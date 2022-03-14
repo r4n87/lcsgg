@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function getSummonerInfo() {
+            alert("검색 진행중");
+        }
+    </script>
+<div>
+    <form name="search-form" autocomplete="off">
+        <input type="text" name="name" value=""></input>
+        <input type="button" onclick="getSummonerInfo()" value="검색"></input>
+    </form>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Tier</th>
+        <th>Position</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${summoner.name}">
+        <td th:text="${summoner.tier}">
+        <td th:text="${summoner.position}">
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
