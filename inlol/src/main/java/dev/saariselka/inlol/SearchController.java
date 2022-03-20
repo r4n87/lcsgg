@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class SearchController {
     private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
-    @GetMapping("/summoner-info")
+    @GetMapping("/")
     public ModelAndView searchSummoner(
             @RequestParam("name") String name
     ) {
