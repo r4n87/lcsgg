@@ -1,6 +1,8 @@
 package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.saariselka.inlol.controller.APIController;
+import dev.saariselka.inlol.service.APIService;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -42,7 +44,6 @@ public class RestAPI {
             // api key는 만료되면 갱신해야 함
             String userID = "Petaluma";
             String apiKey = "RGAPI-c26c3b08-edb4-40c8-b5ab-4cf49668f8d2";
-
 
             // 1. ppuid get
             String url = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/";
