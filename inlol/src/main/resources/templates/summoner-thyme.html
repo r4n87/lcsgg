@@ -10,13 +10,14 @@
 <body>
     <script type="text/javascript">
         function getSummonerInfo() {
-            alert("검색 진행중");
+            let summonerName = document.getElementById('name').value;
+
         }
     </script>
 <div>
-    <form name="search-form" autocomplete="off">
-        <input type="text" name="name" value=""></input>
-        <input type="button" onclick="getSummonerInfo()" value="검색"></input>
+    <form name="search-form" action="/summoner/summoner-info" method="get">
+        <input type="text" id="name" name="name" value="" placeholder="소환사명을 입력하세요."/>
+        <button type="submit" id="submitButton">검색</button>
     </form>
 </div>
 <table>

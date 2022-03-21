@@ -6,6 +6,9 @@ public class Summoner {
     private String position;
 
     public Summoner() {
+        this.name = "";
+        this.tier = "";
+        this.position = "";
     }
 
     public Summoner(String name) {

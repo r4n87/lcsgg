@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("summoner")
+@RequestMapping("/summoner")
 public class SearchController {
     private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
 
-    @GetMapping("/")
+    @GetMapping("/summoner-info")
     public ModelAndView searchSummoner(
             @RequestParam("name") String name
     ) {

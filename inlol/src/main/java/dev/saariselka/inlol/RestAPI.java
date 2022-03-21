@@ -19,7 +19,7 @@ import java.util.*;
 
 @RestController
 public class RestAPI {
-    @GetMapping
+    @GetMapping("callAPI")
     public String callAPI() {
         HashMap<String, Object> result1 = new HashMap<String, Object>();    // ppuid
         HashMap<String, Object> result2 = new HashMap<String, Object>();    // match id
