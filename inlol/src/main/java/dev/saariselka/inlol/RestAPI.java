@@ -29,7 +29,7 @@ public class RestAPI {
 
         try {
             HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-            factory.setConnectTimeout(5000); // 타임아웃 5초
+            factory .setConnectTimeout(5000); // 타임아웃 5초
             factory.setReadTimeout(5000); // 타임아웃 5초
             RestTemplate restTemplate = new RestTemplate(factory);
             RestTemplate restTemplate2 = new RestTemplate(factory);
