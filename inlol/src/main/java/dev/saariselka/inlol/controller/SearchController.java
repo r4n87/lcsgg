@@ -1,5 +1,6 @@
-package dev.saariselka.inlol;
+package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.Summoner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
