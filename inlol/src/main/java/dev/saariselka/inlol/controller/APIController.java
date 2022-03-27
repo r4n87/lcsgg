@@ -31,12 +31,12 @@ public class APIController {
         return new ResponseEntity<List<APIEntity>>(api, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/{id}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<APIEntity>  getAPI(@PathVariable("id") Long id) {
-        Optional<APIEntity> api = apiService.findById(id);
+    @GetMapping(value ="/{category,operation}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public String getAPIURL_ByCategoryAndOperation(@PathVariable("category") String category,@PathVariable("operation") String operation) {
+        List<APIEntity> apis = apiService.findByCategoryAndOperation(category,operation);
 
-        if(api.isPresent()) {
-            return new ResponseEntity<APIEntity>(api.get(), HttpStatus.OK);
+        if(!apis.isEmpty()) {
+            return apis.get(0).getUrl();
         } else {
             return null;
         }

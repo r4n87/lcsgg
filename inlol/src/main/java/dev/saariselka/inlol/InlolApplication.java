@@ -9,8 +9,6 @@ public class InlolApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(InlolApplication.class, args);
-        RestAPI api = new RestAPI();
-        api.callAPI();
     }
 
 }

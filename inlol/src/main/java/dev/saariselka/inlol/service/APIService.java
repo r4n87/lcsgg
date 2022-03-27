@@ -29,4 +29,9 @@ public class APIService {
         return api;
     }
 
+    public List<APIEntity> findByCategoryAndOperation(String category,String operation) {
+        List<APIEntity> api = apiRepository.findByCategoryAndOperation(category,operation);
+        return api;
+    }
+
 }
