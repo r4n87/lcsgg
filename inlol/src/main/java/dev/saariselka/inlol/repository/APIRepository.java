@@ -13,6 +13,8 @@ public interface APIRepository extends JpaRepository<APIEntity, Long> {
 
     public List<APIEntity> findById(String id);
 
-    @Query(value = "SELECT URL FROM MST_API WHERE CATEGORY = :category AND OPERATION = :operation", nativeQuery = true)
-    List<APIEntity> searchAPI(@Param("category") String category, @Param("operation") String operation);
+//    @Query(value = "SELECT * FROM mst_api WHERE CATEGORY = :categroy AND OPERATION = :operation", nativeQuery = true)
+//    public List<APIEntity> searchAPI(@Param("categroy") String category, @Param("operation") String operation);
+
+    public List<APIEntity> findByCategoryAndOperation(String category,String operation);
 }
