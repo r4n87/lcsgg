@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.saariselka.inlol.controller.APIController;
+import dev.saariselka.inlol.controller.APIKeyController;
 import dev.saariselka.inlol.service.APIService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -26,6 +27,8 @@ public class RestAPI {
 
     @Autowired
     APIController apiController;
+    @Autowired
+    APIKeyController apiKeyController;
 
     @GetMapping("callAPI")
     public String callAPI() {
@@ -46,7 +49,7 @@ public class RestAPI {
         // 임시로 Petaluma,
         // api key는 만료되면 갱신해야 함
         String userID = "Petaluma";
-        String apiKey = "RGAPI-40229b42-021a-446c-80fe-f3a8776416ac";
+        String apiKey = apiKeyController.getAPIKey_ByCategory("Personal");
 
         // 1. puuid get
         String strPuuid = getPuuidByName(restTemplate, entity, userID, apiKey);
