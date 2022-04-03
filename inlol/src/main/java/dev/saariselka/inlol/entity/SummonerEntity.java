@@ -13,25 +13,22 @@ import javax.persistence.*;
 @Table(name="RIOT_SUMMONER")
 public class SummonerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long puuid;
+    private String puuid;
 
-    @Column(nullable = false,unique = true)
-    private Long accountId;
-    private Long id;
+    private String accountid;
+    private String id;
     private String name;
-    private int profileIconId;
-    private Long revisionDate;
-    private Long summonerLevel;
+    private int profileiconid;
+    private long revisiondate;
+    private long summonerlevel;
 
-    //@Column(nullable = true)
-
-    public SummonerEntity(Long accountId, Long id, String name, int profileIconId, Long revisionDate, Long summonerLevel) {
-        this.accountId = accountId;
+    public SummonerEntity(String accountid, int profileiconid, long revisiondate, String name, String id, long summonerlevel, String puuid) {
+        this.accountid = accountid;
         this.id = id;
         this.name = name;
-        this.profileIconId = profileIconId;
-        this.revisionDate = revisionDate;
-        this.summonerLevel = summonerLevel;
+        this.profileiconid = profileiconid;
+        this.revisiondate = revisiondate;
+        this.summonerlevel = summonerlevel;
+        this.puuid = puuid;
     }
 }

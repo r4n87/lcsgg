@@ -13,6 +13,5 @@ import java.util.List;
 public interface SummonerRepository extends JpaRepository<SummonerEntity, Long> {
     public List<SummonerEntity> findById(String puuid);
 
-    @Query(value = "SELECT ACCOUNTID PROFILEICONID REVISIONDATE NAME ID SUMMONERLEVEL FROM RIOT_SUMMONER WHERE PUUID = :puuid", nativeQuery = true)
-    List<SummonerEntity> searchSummoner(@Param("puuid") String puuid);
+    public List<SummonerEntity> findByName(String name);
 }
