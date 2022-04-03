@@ -23,9 +23,16 @@ public class MatchMasterService {
         return matchs;
     }
 
-    public List<MatchMasterEntity> findByDataversionAndMatchid(String dataversion,String matchid) {
-        List<MatchMasterEntity> matchs = matchMasterRepository.findByDataversionAndMatchid(dataversion,matchid);
-        return matchs;
+//    public List<MatchMasterEntity> findByDataversionAndMatchid(String dataversion,String matchid) {
+//        List<MatchMasterEntity> matchs = matchMasterRepository.findByDataversionAndMatchid(dataversion,matchid);
+//        return matchs;
+//    }
+
+    public void insert(String dataVersion, String matchId, long gameCreation, long gameDuration, long gameEndTimeStamp, long gameid,
+                       String gameMode, String gameName, long gameStartTimeStamp, String gameType, String gameVersion, int mapId,
+                       String platformId, int queueId, String tournamentCode, int teamId1, int teamId2) {
+        matchMasterRepository.save( new MatchMasterEntity(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameid,gameMode,
+                gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,tournamentCode,teamId1,teamId2));
     }
 
 }
