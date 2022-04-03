@@ -13,11 +13,11 @@ import javax.persistence.*;
 
 public class MatchMasterEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String dataVersion;
     private String matchId;
 
-    @Column(nullable = false,unique = true)
+    //@Column(nullable = false,unique = true)
     private Long gameCreation;
     private Long gameEndTimeStamp; // todo : table에 오타있음
     private Long gameDuration;

@@ -13,11 +13,11 @@ import javax.persistence.*;
 @Table(name="RIOT_MATCH_OBJECTIVES")
 public class MatchObjectivesEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private String matchId;
     private Integer teamId;
 
-    @Column(nullable = false,unique = true)
+    //@Column(nullable = false,unique = true)
     private Boolean baron_first;
     private Integer baron_kills;
     private Boolean champion_first;
