@@ -14,12 +14,10 @@ import javax.persistence.*;
 public class MatchBanEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String matchId;
     //private Integer pickTurn;
     //private Integer teamId;
 
-    @Column(nullable = false,unique = true)
     private Integer pickTurn;
     private Integer teamId;
     private Integer championId;
