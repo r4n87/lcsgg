@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/test")
+@RequestMapping(path = "/api")
 public class APIController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
