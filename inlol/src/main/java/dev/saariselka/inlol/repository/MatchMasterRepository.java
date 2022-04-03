@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface MatchMasterRepository extends JpaRepository<MatchMasterEntity, Long> {
-    public List<MatchMasterEntity> findByDataversionAndMatchid(String dataversion,String matchid);
+    public List<MatchMasterEntity> findByDataVersionAndMatchId(String dataVersion,String matchId);
 }
 
 

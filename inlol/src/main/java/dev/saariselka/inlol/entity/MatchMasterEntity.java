@@ -12,14 +12,14 @@ import javax.persistence.*;
 @Table(name="RIOT_MATCH_MASTER")
 
 public class MatchMasterEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String dataVersion;
-    private String matchId;
 
+    @Id
     @Column(nullable = false,unique = true)
+    private String matchId;
+    private String dataVersion;
+
     private Long gameCreation;
-    private Long gameEndTimeStamp; // todo : table에 오타있음
+    private Long gameEndTimeStamp;
     private Long gameDuration;
     private Long gameId;
     private String gameMode;
@@ -32,13 +32,13 @@ public class MatchMasterEntity {
     private Integer queueId;
     private Integer teamId1;
     private Integer teamId2;
-    private String tournamentCode; // todo : table에 오타있음
+    private String tournamentCode;
 
-    //@Column(nullable = true)
-
-    public MatchMasterEntity(Long gameCreation, Long gameEndTimeStamp, Long gameDuration, Long gameId,
+    public MatchMasterEntity(String dataVersion, String matchId, Long gameCreation, Long gameDuration, Long gameEndTimeStamp, Long gameId,
                           String gameMode, String gameName, Long gameStartTimeStamp, String gameType, String gameVersion,
-                          Integer mapId, String platformId, Integer queueId, Integer teamId1, Integer teamId2, String tournamentCode ) {
+                          Integer mapId, String platformId, Integer queueId, String tournamentCode, Integer teamId1, Integer teamId2 ) {
+        this.dataVersion = dataVersion;
+        this.matchId = matchId;
         this.gameCreation = gameCreation;
         this.gameEndTimeStamp = gameEndTimeStamp;
         this.gameDuration = gameDuration;
