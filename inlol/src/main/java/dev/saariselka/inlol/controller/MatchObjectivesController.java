@@ -1,11 +1,8 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.ObjectiveDto;
 import dev.saariselka.inlol.dto.ObjectivesDto;
-import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchObjectivesEntity;
-import dev.saariselka.inlol.service.MatchMasterService;
 import dev.saariselka.inlol.service.MatchObjectivesService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -25,12 +22,12 @@ import java.util.List;
 public class MatchObjectivesController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
+    //@Autowired
     MatchObjectivesService matchObjectivesService;
 
-    @GetMapping(value ="/{matchid,teamid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ObjectivesDto getMatchMaster_ByMatchidAndTeamid(@PathVariable("matchid") String matchid, @PathVariable("teamid") Integer teamid) {
-        List<MatchObjectivesEntity> objectives = matchObjectivesService.findByMatchidAndTeamid(matchid, teamid);
+    @GetMapping(value ="/{matchId,teamId}")
+    public ObjectivesDto getMatchMaster_ByMatchIdAndTeamId(@PathVariable("matchId") String matchId, @PathVariable("teamId") Integer teamId) {
+        List<MatchObjectivesEntity> objectives = matchObjectivesService.findByMatchidAndTeamid(matchId, teamId);
 
         ObjectiveDto baron = new ObjectiveDto();
         baron.setFirst(objectives.get(0).getBaron_first());

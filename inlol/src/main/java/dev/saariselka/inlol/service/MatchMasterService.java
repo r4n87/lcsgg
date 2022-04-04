@@ -23,10 +23,10 @@ public class MatchMasterService {
         return matchs;
     }
 
-//    public List<MatchMasterEntity> findByDataversionAndMatchid(String dataversion,String matchid) {
-//        List<MatchMasterEntity> matchs = matchMasterRepository.findByDataversionAndMatchid(dataversion,matchid);
-//        return matchs;
-//    }
+    public List<MatchMasterEntity> findByDataVersionAndMatchId(String dataVersion,String matchId) {
+        List<MatchMasterEntity> matchs = matchMasterRepository.findByDataVersionAndMatchId(dataVersion,matchId);
+        return matchs;
+    }
 
     public void insert(String dataVersion, String matchId, long gameCreation, long gameDuration, long gameEndTimeStamp, long gameid,
                        String gameMode, String gameName, long gameStartTimeStamp, String gameType, String gameVersion, int mapId,
