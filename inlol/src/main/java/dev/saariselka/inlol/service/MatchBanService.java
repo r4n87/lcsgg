@@ -22,8 +22,9 @@ public class MatchBanService {
         return bans;
     }
 */
-    public List<MatchBanEntity> findByMatchid(String matchid) {
-        List<MatchBanEntity> bans = matchBanRepository.findByMatchid(matchid);
+    public List<MatchBanEntity> findByMatchId(String matchId) {
+        List<MatchBanEntity> bans = matchBanRepository.findByMatchId(matchId);
         return bans;
     }
+
 }

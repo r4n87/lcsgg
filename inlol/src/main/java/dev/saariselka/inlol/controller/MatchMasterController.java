@@ -36,40 +36,40 @@ public class MatchMasterController {
     }
     */
 
-//    @GetMapping(value ="/{dataversion,matchid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-//    public MatchDto getMatchMaster_ByDataversionAndMatchid(@PathVariable("dataversion") String dataversion, @PathVariable("matchid") String matchid) {
-//        List<MatchMasterEntity> match = matchMasterService.findByDataversionAndMatchid(dataversion,matchid);
-//        // todo : adapter가 따로 있어야 하나? 코드 지저분?
-//        MetadataDto metadataDto = new MetadataDto(match.get(0).getDataVersion(), match.get(0).getMatchId());
-//        InfoDto infoDto = new InfoDto();
-//        infoDto.setGameCreation(match.get(0).getGameCreation());
-//        infoDto.setGameEndTimestamp(match.get(0).getGameEndTimeStamp());
-//        infoDto.setGameDuration(match.get(0).getGameDuration());
-//        infoDto.setGameId(match.get(0).getGameId());
-//        infoDto.setGameMode(match.get(0).getGameMode());
-//        infoDto.setGameName(match.get(0).getGameName());
-//        infoDto.setGameStartTimeStamp(match.get(0).getGameStartTimeStamp());
-//        infoDto.setGameType(match.get(0).getGameType());
-//        infoDto.setGameVersion(match.get(0).getGameVersion());
-//        infoDto.setMapId(match.get(0).getMapId());
-//        infoDto.setPlatformId(match.get(0).getPlatformId());
-//        infoDto.setQueueId(match.get(0).getQueueId());
-//
-//        TeamDto teamDto1 = new TeamDto();
-//        teamDto1.setTeamId(match.get(0).getTeamId1());
-//
-//        TeamDto teamDto2 = new TeamDto();
-//        teamDto2.setTeamId(match.get(0).getTeamId2());
-//
-//        List<TeamDto> teams = new ArrayList<>();
-//        teams.add(teamDto1);
-//        teams.add(teamDto2);
-//        infoDto.setTeams(teams);
-//        infoDto.setTournamentCode(match.get(0).getTournamentCode());
-//
-//        MatchDto matchDto = new MatchDto(metadataDto, infoDto);
-//        return matchDto;
-//    }
+    @GetMapping(value ="/{dataVersion,matchId}")
+    public MatchDto getMatchMaster_ByDataVersionAndMatchId(@PathVariable("dataVersion") String dataVersion, @PathVariable("matchId") String matchId) {
+        List<MatchMasterEntity> match = matchMasterService.findByDataVersionAndMatchId(dataVersion,matchId);
+        // todo : adapter가 따로 있어야 하나? 코드 지저분?
+        MetadataDto metadataDto = new MetadataDto(match.get(0).getDataVersion(), match.get(0).getMatchId());
+        InfoDto infoDto = new InfoDto();
+        infoDto.setGameCreation(match.get(0).getGameCreation());
+        infoDto.setGameEndTimestamp(match.get(0).getGameEndTimeStamp());
+        infoDto.setGameDuration(match.get(0).getGameDuration());
+        infoDto.setGameId(match.get(0).getGameId());
+        infoDto.setGameMode(match.get(0).getGameMode());
+        infoDto.setGameName(match.get(0).getGameName());
+        infoDto.setGameStartTimeStamp(match.get(0).getGameStartTimeStamp());
+        infoDto.setGameType(match.get(0).getGameType());
+        infoDto.setGameVersion(match.get(0).getGameVersion());
+        infoDto.setMapId(match.get(0).getMapId());
+        infoDto.setPlatformId(match.get(0).getPlatformId());
+        infoDto.setQueueId(match.get(0).getQueueId());
+
+        TeamDto teamDto1 = new TeamDto();
+        teamDto1.setTeamId(match.get(0).getTeamId1());
+
+        TeamDto teamDto2 = new TeamDto();
+        teamDto2.setTeamId(match.get(0).getTeamId2());
+
+        List<TeamDto> teams = new ArrayList<>();
+        teams.add(teamDto1);
+        teams.add(teamDto2);
+        infoDto.setTeams(teams);
+        infoDto.setTournamentCode(match.get(0).getTournamentCode());
+
+        MatchDto matchDto = new MatchDto(metadataDto, infoDto);
+        return matchDto;
+    }
 
     @GetMapping(value = "/insert/{dataVersion, matchId, gameCreation, gameDuration, gameEndTimeStamp, gameid, gameMode, gameName, " +
             "gameStartTimeStamp, gameType, gameVersion, mapId, platformId, queueId, tournamentCode, teamId1, teamId2}",produces = { MediaType.APPLICATION_JSON_VALUE })
