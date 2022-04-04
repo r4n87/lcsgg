@@ -13,8 +13,17 @@ public class InfoDto {
     private String gameType;
     private String gameVersion;
     private int mapId;
-    //private List<ParticipantDto> participants; // todo : 객체 생성 이후 주석 해제 및 getter setter 생성 필요
+    private List<ParticipantDto> participants;
     private String platformId;
+
+    public List<ParticipantDto> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<ParticipantDto> participants) {
+        this.participants = participants;
+    }
+
     private int queueId;
     private List<TeamDto> teams;
     private String tournamentCode;
