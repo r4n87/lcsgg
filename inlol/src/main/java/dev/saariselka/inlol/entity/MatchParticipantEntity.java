@@ -9,12 +9,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @ToString
 @Table(name="RIOT_MATCH_PARTICIPANT")
-@IdClass(MatchParticipantId.class)
 public class MatchParticipantEntity {
     @EmbeddedId
-    private String puuid;
-    private String dataVersion;
-    private String matchId;
+    private MatchParticipantId matchParticipantId;
 
     private int assists;
     private int baronKills;
