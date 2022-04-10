@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.MatchBanEntity;
+import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.repository.MatchBanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +15,22 @@ import java.util.List;
 public class MatchBanService {
     @Autowired
     private final MatchBanRepository matchBanRepository;
-/*
+
     public List<MatchBanEntity> findAll() {
         List<MatchBanEntity> bans = new ArrayList<>();
         matchBanRepository.findAll().forEach(e -> bans.add(e));
-
         return bans;
     }
-*/
-    public List<MatchBanEntity> findByMatchid(String matchid) {
-        List<MatchBanEntity> bans = matchBanRepository.findByMatchid(matchid);
+
+    /*
+    public List<MatchBanEntity> findByMatchId(String matchId) {
+        List<MatchBanEntity> bans = matchBanRepository.findByMatchId(matchId);
+        return bans;
+    }
+     */
+
+    public List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId) {
+        List<MatchBanEntity> bans = matchBanRepository.findByMatchBanId(matchBanId);
         return bans;
     }
 }
