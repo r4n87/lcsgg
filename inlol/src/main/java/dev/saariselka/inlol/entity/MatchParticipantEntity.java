@@ -2,6 +2,7 @@ package dev.saariselka.inlol.entity;
 
 import lombok.*;
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -116,4 +117,5 @@ public class MatchParticipantEntity {
     private int wardsKilled;
     private int wardsPlaced;
     private boolean win;
+    private Timestamp rrt;
 }

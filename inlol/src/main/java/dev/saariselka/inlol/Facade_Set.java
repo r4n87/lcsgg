@@ -12,6 +12,7 @@ import dev.saariselka.inlol.controller.TeamController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -180,7 +181,8 @@ public class Facade_Set {
                     Integer.parseInt(participantObj.get("visionWardsBoughtInGame").toString()),
                     Integer.parseInt(participantObj.get("wardsKilled").toString()),
                     Integer.parseInt(participantObj.get("wardsPlaced").toString()),
-                    Boolean.parseBoolean(participantObj.get("win").toString())
+                    Boolean.parseBoolean(participantObj.get("win").toString()),
+                    Timestamp.valueOf(participantObj.get("rrt").toString())
                     );
         }
     }

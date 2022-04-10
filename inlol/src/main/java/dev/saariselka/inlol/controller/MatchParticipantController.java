@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/Participants")
@@ -35,7 +37,7 @@ public class MatchParticipantController {
                                       int totalDamageShieldedOnTeammates, int totalDamageTaken, int totalHeal, int totalHealsOnTeammates, int totalMinionsKilled,
                                       int totalTimeCCDealt, int totalTimeSpentDead, int totalUnitsHealed, int tripleKills, int trueDamageDealt, int trueDamageDealtToChampions,
                                       int trueDamageTaken, int turretKills, int turretTakedowns, int turretsLost, int unrealKills, int visionScore, int visionWardsBoughtInGame,
-                                      int wardsKilled, int wardsPlaced, boolean win) {
+                                      int wardsKilled, int wardsPlaced, boolean win, Timestamp rrt) {
         matchParticipantService.insert(puuid, dataVersion, matchId, assists, baronKills,
                 bountyLevel, champExperience, champLevel, championId, championName, championTransform, consumablesPurchased, damageDealtToBuildings,
                 damageDealtToObjectives, damageDealtToTurrets, damageSelfMitigated, deaths, detectorWardsPlaced, doubleKills, dragonKills,
@@ -49,6 +51,6 @@ public class MatchParticipantController {
                 teamEarlySurrendered, teamId, teamPosition, timeCCingOthers, timePlayed, totalDamageDealt, totalDamageDealtToChampions,
                 totalDamageShieldedOnTeammates, totalDamageTaken, totalHeal, totalHealsOnTeammates, totalMinionsKilled, totalTimeCCDealt,
                 totalTimeSpentDead, totalUnitsHealed, tripleKills, trueDamageDealt, trueDamageDealtToChampions, trueDamageTaken, turretKills,
-                turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win);
+                turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
     }
 }
