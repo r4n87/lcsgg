@@ -1,7 +1,12 @@
 package dev.saariselka.inlol.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class MetadataDto {
     private String dataVersion;
     private String matchId;
@@ -10,12 +15,6 @@ public class MetadataDto {
     public MetadataDto(String dataVersion, String matchId) {
         this.dataVersion = dataVersion;
         this.matchId = matchId;
-    }
-
-    public MetadataDto(String dataVersion, String matchId, List<String> participants) {
-        this.dataVersion = dataVersion;
-        this.matchId = matchId;
-        this.participants = participants;
     }
 
     public String getDataVersion() {

@@ -27,34 +27,8 @@ public class MatchObjectivesController {
     MatchObjectivesService matchObjectivesService;
 
     @GetMapping(value ="/{matchId,teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ObjectivesDto getMatchMaster_ByMatchIdAndTeamId(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId) {
+    public List<MatchObjectivesEntity> getMatchObjectives_ByMatchIdAndTeamId(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId) {
         List<MatchObjectivesEntity> objectives = matchObjectivesService.findByMatchObjectivesId(new MatchObjectivesId(matchId, teamId));
-
-        ObjectiveDto baron = new ObjectiveDto();
-        baron.setFirst(objectives.get(0).isBaron_first());
-        baron.setKills(objectives.get(0).getBaron_kills());
-
-        ObjectiveDto champion = new ObjectiveDto();
-        champion.setFirst(objectives.get(0).isChampion_first());
-        champion.setKills(objectives.get(0).getChampion_kills());
-
-        ObjectiveDto dragon = new ObjectiveDto();
-        dragon.setFirst(objectives.get(0).isDragon_first());
-        dragon.setKills(objectives.get(0).getDragon_kills());
-
-        ObjectiveDto inhibitor = new ObjectiveDto();
-        inhibitor.setFirst(objectives.get(0).isInhibitor_first());
-        inhibitor.setKills(objectives.get(0).getInhibitor_kills());
-
-        ObjectiveDto riftHerald = new ObjectiveDto();
-        riftHerald.setFirst(objectives.get(0).isRiftherald_first());
-        riftHerald.setKills(objectives.get(0).getRiftherald_kills());
-
-        ObjectiveDto tower = new ObjectiveDto();
-        tower.setFirst(objectives.get(0).isTower_first());
-        tower.setKills(objectives.get(0).getTower_kills());
-
-        ObjectivesDto objectivesDto = new ObjectivesDto(baron, champion, dragon, inhibitor, riftHerald, tower);
-        return objectivesDto;
+        return objectives;
     }
 }

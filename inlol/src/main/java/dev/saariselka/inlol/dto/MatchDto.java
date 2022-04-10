@@ -1,13 +1,13 @@
 package dev.saariselka.inlol.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class MatchDto {
     private MetadataDto metadata;
     private InfoDto info;
-
-    public MatchDto(MetadataDto metadata, InfoDto info) {
-        this.metadata = metadata;
-        this.info = info;
-    }
 
     public MetadataDto getMetadata() {
         return metadata;
