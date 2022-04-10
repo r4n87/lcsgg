@@ -29,6 +29,11 @@ public class TeamService {
         return teams;
     }
 
+    public List<TeamEntity> findByMatchId(String matchId) {
+        List<TeamEntity> teams = TeamRepository.searchTeamsByMatchId(matchId);
+        return teams;
+    }
+
     public void insert(String matchId, int teamId, boolean win) {
         TeamRepository.save( new TeamEntity(new TeamId(matchId,teamId),win));
     }
