@@ -4,6 +4,7 @@ import dev.saariselka.inlol.controller.APIController;
 import dev.saariselka.inlol.controller.APIKeyController;
 import dev.saariselka.inlol.controller.SummonerController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class Facade_Get {
 
     @Autowired

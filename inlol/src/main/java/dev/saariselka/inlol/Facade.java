@@ -9,10 +9,18 @@ import dev.saariselka.inlol.controller.APIKeyController;
 import dev.saariselka.inlol.controller.MatchMasterController;
 import dev.saariselka.inlol.controller.SummonerController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
+@RestController
 public class Facade {
+
+    @Autowired
+    private Facade_Get facade_get;
+    @Autowired
+    private Facade_Set facade_set;
 
     private String name;
 
@@ -29,13 +37,11 @@ public class Facade {
     }
 
     // API를 활용해서 Init
+    @GetMapping("testinit")
     public void init() throws JsonProcessingException
     {
         // 테스트를 위해 하드 코딩
         name = "Petaluma";
-
-        Facade_Get facade_get = new Facade_Get();
-        Facade_Set facade_set = new Facade_Set();
 
         HashMap<String, Object> result;
 

@@ -2,21 +2,27 @@ package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.MatchMasterController;
 import dev.saariselka.inlol.controller.SummonerController;
+import dev.saariselka.inlol.controller.TeamController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+@Service
 public class Facade_Set {
 
     @Autowired
     SummonerController summonerController;
     @Autowired
     MatchMasterController matchMasterController;
+    @Autowired
+    TeamController teamController;
 
     public void setMatchInfoAtDB(HashMap<String, Object> result) throws JsonProcessingException {
 
@@ -31,6 +37,7 @@ public class Facade_Set {
         JsonObject jsonObject = (JsonObject)jsonParser.parse(jsonInString);
         JsonObject jsonObjectForMetadata = (JsonObject) jsonObject.get("metadata");
         JsonObject jsonObjectForInfo = (JsonObject) jsonObject.get("info");
+        JsonArray jsonArrayForTeams = (JsonArray)jsonObjectForInfo.get("teams");
 
         //DB Insert
         matchMasterController.insertMatchMaster(jsonObjectForMetadata.get("dataVersion").toString(),jsonObjectForMetadata.get("matchId").toString(),
@@ -41,6 +48,13 @@ public class Facade_Set {
                 jsonObjectForInfo.get("gameVersion").toString(),Integer.parseInt(jsonObjectForInfo.get("mapId").toString()),
                 jsonObjectForInfo.get("platformId").toString(),Integer.parseInt(jsonObjectForInfo.get("queueId").toString()),
                 jsonObjectForInfo.get("tournamentCode").toString(), 100, 200);
+
+        for (Object obj : jsonArrayForTeams) {
+            JsonObject teamObj = (JsonObject)obj;
+            teamController.insertTeamInfo(jsonObjectForMetadata.get("matchId").toString()
+                    ,Integer.parseInt(teamObj.get("teamId").toString())
+                    ,Boolean.parseBoolean(teamObj.get("win").toString()));
+        }
     }
 
     public void setSummonerInfoAtDB(HashMap<String, Object> result) {
