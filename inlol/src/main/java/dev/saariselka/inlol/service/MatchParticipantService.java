@@ -18,12 +18,12 @@ public class MatchParticipantService {
 
     @Autowired
     private final MatchParticipantRepository matchParticipantRepository;
-
+/*
     public Optional<MatchParticipantEntity> findById(MatchParticipantId matchParticipantId) {
         Optional<MatchParticipantEntity> matchParticipant = matchParticipantRepository.findById(matchParticipantId);
         return matchParticipant;
     }
-
+*/
     public List<MatchParticipantEntity> findAllById(MatchParticipantId matchParticipantId) {
         List<MatchParticipantEntity> matchParticipantList = matchParticipantRepository.findAllByMatchParticipantId(matchParticipantId);
         return matchParticipantList;

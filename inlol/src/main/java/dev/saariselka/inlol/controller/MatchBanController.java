@@ -4,7 +4,9 @@ import dev.saariselka.inlol.dto.BanDto;
 import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.TeamDto;
 import dev.saariselka.inlol.entity.MatchBanEntity;
+import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
+import dev.saariselka.inlol.entity.TeamEntity;
 import dev.saariselka.inlol.service.MatchBanService;
 import dev.saariselka.inlol.service.MatchMasterService;
 import lombok.RequiredArgsConstructor;
@@ -29,23 +31,15 @@ public class MatchBanController {
     @Autowired
     MatchBanService matchBanService;
 
+    @GetMapping(value ="/{matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<MatchBanEntity> getBans_ByMatchId(@PathVariable("matchId") String matchId) {
+        List<MatchBanEntity> bans = matchBanService.findByMatchId(matchId);
+        return bans;
+    }
 
-    @GetMapping(value ="/{matchid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<BanDto> getMatchBan_ByMatchid(@PathVariable("matchid") String matchid) {
-        List<MatchBanEntity> ban = matchBanService.findByMatchid(matchid);
-
-        BanDto banDto1 = new BanDto();
-        banDto1.setPickTurn(ban.get(0).getPickTurn());
-        banDto1.setChampionId(ban.get(0).getChampionId());
-
-        BanDto banDto2 = new BanDto();
-        banDto2.setPickTurn(ban.get(1).getPickTurn());
-        banDto2.setChampionId(ban.get(1).getChampionId());
-
-        List<BanDto> bans = new ArrayList<>();
-        bans.add(banDto1);
-        bans.add(banDto2);
-
+    @GetMapping(value ="/{matchId, pickTurn, teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<MatchBanEntity> getBans_ByMatchBanId(@PathVariable("matchId") String matchId, @PathVariable("pickTurn") int pickTurn, @PathVariable("teamId") int teamId) {
+        List<MatchBanEntity> bans = matchBanService.findByMatchBanId(new MatchBanId(matchId, pickTurn, teamId));
         return bans;
     }
 }

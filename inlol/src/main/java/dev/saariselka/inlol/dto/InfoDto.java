@@ -1,7 +1,12 @@
 package dev.saariselka.inlol.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class InfoDto {
     private long gameCreation;
     private long gameDuration;

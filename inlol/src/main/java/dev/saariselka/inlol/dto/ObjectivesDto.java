@@ -1,5 +1,8 @@
 package dev.saariselka.inlol.dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class ObjectivesDto {
     private ObjectiveDto baron;
     private ObjectiveDto champion;

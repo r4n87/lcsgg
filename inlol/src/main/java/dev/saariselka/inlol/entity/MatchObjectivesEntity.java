@@ -12,23 +12,22 @@ import javax.persistence.*;
 @ToString
 @Table(name="RIOT_MATCH_OBJECTIVES")
 public class MatchObjectivesEntity {
-    @Id
+    @EmbeddedId
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String matchId;
-    private Integer teamId;
+    private MatchObjectivesId matchObjectivesId;
 
     //@Column(nullable = false,unique = true)
-    private Boolean baron_first;
-    private Integer baron_kills;
-    private Boolean champion_first;
-    private Integer champion_kills;
-    private Boolean dragon_first;
-    private Integer dragon_kills;
-    private Boolean inhibitor_first;
-    private Integer inhibitor_kills;
-    private Boolean riftherald_first;
-    private Integer riftherald_kills;
-    private Boolean tower_first;
-    private Integer tower_kills;
+    private boolean baron_first;
+    private int baron_kills;
+    private boolean champion_first;
+    private int champion_kills;
+    private boolean dragon_first;
+    private int dragon_kills;
+    private boolean inhibitor_first;
+    private int inhibitor_kills;
+    private boolean riftherald_first;
+    private int riftherald_kills;
+    private boolean tower_first;
+    private int tower_kills;
 
 }

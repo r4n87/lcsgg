@@ -50,9 +50,10 @@ public class Facade_Set {
                 jsonObjectForInfo.get("gameMode").toString(),jsonObjectForInfo.get("gameName").toString(),
                 Long.parseLong(jsonObjectForInfo.get("gameStartTimestamp").toString()),jsonObjectForInfo.get("gameType").toString(),
                 jsonObjectForInfo.get("gameVersion").toString(),Integer.parseInt(jsonObjectForInfo.get("mapId").toString()),
+
                 jsonObjectForInfo.get("platformId").toString(),Integer.parseInt(jsonObjectForInfo.get("queueId").toString()),
                 jsonObjectForInfo.get("tournamentCode").toString(), 100, 200);
-
+      
         for (Object teamsObj : jsonArrayForTeams) {
             JsonObject teamObj = (JsonObject)teamsObj;
 
