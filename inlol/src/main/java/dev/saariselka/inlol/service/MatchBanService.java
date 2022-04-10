@@ -22,12 +22,10 @@ public class MatchBanService {
         return bans;
     }
 
-    /*
     public List<MatchBanEntity> findByMatchId(String matchId) {
-        List<MatchBanEntity> bans = matchBanRepository.findByMatchId(matchId);
-        return bans;
+        List<MatchBanEntity> teams = matchBanRepository.searchBansByMatchId(matchId);
+        return teams;
     }
-     */
 
     public List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId) {
         List<MatchBanEntity> bans = matchBanRepository.findByMatchBanId(matchBanId);

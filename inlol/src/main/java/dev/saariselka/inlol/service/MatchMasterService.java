@@ -2,6 +2,7 @@ package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
+import dev.saariselka.inlol.entity.TeamEntity;
 import dev.saariselka.inlol.repository.MatchMasterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class MatchMasterService {
         List<MatchMasterEntity> matchs = new ArrayList<>();
         matchMasterRepository.findAll().forEach(e -> matchs.add(e));
 
+        return matchs;
+    }
+
+    public List<MatchMasterEntity> findByMatchId(String matchId) {
+        List<MatchMasterEntity> matchs = matchMasterRepository.searchMatchByMatchId(matchId);
         return matchs;
     }
 

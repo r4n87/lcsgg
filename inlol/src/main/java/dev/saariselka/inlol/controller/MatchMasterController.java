@@ -29,47 +29,16 @@ public class MatchMasterController {
     @Autowired
     MatchMasterService matchMasterService;
 
-    /*
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<MatchMasterEntity>> getAllapis() {
-        List<MatchMasterEntity> match = matchMasterService.findAll();
-        return new ResponseEntity<List<MatchMasterEntity>>(match, HttpStatus.OK);
+    @GetMapping(value ="/{matchId}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<MatchMasterEntity> getMatchMaster_ByMatchId(@PathVariable("matchId") String matchId) {
+        List<MatchMasterEntity> match = matchMasterService.findByMatchId(matchId);
+        return match;
     }
-    */
 
     @GetMapping(value ="/{dataVersion,matchId}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public MatchDto getMatchMaster_ByDataVersionAndMatchId(@PathVariable("dataVersion") String dataVersion, @PathVariable("matchId") String matchId) {
+    public List<MatchMasterEntity> getMatchMaster_ByDataVersionAndMatchId(@PathVariable("dataVersion") String dataVersion, @PathVariable("matchId") String matchId) {
         List<MatchMasterEntity> match = matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId));
-        // todo : adapter가 따로 있어야 하나? 코드 지저분?
-        MetadataDto metadataDto = new MetadataDto(match.get(0).getMatchMasterId().getDataVersion(), match.get(0).getMatchMasterId().getMatchId());
-        InfoDto infoDto = new InfoDto();
-        infoDto.setGameCreation(match.get(0).getGameCreation());
-        infoDto.setGameEndTimestamp(match.get(0).getGameEndTimeStamp());
-        infoDto.setGameDuration(match.get(0).getGameDuration());
-        infoDto.setGameId(match.get(0).getGameId());
-        infoDto.setGameMode(match.get(0).getGameMode());
-        infoDto.setGameName(match.get(0).getGameName());
-        infoDto.setGameStartTimeStamp(match.get(0).getGameStartTimeStamp());
-        infoDto.setGameType(match.get(0).getGameType());
-        infoDto.setGameVersion(match.get(0).getGameVersion());
-        infoDto.setMapId(match.get(0).getMapId());
-        infoDto.setPlatformId(match.get(0).getPlatformId());
-        infoDto.setQueueId(match.get(0).getQueueId());
-
-        TeamDto teamDto1 = new TeamDto();
-        teamDto1.setTeamId(match.get(0).getTeamId1());
-
-        TeamDto teamDto2 = new TeamDto();
-        teamDto2.setTeamId(match.get(0).getTeamId2());
-
-        List<TeamDto> teams = new ArrayList<>();
-        teams.add(teamDto1);
-        teams.add(teamDto2);
-        infoDto.setTeams(teams);
-        infoDto.setTournamentCode(match.get(0).getTournamentCode());
-
-        MatchDto matchDto = new MatchDto(metadataDto, infoDto);
-        return matchDto;
+        return match;
     }
 
     @GetMapping(value = "/insert/{dataVersion, matchId, gameCreation, gameDuration, gameEndTimeStamp, gameId, gameMode, gameName, " +
