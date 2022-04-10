@@ -12,11 +12,10 @@ import javax.persistence.*;
 @ToString
 @Table(name="RIOT_MATCH_BAN")
 public class MatchBanEntity {
-    @Id
-    private String matchId;
-    private Integer pickTurn;
-    private Integer teamId;
-    private Integer championId;
+    @EmbeddedId
+    private MatchBanId matchBanId;
+
+    private int championId;
 
 
 }

@@ -5,6 +5,7 @@ import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.MetadataDto;
 import dev.saariselka.inlol.dto.TeamDto;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
+import dev.saariselka.inlol.entity.MatchMasterId;
 import dev.saariselka.inlol.service.MatchMasterService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -36,11 +37,11 @@ public class MatchMasterController {
     }
     */
 
-    @GetMapping(value ="/{dataVersion,matchId}")
+    @GetMapping(value ="/{dataVersion,matchId}", produces = { MediaType.APPLICATION_JSON_VALUE })
     public MatchDto getMatchMaster_ByDataVersionAndMatchId(@PathVariable("dataVersion") String dataVersion, @PathVariable("matchId") String matchId) {
-        List<MatchMasterEntity> match = matchMasterService.findByDataVersionAndMatchId(dataVersion,matchId);
+        List<MatchMasterEntity> match = matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId));
         // todo : adapter가 따로 있어야 하나? 코드 지저분?
-        MetadataDto metadataDto = new MetadataDto(match.get(0).getDataVersion(), match.get(0).getMatchId());
+        MetadataDto metadataDto = new MetadataDto(match.get(0).getMatchMasterId().getDataVersion(), match.get(0).getMatchMasterId().getMatchId());
         InfoDto infoDto = new InfoDto();
         infoDto.setGameCreation(match.get(0).getGameCreation());
         infoDto.setGameEndTimestamp(match.get(0).getGameEndTimeStamp());
@@ -71,15 +72,15 @@ public class MatchMasterController {
         return matchDto;
     }
 
-    @GetMapping(value = "/insert/{dataVersion, matchId, gameCreation, gameDuration, gameEndTimeStamp, gameid, gameMode, gameName, " +
+    @GetMapping(value = "/insert/{dataVersion, matchId, gameCreation, gameDuration, gameEndTimeStamp, gameId, gameMode, gameName, " +
             "gameStartTimeStamp, gameType, gameVersion, mapId, platformId, queueId, tournamentCode, teamId1, teamId2}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public void insertMatchMaster(@PathVariable("dataVersion") String dataVersion, @PathVariable("matchId") String matchId, @PathVariable("gameCreation") long gameCreation,
-                                  @PathVariable("gameDuration") long gameDuration, @PathVariable("gameEndTimeStamp") long gameEndTimeStamp, @PathVariable("gameid") long gameid,
+                                  @PathVariable("gameDuration") long gameDuration, @PathVariable("gameEndTimeStamp") long gameEndTimeStamp, @PathVariable("gameId") long gameId,
                                   @PathVariable("gameMode") String gameMode, @PathVariable("gameName") String gameName, @PathVariable("gameStartTimeStamp") long gameStartTimeStamp,
                                   @PathVariable("gameType") String gameType, @PathVariable("gameVersion") String gameVersion, @PathVariable("mapId") int mapId,
                                   @PathVariable("platformId") String platformId, @PathVariable("queueId") int queueId, @PathVariable("tournamentCode") String tournamentCode,
                                   @PathVariable("teamId1") int teamId1, @PathVariable("teamId2") int teamId2) {
-        matchMasterService.insert( dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameid,gameMode,
+        matchMasterService.insert( dataVersion, matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,
                 gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,tournamentCode,teamId1,teamId2);
     }
 
