@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.entity.TeamEntity;
+import dev.saariselka.inlol.entity.TeamId;
 import dev.saariselka.inlol.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -32,16 +33,15 @@ public class TeamController {
         return new ResponseEntity<List<TeamEntity>>(teams, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/{matchid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<TeamEntity>> getTeams_ByMatchid(@PathVariable("matchid") String matchid) {
-        List<TeamEntity> teams = TeamService.findByMatchid(matchid);
+    @GetMapping(value ="/{matchId,teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<List<TeamEntity>> getTeams_ByMatchidAndTeamid(@PathVariable("matchId") String matchId,@PathVariable("teamId") int teamId) {
+        List<TeamEntity> teams = TeamService.findByMatchIdAndTeamId(new TeamId(matchId,teamId));
         return new ResponseEntity<List<TeamEntity>>(teams, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/{matchid,teamid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<TeamEntity>> getTeams_ByMatchidAndTeamid(@PathVariable("matchid") String matchid,@PathVariable("teamid") int teamid) {
-        List<TeamEntity> teams = TeamService.findByMatchidAndTeamid(matchid,teamid);
-        return new ResponseEntity<List<TeamEntity>>(teams, HttpStatus.OK);
+    @GetMapping(value = "/insert/{matchId, teamId, win}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public void insertTeamInfo(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId, @PathVariable("win") boolean win) {
+        TeamService.insert(matchId,teamId,win);
     }
 
 }

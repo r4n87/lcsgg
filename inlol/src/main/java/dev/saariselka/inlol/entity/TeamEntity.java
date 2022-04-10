@@ -12,14 +12,8 @@ import javax.persistence.*;
 @ToString
 @Table(name="RIOT_MATCH_TEAM")
 public class TeamEntity {
-    @Id
-    private String matchid;
-    private int teamid;
+    @EmbeddedId
+    private TeamId teamId;
 
     private boolean win;
-
-    public TeamEntity(String matchid, int teamid) {
-        this.matchid = matchid;
-        this.teamid = teamid;
-    }
 }
