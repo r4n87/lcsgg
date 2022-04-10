@@ -14,16 +14,16 @@ import java.util.List;
 public class MatchObjectivesService {
     @Autowired
     private final MatchObjectivesRepository matchObjectivesRepository;
-
+/*
     public List<MatchObjectivesEntity> findAll() {
         List<MatchObjectivesEntity> objectives = new ArrayList<>();
         matchObjectivesRepository.findAll().forEach(e -> objectives.add(e));
 
         return objectives;
     }
-
-    public List<MatchObjectivesEntity> findByMatchidAndTeamid(String matchId, Integer teamId) {
-        List<MatchObjectivesEntity> matchs = matchObjectivesRepository.findByMatchIdAndTeamId(matchId, teamId);
+*/
+    public List<MatchObjectivesEntity> findByMatchidAndTeamid(String matchid, Integer teamid) {
+        List<MatchObjectivesEntity> matchs = matchObjectivesRepository.findByMatchidAndTeamid(matchid, teamid);
         return matchs;
     }
 }

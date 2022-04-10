@@ -1,8 +1,12 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.dto.BanDto;
+import dev.saariselka.inlol.dto.MatchDto;
+import dev.saariselka.inlol.dto.TeamDto;
 import dev.saariselka.inlol.entity.MatchBanEntity;
+import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.service.MatchBanService;
+import dev.saariselka.inlol.service.MatchMasterService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,12 +26,13 @@ import java.util.List;
 public class MatchBanController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //@Autowired
+    @Autowired
     MatchBanService matchBanService;
 
-    @GetMapping(value ="/{matchId}")
-    public List<BanDto> getMatchBan_ByMatchId(@PathVariable("matchId") String matchId) {
-        List<MatchBanEntity> ban = matchBanService.findByMatchId(matchId);
+
+    @GetMapping(value ="/{matchid}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<BanDto> getMatchBan_ByMatchid(@PathVariable("matchid") String matchid) {
+        List<MatchBanEntity> ban = matchBanService.findByMatchid(matchid);
 
         BanDto banDto1 = new BanDto();
         banDto1.setPickTurn(ban.get(0).getPickTurn());
