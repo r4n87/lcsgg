@@ -3,6 +3,8 @@ package dev.saariselka.inlol.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+
 @Data
 @Entity
 @Builder
@@ -30,4 +32,5 @@ public class MatchMasterEntity {
     private int teamId1;
     private int teamId2;
     private String tournamentCode;
+    private Timestamp rrt;
 }

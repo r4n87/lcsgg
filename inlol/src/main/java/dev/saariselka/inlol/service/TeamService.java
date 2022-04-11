@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class TeamService {
         return teams;
     }
 
-    public void insert(String matchId, int teamId, boolean win) {
-        TeamRepository.save( new TeamEntity(new TeamId(matchId,teamId),win));
+    public void insert(String matchId, int teamId, boolean win, Timestamp rrt) {
+        TeamRepository.save( new TeamEntity(new TeamId(matchId,teamId),win, rrt));
     }
 }

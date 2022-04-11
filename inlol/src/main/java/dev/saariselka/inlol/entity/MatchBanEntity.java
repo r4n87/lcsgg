@@ -3,6 +3,7 @@ package dev.saariselka.inlol.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -16,6 +17,6 @@ public class MatchBanEntity {
     private MatchBanId matchBanId;
 
     private int championId;
-
+    private Timestamp rrt;
 
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,8 +49,8 @@ public class TeamController {
         return teams;
     }
 
-    @GetMapping(value = "/insert/{matchId, teamId, win}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public void insertTeamInfo(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId, @PathVariable("win") boolean win) {
-        TeamService.insert(matchId,teamId,win);
+    @GetMapping(value = "/insert/{matchId, teamId, win, rrt}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public void insertTeamInfo(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId, @PathVariable("win") boolean win, @PathVariable("rrt")Timestamp rrt) {
+        TeamService.insert(matchId,teamId,win, rrt);
     }
 }

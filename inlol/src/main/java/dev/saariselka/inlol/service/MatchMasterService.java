@@ -2,12 +2,12 @@ package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
-import dev.saariselka.inlol.entity.TeamEntity;
 import dev.saariselka.inlol.repository.MatchMasterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +36,10 @@ public class MatchMasterService {
 
     public void insert(String dataVersion, String matchId, long gameCreation, long gameDuration, long gameEndTimeStamp, long gameId,
                        String gameMode, String gameName, long gameStartTimeStamp, String gameType, String gameVersion, int mapId,
-                       String platformId, int queueId, String tournamentCode, int teamId1, int teamId2) {
+                       String platformId, int queueId, String tournamentCode, int teamId1, int teamId2, Timestamp rrt) {
         matchMasterRepository.save( new MatchMasterEntity(new MatchMasterId(dataVersion, matchId),gameCreation,gameDuration,
                 gameEndTimeStamp,gameId,gameMode,
-                gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2, tournamentCode));
+                gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2, tournamentCode, rrt));
     }
 
 }

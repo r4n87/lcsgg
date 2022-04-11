@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +31,9 @@ public class MatchBanService {
     public List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId) {
         List<MatchBanEntity> bans = matchBanRepository.findByMatchBanId(matchBanId);
         return bans;
+    }
+
+    public void insert(String matchId, int pickTurn, int teamId, int championId, Timestamp rrt) {
+        matchBanRepository.save( new MatchBanEntity(new MatchBanId(matchId, pickTurn, teamId), championId, rrt));
     }
 }

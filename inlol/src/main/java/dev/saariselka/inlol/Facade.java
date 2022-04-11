@@ -33,6 +33,14 @@ public class Facade {
     // DB 정보 불러오기
     public void search()
     {
+        name = "Petaluma";
+
+        // 서버에서 ppuid 얻어오기
+        // 얻은 ppuid로 db조회
+        // db에 데이터가 있는 경우 , 없는 경우
+        // db에 데이터가 있지만 일정기간 xx일 지났으면 자동갱신
+        // -> 밖에서 해야되려나?
+        // Init과 search, update의 차이 명확하게
 
     }
 
