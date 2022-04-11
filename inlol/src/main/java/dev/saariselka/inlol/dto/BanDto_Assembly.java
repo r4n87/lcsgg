@@ -4,6 +4,7 @@ import dev.saariselka.inlol.controller.MatchBanController;
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BanDto_Assembly {
@@ -11,29 +12,32 @@ public class BanDto_Assembly {
     @Autowired
     MatchBanController matchBanController;
 
-    public BanDto getBans_ByMatchId(String matchId){
+    public List<BanDto> getBans_ByMatchId(String matchId){
         List<MatchBanEntity> banList = matchBanController.getBans_ByMatchId(matchId);
-        BanDto banDto = new BanDto();
+        List<BanDto> bansDto = new ArrayList<>();
 
         for(MatchBanEntity banEntity : banList)
         {
+            BanDto banDto = new BanDto();
             banDto.setPickTurn(banEntity.getMatchBanId().getPickTurn());
             banDto.setChampionId(banEntity.getChampionId());
+            bansDto.add(banDto);
         }
 
-        return banDto;
+        return bansDto;
     }
 
-    public BanDto getBans_ByMatchBanId(String matchId, int pickTurn, int teamId){
+    public List<BanDto> getBans_ByMatchBanId(String matchId, int pickTurn, int teamId){
         List<MatchBanEntity> banList = matchBanController.getBans_ByMatchBanId(matchId, pickTurn, teamId);
-        BanDto banDto = new BanDto();
+        List<BanDto> bansDto = new ArrayList<>();
 
         for(MatchBanEntity banEntity : banList)
         {
+            BanDto banDto = new BanDto();
             //banDto.setPickTurn(banEntity.getMatchBanId().getPickTurn());
             banDto.setChampionId(banEntity.getChampionId());
         }
 
-        return banDto;
+        return bansDto;
     }
 }
