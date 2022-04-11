@@ -23,7 +23,8 @@ public class MatchParticipantService {
     }
 
     public List<MatchParticipantEntity> findAllById(MatchParticipantId matchParticipantId) {
-        List<MatchParticipantEntity> matchParticipantList = matchParticipantRepository.findAllByMatchParticipantId(matchParticipantId);
+        List<MatchParticipantEntity> matchParticipantList
+                = matchParticipantRepository.findAllByMatchParticipantId(new MatchParticipantId(matchParticipantId.getDataVersion(), matchParticipantId.getMatchId()));
         return matchParticipantList;
     }
 

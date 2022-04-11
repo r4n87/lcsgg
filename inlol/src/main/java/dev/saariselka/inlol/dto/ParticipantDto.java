@@ -1,10 +1,12 @@
 package dev.saariselka.inlol.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 
+@NoArgsConstructor
 @AllArgsConstructor
 public class ParticipantDto {
     private String puuid;

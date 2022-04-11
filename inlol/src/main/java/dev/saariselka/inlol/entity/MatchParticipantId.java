@@ -19,4 +19,9 @@ public class MatchParticipantId implements Serializable {
     private String dataVersion;
     @Column(nullable = false)
     private String matchId;
+
+    public MatchParticipantId(String dataVersion, String matchId) {
+        this.dataVersion = dataVersion;
+        this.matchId = matchId;
+    }
 }

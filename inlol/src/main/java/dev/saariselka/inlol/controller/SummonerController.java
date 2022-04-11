@@ -39,7 +39,7 @@ public class SummonerController {
     }
 
     @GetMapping(value ="/{name}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public String getSummner_Puuid_ByName(@PathVariable("name") String name) {
+    public String getSummoner_Puuid_ByName(@PathVariable("name") String name) {
         List<SummonerEntity> summoner = summonerService.findByName(name);
 
         if(!summoner.isEmpty()) {

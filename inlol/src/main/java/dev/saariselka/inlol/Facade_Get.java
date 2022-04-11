@@ -73,7 +73,7 @@ public class Facade_Get {
 
         try {
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH","GET_MATCHES_BY_PUUID")
-                    + summonerController.getSummner_Puuid_ByName(name)
+                    + summonerController.getSummoner_Puuid_ByName(name)
                     +  "/ids?start=0&count=20&api_key="
                     + apiKey).build();
 

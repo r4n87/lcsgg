@@ -1,14 +1,22 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.entity.MatchObjectivesEntity;
+import dev.saariselka.inlol.entity.MatchObjectivesId;
+import dev.saariselka.inlol.entity.MatchParticipantEntity;
+import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.service.MatchParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -52,5 +60,20 @@ public class MatchParticipantController {
                 totalDamageShieldedOnTeammates, totalDamageTaken, totalHeal, totalHealsOnTeammates, totalMinionsKilled, totalTimeCCDealt,
                 totalTimeSpentDead, totalUnitsHealed, tripleKills, trueDamageDealt, trueDamageDealtToChampions, trueDamageTaken, turretKills,
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
+    }
+
+    @GetMapping(value ="/{dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<MatchParticipantEntity> getMatchParticipantList_ByMatchParticipantId(@PathVariable("dataVersion") String dataVersion
+            ,@PathVariable("matchId") String matchId) {
+        List<MatchParticipantEntity> participants = matchParticipantService.findAllById(new MatchParticipantId(dataVersion, matchId));
+        return participants;
+    }
+
+    @GetMapping(value ="/{puuid,dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<MatchParticipantEntity> getMatchParticipant_ByMatchParticipantId(@PathVariable("puuid") String puuid
+            ,@PathVariable("dataVersion") String dataVersion
+            ,@PathVariable("matchId") String matchId) {
+        List<MatchParticipantEntity> participant = matchParticipantService.findById(new MatchParticipantId(puuid, dataVersion, matchId));
+        return participant;
     }
 }
