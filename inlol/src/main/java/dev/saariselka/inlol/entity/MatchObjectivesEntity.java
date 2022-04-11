@@ -3,6 +3,7 @@ package dev.saariselka.inlol.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -29,5 +30,6 @@ public class MatchObjectivesEntity {
     private int riftherald_kills;
     private boolean tower_first;
     private int tower_kills;
+    private Timestamp rrt;
 
 }

@@ -3,6 +3,7 @@ package dev.saariselka.inlol.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -16,4 +17,5 @@ public class TeamEntity {
     private TeamId teamId;
 
     private boolean win;
+    private Timestamp rrt;
 }

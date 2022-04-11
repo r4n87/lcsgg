@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import dev.saariselka.inlol.controller.MatchMasterController;
-import dev.saariselka.inlol.controller.MatchParticipantController;
-import dev.saariselka.inlol.controller.SummonerController;
-import dev.saariselka.inlol.controller.TeamController;
+import dev.saariselka.inlol.controller.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +24,10 @@ public class Facade_Set {
     TeamController teamController;
     @Autowired
     MatchParticipantController matchParticipantController;
+    @Autowired
+    MatchBanController matchBanController;
+    @Autowired
+    MatchObjectivesController matchObjectivesController;
 
     public void setMatchInfoAtDB(HashMap<String, Object> result) throws JsonProcessingException {
 
@@ -53,24 +54,44 @@ public class Facade_Set {
                 jsonObjectForInfo.get("gameVersion").toString(),Integer.parseInt(jsonObjectForInfo.get("mapId").toString()),
 
                 jsonObjectForInfo.get("platformId").toString(),Integer.parseInt(jsonObjectForInfo.get("queueId").toString()),
-                jsonObjectForInfo.get("tournamentCode").toString(), 100, 200);
+                jsonObjectForInfo.get("tournamentCode").toString(), 100, 200
+                ,Timestamp.valueOf(jsonObjectForInfo.get("rrt").toString()));
       
         for (Object teamsObj : jsonArrayForTeams) {
             JsonObject teamObj = (JsonObject)teamsObj;
 
             teamController.insertTeamInfo(jsonObjectForMetadata.get("matchId").toString()
                     ,Integer.parseInt(teamObj.get("teamId").toString())
-                    ,Boolean.parseBoolean(teamObj.get("win").toString()));
+                    ,Boolean.parseBoolean(teamObj.get("win").toString())
+                    ,Timestamp.valueOf(teamObj.get("rrt").toString()));
 
             JsonArray jsonArrayForBans = (JsonArray)teamObj.get("bans");
 
             for (Object bansObj : jsonArrayForBans) {
                 JsonObject banObj = (JsonObject)bansObj;
-                //ban controller 오류 수정 후 작업할 것
+                matchBanController.insertBanInfo(banObj.get("matchId").toString()
+                        ,Integer.parseInt(banObj.get("pickTurn").toString())
+                        ,Integer.parseInt(banObj.get("teamId").toString())
+                        ,Integer.parseInt(banObj.get("championId").toString())
+                        ,Timestamp.valueOf(banObj.get("rrt").toString()));
             }
 
             JsonObject objectivesObj = (JsonObject)teamObj.get("objectives");
-            //objectives controller 오류 수정 후 작업할 것
+            matchObjectivesController.insertObjectivesInfo(objectivesObj.get("matchId").toString()
+                    ,Integer.parseInt(objectivesObj.get("teamId").toString())
+                    ,Boolean.parseBoolean(objectivesObj.get("baronFirst").toString())
+                    ,Integer.parseInt(objectivesObj.get("baronKills").toString())
+                    ,Boolean.parseBoolean(objectivesObj.get("championFirst").toString())
+                    ,Integer.parseInt(objectivesObj.get("championKills").toString())
+                    ,Boolean.parseBoolean(objectivesObj.get("dragonFirst").toString())
+                    ,Integer.parseInt(objectivesObj.get("dragonKills").toString())
+                    ,Boolean.parseBoolean(objectivesObj.get("inhibitorFirst").toString())
+                    ,Integer.parseInt(objectivesObj.get("inhibitorKills").toString())
+                    ,Boolean.parseBoolean(objectivesObj.get("riftheraldFirst").toString())
+                    ,Integer.parseInt(objectivesObj.get("riftheraldKills").toString())
+                    ,Boolean.parseBoolean(objectivesObj.get("towerFirst").toString())
+                    ,Integer.parseInt(objectivesObj.get("towerKills").toString())
+                    ,Timestamp.valueOf(objectivesObj.get("rrt").toString()));
         }
 
         for (Object obj : jsonArrayForParticipants) {
