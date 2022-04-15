@@ -35,9 +35,9 @@ public class Facade {
     {
         name = "Petaluma";
 
-        // 서버에서 ppuid 얻어오기
-        // 얻은 ppuid로 db조회
-        // db에 데이터가 있는 경우 , 없는 경우
+        // name기준 조회
+        // db에 데이터가 있는 경우  -> 바로 뿌리고
+        // 없는 경우
         // db에 데이터가 있지만 일정기간 xx일 지났으면 자동갱신
         // -> 밖에서 해야되려나?
         // Init과 search, update의 차이 명확하게
@@ -72,7 +72,7 @@ public class Facade {
         }
     }
 
-    // API를 활용해서 DB 업데이트
+    // API를 활용해서 DB 업데이트 - 새로고침 버튼
     public void update()
     {
         //1. puuid 발췌
