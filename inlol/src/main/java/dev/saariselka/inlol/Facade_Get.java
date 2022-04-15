@@ -125,4 +125,33 @@ public class Facade_Get {
         }
         return result;
     }
+
+    public HashMap<String, Object> getLeagueInfo(String encryptedSummonerId) {
+        apiKey = apiKeyController.getAPIKey_ByCategory("Personal");
+
+        HashMap<String, Object> result = new HashMap<String, Object>();
+
+        try {
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("LEAGUE","GET_LEAGUE_BY_ENCRYPTEDID")
+                    + encryptedSummonerId
+                    + "?"+"api_key="
+                    + apiKey).build();
+
+            // API 호출
+            result = api.executeAPI(uri, Map.class);
+
+
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            result.put("statusCode", e.getRawStatusCode());
+            result.put("body"  , e.getStatusText());
+            System.out.println("error~");
+            System.out.println(e.toString());
+
+        } catch (Exception e) {
+            result.put("statusCode", "999");
+            result.put("body"  , "excpetion~");
+            System.out.println(e.toString());
+        }
+        return result;
+    }
 }

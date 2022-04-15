@@ -217,4 +217,11 @@ public class Facade_Set {
                 Long.parseLong(String.valueOf(res.get("revisionDate"))),res.get("name"),res.get("id"),
                 Long.parseLong(String.valueOf(res.get("summonerLevel"))),res.get("puuid"));
     }
+
+    public void setLeagueInfoAtDB(HashMap<String, Object> result) {
+        // parsing
+        LinkedHashMap<String, String> res = (LinkedHashMap) result.get("body");
+
+        // DB Insert
+    }
 }
