@@ -45,6 +45,7 @@ public class Facade {
     }
 
     // API를 활용해서 Init
+    // todo : matchlist 와 league info를 분리할지
     @GetMapping("testinit")
     public void init() throws JsonProcessingException
     {
@@ -55,6 +56,10 @@ public class Facade {
 
         //Step 1. Get SummonerInfo By Name
         result = facade_get.getSummonerInfo(name);
+
+        //Step 1.5 Get EncryptedSummonerId
+        LinkedHashMap<String, String> res =  (LinkedHashMap) result.get("body");
+        String encryptedSummonerId = res.get("accountId");
 
         //Step 2. Set SummonerInfo At DB
         facade_set.setSummonerInfoAtDB(result);
@@ -70,6 +75,10 @@ public class Facade {
             //Step 5. Set MatchInfo At DB
             facade_set.setMatchInfoAtDB(result);
         }
+
+        //Step 6. Get League info by encryptedSummonerId
+        result = facade_get.getLeagueInfo(encryptedSummonerId);
+        facade_set.setLeagueInfoAtDB(result);
     }
 
     // API를 활용해서 DB 업데이트 - 새로고침 버튼
