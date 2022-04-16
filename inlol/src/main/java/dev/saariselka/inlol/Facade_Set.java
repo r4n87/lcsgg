@@ -28,6 +28,8 @@ public class Facade_Set {
     MatchBanController matchBanController;
     @Autowired
     MatchObjectivesController matchObjectivesController;
+    @Autowired
+    LeagueEntryController leagueEntryController;
 
     public void setMatchInfoAtDB(HashMap<String, Object> result) throws JsonProcessingException {
 
@@ -220,8 +222,15 @@ public class Facade_Set {
 
     public void setLeagueInfoAtDB(HashMap<String, Object> result) {
         // parsing
-        LinkedHashMap<String, String> res = (LinkedHashMap) result.get("body");
+        LinkedHashMap<String, Object> res = (LinkedHashMap) result.get("body");
 
         // DB Insert
+        leagueEntryController.insertLeagueEntryInfo(res.get("leagueId").toString(), res.get("summonerId").toString(), res.get("summonerName").toString(),
+                res.get("queueType").toString(), res.get("tier").toString(), res.get("rank").toString(), Integer.parseInt(String.valueOf(res.get("leaguePoints"))),
+                Integer.parseInt(String.valueOf(res.get("wins"))), Integer.parseInt(String.valueOf(res.get("losses"))),
+                Boolean.parseBoolean(res.get("hotStreak").toString()), Boolean.parseBoolean(res.get("veteran").toString()),
+                Boolean.parseBoolean(res.get("freshBlood").toString()), Boolean.parseBoolean(res.get("inactive").toString()),
+                Timestamp.valueOf(res.get("rrt").toString())
+                );
     }
 }
