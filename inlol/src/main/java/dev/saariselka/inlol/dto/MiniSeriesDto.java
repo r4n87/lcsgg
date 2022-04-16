@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class MiniSeriesDTO {
+public class MiniSeriesDto {
     int losses;
     String progress;
     int target;
