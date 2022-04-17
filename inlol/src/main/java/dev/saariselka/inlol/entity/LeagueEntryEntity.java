@@ -2,6 +2,7 @@ package dev.saariselka.inlol.entity;
 
 import lombok.*;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,13 +16,12 @@ import java.sql.Timestamp;
 @ToString
 @Table(name="RIOT_LEAGUE_ENTRY")
 public class LeagueEntryEntity {
+    @EmbeddedId
+    private LeagueEntryId leagueEntryId;
+
     private String leagueId;
-
-    @Id
-    private String summonerId;
-
     private String summonerName;
-    private String queueType;
+
     private String tier;
     private String rank;
     private int leaguePoints;

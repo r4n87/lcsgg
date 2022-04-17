@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 @Service
 public class Facade_Set {
@@ -34,8 +33,9 @@ public class Facade_Set {
     public void setMatchInfoAtDB(HashMap<String, Object> result) throws JsonProcessingException {
 
         HashMap<String, Object> matchInfo;
-
         matchInfo = (HashMap) result.get("body");
+
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = mapper.writeValueAsString(matchInfo);
@@ -57,7 +57,7 @@ public class Facade_Set {
 
                 jsonObjectForInfo.get("platformId").toString(),Integer.parseInt(jsonObjectForInfo.get("queueId").toString()),
                 jsonObjectForInfo.get("tournamentCode").toString(), 100, 200
-                ,Timestamp.valueOf(jsonObjectForInfo.get("rrt").toString()));
+                ,timestamp);
       
         for (Object teamsObj : jsonArrayForTeams) {
             JsonObject teamObj = (JsonObject)teamsObj;
@@ -65,7 +65,7 @@ public class Facade_Set {
             teamController.insertTeamInfo(jsonObjectForMetadata.get("matchId").toString()
                     ,Integer.parseInt(teamObj.get("teamId").toString())
                     ,Boolean.parseBoolean(teamObj.get("win").toString())
-                    ,Timestamp.valueOf(teamObj.get("rrt").toString()));
+                    ,timestamp);
 
             JsonArray jsonArrayForBans = (JsonArray)teamObj.get("bans");
 
@@ -75,7 +75,7 @@ public class Facade_Set {
                         ,Integer.parseInt(banObj.get("pickTurn").toString())
                         ,Integer.parseInt(banObj.get("teamId").toString())
                         ,Integer.parseInt(banObj.get("championId").toString())
-                        ,Timestamp.valueOf(banObj.get("rrt").toString()));
+                        ,timestamp);
             }
 
             JsonObject objectivesObj = (JsonObject)teamObj.get("objectives");
@@ -93,7 +93,7 @@ public class Facade_Set {
                     ,Integer.parseInt(objectivesObj.get("riftheraldKills").toString())
                     ,Boolean.parseBoolean(objectivesObj.get("towerFirst").toString())
                     ,Integer.parseInt(objectivesObj.get("towerKills").toString())
-                    ,Timestamp.valueOf(objectivesObj.get("rrt").toString()));
+                    ,timestamp);
         }
 
         for (Object obj : jsonArrayForParticipants) {
@@ -205,7 +205,7 @@ public class Facade_Set {
                     Integer.parseInt(participantObj.get("wardsKilled").toString()),
                     Integer.parseInt(participantObj.get("wardsPlaced").toString()),
                     Boolean.parseBoolean(participantObj.get("win").toString()),
-                    Timestamp.valueOf(participantObj.get("rrt").toString())
+                    timestamp
                     );
         }
     }
@@ -222,15 +222,22 @@ public class Facade_Set {
 
     public void setLeagueInfoAtDB(HashMap<String, Object> result) {
         // parsing
-        LinkedHashMap<String, Object> res = (LinkedHashMap) result.get("body");
+        HashSet<Object> res = (HashSet) result.get("body");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        // DB Insert
-        leagueEntryController.insertLeagueEntryInfo(res.get("leagueId").toString(), res.get("summonerId").toString(), res.get("summonerName").toString(),
-                res.get("queueType").toString(), res.get("tier").toString(), res.get("rank").toString(), Integer.parseInt(String.valueOf(res.get("leaguePoints"))),
-                Integer.parseInt(String.valueOf(res.get("wins"))), Integer.parseInt(String.valueOf(res.get("losses"))),
-                Boolean.parseBoolean(res.get("hotStreak").toString()), Boolean.parseBoolean(res.get("veteran").toString()),
-                Boolean.parseBoolean(res.get("freshBlood").toString()), Boolean.parseBoolean(res.get("inactive").toString()),
-                Timestamp.valueOf(res.get("rrt").toString())
-                );
+        Iterator<Object> it = res.iterator();
+        while(it.hasNext())
+        {
+            LinkedHashMap<String, Object> data = (LinkedHashMap) it.next();
+            // DB Insert
+            leagueEntryController.insertLeagueEntryInfo(data.get("leagueId").toString(), data.get("summonerId").toString(), data.get("summonerName").toString(),
+                    data.get("queueType").toString(), data.get("tier").toString(), data.get("rank").toString(), Integer.parseInt(String.valueOf(data.get("leaguePoints"))),
+                    Integer.parseInt(String.valueOf(data.get("wins"))), Integer.parseInt(String.valueOf(data.get("losses"))),
+                    Boolean.parseBoolean(data.get("hotStreak").toString()), Boolean.parseBoolean(data.get("veteran").toString()),
+                    Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
+                    timestamp
+            );
+        }
+
     }
 }

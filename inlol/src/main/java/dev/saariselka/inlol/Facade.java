@@ -59,26 +59,27 @@ public class Facade {
 
         //Step 1.5 Get EncryptedSummonerId
         LinkedHashMap<String, String> res =  (LinkedHashMap) result.get("body");
-        String encryptedSummonerId = res.get("accountId");
+        String encryptedSummonerId = res.get("id");
 
         //Step 2. Set SummonerInfo At DB
         facade_set.setSummonerInfoAtDB(result);
 
-        //Step 3. Get MatchList By puuid
+        //Step 3. Get League info by encryptedSummonerId
+        result = facade_get.getLeagueInfo(encryptedSummonerId);
+        facade_set.setLeagueInfoAtDB(result);
+
+        //Step 4. Get MatchList By puuid
         ArrayList<String> matchList = facade_get.getMatchList(name);
 
         for(int i = 0; i < matchList.size(); i++)
         {
-            //Step 4. Get MatchInfo By MatchList
+            //Step 5. Get MatchInfo By MatchList
             result = facade_get.getMatchInfo(matchList, i);
 
-            //Step 5. Set MatchInfo At DB
+            //Step 6. Set MatchInfo At DB
             facade_set.setMatchInfoAtDB(result);
         }
 
-        //Step 6. Get League info by encryptedSummonerId
-        result = facade_get.getLeagueInfo(encryptedSummonerId);
-        facade_set.setLeagueInfoAtDB(result);
     }
 
     // API를 활용해서 DB 업데이트 - 새로고침 버튼
