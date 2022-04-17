@@ -12,17 +12,17 @@ public class LeagueEntryDto_Assembly {
     @Autowired
     LeagueEntryController leagueEntryController;
 
-    public List<LeagueEntryDto> getLeagueEntries_BySummonerId(String summonerId) {
-        List<LeagueEntryEntity> leagueList = leagueEntryController.getLeagueEntries_BySummonerId(summonerId);
+    public List<LeagueEntryDto> getLeagueEntries_BySummonerId(String summonerId, String queueType) {
+        List<LeagueEntryEntity> leagueList = leagueEntryController.getLeagueEntries_ByLeagueEntryId(summonerId, queueType);
         List<LeagueEntryDto> leagueEntryDtoList = new ArrayList<>();
 
         for(LeagueEntryEntity leagueEntryEntity : leagueList)
         {
             LeagueEntryDto leagueEntryDto = new LeagueEntryDto();
             leagueEntryDto.setLeagueId(leagueEntryEntity.getLeagueId());
-            leagueEntryDto.setSummonerId(leagueEntryEntity.getSummonerId());
+            leagueEntryDto.setSummonerId(leagueEntryEntity.getLeagueEntryId().getSummonerId());
             leagueEntryDto.setSummonerName(leagueEntryEntity.getSummonerName());
-            leagueEntryDto.setQueueType(leagueEntryEntity.getQueueType());
+            leagueEntryDto.setQueueType(leagueEntryEntity.getLeagueEntryId().getQueueType());
             leagueEntryDto.setTier(leagueEntryEntity.getTier());
             leagueEntryDto.setRank(leagueEntryEntity.getRank());
             leagueEntryDto.setLeaguePoints(leagueEntryEntity.getLeaguePoints());

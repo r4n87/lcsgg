@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.LeagueEntryEntity;
+import dev.saariselka.inlol.entity.LeagueEntryId;
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.repository.LeagueEntryRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +24,12 @@ public class LeagueEntryService {
         return league;
     }
 
-    public List<LeagueEntryEntity> findBySummonerId(String summonerId) {
-        List<LeagueEntryEntity> league = leagueEntryRepository.findBySummonerId(summonerId);
+    public List<LeagueEntryEntity> findByLeagueEntryId(LeagueEntryId leagueEntryId) {
+        List<LeagueEntryEntity> league = leagueEntryRepository.findByLeagueEntryId(leagueEntryId);
         return league;
     }
 
     public void insert(String leagueId, String summonerId, String summonerName, String queueType, String tier, String rank, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, Timestamp rrt) {
-        leagueEntryRepository.save( new LeagueEntryEntity( leagueId, summonerId, summonerName, queueType, tier, rank, leaguePoints, wins, losses, hotStreak, veteran, freshBlood, inactive, rrt ));
+        leagueEntryRepository.save( new LeagueEntryEntity( new LeagueEntryId(summonerId, queueType), leagueId, summonerName, tier, rank, leaguePoints, wins, losses, hotStreak, veteran, freshBlood, inactive, rrt ));
     }
 }
