@@ -23,7 +23,7 @@ public class LeagueEntryEntity {
     private String summonerName;
 
     private String tier;
-    private String rank;
+    private String ranks;
     private int leaguePoints;
     private int wins;
     private int losses;

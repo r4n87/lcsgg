@@ -29,7 +29,7 @@ public class LeagueEntryService {
         return league;
     }
 
-    public void insert(String leagueId, String summonerId, String summonerName, String queueType, String tier, String rank, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, Timestamp rrt) {
-        leagueEntryRepository.save( new LeagueEntryEntity( new LeagueEntryId(summonerId, queueType), leagueId, summonerName, tier, rank, leaguePoints, wins, losses, hotStreak, veteran, freshBlood, inactive, rrt ));
+    public void insert(String summonerId, String queueType, String leagueId, String summonerName, String tier, String ranks, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, Timestamp rrt) {
+        leagueEntryRepository.save( new LeagueEntryEntity( new LeagueEntryId(summonerId, queueType), leagueId, summonerName, tier, ranks, leaguePoints, wins, losses, hotStreak, veteran, freshBlood, inactive, rrt));
     }
 }
