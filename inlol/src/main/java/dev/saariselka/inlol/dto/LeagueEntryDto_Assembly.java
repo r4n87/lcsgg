@@ -24,7 +24,7 @@ public class LeagueEntryDto_Assembly {
             leagueEntryDto.setSummonerName(leagueEntryEntity.getSummonerName());
             leagueEntryDto.setQueueType(leagueEntryEntity.getLeagueEntryId().getQueueType());
             leagueEntryDto.setTier(leagueEntryEntity.getTier());
-            leagueEntryDto.setRank(leagueEntryEntity.getRank());
+            leagueEntryDto.setRank(leagueEntryEntity.getRanks());
             leagueEntryDto.setLeaguePoints(leagueEntryEntity.getLeaguePoints());
             leagueEntryDto.setWins(leagueEntryEntity.getWins());
             leagueEntryDto.setLosses(leagueEntryEntity.getLosses());

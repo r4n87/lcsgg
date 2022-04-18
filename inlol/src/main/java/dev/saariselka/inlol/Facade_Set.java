@@ -230,8 +230,8 @@ public class Facade_Set {
         {
             LinkedHashMap<String, Object> data = (LinkedHashMap) it.next();
             // DB Insert
-            leagueEntryController.insertLeagueEntryInfo(data.get("leagueId").toString(), data.get("summonerId").toString(), data.get("summonerName").toString(),
-                    data.get("queueType").toString(), data.get("tier").toString(), data.get("rank").toString(), Integer.parseInt(String.valueOf(data.get("leaguePoints"))),
+            leagueEntryController.insertLeagueEntryInfo(data.get("summonerId").toString(), data.get("queueType").toString(), data.get("leagueId").toString(),
+                    data.get("summonerName").toString(), data.get("tier").toString(), data.get("rank").toString(), Integer.parseInt(String.valueOf(data.get("leaguePoints"))),
                     Integer.parseInt(String.valueOf(data.get("wins"))), Integer.parseInt(String.valueOf(data.get("losses"))),
                     Boolean.parseBoolean(data.get("hotStreak").toString()), Boolean.parseBoolean(data.get("veteran").toString()),
                     Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
