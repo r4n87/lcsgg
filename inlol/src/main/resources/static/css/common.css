@@ -37,8 +37,8 @@ footer {
     -webkit-justify-content: center;
     justify-content: center;
     height: 48px;
-    background-color: #5383E8;
-    border-bottom: 1px solid #4171d6;
+    background-color: #B5D692;
+    /*border-bottom: 1px solid #98D692;*/
     box-sizing: border-box;
 }
 .css-7dq222 .route-nav {
@@ -136,7 +136,7 @@ a:-webkit-any-link {
 }
 .css-4b4yo9 {
     padding: 10px 0 4px 0;
-    color: #B3CDFF;
+    color: #e5ffc9;
     border-bottom: 3px solid transparent;
     display: -webkit-box;
     display: -webkit-flex;
@@ -154,7 +154,7 @@ a:-webkit-any-link {
 html {
     font-family: sans-serif;
     text-size-adjust: 100%;
-    background-color: rgb(83, 131, 232) !important;
+    background-color: rgb(181, 214, 146) !important;
 }
 .css-1hxhw8h {
     color: #fff;
