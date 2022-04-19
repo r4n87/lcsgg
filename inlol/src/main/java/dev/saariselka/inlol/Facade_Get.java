@@ -34,7 +34,7 @@ public class Facade_Get {
 
     public HashMap<String, Object> getMatchInfo(ArrayList<String> matchList, int i) {
 
-        apiKey = apiKeyController.getAPIKey_ByCategory("Personal");
+        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<String, Object>();
 
@@ -65,7 +65,7 @@ public class Facade_Get {
 
     public ArrayList<String> getMatchList(String name) {
 
-        apiKey = apiKeyController.getAPIKey_ByCategory("Personal");
+        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<String, Object>();
         ArrayList<String> matchList = new ArrayList<String>();
@@ -97,7 +97,7 @@ public class Facade_Get {
 
     public HashMap<String, Object> getSummonerInfo(String name) {
 
-        apiKey = apiKeyController.getAPIKey_ByCategory("Personal");
+        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<String, Object>();
 
@@ -126,7 +126,7 @@ public class Facade_Get {
     }
 
     public HashMap<String, Object> getLeagueInfo(String encryptedSummonerId) {
-        apiKey = apiKeyController.getAPIKey_ByCategory("Personal");
+        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<String, Object>();
 
