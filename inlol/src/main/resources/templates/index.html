@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+</head>
+<body style="margin: 300px auto 0; width: 500px;">
+<div style="display: inline-block; text-align: center; width:500px; margin-bottom: 100px">
+    <form name="search-form" action="/searchInit" method="get">
+        <input type="text" id="name" name="name"
+               th:value="${#strings.defaultString(summonerName, '')}"
+               placeholder="소환사명을 입력하세요."/>
+        <button type="submit" id="submitButton">검색</button>
+        <button type="submit" id="updateButton">갱신</button>
+    </form>
+</div>
+<div>
+    <table style="width: 500px; margin-bottom: 100px">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Level</th>
+                <th>Solo Tier</th>
+                <th>Flex Tier</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align: center">
+                <td th:text="${summoner?.get('name')}">
+                <td th:text="${summoner?.get('summonerLevel')}">
+                <td th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}">
+                <td th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}">
+            </tr>
+        </tbody>
+    </table>
+    <table style="width: 500px;">
+        <thead>
+            <tr>
+                <th>gameType</th>
+                <th>gameDuration</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: center">
+            <tr>
+                <td th:text="${match1?.get('gameType')}">
+                <td th:text="${match1?.get('gameDuration')}">
+            </tr>
+            <tr>
+                <td th:text="${match2?.get('gameType')}">
+                <td th:text="${match2?.get('gameDuration')}">
+            </tr>
+            <tr>
+                <td th:text="${match3?.get('gameType')}">
+                <td th:text="${match3?.get('gameDuration')}">
+            </tr>
+            <tr>
+                <td th:text="${match4?.get('gameType')}">
+                <td th:text="${match4?.get('gameDuration')}">
+            </tr>
+            <tr>
+                <td th:text="${match5?.get('gameType')}">
+                <td th:text="${match5?.get('gameDuration')}">
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

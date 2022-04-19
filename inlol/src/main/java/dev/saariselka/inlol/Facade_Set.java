@@ -210,14 +210,11 @@ public class Facade_Set {
         }
     }
 
-    public void setSummonerInfoAtDB(HashMap<String, Object> result) {
-        // parsing
-        LinkedHashMap<String, String> res = (LinkedHashMap) result.get("body");
-
+    public void setSummonerInfoAtDB(HashMap<String, String> result) {
         // DB Insert
-        summonerController.insertSummoner(res.get("accountId"),Integer.parseInt(String.valueOf(res.get("profileIconId"))),
-                Long.parseLong(String.valueOf(res.get("revisionDate"))),res.get("name"),res.get("id"),
-                Long.parseLong(String.valueOf(res.get("summonerLevel"))),res.get("puuid"));
+        summonerController.insertSummoner(result.get("accountId"),Integer.parseInt(String.valueOf(result.get("profileIconId"))),
+                Long.parseLong(String.valueOf(result.get("revisionDate"))),result.get("name"),result.get("id"),
+                Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"));
     }
 
     public void setLeagueInfoAtDB(HashMap<String, Object> result) {

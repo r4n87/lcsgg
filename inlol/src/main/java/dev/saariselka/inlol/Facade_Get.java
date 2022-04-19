@@ -83,13 +83,13 @@ public class Facade_Get {
             matchList = (ArrayList)result.get("body");
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
-            result.put("body"  , e.getStatusText());
-            System.out.println("error~");
+            result.put("body", e.getStatusText());
+            System.out.println("get match list error");
             System.out.println(e.toString());
 
         } catch (Exception e) {
             result.put("statusCode", "999");
-            result.put("body"  , "excpetion~");
+            result.put("body", "get match list exception");
             System.out.println(e.toString());
         }
         return matchList;
@@ -114,12 +114,12 @@ public class Facade_Get {
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
             result.put("body"  , e.getStatusText());
-            System.out.println("error~");
+            System.out.println("summoner info get error");
             System.out.println(e.toString());
 
         } catch (Exception e) {
             result.put("statusCode", "999");
-            result.put("body"  , "excpetion~");
+            result.put("body"  , "summoner info get exception");
             System.out.println(e.toString());
         }
         return result;
@@ -141,13 +141,13 @@ public class Facade_Get {
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
-            result.put("body"  , e.getStatusText());
-            System.out.println("error~");
+            result.put("body", e.getStatusText());
+            System.out.println("league info get error");
             System.out.println(e.toString());
 
         } catch (Exception e) {
             result.put("statusCode", "999");
-            result.put("body"  , "excpetion~");
+            result.put("body", "league info get exception");
             System.out.println(e.toString());
         }
         return result;

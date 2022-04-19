@@ -1,20 +1,20 @@
 package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import dev.saariselka.inlol.controller.APIController;
-import dev.saariselka.inlol.controller.APIKeyController;
-import dev.saariselka.inlol.controller.MatchMasterController;
-import dev.saariselka.inlol.controller.SummonerController;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
 @RestController
+@NoArgsConstructor
+@AllArgsConstructor
 public class Facade {
 
     @Autowired
@@ -30,64 +30,75 @@ public class Facade {
 //        this.name = name;
 //    }
 
-    // DB 정보 불러오기
-    public void search()
-    {
-        name = "Petaluma";
-
-        // name기준 조회
-        // db에 데이터가 있는 경우  -> 바로 뿌리고
-        // 없는 경우
-        // db에 데이터가 있지만 일정기간 xx일 지났으면 자동갱신
-        // -> 밖에서 해야되려나?
-        // Init과 search, update의 차이 명확하게
-
-    }
-
-    // API를 활용해서 Init
-    // todo : matchlist 와 league info를 분리할지
-    @GetMapping("testinit")
-    public void init() throws JsonProcessingException
-    {
-        // 테스트를 위해 하드 코딩
-        name = "Petaluma";
-
+    // 소환사 검색 수행
+    @GetMapping("searchInit")
+    public ModelAndView search(@RequestParam("name") String name) throws JsonProcessingException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
         HashMap<String, Object> result;
 
         //Step 1. Get SummonerInfo By Name
         result = facade_get.getSummonerInfo(name);
 
-        //Step 1.5 Get EncryptedSummonerId
-        LinkedHashMap<String, String> res =  (LinkedHashMap) result.get("body");
+        //Step 1.1. Get EncryptedSummonerId and Puuid
+        LinkedHashMap<String, String> res = (LinkedHashMap) result.get("body");
         String encryptedSummonerId = res.get("id");
 
-        //Step 2. Set SummonerInfo At DB
-        facade_set.setSummonerInfoAtDB(result);
+        //Step 1.2. Set SummonerInfo At DB
+        facade_set.setSummonerInfoAtDB(res);
 
-        //Step 3. Get League info by encryptedSummonerId
+        //Step 1.3. Set summoner At ModelAndView
+        modelAndView.addObject("summoner", res);
+        modelAndView.addObject("summonerName", name);
+
+        //Step 2. Get League info by encryptedSummonerId
         result = facade_get.getLeagueInfo(encryptedSummonerId);
+        HashSet<Object> res2 = (HashSet<Object>) result.get("body");
+
+        //Step 2.1. Set League Info At DB
         facade_set.setLeagueInfoAtDB(result);
 
-        //Step 4. Get MatchList By puuid
+        //Step 2.2. Set League Info At ModelAndView
+        setLeagueInfoAtModelAndView(modelAndView, res2);
+
+        //Step 3. Get MatchList By Name
         ArrayList<String> matchList = facade_get.getMatchList(name);
+        System.out.println(matchList.toString());
 
-        for(int i = 0; i < matchList.size(); i++)
-        {
-            //Step 5. Get MatchInfo By MatchList
+        //Step 4. Get MatchInfo By MatchId from MatchList
+        //        Set MatchInfo At DB
+        //        Set MatchInfo At ModelAndView
+        ArrayList<HashMap<String, Object>> matchInfoList = new ArrayList<>();
+        for(int i = 0; i < matchList.size(); i++) {
             result = facade_get.getMatchInfo(matchList, i);
-
-            //Step 6. Set MatchInfo At DB
-            facade_set.setMatchInfoAtDB(result);
+            matchInfoList.add((HashMap<String, Object>) ((HashMap<String, Object>) result.get("body")).get("info"));
+//            facade_set.setMatchInfoAtDB(result);
         }
+        modelAndView.addObject("match1", matchInfoList.get(0));
+        modelAndView.addObject("match2", matchInfoList.get(1));
+        modelAndView.addObject("match3", matchInfoList.get(2));
+        modelAndView.addObject("match4", matchInfoList.get(3));
+        modelAndView.addObject("match5", matchInfoList.get(4));
 
+        return modelAndView;
     }
 
-    // API를 활용해서 DB 업데이트 - 새로고침 버튼
-    public void update()
-    {
-        //1. puuid 발췌
-        //String puuid = summonerController.getSummner_Puuid_ByName(name);
-
+    private void setLeagueInfoAtModelAndView(ModelAndView modelAndView, HashSet<Object> res2) {
+        Iterator<Object> iterator = res2.iterator();
+        while(iterator.hasNext()) {
+            HashMap<String, String> map = (HashMap) iterator.next();
+            String rankInfo = map.get("queueType").toString();
+            if("RANKED_SOLO_5x5".equals(rankInfo)) {
+                modelAndView.addObject("soloRankInfo", map);
+            } else {
+                modelAndView.addObject("flexRankInfo", map);
+            }
+        }
     }
 
+    // 소환사 검색 결과 새로고침
+    @GetMapping("searchRefresh")
+    public void refresh() {
+
+    }
 }
