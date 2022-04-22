@@ -72,7 +72,7 @@ public class Facade {
         for(int i = 0; i < matchList.size(); i++) {
             result = facade_get.getMatchInfo(matchList, i);
             matchInfoList.add((HashMap<String, Object>) ((HashMap<String, Object>) result.get("body")).get("info"));
-//            facade_set.setMatchInfoAtDB(result);
+            facade_set.setMatchInfoAtDB(result);
         }
         modelAndView.addObject("match1", matchInfoList.get(0));
         modelAndView.addObject("match2", matchInfoList.get(1));

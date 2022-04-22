@@ -71,28 +71,35 @@ public class Facade_Set {
 
             for (Object bansObj : jsonArrayForBans) {
                 JsonObject banObj = (JsonObject)bansObj;
-                matchBanController.insertBanInfo(banObj.get("matchId").toString()
+                matchBanController.insertBanInfo(jsonObjectForMetadata.get("matchId").toString()
                         ,Integer.parseInt(banObj.get("pickTurn").toString())
-                        ,Integer.parseInt(banObj.get("teamId").toString())
+                        ,Integer.parseInt(teamObj.get("teamId").toString())
                         ,Integer.parseInt(banObj.get("championId").toString())
                         ,timestamp);
             }
 
             JsonObject objectivesObj = (JsonObject)teamObj.get("objectives");
-            matchObjectivesController.insertObjectivesInfo(objectivesObj.get("matchId").toString()
-                    ,Integer.parseInt(objectivesObj.get("teamId").toString())
-                    ,Boolean.parseBoolean(objectivesObj.get("baronFirst").toString())
-                    ,Integer.parseInt(objectivesObj.get("baronKills").toString())
-                    ,Boolean.parseBoolean(objectivesObj.get("championFirst").toString())
-                    ,Integer.parseInt(objectivesObj.get("championKills").toString())
-                    ,Boolean.parseBoolean(objectivesObj.get("dragonFirst").toString())
-                    ,Integer.parseInt(objectivesObj.get("dragonKills").toString())
-                    ,Boolean.parseBoolean(objectivesObj.get("inhibitorFirst").toString())
-                    ,Integer.parseInt(objectivesObj.get("inhibitorKills").toString())
-                    ,Boolean.parseBoolean(objectivesObj.get("riftheraldFirst").toString())
-                    ,Integer.parseInt(objectivesObj.get("riftheraldKills").toString())
-                    ,Boolean.parseBoolean(objectivesObj.get("towerFirst").toString())
-                    ,Integer.parseInt(objectivesObj.get("towerKills").toString())
+            JsonObject baronObj = (JsonObject)objectivesObj.get("baron");
+            JsonObject championObj = (JsonObject)objectivesObj.get("champion");
+            JsonObject dragonObj = (JsonObject)objectivesObj.get("dragon");
+            JsonObject inhibitorObj = (JsonObject)objectivesObj.get("inhibitor");
+            JsonObject riftHeraldObj = (JsonObject)objectivesObj.get("riftHerald");
+            JsonObject towerObj = (JsonObject)objectivesObj.get("tower");
+
+            matchObjectivesController.insertObjectivesInfo(jsonObjectForMetadata.get("matchId").toString()
+                    ,Integer.parseInt(teamObj.get("teamId").toString())
+                    ,Boolean.parseBoolean(baronObj.get("first").toString())
+                    ,Integer.parseInt(baronObj.get("kills").toString())
+                    ,Boolean.parseBoolean(championObj.get("first").toString())
+                    ,Integer.parseInt(championObj.get("kills").toString())
+                    ,Boolean.parseBoolean(dragonObj.get("first").toString())
+                    ,Integer.parseInt(dragonObj.get("kills").toString())
+                    ,Boolean.parseBoolean(inhibitorObj.get("first").toString())
+                    ,Integer.parseInt(inhibitorObj.get("kills").toString())
+                    ,Boolean.parseBoolean(riftHeraldObj.get("first").toString())
+                    ,Integer.parseInt(riftHeraldObj.get("kills").toString())
+                    ,Boolean.parseBoolean(towerObj.get("first").toString())
+                    ,Integer.parseInt(towerObj.get("kills").toString())
                     ,timestamp);
         }
 
