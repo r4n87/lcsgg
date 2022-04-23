@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-    <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:th="http://www.thymeleaf.org"
-          xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-          layout:decorate="~{layout/default_layout}">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
 
     <th:block layout:fragment="head">
         <title>Inlol Project</title>
@@ -13,22 +13,73 @@
     <body>
         <th:block layout:fragment="header" th:include="/fragments/header"> </th:block>
 
-        <div layout:fragment="content" class="content">
-            <h2>This is Content</h2>
-
-<!--            <hr>-->
-<!--            <table border = "1">-->
-<!--                <tr>-->
-<!--                    <th>TEXT</th>-->
-<!--                </tr>-->
-<!--                <th:block th:each="rl : ${resultList}">-->
-<!--                    <tr>-->
-<!--                        <td th:text="${rl}">-->
-
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </th:block>-->
-<!--            </table>-->
+        <div class="css-16kp18i e1oup1a82">
+            <div class="css-1qmhykx e1sjm9eu0">
+                <img src="images/background/Arcane.png" alt="Inlol.GG logo (Arcane)" title="Arcane">
+            </div>
+            <div class="search-contaienr">
+                <div>
+                    <form autocomplete="off" class ="css-yxjuhi e4p0i2v3" action="/searchInit" method="get">
+                        <label for="name" class = "hidden"> 소환사명을 입력하세요. </label>
+                        <input type="text" id="name" autocomplete="off" name="name"
+                               th:value="${#strings.defaultString(summonerName, '')}"
+                               placeholder="소환사명을 입력하세요." class="css-1k7wk8z e4p0i2v2 js-bound">
+                        <button type="submit">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="css-97qxj7 einfil01">
+                <table style="width: 500px; margin-bottom: 100px">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Level</th>
+                        <th>Solo Tier</th>
+                        <th>Flex Tier</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr style="text-align: center">
+                        <td th:text="${summoner?.get('name')}">
+                        <td th:text="${summoner?.get('summonerLevel')}">
+                        <td th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}">
+                        <td th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}">
+                    </tr>
+                    </tbody>
+                </table>
+                <table style="width: 500px;">
+                    <thead>
+                    <tr>
+                        <th>gameType</th>
+                        <th>gameDuration</th>
+                    </tr>
+                    </thead>
+                    <tbody style="text-align: center">
+                    <tr>
+                        <td th:text="${match1?.get('gameType')}">
+                        <td th:text="${match1?.get('gameDuration')}">
+                    </tr>
+                    <tr>
+                        <td th:text="${match2?.get('gameType')}">
+                        <td th:text="${match2?.get('gameDuration')}">
+                    </tr>
+                    <tr>
+                        <td th:text="${match3?.get('gameType')}">
+                        <td th:text="${match3?.get('gameDuration')}">
+                    </tr>
+                    <tr>
+                        <td th:text="${match4?.get('gameType')}">
+                        <td th:text="${match4?.get('gameDuration')}">
+                    </tr>
+                    <tr>
+                        <td th:text="${match5?.get('gameType')}">
+                        <td th:text="${match5?.get('gameDuration')}">
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <th:block layout:fragment="footer" th:include="/fragments/footer"> </th:block>

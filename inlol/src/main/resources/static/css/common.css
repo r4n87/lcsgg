@@ -203,6 +203,186 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-.content{
-    height:60%;
+.css-1qmhykx {
+    padding: 56px 0 48px;
+}
+.css-1qmhykx img {
+    display: block;
+    max-height: 200px;
+    margin: 0 auto;
+}
+img {
+    border: 0;
+    vertical-align: middle;
+    max-width: 100%;
+}
+.css-16kp18i {
+    display: block;
+    width: 1080px;
+    margin: 0 auto;
+}
+.css-1lshm8i {
+    padding: 32px 0 24px;
+}
+.css-16kp18i .search-contaienr {
+    width: 624px;
+    margin: 0 auto;
+}
+.css-yxjuhi {
+    position: relative;
+    border-radius: 2px;
+    background-color: #fff;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+caption, .hidden {
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+.hidden {
+    position: absolute;
+}
+label {
+    cursor: pointer;
+}
+.css-1k7wk8z {
+    width: 100%;
+    padding: 15px 150px 18px 17px;
+    border: 0;
+    height: 50px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+input, textarea {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+input, select {
+    background: #fff;
+    border: none;
+    vertical-align: middle;
+}
+input {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+input[type="text" i] {
+    padding: 1px 2px;
+}
+input {
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+.css-yxjuhi button[type="submit"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 30px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background: #01a9ff;
+    border-radius: 2px;
+}
+button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: none;
+}
+body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
+    margin: 0;
+    padding: 0;
+}
+input, textarea, keygen, select, button {
+    font-family: "Apple SD Gothic Neo",AppleGothic,"Helvetica Neue",Helvetica,"Malgun Gothic",Dotum,Arial,Tahoma;
+}
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+.css-97qxj7 {
+    /*position: relative;*/
+    width: 1080px;
+    margin: 0 auto;
+    margin-top: 20px;
+    min-height: 400px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    border-radius: 4px;
 }
