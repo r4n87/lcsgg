@@ -7,45 +7,44 @@
     <th:block layout:fragment="head">
         <title>Inlol Project</title>
         <!--/* css */-->
-        <link th:href="@{/css/common.css}" rel="stylesheet" />
+        <link th:href="@{/css/summoner.css}" rel="stylesheet" />
     </th:block>
 
     <body>
         <th:block layout:fragment="header" th:include="/fragments/header"> </th:block>
-
-        <div class="css-16kp18i e1oup1a82">
-            <div class="css-1qmhykx e1sjm9eu0">
-                <img src="images/background/Arcane.png" alt="Inlol.GG logo (Arcane)" title="Arcane">
-            </div>
-            <div class="search-contaienr">
-                <div>
-                    <form autocomplete="off" class ="css-yxjuhi e4p0i2v3" action="/searchInit" method="get">
-                        <label for="name" class = "hidden"> 소환사명을 입력하세요. </label>
-                        <input type="text" id="name" autocomplete="off" name="name"
-                               th:value="${#strings.defaultString(summonerName, '')}"
-                               placeholder="소환사명을 입력하세요." class="css-1k7wk8z e4p0i2v2 js-bound">
-                        <button type="submit">
-                            Search
-                        </button>
-                    </form>
+        <div class="css-nvyacf e1y28yym3">
+            <ul> </ul>
+            <div class="face">
+                <div class="profile-icon">
+                    <img src="https://opgg-static.akamaized.net/images/profile_icons/profileIcon4353.jpg?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774" alt="profile image">
+                    <span class="level" th:text="${summoner?.get('summonerLevel')}"> </span>
                 </div>
             </div>
+            <div class="profile">
+                <div class="info">
+                    <span class="name" th:text="${summoner?.get('name')}"></span>
+                </div>
+            </div>
+        </div>
+        <div class="css-16kp18i e1oup1a82">
             <div class="css-97qxj7 einfil01">
-                <table style="width: 500px; margin-bottom: 100px">
+                <table style="width: 500px;">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Level</th>
                         <th>Solo Tier</th>
                         <th>Flex Tier</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr style="text-align: center">
-                        <td th:text="${summoner?.get('name')}">
-                        <td th:text="${summoner?.get('summonerLevel')}">
                         <td th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}">
                         <td th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}">
+                    </tr>
+                    </tbody>
+                    <tbody>
+                    <tr style="text-align: center">
+                        <td> <img th:src="${soloRankImg}" width="80px" height="auto;"> </td>
+                        <td> <img th:src="${flexRankImg}" width="80px" height="auto;"> </td>
                     </tr>
                     </tbody>
                 </table>

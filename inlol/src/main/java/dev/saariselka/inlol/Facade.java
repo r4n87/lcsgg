@@ -34,7 +34,7 @@ public class Facade {
     @GetMapping("searchInit")
     public ModelAndView search(@RequestParam("name") String name) throws JsonProcessingException {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("content/summoner");
         HashMap<String, Object> result;
 
         //Step 1. Get SummonerInfo By Name

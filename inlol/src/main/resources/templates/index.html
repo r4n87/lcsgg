@@ -9,7 +9,6 @@
     <!--/* css */-->
     <link th:href="@{/css/common.css}" rel="stylesheet" />
 </th:block>
-
 <body>
 <th:block layout:fragment="header" th:include="/fragments/header"> </th:block>
 
@@ -22,84 +21,15 @@
             <form autocomplete="off" class ="css-yxjuhi e4p0i2v3" action="/searchInit" method="get">
                 <label for="name" class = "hidden"> 소환사명을 입력하세요. </label>
                 <input type="text" id="name" autocomplete="off" name="name"
-                       th:value="${#strings.defaultString(summonerName, '')}"
                        placeholder="소환사명을 입력하세요." class="css-1k7wk8z e4p0i2v2 js-bound">
-                <button type="submit">
+                <button type="submit" th:onclick="|location.href='@{/content/summoner(id=${name})}'|">
                     Search
                 </button>
             </form>
         </div>
     </div>
-    <div class="css-97qxj7 einfil01">
-        <table style="width: 500px; margin-bottom: 100px">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Level</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr style="text-align: center">
-                <td th:text="${summoner?.get('name')}">
-                <td th:text="${summoner?.get('summonerLevel')}">
-            </tr>
-            </tbody>
-
-        </table>
-
-        <table style="width: 500px;">
-            <thead>
-            <tr>
-                <th>Solo Tier</th>
-                <th>Flex Tier</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr style="text-align: center">
-                <td th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}">
-                <td th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}">
-            </tr>
-            </tbody>
-            <tbody>
-            <tr style="text-align: center">
-                <td> <img th:src="${soloRankImg}" width="80px" height="auto;"> </td>
-                <td> <img th:src="${flexRankImg}" width="80px" height="auto;"> </td>
-            </tr>
-            </tbody>
-        </table>
-        <table style="width: 500px;">
-            <thead>
-            <tr>
-                <th>gameType</th>
-                <th>gameDuration</th>
-            </tr>
-            </thead>
-            <tbody style="text-align: center">
-            <tr>
-                <td th:text="${match1?.get('gameType')}">
-                <td th:text="${match1?.get('gameDuration')}">
-            </tr>
-            <tr>
-                <td th:text="${match2?.get('gameType')}">
-                <td th:text="${match2?.get('gameDuration')}">
-            </tr>
-            <tr>
-                <td th:text="${match3?.get('gameType')}">
-                <td th:text="${match3?.get('gameDuration')}">
-            </tr>
-            <tr>
-                <td th:text="${match4?.get('gameType')}">
-                <td th:text="${match4?.get('gameDuration')}">
-            </tr>
-            <tr>
-                <td th:text="${match5?.get('gameType')}">
-                <td th:text="${match5?.get('gameDuration')}">
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <div class="css-97qxj7 einfil01"></div>
 </div>
-
 <th:block layout:fragment="footer" th:include="/fragments/footer"> </th:block>
 </body>
 </html>
