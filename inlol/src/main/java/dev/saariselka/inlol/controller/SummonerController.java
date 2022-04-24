@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,12 +50,14 @@ public class SummonerController {
         }
     }
 
-    @GetMapping(value = "/insert/{accountid,profileIconid,revisiondate,name,id,summonerlevel,puuid}",produces = { MediaType.APPLICATION_JSON_VALUE })
+    @GetMapping(value = "/insert/{accountid,profileIconid,revisiondate,name,id,summonerlevel,puuid,rrt}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public void insertSummoner(@PathVariable("accountid") String accountId
-                              ,@PathVariable("profileiconid") int profileIconid, @PathVariable("revisionDate") long revisiondate
-                              ,@PathVariable("name") String name, @PathVariable("id") String id
-                              ,@PathVariable("summonerLevel") long summonerlevel, @PathVariable("puuid") String puuid) {
-        summonerService.insert(accountId,profileIconid,revisiondate,name,id,summonerlevel,puuid);
+                              , @PathVariable("profileiconid") int profileIconid, @PathVariable("revisionDate") long revisiondate
+                              , @PathVariable("name") String name, @PathVariable("id") String id
+                              , @PathVariable("summonerLevel") long summonerlevel, @PathVariable("puuid") String puuid
+                              , @PathVariable("rrt") Timestamp rrt
+                               ) {
+        summonerService.insert(accountId,profileIconid,revisiondate,name,id,summonerlevel,puuid, rrt);
     }
 
 

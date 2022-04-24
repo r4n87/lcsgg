@@ -218,10 +218,12 @@ public class Facade_Set {
     }
 
     public void setSummonerInfoAtDB(HashMap<String, String> result) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
         // DB Insert
         summonerController.insertSummoner(result.get("accountId"),Integer.parseInt(String.valueOf(result.get("profileIconId"))),
                 Long.parseLong(String.valueOf(result.get("revisionDate"))),result.get("name"),result.get("id"),
-                Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"));
+                Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
     }
 
     public void setLeagueInfoAtDB(HashMap<String, Object> result) {

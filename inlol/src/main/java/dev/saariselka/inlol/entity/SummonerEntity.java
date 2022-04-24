@@ -3,6 +3,7 @@ package dev.saariselka.inlol.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Data
 @Entity
@@ -21,8 +22,9 @@ public class SummonerEntity {
     private int profileiconid;
     private long revisiondate;
     private long summonerlevel;
+    private Timestamp rrt;
 
-    public SummonerEntity(String accountid, int profileiconid, long revisiondate, String name, String id, long summonerlevel, String puuid) {
+    public SummonerEntity(String accountid, int profileiconid, long revisiondate, String name, String id, long summonerlevel, String puuid, Timestamp rrt) {
         this.accountid = accountid;
         this.id = id;
         this.name = name;
@@ -30,5 +32,6 @@ public class SummonerEntity {
         this.revisiondate = revisiondate;
         this.summonerlevel = summonerlevel;
         this.puuid = puuid;
+        this.rrt = rrt;
     }
 }

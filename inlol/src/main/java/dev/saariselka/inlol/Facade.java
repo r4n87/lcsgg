@@ -87,11 +87,48 @@ public class Facade {
         Iterator<Object> iterator = res2.iterator();
         while(iterator.hasNext()) {
             HashMap<String, String> map = (HashMap) iterator.next();
+            String tierInfo = map.get("tier");
+            String tierImg = "/images/ranked-emblems/";
+            switch(tierInfo) {
+                case "IRON":
+                    tierImg += "Emblem_Iron.png";
+                    break;
+                case "BRONZE":
+                    tierImg += "Emblem_Bronze.png";
+                    break;
+                case "SILVER":
+                    tierImg += "Emblem_Silver.png";
+                    break;
+                case "GOLD":
+                    tierImg += "Emblem_Gold.png";
+                    break;
+                case "PLATINUM":
+                    tierImg += "Emblem_Platinum.png";
+                    break;
+                case "DIAMOND":
+                    tierImg += "Emblem_Diamond.png";
+                    break;
+                case "MASTER":
+                    tierImg += "Emblem_Master.png";
+                    break;
+                case "GRANDMASTER":
+                    tierImg += "Emblem_Grandmaster.png";
+                    break;
+                case "CHALLENGER":
+                    tierImg += "Emblem_Challenger.png";
+                    break;
+                default:
+                    tierImg = "";
+            }
+
             String rankInfo = map.get("queueType").toString();
+
             if("RANKED_SOLO_5x5".equals(rankInfo)) {
                 modelAndView.addObject("soloRankInfo", map);
+                modelAndView.addObject("soloRankImg", tierImg);
             } else {
                 modelAndView.addObject("flexRankInfo", map);
+                modelAndView.addObject("flexRankImg", tierImg);
             }
         }
     }
