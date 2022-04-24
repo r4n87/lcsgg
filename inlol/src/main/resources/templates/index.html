@@ -36,16 +36,34 @@
             <tr>
                 <th>Name</th>
                 <th>Level</th>
-                <th>Solo Tier</th>
-                <th>Flex Tier</th>
             </tr>
             </thead>
             <tbody>
             <tr style="text-align: center">
                 <td th:text="${summoner?.get('name')}">
                 <td th:text="${summoner?.get('summonerLevel')}">
+            </tr>
+            </tbody>
+
+        </table>
+
+        <table style="width: 500px;">
+            <thead>
+            <tr>
+                <th>Solo Tier</th>
+                <th>Flex Tier</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr style="text-align: center">
                 <td th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}">
                 <td th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}">
+            </tr>
+            </tbody>
+            <tbody>
+            <tr style="text-align: center">
+                <td> <img th:src="${soloRankImg}" width="80px" height="auto;"> </td>
+                <td> <img th:src="${flexRankImg}" width="80px" height="auto;"> </td>
             </tr>
             </tbody>
         </table>
