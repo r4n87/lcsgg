@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface SummonerRepository extends JpaRepository<SummonerEntity, Long> {
-    public List<SummonerEntity> findById(String puuid);
-
-    public List<SummonerEntity> findByName(String name);
+    List<SummonerEntity> findByPuuid(String puuid);
+    List<SummonerEntity> findByName(String name);
 }

@@ -65,15 +65,18 @@ public class MatchParticipantController {
     @GetMapping(value ="/{dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public List<MatchParticipantEntity> getMatchParticipantList_ByMatchParticipantId(@PathVariable("dataVersion") String dataVersion
             ,@PathVariable("matchId") String matchId) {
-        List<MatchParticipantEntity> participants = matchParticipantService.findAllById(new MatchParticipantId(dataVersion, matchId));
-        return participants;
+        return matchParticipantService.findAllById(new MatchParticipantId(dataVersion, matchId));
     }
 
     @GetMapping(value ="/{puuid,dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public List<MatchParticipantEntity> getMatchParticipant_ByMatchParticipantId(@PathVariable("puuid") String puuid
             ,@PathVariable("dataVersion") String dataVersion
             ,@PathVariable("matchId") String matchId) {
-        List<MatchParticipantEntity> participant = matchParticipantService.findById(new MatchParticipantId(puuid, dataVersion, matchId));
-        return participant;
+        return matchParticipantService.findById(new MatchParticipantId(puuid, dataVersion, matchId));
+    }
+
+    @GetMapping(value = "/{puuid}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public List<MatchParticipantEntity> getMatchParticipantList_ByPuuid(@PathVariable("puuid") String puuid) {
+        return matchParticipantService.findByPuuid(puuid);
     }
 }

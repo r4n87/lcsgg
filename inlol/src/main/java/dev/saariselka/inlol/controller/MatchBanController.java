@@ -28,14 +28,17 @@ public class MatchBanController {
 
     @GetMapping(value ="/{matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public List<MatchBanEntity> getBans_ByMatchId(@PathVariable("matchId") String matchId) {
-        List<MatchBanEntity> bans = matchBanService.findByMatchId(matchId);
-        return bans;
+        return matchBanService.findByMatchId(matchId);
     }
 
     @GetMapping(value ="/{matchId, pickTurn, teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public List<MatchBanEntity> getBans_ByMatchBanId(@PathVariable("matchId") String matchId, @PathVariable("pickTurn") int pickTurn, @PathVariable("teamId") int teamId) {
-        List<MatchBanEntity> bans = matchBanService.findByMatchBanId(new MatchBanId(matchId, pickTurn, teamId));
-        return bans;
+        return matchBanService.findByMatchBanId(new MatchBanId(matchId, pickTurn, teamId));
+    }
+
+    @GetMapping(value = "/{matchId, teamId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<MatchBanEntity> getBans_ByMatchBanIdAndTeamId(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId) {
+        return matchBanService.findByMatchIdAndTeamId(matchId, teamId);
     }
 
     public void insertBanInfo(String matchId, int pickTurn, int teamId, int championId, Timestamp rrt) {

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,14 +24,12 @@ public class SummonerService {
         return summonerList;
     }
 
-    public List<SummonerEntity> findById(String puuid) {
-        List<SummonerEntity> summoner = summonerRepository.findById(puuid);
-        return summoner;
+    public List<SummonerEntity> findByPuuid(String puuid) {
+        return summonerRepository.findByPuuid(puuid);
     }
 
     public List<SummonerEntity> findByName(String name) {
-        List<SummonerEntity> summoner = summonerRepository.findByName(name);
-        return summoner;
+        return summonerRepository.findByName(name);
     }
 
     public void insert(String accountId,int profileIconid, long revisionDate, String name, String id, long summonerLevel, String puuid, Timestamp rrt) {
