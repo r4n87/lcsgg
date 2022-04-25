@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.internal.LinkedTreeMap;
 import dev.saariselka.inlol.controller.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,15 +49,15 @@ public class Facade_Set {
         JsonArray jsonArrayForParticipants = (JsonArray)jsonObjectForInfo.get("participants");
 
         //DB Insert
-        matchMasterController.insertMatchMaster(jsonObjectForMetadata.get("dataVersion").toString(),jsonObjectForMetadata.get("matchId").toString(),
-                Long.parseLong(jsonObjectForInfo.get("gameCreation").toString()),Long.parseLong(jsonObjectForInfo.get("gameDuration").toString()),
-                Long.parseLong(jsonObjectForInfo.get("gameEndTimestamp").toString()),Long.parseLong(jsonObjectForInfo.get("gameId").toString()),
-                jsonObjectForInfo.get("gameMode").toString(),jsonObjectForInfo.get("gameName").toString(),
-                Long.parseLong(jsonObjectForInfo.get("gameStartTimestamp").toString()),jsonObjectForInfo.get("gameType").toString(),
-                jsonObjectForInfo.get("gameVersion").toString(),Integer.parseInt(jsonObjectForInfo.get("mapId").toString()),
+        matchMasterController.insertMatchMaster(jsonObjectForMetadata.get("dataVersion").getAsString(),jsonObjectForMetadata.get("matchId").getAsString(),
+                Long.parseLong(jsonObjectForInfo.get("gameCreation").getAsString()),Long.parseLong(jsonObjectForInfo.get("gameDuration").getAsString()),
+                Long.parseLong(jsonObjectForInfo.get("gameEndTimestamp").getAsString()),Long.parseLong(jsonObjectForInfo.get("gameId").getAsString()),
+                jsonObjectForInfo.get("gameMode").getAsString(),jsonObjectForInfo.get("gameName").getAsString(),
+                Long.parseLong(jsonObjectForInfo.get("gameStartTimestamp").getAsString()),jsonObjectForInfo.get("gameType").getAsString(),
+                jsonObjectForInfo.get("gameVersion").getAsString(),Integer.parseInt(jsonObjectForInfo.get("mapId").getAsString()),
 
-                jsonObjectForInfo.get("platformId").toString(),Integer.parseInt(jsonObjectForInfo.get("queueId").toString()),
-                jsonObjectForInfo.get("tournamentCode").toString(), 100, 200
+                jsonObjectForInfo.get("platformId").getAsString(),Integer.parseInt(jsonObjectForInfo.get("queueId").getAsString()),
+                jsonObjectForInfo.get("tournamentCode").getAsString(), 100, 200
                 ,timestamp);
       
         for (Object teamsObj : jsonArrayForTeams) {
