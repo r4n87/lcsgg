@@ -482,3 +482,183 @@ ul {
     margin-inline-end: 0px;
     padding-inline-start: 40px;
 }
+.css-19ozhet {
+    width: 1000px;
+    margin: 0px auto;
+}
+.css-19ozhet > div:nth-of-type(1) {
+    display: inline-block;
+    width: 300px;
+    font-size: 12px;
+    vertical-align: top;
+    min-height: 870px;
+}
+.css-13uv2u8 {
+    margin-top: 10px;
+    border: 1px solid rgb(205, 210, 210);
+    box-shadow: rgb(220 223 223) 0px 1px;
+    background: rgb(242, 242, 242);
+    border-radius: 2px;
+}
+.css-13uv2u8 .wrapper {
+    display: table;
+    width: 100%;
+    color: rgb(135, 146, 146);
+    position: relative;
+    background-color: rgb(242, 242, 242);
+    padding: 8px 0px;
+}
+.css-13uv2u8 .wrapper .medal {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+    height: 124px;
+    text-align: center;
+}
+.css-13uv2u8 .wrapper .medal img {
+    width: 104px;
+    height: 104px;
+    margin: -5px 0px -10px;
+}
+img {
+     border: 0px;
+     vertical-align: middle;
+     max-width: 100%;
+ }
+.css-13uv2u8 .wrapper .info {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+}
+.css-13uv2u8 .wrapper .info .type {
+    font-size: 11px;
+    color: rgb(135, 146, 146);
+}
+.css-13uv2u8 .wrapper .info .tier-rank {
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgb(79, 99, 57);
+}
+.css-rxctzc {
+    margin-top: 10px;
+    border: 1px solid rgb(205, 210, 210);
+    box-shadow: rgb(220 223 223) 0px 1px;
+    background: rgb(242, 242, 242);
+    border-radius: 2px;
+}
+.css-rxctzc .wrapper {
+    display: table;
+    width: 100%;
+    color: rgb(135, 146, 146);
+    position: relative;
+    background-color: rgb(242, 242, 242);
+    padding: 8px 0px;
+}
+.css-rxctzc .wrapper .medal {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+    height: 82px;
+    text-align: center;
+}
+.css-rxctzc .wrapper .medal img {
+    width: 64px;
+    height: 64px;
+    margin: -15px 0px -10px;
+}
+.css-rxctzc .wrapper .info {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 12px;
+    line-height: 1.3;
+    text-align: left;
+}
+.css-rxctzc .wrapper .info .type {
+    font-size: 11px;
+    color: rgb(135, 146, 146);
+}
+.css-rxctzc .wrapper .info .tier-rank {
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgb(79, 99, 57);
+}
+.css-13uv2u8 .wrapper .info .tier-info .lp {
+    color: rgb(85, 94, 94);
+    font-weight: bold;
+}
+.css-rxctzc .wrapper .info .tier-info .lp {
+    color: rgb(85, 94, 94);
+    font-weight: bold;
+}
+.css-1u0uowu {
+    border-bottom: 1px solid rgb(198, 203, 203);
+    margin-top: 25px;
+}
+.css-1u0uowu dl {
+    width: 1000px;
+    height: 40px;
+    margin: 0px auto;
+    padding: 0px;
+    font-size: 0px;
+}
+.css-1u0uowu dl dd {
+    display: inline-block;
+    margin: 0px -1px 0px 0px;
+    padding: 0px;
+}
+.css-1a8o8sd {
+    display: block;
+    min-width: 70px;
+    height: 39px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(198, 203, 203) rgb(198, 203, 203) rgb(232, 234, 234);
+    border-image: initial;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(232, 234, 234);
+    color: rgb(20, 23, 23);
+    font-size: 13px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+}
+.css-1hxj3ri {
+    display: block;
+    min-width: 70px;
+    height: 39px;
+    border: 1px solid rgb(198, 203, 203);
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(242, 242, 242);
+    color: rgb(85, 94, 94);
+    font-size: 13px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+}
+.css-jyq6x6 {
+    border: 1px solid rgb(198, 203, 203);
+    background-color: rgb(242, 242, 242);
+    color: rgb(79, 150, 57);
+    position: relative;
+    display: block;
+    margin-left: 15px;
+    min-width: 70px;
+    height: 39px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 13px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+}
+.css-jyq6x6 span {
+    margin-left: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
