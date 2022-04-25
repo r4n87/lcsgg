@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,10 +32,8 @@ public class SummonerController {
     }
 
     @GetMapping(value ="/{puuid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<List<SummonerEntity>> getSummoner(@PathVariable("puuid") String puuid) {
-        List<SummonerEntity> summoner = summonerService.findById(puuid);
-
-        return new ResponseEntity<List<SummonerEntity>>(summoner, HttpStatus.OK);
+    public List<SummonerEntity> getSummoner(@PathVariable("puuid") String puuid) {
+        return summonerService.findByPuuid(puuid);
     }
 
     @GetMapping(value ="/{name}",produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -52,11 +49,11 @@ public class SummonerController {
 
     @GetMapping(value = "/insert/{accountid,profileIconid,revisiondate,name,id,summonerlevel,puuid,rrt}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public void insertSummoner(@PathVariable("accountid") String accountId
-                              , @PathVariable("profileiconid") int profileIconid, @PathVariable("revisionDate") long revisiondate
-                              , @PathVariable("name") String name, @PathVariable("id") String id
-                              , @PathVariable("summonerLevel") long summonerlevel, @PathVariable("puuid") String puuid
-                              , @PathVariable("rrt") Timestamp rrt
-                               ) {
+            , @PathVariable("profileiconid") int profileIconid, @PathVariable("revisionDate") long revisiondate
+            , @PathVariable("name") String name, @PathVariable("id") String id
+            , @PathVariable("summonerLevel") long summonerlevel, @PathVariable("puuid") String puuid
+            , @PathVariable("rrt") Timestamp rrt
+    ) {
         summonerService.insert(accountId,profileIconid,revisiondate,name,id,summonerlevel,puuid, rrt);
     }
 

@@ -24,13 +24,15 @@ public class MatchBanService {
     }
 
     public List<MatchBanEntity> findByMatchId(String matchId) {
-        List<MatchBanEntity> teams = matchBanRepository.searchBansByMatchId(matchId);
-        return teams;
+        return matchBanRepository.searchBansByMatchId(matchId);
+    }
+
+    public List<MatchBanEntity> findByMatchIdAndTeamId(String matchId, int teamId) {
+        return matchBanRepository.searchBansByMatchIdAndTeamId(matchId, teamId);
     }
 
     public List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId) {
-        List<MatchBanEntity> bans = matchBanRepository.findByMatchBanId(matchBanId);
-        return bans;
+        return matchBanRepository.findByMatchBanId(matchBanId);
     }
 
     public void insert(String matchId, int pickTurn, int teamId, int championId, Timestamp rrt) {

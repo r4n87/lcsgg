@@ -37,17 +37,20 @@ public class Facade {
         modelAndView.setViewName("content/summoner");
         HashMap<String, Object> result;
 
-        //Step 1. Get SummonerInfo By Name
-        result = facade_get.getSummonerInfo(name);
+        //Step 1. Get Summoner Info By Name from DB
+        LinkedHashMap<String, String> res = facade_get.getSummonerInfoFromDB(name);
 
-        //Step 1.1. Get EncryptedSummonerId and Puuid
-        LinkedHashMap<String, String> res = (LinkedHashMap) result.get("body");
+        //Step 1.1 Get Summoner Info By Name via API
+        if(null == res) {
+            result = facade_get.getSummonerInfo(name);
+            res = (LinkedHashMap) result.get("body");
+            facade_set.setSummonerInfoAtDB(res);
+        }
+
         String encryptedSummonerId = res.get("id");
+        String puuid = res.get("puuid");
 
-        //Step 1.2. Set SummonerInfo At DB
-        facade_set.setSummonerInfoAtDB(res);
-
-        //Step 1.3. Set summoner At ModelAndView
+        //Step 1.2. Set summoner At ModelAndView
         modelAndView.addObject("summoner", res);
         modelAndView.addObject("summonerName", name);
 
@@ -61,24 +64,21 @@ public class Facade {
         //Step 2.2. Set League Info At ModelAndView
         setLeagueInfoAtModelAndView(modelAndView, res2);
 
-        //Step 3. Get MatchList By Name
-        ArrayList<String> matchList = facade_get.getMatchList(name);
-        System.out.println(matchList.toString());
+        //Step 3. Get Match Info List from DB
+        ArrayList<HashMap<String,Object>> matchInfoList = facade_get.getMatchInfoFromDB(puuid);
 
-        //Step 4. Get MatchInfo By MatchId from MatchList
-        //        Set MatchInfo At DB
-        //        Set MatchInfo At ModelAndView
-        ArrayList<HashMap<String, Object>> matchInfoList = new ArrayList<>();
-        for(int i = 0; i < matchList.size(); i++) {
-            result = facade_get.getMatchInfo(matchList, i);
-            matchInfoList.add((HashMap<String, Object>) ((HashMap<String, Object>) result.get("body")).get("info"));
-            facade_set.setMatchInfoAtDB(result);
+        //Step 3.1 Get Match Info List via API
+        if(null == matchInfoList) {
+            matchInfoList = new ArrayList<>();
+            ArrayList<String> matchList = facade_get.getMatchList(name);
+            for (int i = 0; i < matchList.size(); i++) {
+                result = facade_get.getMatchInfo(matchList, i);
+                matchInfoList.add((HashMap<String, Object>) ((HashMap<String, Object>) result.get("body")).get("info"));
+                facade_set.setMatchInfoAtDB(result);
+            }
         }
+
         modelAndView.addObject("match1", matchInfoList.get(0));
-        modelAndView.addObject("match2", matchInfoList.get(1));
-        modelAndView.addObject("match3", matchInfoList.get(2));
-        modelAndView.addObject("match4", matchInfoList.get(3));
-        modelAndView.addObject("match5", matchInfoList.get(4));
 
         return modelAndView;
     }

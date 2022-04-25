@@ -18,20 +18,18 @@ public class MatchMasterService {
     private final MatchMasterRepository matchMasterRepository;
 
     public List<MatchMasterEntity> findAll() {
-        List<MatchMasterEntity> matchs = new ArrayList<>();
-        matchMasterRepository.findAll().forEach(e -> matchs.add(e));
+        List<MatchMasterEntity> matches = new ArrayList<>();
+        matchMasterRepository.findAll().forEach(e -> matches.add(e));
 
-        return matchs;
+        return matches;
     }
 
     public List<MatchMasterEntity> findByMatchId(String matchId) {
-        List<MatchMasterEntity> matchs = matchMasterRepository.searchMatchByMatchId(matchId);
-        return matchs;
+        return matchMasterRepository.searchMatchByMatchId(matchId);
     }
 
     public List<MatchMasterEntity> findByMatchMasterId(MatchMasterId matchMasterId) {
-        List<MatchMasterEntity> matchs = matchMasterRepository.findByMatchMasterId(matchMasterId);
-        return matchs;
+        return matchMasterRepository.findByMatchMasterId(matchMasterId);
     }
 
     public void insert(String dataVersion, String matchId, long gameCreation, long gameDuration, long gameEndTimeStamp, long gameId,

@@ -24,4 +24,8 @@ public class MatchParticipantId implements Serializable {
         this.dataVersion = dataVersion;
         this.matchId = matchId;
     }
+
+    public MatchParticipantId(String puuid) {
+        this.puuid = puuid;
+    }
 }

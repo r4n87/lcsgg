@@ -18,14 +18,16 @@ public class MatchParticipantService {
     private final MatchParticipantRepository matchParticipantRepository;
 
     public List<MatchParticipantEntity> findById(MatchParticipantId matchParticipantId) {
-        List<MatchParticipantEntity> matchParticipant = matchParticipantRepository.findByMatchParticipantId(matchParticipantId);
-        return matchParticipant;
+        return matchParticipantRepository.findByMatchParticipantId(matchParticipantId);
     }
 
     public List<MatchParticipantEntity> findAllById(MatchParticipantId matchParticipantId) {
-        List<MatchParticipantEntity> matchParticipantList
-                = matchParticipantRepository.findAllByMatchParticipantId(new MatchParticipantId(matchParticipantId.getDataVersion(), matchParticipantId.getMatchId()));
-        return matchParticipantList;
+        return matchParticipantRepository.findAllByMatchParticipantId(new MatchParticipantId(matchParticipantId.getDataVersion()
+                                                                                            , matchParticipantId.getMatchId()));
+    }
+
+    public List<MatchParticipantEntity> findByPuuid(String puuid) {
+        return matchParticipantRepository.searchMatchesByPuuid(puuid);
     }
 
     public void insert(String puuid, String dataVersion, String matchId, int assists, int baronKills, int bountyLevel, int champExperience,

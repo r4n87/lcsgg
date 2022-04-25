@@ -10,9 +10,11 @@ import java.util.List;
 
 @Repository
 public interface MatchBanRepository extends JpaRepository<MatchBanEntity, MatchBanId> {
-    //List<MatchBanEntity> findByMatchId(String matchId);
     List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId);
 
     @Query(value = "SELECT * FROM riot_match_ban WHERE match_id = :matchId", nativeQuery = true)
     List<MatchBanEntity> searchBansByMatchId(@Param("matchId") String matchId);
+
+    @Query(value = "SELECT * FROM riot_match_ban WHERE match_id = :matchId and team_id = :teamId", nativeQuery = true)
+    List<MatchBanEntity> searchBansByMatchIdAndTeamId(@Param("matchId") String matchId, @Param("teamId") int teamId);
 }

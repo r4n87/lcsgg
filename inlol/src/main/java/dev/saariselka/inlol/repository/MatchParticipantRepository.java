@@ -12,4 +12,7 @@ import java.util.List;
 public interface MatchParticipantRepository extends JpaRepository<MatchParticipantEntity, MatchParticipantId> {
     List<MatchParticipantEntity> findByMatchParticipantId(MatchParticipantId matchParticipantId);
     List<MatchParticipantEntity> findAllByMatchParticipantId(MatchParticipantId matchParticipantId);
+
+    @Query(value = "SELECT * FROM riot_match_participant WHERE puuid = :puuid", nativeQuery = true)
+    List<MatchParticipantEntity> searchMatchesByPuuid(String puuid);
 }
