@@ -184,7 +184,7 @@ public class Facade_Get {
 
 
             //5. Match Participants 정보 생성
-            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByMatchParticipantId(dataVersion, matchId);
+            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
             String[] participantsPuuid = new String[10];
             Object[] participantsInfo = new Object[10];
 
@@ -304,6 +304,7 @@ public class Facade_Get {
 
             metadataMap.put("participants", participantsPuuid);
             infoMap.put("participants", participantsInfo);
+            System.out.println(infoMap.get("participants").toString());
 
             matchInfo.put("metadata", metadataMap);
             matchInfo.put("info", infoMap);

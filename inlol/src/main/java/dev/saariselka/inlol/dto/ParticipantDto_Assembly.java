@@ -13,7 +13,7 @@ public class ParticipantDto_Assembly {
 
     public List<ParticipantDto> getMatchParticipantList_ByMatchParticipantId(String dataVersion, String matchId) {
         List<MatchParticipantEntity> participants
-                = matchParticipantController.getMatchParticipantList_ByMatchParticipantId(dataVersion, matchId);
+                = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
         List<ParticipantDto> participantDtos = new ArrayList<>();
         ParticipantDto participantDto = null;
 

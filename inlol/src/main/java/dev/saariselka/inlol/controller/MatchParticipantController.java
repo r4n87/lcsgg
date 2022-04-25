@@ -63,9 +63,9 @@ public class MatchParticipantController {
     }
 
     @GetMapping(value ="/{dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchParticipantEntity> getMatchParticipantList_ByMatchParticipantId(@PathVariable("dataVersion") String dataVersion
+    public List<MatchParticipantEntity> getMatchParticipantList_ByDataVersionAndMatchId(@PathVariable("dataVersion") String dataVersion
             ,@PathVariable("matchId") String matchId) {
-        return matchParticipantService.findAllById(new MatchParticipantId(dataVersion, matchId));
+        return matchParticipantService.findByDataVersionAndMatchId(dataVersion, matchId);
     }
 
     @GetMapping(value ="/{puuid,dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })

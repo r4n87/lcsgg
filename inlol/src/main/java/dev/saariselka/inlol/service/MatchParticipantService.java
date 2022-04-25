@@ -21,9 +21,8 @@ public class MatchParticipantService {
         return matchParticipantRepository.findByMatchParticipantId(matchParticipantId);
     }
 
-    public List<MatchParticipantEntity> findAllById(MatchParticipantId matchParticipantId) {
-        return matchParticipantRepository.findAllByMatchParticipantId(new MatchParticipantId(matchParticipantId.getDataVersion()
-                                                                                            , matchParticipantId.getMatchId()));
+    public List<MatchParticipantEntity> findByDataVersionAndMatchId(String dataVersion, String matchId) {
+        return matchParticipantRepository.searchMatchesByDataVersionAndMatchId(dataVersion, matchId);
     }
 
     public List<MatchParticipantEntity> findByPuuid(String puuid) {
