@@ -12,19 +12,10 @@
 small, div, p, span, button {
     font-family: Helvetica, "Malgun Gothic", "Apple SD Gothic Neo", AppleGothic, Dotum, Arial, Tahoma;
 }
-div {
-    display: block;
-}
 .css-16nzi5j {
     min-width: 1080px;
 }
 footer, header {
-    display: block;
-}
-header {
-    display: block;
-}
-footer {
     display: block;
 }
 .css-7dq222 {
@@ -73,30 +64,6 @@ nav {
     -ms-flex-align: center;
     align-items: center;
 }
-ol, ul, li {
-    list-style: none;
-}
-dl, dt, dd, ol, ul, li {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-}
-ul, li {
-    list-style: none;
-}
-body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
-    margin: 0px;
-    padding: 0px;
-}
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
 li {
     display: list-item;
     text-align: -webkit-match-parent;
@@ -118,18 +85,6 @@ li {
     font-size: 15px;
     box-sizing: border-box;
     letter-spacing: -0.5px;
-}
-a {
-    cursor: pointer;
-}
-a {
-    text-decoration: none;
-    /*color: rgb(32, 45, 55);*/
-}
-a:-webkit-any-link {
-    /*color: -webkit-link;*/
-    /*cursor: pointer;*/
-    /*text-decoration: underline;*/
 }
 .css-7dq222 .route-item +.route-item {
     margin-left: 24px;
@@ -210,11 +165,6 @@ p {
     display: block;
     max-height: 200px;
     margin: 0 auto;
-}
-img {
-    border: 0;
-    vertical-align: middle;
-    max-width: 100%;
 }
 .css-16kp18i {
     display: block;
@@ -339,6 +289,16 @@ body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
     margin: 0;
     padding: 0;
 }
+img {
+    border: 0px;
+    vertical-align: middle;
+    max-width: 100%;
+}
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
 input, textarea, keygen, select, button {
     font-family: "Apple SD Gothic Neo",AppleGothic,"Helvetica Neue",Helvetica,"Malgun Gothic",Dotum,Arial,Tahoma;
 }
@@ -453,60 +413,32 @@ button {
     width: 100px;
     height: 100px;
 }
-img {
-    border: 0px;
-    vertical-align: middle;
-    max-width: 100%;
-}
-ol, ul, li {
-    list-style: none;
-}
-dl, dt, dd, ol, ul, li {
-    list-style: none;
-    margin: 0px;
-    padding: 0px;
-}
-ul, li {
-    list-style: none;
-}
-body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
-    margin: 0px;
-    padding: 0px;
-}
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
 .css-19ozhet {
+    display:flex;
     width: 1000px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 .css-19ozhet > div:nth-of-type(1) {
     display: inline-block;
     width: 300px;
-    font-size: 12px;
+    font-size: 0px;
     vertical-align: top;
     min-height: 870px;
 }
 .css-13uv2u8 {
     margin-top: 10px;
-    border: 1px solid rgb(205, 210, 210);
-    box-shadow: rgb(220 223 223) 0px 1px;
-    background: rgb(242, 242, 242);
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
     border-radius: 2px;
 }
 .css-13uv2u8 .wrapper {
     display: table;
     width: 100%;
-    color: rgb(135, 146, 146);
+    color: #879292;
     position: relative;
-    background-color: rgb(242, 242, 242);
-    padding: 8px 0px;
+    background-color: #f2f2f2;
+    padding: 8px 0;
 }
 .css-13uv2u8 .wrapper .medal {
     display: table-cell;
@@ -518,23 +450,18 @@ ul {
 .css-13uv2u8 .wrapper .medal img {
     width: 104px;
     height: 104px;
-    margin: -5px 0px -10px;
+    margin: -5px 0 -10px 0;
 }
-img {
-     border: 0px;
-     vertical-align: middle;
-     max-width: 100%;
- }
 .css-13uv2u8 .wrapper .info {
     display: table-cell;
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 0px;
     line-height: 1.5;
     text-align: left;
 }
 .css-13uv2u8 .wrapper .info .type {
     font-size: 11px;
-    color: rgb(135, 146, 146);
+    color: #879292;
 }
 .css-13uv2u8 .wrapper .info .tier-rank {
     font-size: 15px;
@@ -542,20 +469,24 @@ img {
     text-transform: capitalize;
     color: rgb(79, 99, 57);
 }
+.css-13uv2u8 .wrapper .info .tier-info .lp {
+    color: #555e5e;
+    font-weight: bold;
+}
 .css-rxctzc {
     margin-top: 10px;
-    border: 1px solid rgb(205, 210, 210);
-    box-shadow: rgb(220 223 223) 0px 1px;
-    background: rgb(242, 242, 242);
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
     border-radius: 2px;
 }
 .css-rxctzc .wrapper {
     display: table;
     width: 100%;
-    color: rgb(135, 146, 146);
+    color: #879292;
     position: relative;
-    background-color: rgb(242, 242, 242);
-    padding: 8px 0px;
+    background-color: #f2f2f2;
+    padding: 8px 0;
 }
 .css-rxctzc .wrapper .medal {
     display: table-cell;
@@ -567,32 +498,24 @@ img {
 .css-rxctzc .wrapper .medal img {
     width: 64px;
     height: 64px;
-    margin: -15px 0px -10px;
+    margin: -15px 0 -10px 0;
 }
 .css-rxctzc .wrapper .info {
     display: table-cell;
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 0px;
     line-height: 1.3;
     text-align: left;
 }
 .css-rxctzc .wrapper .info .type {
     font-size: 11px;
-    color: rgb(135, 146, 146);
+    color: #879292;
 }
 .css-rxctzc .wrapper .info .tier-rank {
     font-size: 13px;
     font-weight: bold;
     text-transform: capitalize;
     color: rgb(79, 99, 57);
-}
-.css-13uv2u8 .wrapper .info .tier-info .lp {
-    color: rgb(85, 94, 94);
-    font-weight: bold;
-}
-.css-rxctzc .wrapper .info .tier-info .lp {
-    color: rgb(85, 94, 94);
-    font-weight: bold;
 }
 .css-1u0uowu {
     border-bottom: 1px solid rgb(198, 203, 203);
@@ -661,4 +584,460 @@ img {
     margin-left: 4px;
     display: inline-block;
     vertical-align: middle;
+}
+.css-1sq1kbv {
+    display: inline-block;
+    width: 690px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 0px;
+    vertical-align: top;
+}
+.css-j57b8z {
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+    position: relative;
+    border-bottom: 1px solid #cdd2d2;
+    margin-bottom: -1px;
+    height: 34px;
+}
+.css-j57b8z>ul {
+    float: left;
+    padding-left: 10px;
+}
+.css-19vcwbs {
+    display: inline-block;
+    height: 32px;
+    margin: 0 10px;
+    vertical-align: top;
+    border-bottom: 2px solid #1f8ecd;
+}
+.css-19vcwbs button {
+    display: inline-block;
+    color: #1f8ecd;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 36px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+.css-itomut {
+    display: inline-block;
+    height: 32px;
+    margin: 0 10px;
+    vertical-align: top;
+}
+.css-itomut button {
+    display: inline-block;
+    color: #555e5e;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 36px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+.css-1mznf9n {
+    margin-top: -1px;
+    box-sizing: border-box;
+    text-align: left;
+    border: 1px solid rgb(205, 210, 210);
+    box-shadow: rgb(220 223 223) 0px 1px;
+    background: rgb(242, 242, 242);
+    border-radius: 2px;
+}
+.css-1mznf9n table {
+    display: table;
+    width: 100%;
+    table-layout: auto;
+    background-color: rgb(237, 237, 237);
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.css-1mznf9n table td.title:nth-of-type(1) {
+    border-left: none;
+    padding-left: 24px;
+}
+.css-1mznf9n table td.most-champion {
+    width: 229px;
+    border-left: 1px solid rgb(205, 210, 210);
+}
+.css-1mznf9n table td.title {
+     padding: 16px 0px 14px 20px;
+     line-height: 14px;
+     font-size: 12px;
+     color: rgb(102, 102, 102);
+     height: 14px;
+     border-left: 1px solid rgb(205, 210, 210);
+}
+th, td {
+    padding: 0;
+    margin: 0;
+}
+.css-1mznf9n table td.most-champion ul {
+    font-size: 0px;
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
+    margin: 0;
+    padding: 0;
+}
+.css-1mznf9n table td.most-champion ul li:nth-of-type(1) {
+    margin-top: 0px;
+}
+.css-1mznf9n table td.most-champion ul li {
+     position: relative;
+     display: block;
+     white-space: nowrap;
+     margin-top: 12px;
+     padding-left: 42px;
+     padding-top: 1px;
+}
+.css-1mznf9n table td.most-champion ul li .icon {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.css-1mznf9n table td.most-champion ul li .icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+img {
+    border: 0;
+    vertical-align: middle;
+    max-width: 100%;
+}
+.css-1mznf9n table td.most-champion ul li .win-lose {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 12px;
+    color: rgb(51, 51, 51);
+}
+.css-164l9sf {
+    display: inline-block;
+    line-height: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    color: rgb(31, 142, 205);
+}
+.css-1mznf9n table td.title {
+    padding: 16px 0px 14px 20px;
+    line-height: 14px;
+    font-size: 12px;
+    color: rgb(102, 102, 102);
+    height: 14px;
+    border-left: 1px solid rgb(205, 210, 210);
+}
+.css-164r41r {
+    margin-top: 8px;
+}
+.css-ja2wlz {
+    position: relative;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+.css-utzuox {
+    display: table;
+    table-layout: fixed;
+    width: 689px;
+    border-collapse: collapse;
+    border: 1px solid #cea7a7;
+    background-color: #e2b6b3;
+}
+.css-utzuox>div.info {
+    width: 70px;
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+    line-height: 16px;
+}
+.css-utzuox>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox>div.info .type {
+    font-weight: bold;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.css-utzuox>div.info .bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #cea7a7;
+}
+.css-utzuox>div.info .game-result {
+    font-weight: bold;
+    color: #c6443e;
+}
+.css-utzuox>div.champion {
+    width: 100px;
+    font-size: 0;
+}
+.css-utzuox>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox>div.champion .icon {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.css-utzuox>div.champion .icon a {
+    text-decoration: none;
+    color: inherit;
+}
+.css-utzuox>div.champion .icon a img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+.css-utzuox>div.champion .spells {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.css-utzuox>div.champion .spells .spell:nth-of-type(1) {
+    margin-top: 0;
+}
+.css-utzuox>div.champion .spells .spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.css-utzuox>div.champion .spells .spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.css-utzuox>div.champion .runes {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.css-utzuox>div.champion .runes .rune:nth-of-type(1) {
+    margin-top: 0;
+}
+.css-utzuox>div.champion .runes .rune {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+.css-utzuox>div.champion .runes .rune:nth-of-type(1) img {
+    background: #000;
+}
+.css-utzuox>div.champion .runes .rune img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.css-utzuox>div.champion .name {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.css-utzuox>div.kda {
+    font-size: 11px;
+    text-align: center;
+}
+.css-utzuox>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox>div.kda .k-d-a {
+    color: #879292;
+    font-size: 15px;
+    white-space: nowrap;
+}
+.css-utzuox>div.kda .k-d-a span {
+    color: #555e5e;
+    font-weight: bold;
+}
+.css-utzuox>div.kda .k-d-a span.d {
+    color: #c6443e;
+}
+.css-utzuox>div.kda .ratio {
+    color: #555e5e;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.css-utzuox>div.kda .ratio span {
+    color: #353a3a;
+}
+.css-utzuox>div.stats {
+    width: 90px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: #555e5e;
+}
+.css-utzuox>div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox>div.stats .cs div {
+    display: inline;
+    margin-right: 4px;
+}
+.css-utzuox>div.stats .kill-participantion {
+    color: #c6443e;
+}
+.css-utzuox>div.stats .mmr b {
+    color: #353a3a;
+    text-transform: capitalize;
+}
+b, strong {
+    font-weight: bold;
+}
+.css-utzuox>div.items {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox>div.items .item {
+    font-size: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.css-utzuox>div.items .item ul {
+    width: 72px;
+}
+.css-utzuox>div.items .item ul li {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    background-color: #cea7a7;
+}
+.css-utzuox>div.participants {
+    width: 170px;
+    font-size: 0;
+}
+.css-utzuox>div.participants ul {
+    float: left;
+    width: 50%;
+}
+.css-tegtkt {
+    display: block;
+    width: 80px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+.css-tegtkt .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.css-tegtkt .icon img {
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+}
+.css-tegtkt .name {
+    display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #555;
+}
+.css-tegtkt .name a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.css-utzuox>div.action {
+    position: relative;
+    width: 30px;
+    border: 1px solid #d67b77;
+    background-color: #e89d99;
+}
+.css-utzuox>div.action .detail {
+    width: 30px;
+    height: 100%;
+}
+.css-utzuox>div.action .detail img {
+    position: absolute;
+    bottom: 10px;
+    left: 9px;
+    -webkit-transform: rotate( 0deg );
+    -moz-transform: rotate( 0deg );
+    -ms-transform: rotate( 0deg );
+    transform: rotate( 0deg );
+}
+.css-1sq1kbv .more {
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+    display: block;
+    width: 100%;
+    height: 50px;
+    color: #555e5e;
+    font-size: 13px;
+    line-height: 50px;
+    text-align: center;
+    -webkit-text-decoration: none;
+    text-decoration: none;
 }

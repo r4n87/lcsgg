@@ -78,7 +78,8 @@ public class Facade {
             }
         }
 
-        modelAndView.addObject("match1", matchInfoList.get(0).get("info"));
+        //modelAndView.addObject("match1", matchInfoList.get(0).get("info"));
+        modelAndView.addObject("matchInfoList",matchInfoList);
 
         return modelAndView;
     }
