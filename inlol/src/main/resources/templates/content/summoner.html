@@ -50,17 +50,17 @@
                 <div class="css-13uv2u8 e135kpg1">
                     <div class="wrapper">
                         <div class="medal">
-                            <div class="" style="position: relative;">
+                            <div style="position: relative" class>
                                 <img th:src="${soloRankImg}">
                             </div>
                         </div>
                         <div class="info">
                             <div class="type">솔로랭크</div>
                             <div class="tier-rank" th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}"></div>
-                            <div class="tier-info">
+<!--                            <div class="tier-info">-->
 <!--                                <span class="lp">44 LP</span> /-->
 <!--                                <span class="win-lose">25승 22 패<br>승률 53%</span>-->
-                            </div>
+<!--                            </div>-->
 <!--                            <div class="league-name">빅토르의 그림자들</div>-->
                         </div>
                     </div>
@@ -68,77 +68,57 @@
                 <div class="css-rxctzc e135kpg1">
                     <div class="wrapper">
                         <div class="medal">
-                            <div class="" style="position: relative;">
+                            <div style="position: relative" class>
                                 <img th:src="${flexRankImg}">
                             </div>
                         </div>
                         <div class="info">
                             <div class="type">자유랭크</div>
                             <div class="tier-rank" th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}"></div>
-                            <div class="tier-info">
+<!--                            <div class="tier-info">-->
 <!--                                <span class="lp">36 LP</span> /-->
 <!--                                <span class="win-lose">74승 79 패<br>승률 48%</span>-->
-                            </div>
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>
+<!--                <div class="css-1s4j24f exxtup3"> </div>-->
+<!--                <div class="css-19xo3qz etgm35o1"> </div>-->
+<!--                <div class="css-b9il6f etgm35o1"> </div>-->
+            </div>
+            <div class="css-1sq1kbv e3mqlfu0">
+                <div class="css-j57b8z e1yoemer2"></div>
+                <div class="css-1mznf9n e1je0q1a3"></div>
+                <ul class="css-164r41r exlvoq30">
+                <tr th:each="matchInfo : ${matchInfoList}">
+                    <li class="css-ja2wlz e19epo2o3">
+                        <div result="LOSE" class="css-utzuox e19epo2o2">
+                            <div class="info">
+                                <div class="type" th:text = "${matchInfo?.get('info')?.get('gameMode')}"></div>
+                                <div style="position: relative" class>
+                                    <div class="time-stamp"
+                                         th:text="${matchInfo?.get('info')?.get('gameAgoTime')}">
+                                    </div>
+                                </div>
+                                <div class="bar"></div>
+                                <div class="game-result">패배</div>
+                                <div class="game-length"
+                                     th:text="${matchInfo?.get('info')?.get('gameDuration')}">
+                                </div>
+                            </div>
+                            <div class="champion"></div>
+                            <div class="kda"></div>
+                            <div class="stats"></div>
+                            <div class="items"></div>
+                            <div class="participants"></div>
+                            <div class="action"></div>
+                        </div>
+                    </li>
+                </tr>
+                </ul>
+                <button class="more">더 보기</button>
             </div>
         </div>
-<!--        <div class="css-16kp18i e1oup1a82">-->
-<!--            <div class="css-97qxj7 einfil01">-->
-<!--                <table style="width: 500px;">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>Solo Tier</th>-->
-<!--                        <th>Flex Tier</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr style="text-align: center">-->
-<!--                        <td th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}">-->
-<!--                        <td th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}">-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                    <tbody>-->
-<!--                    <tr style="text-align: center">-->
-<!--                        <td> <img th:src="${soloRankImg}" width="80px" height="auto;"> </td>-->
-<!--                        <td> <img th:src="${flexRankImg}" width="80px" height="auto;"> </td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--                <table style="width: 500px;">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>gameType</th>-->
-<!--                        <th>gameDuration</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody style="text-align: center">-->
-<!--                    <tr>-->
-<!--                        <td th:text="${match1?.get('gameType')}">-->
-<!--                        <td th:text="${match1?.get('gameDuration')}">-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td th:text="${match2?.get('gameType')}">-->
-<!--                        <td th:text="${match2?.get('gameDuration')}">-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td th:text="${match3?.get('gameType')}">-->
-<!--                        <td th:text="${match3?.get('gameDuration')}">-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td th:text="${match4?.get('gameType')}">-->
-<!--                        <td th:text="${match4?.get('gameDuration')}">-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td th:text="${match5?.get('gameType')}">-->
-<!--                        <td th:text="${match5?.get('gameDuration')}">-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </div>-->
-
         <th:block layout:fragment="footer" th:include="/fragments/footer"> </th:block>
     </body>
 </html>

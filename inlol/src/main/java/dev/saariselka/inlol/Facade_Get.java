@@ -9,6 +9,10 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -81,11 +85,8 @@ public class Facade_Get {
     public ArrayList<HashMap<String,Object>> getMatchInfoFromDB(String puuid) {
         ArrayList<HashMap<String,Object>> result = new ArrayList<>();
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
-        if(0 == matchList.size()) return null;
 
-        HashMap<String,Object> matchInfo = new HashMap<>();
-        HashMap<String,Object> metadataMap = new HashMap<>();
-        HashMap<String,Object> infoMap = new HashMap<>();
+        if(0 == matchList.size()) return null;
 
         String matchId;
         String dataVersion;
@@ -95,22 +96,46 @@ public class Facade_Get {
             matchId = masterEntity.getMatchMasterId().getMatchId();
             dataVersion = masterEntity.getMatchMasterId().getDataVersion();
 
+            HashMap<String, Object> matchInfo = new HashMap<>();
+            HashMap<String, Object> metadataMap = new HashMap<>();
+            HashMap<String, Object> infoMap = new HashMap<>();
+
+            //시간 차이 계산
+            String gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())))
+                    + "분 "
+                    + String.valueOf(ChronoUnit.SECONDS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())) - (ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())) * 60))
+                    + "초";
+
+            String gameAgoTime = null;
+
+            if (ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.now()) >= 24)
+            {
+                gameAgoTime = String.valueOf(ChronoUnit.DAYS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
+                        + "일 전";
+            }
+            else
+            {
+                gameAgoTime = String.valueOf(ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
+                        + "시간 전";
+            }
+
             //1. Match Master 정보 생성
             metadataMap.put("dataVersion", masterEntity.getMatchMasterId().getDataVersion());
             metadataMap.put("matchId", masterEntity.getMatchMasterId().getMatchId());
             infoMap.put("gameCreation", masterEntity.getGameCreation());
-            infoMap.put("gameDuration", masterEntity.getGameDuration());
-            infoMap.put("gameEndTimestamp", masterEntity.getGameEndTimeStamp());
+            infoMap.put("gameDuration", gameDuration);
+            infoMap.put("gameEndTimestamp", LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
             infoMap.put("gameId", masterEntity.getGameId());
             infoMap.put("gameMode", masterEntity.getGameMode());
             infoMap.put("gameName", masterEntity.getGameName());
-            infoMap.put("gameStartTimestamp", String.valueOf(masterEntity.getGameStartTimeStamp()));
+            infoMap.put("gameStartTimestamp", LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
             infoMap.put("gameType", masterEntity.getGameType());
             infoMap.put("gameVersion", masterEntity.getGameVersion());
             infoMap.put("mapId", String.valueOf(masterEntity.getMapId()));
             infoMap.put("platformId", masterEntity.getPlatformId());
             infoMap.put("queueId", String.valueOf(masterEntity.getQueueId()));
             infoMap.put("tournamentCode", masterEntity.getTournamentCode());
+            infoMap.put("gameAgoTime",gameAgoTime);
 
             //2. Team 정보 생성
             List<TeamEntity> teamsList = teamController.getTeams_ByMatchId(matchId);

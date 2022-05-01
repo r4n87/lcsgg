@@ -18,8 +18,8 @@ public class MatchMasterEntity {
     @Column(nullable = false,unique = true)
     private MatchMasterId matchMasterId;
     private long gameCreation;
-    private long gameEndTimeStamp;
     private long gameDuration;
+    private long gameEndTimeStamp;
     private long gameId;
     private String gameMode;
     private String gameName;
