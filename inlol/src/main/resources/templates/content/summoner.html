@@ -57,10 +57,10 @@
                         <div class="info">
                             <div class="type">솔로랭크</div>
                             <div class="tier-rank" th:text="${soloRankInfo?.get('tier')} + ${soloRankInfo?.get('rank')}"></div>
-<!--                            <div class="tier-info">-->
-<!--                                <span class="lp">44 LP</span> /-->
-<!--                                <span class="win-lose">25승 22 패<br>승률 53%</span>-->
-<!--                            </div>-->
+                            <div class="tier-info">
+                                <span class="lp" th:text="${soloRankInfo?.get('leaguePoints')} + LP"></span>
+                                <span class="win-lose" th:text="|&nbsp;&#47; ${soloRankInfo?.get('wins')}승 ${soloRankInfo?.get('losses')}패|"><br>승률 53%</span>
+                            </div>
 <!--                            <div class="league-name">빅토르의 그림자들</div>-->
                         </div>
                     </div>
@@ -75,10 +75,10 @@
                         <div class="info">
                             <div class="type">자유랭크</div>
                             <div class="tier-rank" th:text="${flexRankInfo?.get('tier')} + ${flexRankInfo?.get('rank')}"></div>
-<!--                            <div class="tier-info">-->
-<!--                                <span class="lp">36 LP</span> /-->
-<!--                                <span class="win-lose">74승 79 패<br>승률 48%</span>-->
-<!--                            </div>-->
+                            <div class="tier-info">
+                                <span class="lp" th:text="${flexRankInfo?.get('leaguePoints')} + LP"></span>
+                                <span class="win-lose" th:text="|&nbsp;&#47; ${flexRankInfo?.get('wins')}승 ${flexRankInfo?.get('losses')}패|"><br>승률 48%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
