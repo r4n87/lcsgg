@@ -54,12 +54,15 @@ public class Facade {
         modelAndView.addObject("summoner", res);
         modelAndView.addObject("summonerName", name);
 
-        //Step 2. Get League info by encryptedSummonerId
-        result = facade_get.getLeagueInfo(encryptedSummonerId);
-        HashSet<Object> res2 = (HashSet<Object>) result.get("body");
+        //Step 2. Get League Info By encryptedSummonerId from DB
+        HashSet<Object> res2 = facade_get.getLeagueInfoFromDB(encryptedSummonerId);
 
-        //Step 2.1. Set League Info At DB
-        facade_set.setLeagueInfoAtDB(result);
+        //Step 2.1 Get League Info By encryptedSummonerId via API
+        if(null == res2) {
+            result = facade_get.getLeagueInfo(encryptedSummonerId);
+            res2 = (HashSet<Object>) result.get("body");
+            facade_set.setLeagueInfoAtDB(result);
+        }
 
         //Step 2.2. Set League Info At ModelAndView
         setLeagueInfoAtModelAndView(modelAndView, res2);
@@ -78,8 +81,7 @@ public class Facade {
             }
         }
 
-        //modelAndView.addObject("match1", matchInfoList.get(0).get("info"));
-        modelAndView.addObject("matchInfoList",matchInfoList);
+        modelAndView.addObject("matchInfoList", matchInfoList);
 
         return modelAndView;
     }
@@ -89,40 +91,13 @@ public class Facade {
         while(iterator.hasNext()) {
             HashMap<String, String> map = (HashMap) iterator.next();
             String tierInfo = map.get("tier");
-            String tierImg = "/images/ranked-emblems/";
-            switch(tierInfo) {
-                case "IRON":
-                    tierImg += "Emblem_Iron.png";
-                    break;
-                case "BRONZE":
-                    tierImg += "Emblem_Bronze.png";
-                    break;
-                case "SILVER":
-                    tierImg += "Emblem_Silver.png";
-                    break;
-                case "GOLD":
-                    tierImg += "Emblem_Gold.png";
-                    break;
-                case "PLATINUM":
-                    tierImg += "Emblem_Platinum.png";
-                    break;
-                case "DIAMOND":
-                    tierImg += "Emblem_Diamond.png";
-                    break;
-                case "MASTER":
-                    tierImg += "Emblem_Master.png";
-                    break;
-                case "GRANDMASTER":
-                    tierImg += "Emblem_Grandmaster.png";
-                    break;
-                case "CHALLENGER":
-                    tierImg += "Emblem_Challenger.png";
-                    break;
-                default:
-                    tierImg = "";
+            String tierImg = "";
+
+            if(null != tierInfo && !"".equals(tierInfo)) {
+                tierImg = "/images/ranked-emblems/" + tierInfo + ".png";
             }
 
-            String rankInfo = map.get("queueType").toString();
+            String rankInfo = map.get("queueType");
 
             if("RANKED_SOLO_5x5".equals(rankInfo)) {
                 modelAndView.addObject("soloRankInfo", map);
@@ -136,7 +111,41 @@ public class Facade {
 
     // 소환사 검색 결과 새로고침
     @GetMapping("searchRefresh")
-    public void refresh() {
+    public ModelAndView refresh(@RequestParam("name") String name) throws JsonProcessingException {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("content/summoner");
 
+        //Step 1. Get Summoner Info By Name via API
+        HashMap<String, Object> result = facade_get.getSummonerInfo(name);
+        LinkedHashMap<String, String> res = (LinkedHashMap) result.get("body");
+        facade_set.setSummonerInfoAtDB(res);
+
+        modelAndView.addObject("summoner", res);
+        modelAndView.addObject("summonerName", name);
+
+        //Step 2. Get League info by encryptedSummonerId via API
+        String encryptedSummonerId = res.get("id");
+        result = facade_get.getLeagueInfo(encryptedSummonerId);
+        HashSet<Object> res2 = (HashSet<Object>) result.get("body");
+        facade_set.setLeagueInfoAtDB(result);
+
+        setLeagueInfoAtModelAndView(modelAndView, res2);
+
+        //Step 3. Get Match Info List by Name via API
+        ArrayList<HashMap<String,Object>> matchInfoList = new ArrayList<>();
+        ArrayList<String> matchList = facade_get.getMatchList(name);
+        for (int i = 0; i < matchList.size(); i++) {
+            result = facade_get.getMatchInfo(matchList, i);
+            matchInfoList.add((HashMap<String, Object>) ((HashMap<String, Object>) result.get("body")).get("info"));
+            facade_set.setMatchInfoAtDB(result);
+        }
+
+        //Step 4. Get Match Info List from DB
+        String puuid = res.get("puuid");
+        matchInfoList = facade_get.getMatchInfoFromDB(puuid);
+
+        modelAndView.addObject("matchInfoList", matchInfoList);
+
+        return modelAndView;
     }
 }

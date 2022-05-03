@@ -26,13 +26,11 @@ public class TeamService {
     }
 
     public List<TeamEntity> findByMatchIdAndTeamId(TeamId teamId) {
-        List<TeamEntity> teams = TeamRepository.findByTeamId(teamId);
-        return teams;
+        return TeamRepository.findByTeamId(teamId);
     }
 
     public List<TeamEntity> findByMatchId(String matchId) {
-        List<TeamEntity> teams = TeamRepository.searchTeamsByMatchId(matchId);
-        return teams;
+        return TeamRepository.findByTeamId_MatchId(matchId);
     }
 
     public void insert(String matchId, int teamId, boolean win, Timestamp rrt) {

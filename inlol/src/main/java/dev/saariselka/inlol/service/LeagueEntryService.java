@@ -25,8 +25,11 @@ public class LeagueEntryService {
     }
 
     public List<LeagueEntryEntity> findByLeagueEntryId(LeagueEntryId leagueEntryId) {
-        List<LeagueEntryEntity> league = leagueEntryRepository.findByLeagueEntryId(leagueEntryId);
-        return league;
+        return leagueEntryRepository.findByLeagueEntryId(leagueEntryId);
+    }
+
+    public List<LeagueEntryEntity> findByLeagueEntryId_SummonerId(String summonerId) {
+        return leagueEntryRepository.findByLeagueEntryId_SummonerId(summonerId);
     }
 
     public void insert(String summonerId, String queueType, String leagueId, String summonerName, String tier, String ranks, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, Timestamp rrt) {
