@@ -14,7 +14,5 @@ import java.util.List;
 @Repository
 public interface TeamRepository extends JpaRepository<TeamEntity, TeamId> {
     List<TeamEntity> findByTeamId(TeamId teamId);
-
-    @Query(value = "SELECT * FROM riot_match_team WHERE match_id = :matchId", nativeQuery = true)
-    List<TeamEntity> searchTeamsByMatchId(@Param("matchId") String matchId);
+    List<TeamEntity> findByTeamId_MatchId(@Param("matchId") String matchId);
 }

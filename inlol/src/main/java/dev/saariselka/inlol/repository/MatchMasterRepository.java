@@ -12,9 +12,7 @@ import java.util.List;
 @Repository
 public interface MatchMasterRepository extends JpaRepository<MatchMasterEntity, MatchMasterId> {
     List<MatchMasterEntity> findByMatchMasterId(MatchMasterId matchMasterId);
-
-    @Query(value = "SELECT * FROM riot_match_master WHERE match_id = :matchId", nativeQuery = true)
-    List<MatchMasterEntity> searchMatchByMatchId(@Param("matchId") String matchId);
+    List<MatchMasterEntity> findByMatchMasterId_MatchId(@Param("matchId") String matchId);
 }
 
 

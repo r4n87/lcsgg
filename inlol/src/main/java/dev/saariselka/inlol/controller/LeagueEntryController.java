@@ -22,10 +22,12 @@ public class LeagueEntryController {
     @Autowired
     LeagueEntryService leagueEntryService;
 
-    public List<LeagueEntryEntity> getLeagueEntries_ByLeagueEntryId(String summonerId, String queueType)
-    {
-        List<LeagueEntryEntity> league = leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId, queueType));
-        return league;
+    public List<LeagueEntryEntity> getLeagueEntries_ByLeagueEntryId(String summonerId, String queueType) {
+        return leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId, queueType));
+    }
+
+    public List<LeagueEntryEntity> getLeagueEntries_BySummonerId(String summonerId) {
+        return leagueEntryService.findByLeagueEntryId_SummonerId(summonerId);
     }
 
     public void insertLeagueEntryInfo(String summonerId, String queueType, String leagueId, String summonerName, String tier, String rank, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, Timestamp rrt) {

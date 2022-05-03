@@ -22,11 +22,11 @@ public class MatchParticipantService {
     }
 
     public List<MatchParticipantEntity> findByDataVersionAndMatchId(String dataVersion, String matchId) {
-        return matchParticipantRepository.searchMatchesByDataVersionAndMatchId(dataVersion, matchId);
+        return matchParticipantRepository.findByMatchParticipantId_DataVersionAndMatchParticipantId_MatchId(dataVersion, matchId);
     }
 
     public List<MatchParticipantEntity> findByPuuid(String puuid) {
-        return matchParticipantRepository.searchMatchesByPuuid(puuid);
+        return matchParticipantRepository.findByMatchParticipantId_Puuid(puuid);
     }
 
     public void insert(String puuid, String dataVersion, String matchId, int assists, int baronKills, int bountyLevel, int champExperience,

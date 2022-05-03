@@ -24,11 +24,11 @@ public class MatchBanService {
     }
 
     public List<MatchBanEntity> findByMatchId(String matchId) {
-        return matchBanRepository.searchBansByMatchId(matchId);
+        return matchBanRepository.findByMatchBanId_MatchId(matchId);
     }
 
     public List<MatchBanEntity> findByMatchIdAndTeamId(String matchId, int teamId) {
-        return matchBanRepository.searchBansByMatchIdAndTeamId(matchId, teamId);
+        return matchBanRepository.findByMatchBanId_MatchIdAndMatchBanId_TeamId(matchId, teamId);
     }
 
     public List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId) {

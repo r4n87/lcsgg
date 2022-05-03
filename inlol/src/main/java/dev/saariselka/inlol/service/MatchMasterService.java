@@ -25,7 +25,7 @@ public class MatchMasterService {
     }
 
     public List<MatchMasterEntity> findByMatchId(String matchId) {
-        return matchMasterRepository.searchMatchByMatchId(matchId);
+        return matchMasterRepository.findByMatchMasterId_MatchId(matchId);
     }
 
     public List<MatchMasterEntity> findByMatchMasterId(MatchMasterId matchMasterId) {

@@ -9,7 +9,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -24,22 +23,16 @@ public class Facade_Get {
     APIKeyController apiKeyController;
     @Autowired
     SummonerController summonerController;
-
     @Autowired
     MatchMasterController matchMasterController;
-
     @Autowired
     TeamController teamController;
-
     @Autowired
     MatchParticipantController matchParticipantController;
-
     @Autowired
     MatchBanController matchBanController;
-
     @Autowired
     MatchObjectivesController matchObjectivesController;
-
     @Autowired
     LeagueEntryController leagueEntryController;
 
@@ -329,7 +322,6 @@ public class Facade_Get {
 
             metadataMap.put("participants", participantsPuuid);
             infoMap.put("participants", participantsInfo);
-            System.out.println(infoMap.get("participants").toString());
 
             matchInfo.put("metadata", metadataMap);
             matchInfo.put("info", infoMap);
@@ -445,6 +437,35 @@ public class Facade_Get {
             result.put("body", "league info get exception");
             System.out.println(e);
         }
+        return result;
+    }
+
+    public HashSet<Object> getLeagueInfoFromDB(String summonerId) {
+        HashSet<Object> result = new HashSet<>();
+
+        List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntries_BySummonerId(summonerId);
+        HashMap<String, Object> leagueEntryInfo;
+
+        for(LeagueEntryEntity entryEntity : leagueEntryEntityList) {
+            leagueEntryInfo = new HashMap<>();
+
+            leagueEntryInfo.put("leagueId", entryEntity.getLeagueId());
+            leagueEntryInfo.put("queueType", entryEntity.getLeagueEntryId().getQueueType());
+            leagueEntryInfo.put("tier", entryEntity.getTier());
+            leagueEntryInfo.put("rank", entryEntity.getRanks());
+            leagueEntryInfo.put("summonerId", entryEntity.getLeagueEntryId().getSummonerId());
+            leagueEntryInfo.put("summonerName", entryEntity.getSummonerName());
+            leagueEntryInfo.put("leaguePoints", entryEntity.getLeaguePoints());
+            leagueEntryInfo.put("wins", entryEntity.getWins());
+            leagueEntryInfo.put("losses", entryEntity.getLosses());
+            leagueEntryInfo.put("veteran", entryEntity.isVeteran());
+            leagueEntryInfo.put("inactive", entryEntity.isInactive());
+            leagueEntryInfo.put("freshBlood", entryEntity.isFreshBlood());
+            leagueEntryInfo.put("hotStreak", entryEntity.isHotStreak());
+
+            result.add(leagueEntryInfo);
+        }
+
         return result;
     }
 }
