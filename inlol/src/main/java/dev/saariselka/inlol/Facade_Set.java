@@ -31,11 +31,7 @@ public class Facade_Set {
     @Autowired
     LeagueEntryController leagueEntryController;
 
-    public void setMatchInfoAtDB(HashMap<String, Object> result) throws JsonProcessingException {
-
-        HashMap<String, Object> matchInfo;
-        matchInfo = (HashMap) result.get("body");
-
+    public void setMatchInfoAtDB(HashMap<String, Object> matchInfo) throws JsonProcessingException {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         ObjectMapper mapper = new ObjectMapper();
@@ -227,12 +223,11 @@ public class Facade_Set {
                 Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
     }
 
-    public void setLeagueInfoAtDB(HashMap<String, Object> result) {
+    public void setLeagueInfoAtDB(HashSet<Object> result) {
         // parsing
-        HashSet<Object> res = (HashSet) result.get("body");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        Iterator<Object> it = res.iterator();
+        Iterator<Object> it = result.iterator();
         while(it.hasNext())
         {
             LinkedHashMap<String, Object> data = (LinkedHashMap) it.next();
