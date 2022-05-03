@@ -15,5 +15,5 @@ public interface MatchParticipantRepository extends JpaRepository<MatchParticipa
 
     List<MatchParticipantEntity> findByMatchParticipantId_DataVersionAndMatchParticipantId_MatchId(@Param("dataVersion") String dataVersion, @Param("matchId") String matchId);
 
-    List<MatchParticipantEntity> findByMatchParticipantId_Puuid(@Param("puuid") String puuid);
+    List<MatchParticipantEntity> findByMatchParticipantId_PuuidOrderByMatchParticipantId_MatchIdDesc(@Param("puuid") String puuid);
 }
