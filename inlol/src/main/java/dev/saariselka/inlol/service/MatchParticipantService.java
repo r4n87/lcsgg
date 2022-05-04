@@ -26,7 +26,7 @@ public class MatchParticipantService {
     }
 
     public List<MatchParticipantEntity> findByPuuid(String puuid) {
-        return matchParticipantRepository.findByMatchParticipantId_Puuid(puuid);
+        return matchParticipantRepository.findByMatchParticipantId_PuuidOrderByMatchParticipantId_MatchIdDesc(puuid);
     }
 
     public void insert(String puuid, String dataVersion, String matchId, int assists, int baronKills, int bountyLevel, int champExperience,
