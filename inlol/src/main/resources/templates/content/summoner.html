@@ -16,20 +16,20 @@
             <ul> </ul>
             <div class="face">
                 <div class="profile-icon">
-                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner?.get('profileIconId')}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="profile image">
-                    <span class="level" th:text="${summoner?.get('summonerLevel')}"> </span>
+                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.getProfileIconId()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="profile image">
+                    <span class="level" th:text="${summoner.getSummonerLevel()}"> </span>
                 </div>
             </div>
             <div class="profile">
                 <div class="info">
-                    <span class="name" th:text="${summoner?.get('name')}"></span>
+                    <span class="name" th:text="${summoner.getName()}"></span>
                 </div>
             </div>
         </div>
         <div class="css-1u0uowu e1ijocqp2">
             <dl>
                 <dd>
-                    <a th:onclick="|location.href='@{searchInit(name=${summoner?.get('name')})}'|" class="css-1a8o8sd e1ijocqp1">
+                    <a th:onclick="|location.href='@{searchInit(name=${summoner.getName()})}'|" class="css-1a8o8sd e1ijocqp1">
                         종합
                     </a>
                 </dd>
