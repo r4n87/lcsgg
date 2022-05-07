@@ -394,21 +394,22 @@ public class Facade_Get {
         return result;
     }
 
-    public LinkedHashMap<String, String> getSummonerInfoFromDB(String name) {
-        LinkedHashMap<String, String> result = new LinkedHashMap<>();
+    public SummonerDto getSummonerInfoFromDB(String name) {
+        SummonerDto summonerDto = new SummonerDto();
+
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
         if(null == puuid) return null;
 
         SummonerEntity summoner = summonerController.getSummoner(puuid).get(0);
-        result.put("puuid", summoner.getPuuid());
-        result.put("accountId", summoner.getAccountid());
-        result.put("id", summoner.getId());
-        result.put("name", summoner.getName());
-        result.put("profileIconId", String.valueOf(summoner.getProfileiconid()));
-        result.put("revisionDate", String.valueOf(summoner.getRevisiondate()));
-        result.put("summonerLevel", String.valueOf(summoner.getSummonerlevel()));
+        summonerDto.setPuuid(summoner.getPuuid());
+        summonerDto.setAccountId(summoner.getAccountid());
+        summonerDto.setId(summoner.getId());
+        summonerDto.setName(summoner.getName());
+        summonerDto.setProfileIconId(String.valueOf(summoner.getProfileiconid()));
+        summonerDto.setRevisionDate(String.valueOf(summoner.getRevisiondate()));
+        summonerDto.setSummonerLevel(String.valueOf(summoner.getSummonerlevel()));
 
-        return result;
+        return summonerDto;
     }
 
     public HashMap<String, Object> getLeagueInfo(String encryptedSummonerId) {

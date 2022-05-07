@@ -2,6 +2,7 @@ package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import dev.saariselka.inlol.dto.MatchDto;
+import dev.saariselka.inlol.dto.SummonerDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,13 @@ public class Facade {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
         //Step 1. Get Summoner Info and Set Summoner Info At ModelAndView
-        LinkedHashMap<String, String> res = getSummonerInfo(modelAndView, name, facade_get.getSummonerInfoFromDB(name));
+        SummonerDto summonerDto = getSummonerInfo(modelAndView, name, facade_get.getSummonerInfoFromDB(name));
 
         //Step 2. Get League Info and Set League Info At ModelAndView
-        getLeagueInfo(modelAndView, res.get("id"), facade_get.getLeagueInfoFromDB(res.get("id")));
+        getLeagueInfo(modelAndView, summonerDto.getId(), facade_get.getLeagueInfoFromDB(summonerDto.getId()));
 
         //Step 3. Get Match Info List
-        getMatchInfoList(modelAndView, res.get("puuid"), facade_get.getMatchInfoFromDB(res.get("puuid")));
+        getMatchInfoList(modelAndView, summonerDto, facade_get.getMatchInfoFromDB(summonerDto.getPuuid()));
 
         return modelAndView;
     }
@@ -54,18 +55,18 @@ public class Facade {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
         //Step 1. Get Summoner Info By Name via API
-        LinkedHashMap<String, String> res = getSummonerInfoFromAPI(modelAndView, name);
+        SummonerDto summonerDto = getSummonerInfoFromAPI(modelAndView, name);
 
         //Step 2. Get League info by encryptedSummonerId via API
-        getLeagueInfoFromAPI(modelAndView, res.get("id"));
+        getLeagueInfoFromAPI(modelAndView, summonerDto.getId());
 
         //Step 3. Get Match Info List by Name via API
-        getMatchInfoFromAPI_Refresh(modelAndView, name, res);
+        getMatchInfoFromAPI_Refresh(modelAndView, summonerDto);
 
         return modelAndView;
     }
 
-    private LinkedHashMap<String, String> getSummonerInfo(ModelAndView modelAndView, String name, LinkedHashMap<String, String> summonerInfoFromDB) {
+    private SummonerDto getSummonerInfo(ModelAndView modelAndView, String name, SummonerDto summonerInfoFromDB) {
         if(null != summonerInfoFromDB) {
             setSummonerInfoAtModelAndView(modelAndView, summonerInfoFromDB, name);
             return summonerInfoFromDB;
@@ -74,12 +75,16 @@ public class Facade {
         return getSummonerInfoFromAPI(modelAndView, name);
     }
 
-    private LinkedHashMap<String, String> getSummonerInfoFromAPI(ModelAndView modelAndView, String name) {
-        LinkedHashMap<String, String> summonerInfo = (LinkedHashMap) facade_get.getSummonerInfo(name).get("body");
-        facade_set.setSummonerInfoAtDB(summonerInfo);
-        setSummonerInfoAtModelAndView(modelAndView, summonerInfo, name);
+    private SummonerDto getSummonerInfoFromAPI(ModelAndView modelAndView, String name) {
+        SummonerDto summonerDto = new SummonerDto();
 
-        return summonerInfo;
+        facade_set.setSummonerInfoAtDB((LinkedHashMap) facade_get.getSummonerInfo(name).get("body"));
+
+        summonerDto = facade_get.getSummonerInfoFromDB(name);
+
+        setSummonerInfoAtModelAndView(modelAndView, summonerDto, name);
+
+        return summonerDto;
     }
 
     private void getLeagueInfo(ModelAndView modelAndView, String encryptedSummonerId, HashSet<Object> leagueInfoFromDB) {
@@ -97,44 +102,45 @@ public class Facade {
         setLeagueInfoAtModelAndView(modelAndView, leagueInfo);
     }
 
-    private void getMatchInfoList(ModelAndView modelAndView, String name, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
+    private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
         if(null != matchInfoList) {
             setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
             return;
         }
 
-        getMatchInfoFromAPI_Init(modelAndView, name);
+        getMatchInfoFromAPI_Init(modelAndView, summonerDto);
     }
 
-    private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, String name) throws JsonProcessingException {
+    private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
         ArrayList<MatchDto> matchInfoList = new ArrayList<>();
-        ArrayList<String> matchList = facade_get.getMatchList(name);
+        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName());
 
         for (int i = 0; i < matchList.size(); i++) {
             HashMap<String, Object> result =  ((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body"));
-            //matchInfoList.add((HashMap<String, Object>) result.get("info"));
             facade_set.setMatchInfoAtDB(result);
         }
+
+        matchInfoList = facade_get.getMatchInfoFromDB(summonerDto.getPuuid());
 
         setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
     }
 
-    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, String name, LinkedHashMap<String, String> res) throws JsonProcessingException {
-        ArrayList<String> matchList = facade_get.getMatchList(name);
+    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
+        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName());
 
         for (int i = 0; i < matchList.size(); i++) {
             facade_set.setMatchInfoAtDB(((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body")));
         }
 
-        setMatchInfoListAtModelAndView(modelAndView, facade_get.getMatchInfoFromDB(res.get("puuid")));
+        setMatchInfoListAtModelAndView(modelAndView, facade_get.getMatchInfoFromDB(summonerDto.getPuuid()));
     }
 
     private void setMatchInfoListAtModelAndView(ModelAndView modelAndView, ArrayList<MatchDto> matchInfoList) {
         modelAndView.addObject("matchInfoList", matchInfoList);
     }
 
-    private void setSummonerInfoAtModelAndView(ModelAndView modelAndView, LinkedHashMap<String, String> res, String name) {
-        modelAndView.addObject("summoner", res);
+    private void setSummonerInfoAtModelAndView(ModelAndView modelAndView, SummonerDto summonerDto, String name) {
+        modelAndView.addObject("summoner", summonerDto);
         modelAndView.addObject("summonerName", name);
     }
 
