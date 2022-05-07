@@ -202,10 +202,119 @@ public class Facade_Get {
             List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
             List<String> participantsPuuidList = new ArrayList<>();
             List<ParticipantDto> participantDtoList = new ArrayList<>();
+            ParticipantDto summonerInfo = new ParticipantDto();
 
             index = 0;
             for(MatchParticipantEntity participantEntity : participantsList) {
                 participantsPuuidList.add(participantEntity.getMatchParticipantId().getPuuid());
+                
+                if(puuid.equals(participantsPuuidList.get(index)))
+                {
+                    summonerInfo.setAssists(String.valueOf(participantEntity.getAssists()));
+                    summonerInfo.setBaronKills(String.valueOf(participantEntity.getBaronKills()));
+                    summonerInfo.setBountyLevel(String.valueOf(participantEntity.getBountyLevel()));
+                    summonerInfo.setChampExperience(String.valueOf(participantEntity.getChampExperience()));
+                    summonerInfo.setChampLevel(String.valueOf(participantEntity.getChampLevel()));
+                    summonerInfo.setChampionId(String.valueOf(participantEntity.getChampionName()));
+                    summonerInfo.setChampionName(participantEntity.getChampionName());
+                    summonerInfo.setChampionTransform(String.valueOf(participantEntity.getChampionTransform()));
+                    summonerInfo.setConsumablesPurchased(String.valueOf(participantEntity.getConsumablesPurchased()));
+                    summonerInfo.setDamageDealtToBuildings(String.valueOf(participantEntity.getDamageDealtToBuildings()));
+                    summonerInfo.setDamageDealtToObjectives(String.valueOf(participantEntity.getDamageDealtToObjectives()));
+                    summonerInfo.setDamageDealtToTurrets(String.valueOf(participantEntity.getDamageDealtToTurrets()));
+                    summonerInfo.setDamageSelfMitigated(String.valueOf(participantEntity.getDamageSelfMitigated()));
+                    summonerInfo.setDeaths(String.valueOf(participantEntity.getDeaths()));
+                    summonerInfo.setDetectorWardsPlaced(String.valueOf(participantEntity.getDetectorWardsPlaced()));
+                    summonerInfo.setDoubleKills(String.valueOf(participantEntity.getDoubleKills()));
+                    summonerInfo.setDragonKills(String.valueOf(participantEntity.getDragonKills()));
+                    summonerInfo.setFirstBloodAssist(String.valueOf(participantEntity.isFirstBloodAssist()));
+                    summonerInfo.setFirstBloodKill(String.valueOf(participantEntity.isFirstBloodKill()));
+                    summonerInfo.setFirstTowerAssist(String.valueOf(participantEntity.isFirstTowerAssist()));
+                    summonerInfo.setFirstTowerKill(String.valueOf(participantEntity.isFirstTowerKill()));
+                    summonerInfo.setGameEndedInEarlySurrender(String.valueOf(participantEntity.isGameEndedInEarlySurrender()));
+                    summonerInfo.setGameEndedInSurrender(String.valueOf(participantEntity.isGameEndedInSurrender()));
+                    summonerInfo.setGoldEarned(String.valueOf(participantEntity.getGoldEarned()));
+                    summonerInfo.setGoldSpent(String.valueOf(participantEntity.getGoldSpent()));
+                    summonerInfo.setIndividualPosition(participantEntity.getIndividualPosition());
+                    summonerInfo.setInhibitorKills(String.valueOf(participantEntity.getInhibitorKills()));
+                    summonerInfo.setInhibitorTakedowns(String.valueOf(participantEntity.getInhibitorTakedowns()));
+                    summonerInfo.setInhibitorsLost(String.valueOf(participantEntity.getInhibitorsLost()));
+                    summonerInfo.setItem0(String.valueOf(participantEntity.getItem0()));
+                    summonerInfo.setItem1(String.valueOf(participantEntity.getItem1()));
+                    summonerInfo.setItem2(String.valueOf(participantEntity.getItem2()));
+                    summonerInfo.setItem3(String.valueOf(participantEntity.getItem3()));
+                    summonerInfo.setItem4(String.valueOf(participantEntity.getItem4()));
+                    summonerInfo.setItem5(String.valueOf(participantEntity.getItem5()));
+                    summonerInfo.setItem6(String.valueOf(participantEntity.getItem6()));
+                    summonerInfo.setItemsPurchased(String.valueOf(participantEntity.getItemsPurchased()));
+                    summonerInfo.setKillingSprees(String.valueOf(participantEntity.getKillingSprees()));
+                    summonerInfo.setKills(String.valueOf(participantEntity.getKills()));
+                    summonerInfo.setLane(participantEntity.getLane());
+                    summonerInfo.setLargestCriticalStrike(String.valueOf(participantEntity.getLargestCriticalStrike()));
+                    summonerInfo.setLargestKillingSpree(String.valueOf(participantEntity.getLargestKillingSpree()));
+                    summonerInfo.setLargestMultiKill(String.valueOf(participantEntity.getLargestMultiKill()));
+                    summonerInfo.setLongestTimeSpentLiving(String.valueOf(participantEntity.getLongestTimeSpentLiving()));
+                    summonerInfo.setMagicDamageDealt(String.valueOf(participantEntity.getMagicDamageDealt()));
+                    summonerInfo.setMagicDamageDealtToChampions(String.valueOf(participantEntity.getMagicDamageDealtToChampions()));
+                    summonerInfo.setMagicDamageTaken(String.valueOf(participantEntity.getMagicDamageTaken()));
+                    summonerInfo.setNeutralMinionsKilled(String.valueOf(participantEntity.getNeutralMinionsKilled()));
+                    summonerInfo.setNexusKills(String.valueOf(participantEntity.getNexusKills()));
+                    summonerInfo.setNexusLost(String.valueOf(participantEntity.getNexusLost()));
+                    summonerInfo.setNexusTakedowns(String.valueOf(participantEntity.getNexusTakedowns()));
+                    summonerInfo.setObjectivesStolen(String.valueOf(participantEntity.getObjectivesStolen()));
+                    summonerInfo.setObjectivesStolenAssists(String.valueOf(participantEntity.getObjectivesStolenAssists()));
+                    summonerInfo.setParticipantId(String.valueOf(participantEntity.getParticipantId()));
+                    summonerInfo.setPentaKills(String.valueOf(participantEntity.getPentaKills()));
+                    summonerInfo.setPhysicalDamageDealt(String.valueOf(participantEntity.getPhysicalDamageDealt()));
+                    summonerInfo.setPhysicalDamageDealtToChampions(String.valueOf(participantEntity.getPhysicalDamageDealtToChampions()));
+                    summonerInfo.setPhysicalDamageTaken(String.valueOf(participantEntity.getPhysicalDamageTaken()));
+                    summonerInfo.setPuuid(participantsPuuidList.get(index));
+                    summonerInfo.setProfileIcon(String.valueOf(participantEntity.getProfileIcon()));
+                    summonerInfo.setQuadraKills(String.valueOf(participantEntity.getQuadraKills()));
+                    summonerInfo.setRiotIdName(participantEntity.getRiotIdName());
+                    summonerInfo.setRiotIdTagline(participantEntity.getRiotIdTagline());
+                    summonerInfo.setRole(participantEntity.getRole());
+                    summonerInfo.setSightWardsBoughtInGame(String.valueOf(participantEntity.getSightWardsBoughtInGame()));
+                    summonerInfo.setSpell1Casts(String.valueOf(participantEntity.getSpell1Casts()));
+                    summonerInfo.setSpell2Casts(String.valueOf(participantEntity.getSpell2Casts()));
+                    summonerInfo.setSpell3Casts(String.valueOf(participantEntity.getSpell3Casts()));
+                    summonerInfo.setSpell4Casts(String.valueOf(participantEntity.getSpell4Casts()));
+                    summonerInfo.setSummoner1Casts(String.valueOf(participantEntity.getSummoner1Casts()));
+                    summonerInfo.setSummoner1Id(String.valueOf(participantEntity.getSummoner1Id()));
+                    summonerInfo.setSummoner2Casts(String.valueOf(participantEntity.getSummoner2Casts()));
+                    summonerInfo.setSummoner2Id(String.valueOf(participantEntity.getSummoner2Id()));
+                    summonerInfo.setSummonerId(participantEntity.getSummonerId());
+                    summonerInfo.setSummonerLevel(String.valueOf(participantEntity.getSummonerLevel()));
+                    summonerInfo.setSummonerName(participantEntity.getSummonerName());
+                    summonerInfo.setTeamEarlySurrendered(String.valueOf(participantEntity.isTeamEarlySurrendered()));
+                    summonerInfo.setTeamId(String.valueOf(participantEntity.getTeamId()));
+                    summonerInfo.setTeamPosition(participantEntity.getTeamPosition());
+                    summonerInfo.setTimeCCingOthers(String.valueOf(participantEntity.getTimeCCingOthers()));
+                    summonerInfo.setTimePlayed(String.valueOf(participantEntity.getTimePlayed()));
+                    summonerInfo.setTotalDamageDealt(String.valueOf(participantEntity.getTotalDamageDealt()));
+                    summonerInfo.setTotalDamageDealtToChampions( String.valueOf(participantEntity.getTotalDamageDealtToChampions()));
+                    summonerInfo.setTotalDamageShieldedOnTeammates(String.valueOf(participantEntity.getTotalDamageShieldedOnTeammates()));
+                    summonerInfo.setTotalDamageTaken(String.valueOf(participantEntity.getTotalDamageTaken()));
+                    summonerInfo.setTotalHeal(String.valueOf(participantEntity.getTotalHeal()));
+                    summonerInfo.setTotalHealsOnTeammates(String.valueOf(participantEntity.getTotalHealsOnTeammates()));
+                    summonerInfo.setTotalMinionsKilled(String.valueOf(participantEntity.getTotalMinionsKilled()));
+                    summonerInfo.setTotalTimeCCDealt(String.valueOf(participantEntity.getTotalTimeCCDealt()));
+                    summonerInfo.setTotalTimeSpentDead(String.valueOf(participantEntity.getTotalTimeSpentDead()));
+                    summonerInfo.setTotalUnitsHealed(String.valueOf(participantEntity.getTotalUnitsHealed()));
+                    summonerInfo.setTripleKills(String.valueOf(participantEntity.getTripleKills()));
+                    summonerInfo.setTrueDamageDealt(String.valueOf(participantEntity.getTrueDamageDealt()));
+                    summonerInfo.setTrueDamageDealtToChampions(String.valueOf(participantEntity.getTrueDamageDealtToChampions()));
+                    summonerInfo.setTrueDamageTaken(String.valueOf(participantEntity.getTrueDamageTaken()));
+                    summonerInfo.setTurretKills(String.valueOf(participantEntity.getTurretKills()));
+                    summonerInfo.setTurretTakedowns(String.valueOf(participantEntity.getTurretTakedowns()));
+                    summonerInfo.setTurretsLost(String.valueOf(participantEntity.getTurretsLost()));
+                    summonerInfo.setUnrealKills(String.valueOf(participantEntity.getUnrealKills()));
+                    summonerInfo.setVisionScore(String.valueOf(participantEntity.getVisionScore()));
+                    summonerInfo.setVisionWardsBoughtInGame(String.valueOf(participantEntity.getVisionWardsBoughtInGame()));
+                    summonerInfo.setWardsKilled(String.valueOf(participantEntity.getWardsKilled()));
+                    summonerInfo.setWardsPlaced(String.valueOf(participantEntity.getWardsPlaced()));
+                    summonerInfo.setWin(String.valueOf(participantEntity.isWin()));
+                }
                 
                 ParticipantDto participantDto = new ParticipantDto();
 
@@ -321,6 +430,7 @@ public class Facade_Get {
 
             metadataDto.setParticipants(participantsPuuidList);
             infoDto.setParticipants(participantDtoList);
+            infoDto.setSummoner(summonerInfo);
 
             matchInfo.setMetadata(metadataDto);
             matchInfo.setInfo(infoDto);

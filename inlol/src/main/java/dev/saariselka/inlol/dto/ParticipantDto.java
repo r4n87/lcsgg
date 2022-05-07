@@ -958,7 +958,7 @@ public class ParticipantDto {
         this.wardsPlaced = wardsPlaced;
     }
 
-    public String isWin() {
+    public String getWin() {
         return win;
     }
 
