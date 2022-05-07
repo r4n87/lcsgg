@@ -1,6 +1,7 @@
 package dev.saariselka.inlol;
 
 import dev.saariselka.inlol.controller.*;
+import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,8 +76,8 @@ public class Facade_Get {
         return result;
     }
 
-    public ArrayList<HashMap<String,Object>> getMatchInfoFromDB(String puuid) {
-        ArrayList<HashMap<String,Object>> result = new ArrayList<>();
+    public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) {
+        ArrayList<MatchDto> result = new ArrayList<>();
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
@@ -89,9 +90,9 @@ public class Facade_Get {
             matchId = masterEntity.getMatchMasterId().getMatchId();
             dataVersion = masterEntity.getMatchMasterId().getDataVersion();
 
-            HashMap<String, Object> matchInfo = new HashMap<>();
-            HashMap<String, Object> metadataMap = new HashMap<>();
-            HashMap<String, Object> infoMap = new HashMap<>();
+            MatchDto matchInfo = new MatchDto();
+            MetadataDto metadataDto = new MetadataDto();
+            InfoDto infoDto = new InfoDto();
 
             //시간 차이 계산
             String gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())))
@@ -113,218 +114,216 @@ public class Facade_Get {
             }
 
             //1. Match Master 정보 생성
-            metadataMap.put("dataVersion", masterEntity.getMatchMasterId().getDataVersion());
-            metadataMap.put("matchId", masterEntity.getMatchMasterId().getMatchId());
-            infoMap.put("gameCreation", masterEntity.getGameCreation());
-            infoMap.put("gameDuration", gameDuration);
-            infoMap.put("gameEndTimestamp", LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
-            infoMap.put("gameId", masterEntity.getGameId());
-            infoMap.put("gameMode", masterEntity.getGameMode());
-            infoMap.put("gameName", masterEntity.getGameName());
-            infoMap.put("gameStartTimestamp", LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
-            infoMap.put("gameType", masterEntity.getGameType());
-            infoMap.put("gameVersion", masterEntity.getGameVersion());
-            infoMap.put("mapId", String.valueOf(masterEntity.getMapId()));
-            infoMap.put("platformId", masterEntity.getPlatformId());
-            infoMap.put("queueId", String.valueOf(masterEntity.getQueueId()));
-            infoMap.put("tournamentCode", masterEntity.getTournamentCode());
-            infoMap.put("gameAgoTime",gameAgoTime);
+            metadataDto.setDataVersion(masterEntity.getMatchMasterId().getDataVersion());
+            metadataDto.setMatchId(masterEntity.getMatchMasterId().getMatchId());
+
+            infoDto.setGameCreation(masterEntity.getGameCreation());
+            infoDto.setGameDuration(gameDuration);
+            infoDto.setGameEndTimestamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
+            infoDto.setGameId(masterEntity.getGameId());
+            infoDto.setGameMode(masterEntity.getGameMode());
+            infoDto.setGameName(masterEntity.getGameName());
+            infoDto.setGameStartTimeStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
+            infoDto.setGameType(masterEntity.getGameType());
+            infoDto.setGameVersion(masterEntity.getGameVersion());
+            infoDto.setMapId(String.valueOf(masterEntity.getMapId()));
+            infoDto.setPlatformId(masterEntity.getPlatformId());
+            infoDto.setQueueId(String.valueOf(masterEntity.getQueueId()));
+            infoDto.setTournamentCode(masterEntity.getTournamentCode());
+            infoDto.setGameAgoTime(gameAgoTime);
 
             //2. Team 정보 생성
             List<TeamEntity> teamsList = teamController.getTeams_ByMatchId(matchId);
-            Object[] teamsInfo = new Object[2];
+            List<TeamDto> teamDtoList = new ArrayList<>();
+
             int index = 0;
 
             for(TeamEntity teamEntity : teamsList) {
-                HashMap<String, Object> teamInfo = new HashMap<>();
-                teamInfo.put("teamId", String.valueOf(teamEntity.getTeamId().getTeamId()));
-                teamInfo.put("win", String.valueOf(teamEntity.isWin()));
-
+                TeamDto teamDto = new TeamDto();
+                teamDto.setTeamId(String.valueOf(teamEntity.getTeamId().getTeamId()));
+                teamDto.setWin(String.valueOf(teamEntity.isWin()));
 
                 //3. Match Ban 정보 생성
                 List<MatchBanEntity> bansList = matchBanController.getBans_ByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
-                Object[] bansInfo = new Object[5];
 
-                int tempIndex = 0;
+                List<BanDto> banDtoList = new ArrayList<>();
+
                 for(MatchBanEntity banEntity : bansList) {
-                    HashMap<String, String> banInfo = new HashMap<>();
-                    banInfo.put("championId", String.valueOf(banEntity.getChampionId()));
-                    banInfo.put("pickTurn", String.valueOf(banEntity.getMatchBanId().getPickTurn()));
+                    BanDto banDto = new BanDto();
+                    banDto.setChampionId(String.valueOf(banEntity.getChampionId()));
+                    banDto.setPickTurn(String.valueOf(banEntity.getMatchBanId().getPickTurn()));
 
-                    bansInfo[tempIndex] = banInfo;
-                    tempIndex++;
+                    banDtoList.add(banDto);
                 }
 
-                teamInfo.put("bans", bansInfo);
+                teamDto.setBans(banDtoList);
 
                 //4. Match Objectives 정보 생성
                 MatchObjectivesEntity objectivesEntity = matchObjectivesController
                                                         .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
                                                         .get(0);
 
-                HashMap<String, Object> objectivesInfo = new HashMap<>();
-                HashMap<String, Object> baron = new HashMap<>();
-                HashMap<String, Object> champion = new HashMap<>();
-                HashMap<String, Object> dragon = new HashMap<>();
-                HashMap<String, Object> inhibitor = new HashMap<>();
-                HashMap<String, Object> riftHerald = new HashMap<>();
-                HashMap<String, Object> tower = new HashMap<>();
+                ObjectivesDto objectivesDto = new ObjectivesDto();
+                ObjectiveDto baron = new ObjectiveDto();
+                ObjectiveDto champion = new ObjectiveDto();
+                ObjectiveDto dragon = new ObjectiveDto();
+                ObjectiveDto inhibitor = new ObjectiveDto();
+                ObjectiveDto riftHerald = new ObjectiveDto();
+                ObjectiveDto tower = new ObjectiveDto();
 
+                baron.setFirst(objectivesEntity.isBaron_first());
+                baron.setKills(objectivesEntity.getBaron_kills());
+                champion.setFirst(objectivesEntity.isChampion_first());
+                champion.setKills(objectivesEntity.getChampion_kills());
+                dragon.setFirst(objectivesEntity.isDragon_first());
+                dragon.setKills(objectivesEntity.getDragon_kills());
+                inhibitor.setFirst(objectivesEntity.isInhibitor_first());
+                inhibitor.setKills(objectivesEntity.getInhibitor_kills());
+                riftHerald.setFirst(objectivesEntity.isRiftherald_first());
+                riftHerald.setKills(objectivesEntity.getRiftherald_kills());
+                tower.setFirst(objectivesEntity.isTower_first());
+                tower.setKills(objectivesEntity.getTower_kills());
 
-                baron.put("first", objectivesEntity.isBaron_first());
-                baron.put("kills", objectivesEntity.getBaron_kills());
-                champion.put("first", objectivesEntity.isChampion_first());
-                champion.put("kills", objectivesEntity.getChampion_kills());
-                dragon.put("first", objectivesEntity.isDragon_first());
-                dragon.put("kills", objectivesEntity.getDragon_kills());
-                inhibitor.put("first", objectivesEntity.isInhibitor_first());
-                inhibitor.put("kills", objectivesEntity.getInhibitor_kills());
-                riftHerald.put("first", objectivesEntity.isRiftherald_first());
-                riftHerald.put("kills", objectivesEntity.getRiftherald_kills());
-                tower.put("first", objectivesEntity.isTower_first());
-                tower.put("kills", objectivesEntity.getTower_kills());
+                objectivesDto.setBaron(baron);
+                objectivesDto.setChampion(champion);
+                objectivesDto.setDragon(dragon);
+                objectivesDto.setInhibitor(inhibitor);
+                objectivesDto.setRiftHeraId(riftHerald);
+                objectivesDto.setTower(tower);
 
-                objectivesInfo.put("baron", baron);
-                objectivesInfo.put("champion", champion);
-                objectivesInfo.put("dragon", dragon);
-                objectivesInfo.put("inhibitor", inhibitor);
-                objectivesInfo.put("riftHerald", riftHerald);
-                objectivesInfo.put("tower", tower);
+                teamDto.setObjectives(objectivesDto);
 
-                teamInfo.put("objectives", objectivesInfo);
-
-
-                teamsInfo[index] = teamInfo;
-                index++;
+                teamDtoList.add(teamDto);
             }
 
-            infoMap.put("teams", teamsInfo);
-
+            infoDto.setTeams(teamDtoList);
 
             //5. Match Participants 정보 생성
             List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
-            String[] participantsPuuid = new String[10];
-            Object[] participantsInfo = new Object[10];
+            List<String> participantsPuuidList = new ArrayList<>();
+            List<ParticipantDto> participantDtoList = new ArrayList<>();
 
             index = 0;
             for(MatchParticipantEntity participantEntity : participantsList) {
-                participantsPuuid[index] = participantEntity.getMatchParticipantId().getPuuid();
-                HashMap<String, Object> participantInfo = new HashMap<>();
+                participantsPuuidList.add(participantEntity.getMatchParticipantId().getPuuid());
+                
+                ParticipantDto participantDto = new ParticipantDto();
 
-                participantInfo.put("assists", String.valueOf(participantEntity.getAssists()));
-                participantInfo.put("baronKills", String.valueOf(participantEntity.getBaronKills()));
-                participantInfo.put("bountyLevel", String.valueOf(participantEntity.getBountyLevel()));
-                participantInfo.put("champExperience", String.valueOf(participantEntity.getChampExperience()));
-                participantInfo.put("champLevel", String.valueOf(participantEntity.getChampLevel()));
-                participantInfo.put("championId", String.valueOf(participantEntity.getChampionName()));
-                participantInfo.put("championName", participantEntity.getChampionName());
-                participantInfo.put("championTransform",String.valueOf(participantEntity.getChampionTransform()));
-                participantInfo.put("consumablesPurchased", String.valueOf(participantEntity.getConsumablesPurchased()));
-                participantInfo.put("damageDealtToBuildings", String.valueOf(participantEntity.getDamageDealtToBuildings()));
-                participantInfo.put("damageDealtToObjectives", String.valueOf(participantEntity.getDamageDealtToObjectives()));
-                participantInfo.put("damageDealtToTurrets", String.valueOf(participantEntity.getDamageDealtToTurrets()));
-                participantInfo.put("damageSelfMitigated", String.valueOf(participantEntity.getDamageSelfMitigated()));
-                participantInfo.put("deaths", String.valueOf(participantEntity.getDeaths()));
-                participantInfo.put("detectorWardsPlaced", String.valueOf(participantEntity.getDetectorWardsPlaced()));
-                participantInfo.put("doubleKills", String.valueOf(participantEntity.getDoubleKills()));
-                participantInfo.put("dragonKills", String.valueOf(participantEntity.getDragonKills()));
-                participantInfo.put("firstBloodAssist", String.valueOf(participantEntity.isFirstBloodAssist()));
-                participantInfo.put("firstBloodKill", String.valueOf(participantEntity.isFirstBloodKill()));
-                participantInfo.put("firstTowerAssist", String.valueOf(participantEntity.isFirstTowerAssist()));
-                participantInfo.put("firstTowerKill", String.valueOf(participantEntity.isFirstTowerKill()));
-                participantInfo.put("gameEndedInEarlySurrender", String.valueOf(participantEntity.isGameEndedInEarlySurrender()));
-                participantInfo.put("gameEndedInSurrender", String.valueOf(participantEntity.isGameEndedInSurrender()));
-                participantInfo.put("goldEarned", String.valueOf(participantEntity.getGoldEarned()));
-                participantInfo.put("goldSpent", String.valueOf(participantEntity.getGoldSpent()));
-                participantInfo.put("individualPosition", participantEntity.getIndividualPosition());
-                participantInfo.put("inhibitorKills", String.valueOf(participantEntity.getInhibitorKills()));
-                participantInfo.put("inhibitorTakedowns", String.valueOf(participantEntity.getInhibitorTakedowns()));
-                participantInfo.put("inhibitorsLost", String.valueOf(participantEntity.getInhibitorsLost()));
-                participantInfo.put("item0", String.valueOf(participantEntity.getItem0()));
-                participantInfo.put("item1", String.valueOf(participantEntity.getItem1()));
-                participantInfo.put("item2", String.valueOf(participantEntity.getItem2()));
-                participantInfo.put("item3", String.valueOf(participantEntity.getItem3()));
-                participantInfo.put("item4", String.valueOf(participantEntity.getItem4()));
-                participantInfo.put("item5", String.valueOf(participantEntity.getItem5()));
-                participantInfo.put("item6", String.valueOf(participantEntity.getItem6()));
-                participantInfo.put("itemsPurchased", String.valueOf(participantEntity.getItemsPurchased()));
-                participantInfo.put("killingSprees", String.valueOf(participantEntity.getKillingSprees()));
-                participantInfo.put("kills", String.valueOf(participantEntity.getKills()));
-                participantInfo.put("lane", participantEntity.getLane());
-                participantInfo.put("largestCriticalStrike", String.valueOf(participantEntity.getLargestCriticalStrike()));
-                participantInfo.put("largestKillingSpree", String.valueOf(participantEntity.getLargestKillingSpree()));
-                participantInfo.put("largestMultiKill", String.valueOf(participantEntity.getLargestMultiKill()));
-                participantInfo.put("longestTimeSpentLiving", String.valueOf(participantEntity.getLongestTimeSpentLiving()));
-                participantInfo.put("magicDamageDealt", String.valueOf(participantEntity.getMagicDamageDealt()));
-                participantInfo.put("magicDamageDealtToChampions", String.valueOf(participantEntity.getMagicDamageDealtToChampions()));
-                participantInfo.put("magicDamageTaken", String.valueOf(participantEntity.getMagicDamageTaken()));
-                participantInfo.put("neutralMinionsKilled", String.valueOf(participantEntity.getNeutralMinionsKilled()));
-                participantInfo.put("nexusKills", String.valueOf(participantEntity.getNexusKills()));
-                participantInfo.put("nexusLost", String.valueOf(participantEntity.getNexusLost()));
-                participantInfo.put("nexusTakedowns", String.valueOf(participantEntity.getNexusTakedowns()));
-                participantInfo.put("objectivesStolen", String.valueOf(participantEntity.getObjectivesStolen()));
-                participantInfo.put("objectivesStolenAssists", String.valueOf(participantEntity.getObjectivesStolenAssists()));
-                participantInfo.put("participantId", String.valueOf(participantEntity.getParticipantId()));
-                participantInfo.put("pentaKills", String.valueOf(participantEntity.getPentaKills()));
-                participantInfo.put("physicalDamageDealt", String.valueOf(participantEntity.getPhysicalDamageDealt()));
-                participantInfo.put("physicalDamageDealtToChampions", String.valueOf(participantEntity.getPhysicalDamageDealtToChampions()));
-                participantInfo.put("physicalDamageTaken", String.valueOf(participantEntity.getPhysicalDamageTaken()));
-                participantInfo.put("puuid", participantsPuuid[index]);
-                participantInfo.put("profileIcon", String.valueOf(participantEntity.getProfileIcon()));
-                participantInfo.put("quadraKills", String.valueOf(participantEntity.getQuadraKills()));
-                participantInfo.put("riotIdName", participantEntity.getRiotIdName());
-                participantInfo.put("riotIdTagline", participantEntity.getRiotIdTagline());
-                participantInfo.put("role", participantEntity.getRole());
-                participantInfo.put("sightWardsBoughtInGame", String.valueOf(participantEntity.getSightWardsBoughtInGame()));
-                participantInfo.put("spell1Casts", String.valueOf(participantEntity.getSpell1Casts()));
-                participantInfo.put("spell2Casts", String.valueOf(participantEntity.getSpell2Casts()));
-                participantInfo.put("spell3Casts", String.valueOf(participantEntity.getSpell3Casts()));
-                participantInfo.put("spell4Casts", String.valueOf(participantEntity.getSpell4Casts()));
-                participantInfo.put("summoner1Casts", String.valueOf(participantEntity.getSummoner1Casts()));
-                participantInfo.put("summoner1Id", String.valueOf(participantEntity.getSummoner1Id()));
-                participantInfo.put("summoner2Casts", String.valueOf(participantEntity.getSummoner2Casts()));
-                participantInfo.put("summoner2Id", String.valueOf(participantEntity.getSummoner2Id()));
-                participantInfo.put("summonerId", participantEntity.getSummonerId());
-                participantInfo.put("summonerLevel", String.valueOf(participantEntity.getSummonerLevel()));
-                participantInfo.put("summonerName", participantEntity.getSummonerName());
-                participantInfo.put("teamEarlySurrendered", String.valueOf(participantEntity.isTeamEarlySurrendered()));
-                participantInfo.put("teamId", String.valueOf(participantEntity.getTeamId()));
-                participantInfo.put("teamPosition", participantEntity.getTeamPosition());
-                participantInfo.put("timeCCingOthers", String.valueOf(participantEntity.getTimeCCingOthers()));
-                participantInfo.put("timePlayed", String.valueOf(participantEntity.getTimePlayed()));
-                participantInfo.put("totalDamageDealt", String.valueOf(participantEntity.getTotalDamageDealt()));
-                participantInfo.put("totalDamageDealtToChampions", String.valueOf(participantEntity.getTotalDamageDealtToChampions()));
-                participantInfo.put("totalDamageShieldedOnTeammates", String.valueOf(participantEntity.getTotalDamageShieldedOnTeammates()));
-                participantInfo.put("totalDamageTaken", String.valueOf(participantEntity.getTotalDamageTaken()));
-                participantInfo.put("totalHeal", String.valueOf(participantEntity.getTotalHeal()));
-                participantInfo.put("totalHealsOnTeammates", String.valueOf(participantEntity.getTotalHealsOnTeammates()));
-                participantInfo.put("totalMinionsKilled", String.valueOf(participantEntity.getTotalMinionsKilled()));
-                participantInfo.put("totalTimeCCDealt", String.valueOf(participantEntity.getTotalTimeCCDealt()));
-                participantInfo.put("totalTimeSpentDead", String.valueOf(participantEntity.getTotalTimeSpentDead()));
-                participantInfo.put("totalUnitsHealed", String.valueOf(participantEntity.getTotalUnitsHealed()));
-                participantInfo.put("tripleKills", String.valueOf(participantEntity.getTripleKills()));
-                participantInfo.put("trueDamageDealt", String.valueOf(participantEntity.getTrueDamageDealt()));
-                participantInfo.put("trueDamageDealtToChampions", String.valueOf(participantEntity.getTrueDamageDealtToChampions()));
-                participantInfo.put("trueDamageTaken", String.valueOf(participantEntity.getTrueDamageTaken()));
-                participantInfo.put("turretKills", String.valueOf(participantEntity.getTurretKills()));
-                participantInfo.put("turretTakedowns", String.valueOf(participantEntity.getTurretTakedowns()));
-                participantInfo.put("turretsLost", String.valueOf(participantEntity.getTurretsLost()));
-                participantInfo.put("unrealKills", String.valueOf(participantEntity.getUnrealKills()));
-                participantInfo.put("visionScore", String.valueOf(participantEntity.getVisionScore()));
-                participantInfo.put("visionWardsBoughtInGame", String.valueOf(participantEntity.getVisionWardsBoughtInGame()));
-                participantInfo.put("wardsKilled", String.valueOf(participantEntity.getWardsKilled()));
-                participantInfo.put("wardsPlaced", String.valueOf(participantEntity.getWardsPlaced()));
-                participantInfo.put("win", String.valueOf(participantEntity.isWin()));
+                participantDto.setAssists(String.valueOf(participantEntity.getAssists()));
+                participantDto.setBaronKills(String.valueOf(participantEntity.getBaronKills()));
+                participantDto.setBountyLevel(String.valueOf(participantEntity.getBountyLevel()));
+                participantDto.setChampExperience(String.valueOf(participantEntity.getChampExperience()));
+                participantDto.setChampLevel(String.valueOf(participantEntity.getChampLevel()));
+                participantDto.setChampionId(String.valueOf(participantEntity.getChampionName()));
+                participantDto.setChampionName(participantEntity.getChampionName());
+                participantDto.setChampionTransform(String.valueOf(participantEntity.getChampionTransform()));
+                participantDto.setConsumablesPurchased(String.valueOf(participantEntity.getConsumablesPurchased()));
+                participantDto.setDamageDealtToBuildings(String.valueOf(participantEntity.getDamageDealtToBuildings()));
+                participantDto.setDamageDealtToObjectives(String.valueOf(participantEntity.getDamageDealtToObjectives()));
+                participantDto.setDamageDealtToTurrets(String.valueOf(participantEntity.getDamageDealtToTurrets()));
+                participantDto.setDamageSelfMitigated(String.valueOf(participantEntity.getDamageSelfMitigated()));
+                participantDto.setDeaths(String.valueOf(participantEntity.getDeaths()));
+                participantDto.setDetectorWardsPlaced(String.valueOf(participantEntity.getDetectorWardsPlaced()));
+                participantDto.setDoubleKills(String.valueOf(participantEntity.getDoubleKills()));
+                participantDto.setDragonKills(String.valueOf(participantEntity.getDragonKills()));
+                participantDto.setFirstBloodAssist(String.valueOf(participantEntity.isFirstBloodAssist()));
+                participantDto.setFirstBloodKill(String.valueOf(participantEntity.isFirstBloodKill()));
+                participantDto.setFirstTowerAssist(String.valueOf(participantEntity.isFirstTowerAssist()));
+                participantDto.setFirstTowerKill(String.valueOf(participantEntity.isFirstTowerKill()));
+                participantDto.setGameEndedInEarlySurrender(String.valueOf(participantEntity.isGameEndedInEarlySurrender()));
+                participantDto.setGameEndedInSurrender(String.valueOf(participantEntity.isGameEndedInSurrender()));
+                participantDto.setGoldEarned(String.valueOf(participantEntity.getGoldEarned()));
+                participantDto.setGoldSpent(String.valueOf(participantEntity.getGoldSpent()));
+                participantDto.setIndividualPosition(participantEntity.getIndividualPosition());
+                participantDto.setInhibitorKills(String.valueOf(participantEntity.getInhibitorKills()));
+                participantDto.setInhibitorTakedowns(String.valueOf(participantEntity.getInhibitorTakedowns()));
+                participantDto.setInhibitorsLost(String.valueOf(participantEntity.getInhibitorsLost()));
+                participantDto.setItem0(String.valueOf(participantEntity.getItem0()));
+                participantDto.setItem1(String.valueOf(participantEntity.getItem1()));
+                participantDto.setItem2(String.valueOf(participantEntity.getItem2()));
+                participantDto.setItem3(String.valueOf(participantEntity.getItem3()));
+                participantDto.setItem4(String.valueOf(participantEntity.getItem4()));
+                participantDto.setItem5(String.valueOf(participantEntity.getItem5()));
+                participantDto.setItem6(String.valueOf(participantEntity.getItem6()));
+                participantDto.setItemsPurchased(String.valueOf(participantEntity.getItemsPurchased()));
+                participantDto.setKillingSprees(String.valueOf(participantEntity.getKillingSprees()));
+                participantDto.setKills(String.valueOf(participantEntity.getKills()));
+                participantDto.setLane(participantEntity.getLane());
+                participantDto.setLargestCriticalStrike(String.valueOf(participantEntity.getLargestCriticalStrike()));
+                participantDto.setLargestKillingSpree(String.valueOf(participantEntity.getLargestKillingSpree()));
+                participantDto.setLargestMultiKill(String.valueOf(participantEntity.getLargestMultiKill()));
+                participantDto.setLongestTimeSpentLiving(String.valueOf(participantEntity.getLongestTimeSpentLiving()));
+                participantDto.setMagicDamageDealt(String.valueOf(participantEntity.getMagicDamageDealt()));
+                participantDto.setMagicDamageDealtToChampions(String.valueOf(participantEntity.getMagicDamageDealtToChampions()));
+                participantDto.setMagicDamageTaken(String.valueOf(participantEntity.getMagicDamageTaken()));
+                participantDto.setNeutralMinionsKilled(String.valueOf(participantEntity.getNeutralMinionsKilled()));
+                participantDto.setNexusKills(String.valueOf(participantEntity.getNexusKills()));
+                participantDto.setNexusLost(String.valueOf(participantEntity.getNexusLost()));
+                participantDto.setNexusTakedowns(String.valueOf(participantEntity.getNexusTakedowns()));
+                participantDto.setObjectivesStolen(String.valueOf(participantEntity.getObjectivesStolen()));
+                participantDto.setObjectivesStolenAssists(String.valueOf(participantEntity.getObjectivesStolenAssists()));
+                participantDto.setParticipantId(String.valueOf(participantEntity.getParticipantId()));
+                participantDto.setPentaKills(String.valueOf(participantEntity.getPentaKills()));
+                participantDto.setPhysicalDamageDealt(String.valueOf(participantEntity.getPhysicalDamageDealt()));
+                participantDto.setPhysicalDamageDealtToChampions(String.valueOf(participantEntity.getPhysicalDamageDealtToChampions()));
+                participantDto.setPhysicalDamageTaken(String.valueOf(participantEntity.getPhysicalDamageTaken()));
+                participantDto.setPuuid(participantsPuuidList.get(index));
+                participantDto.setProfileIcon(String.valueOf(participantEntity.getProfileIcon()));
+                participantDto.setQuadraKills(String.valueOf(participantEntity.getQuadraKills()));
+                participantDto.setRiotIdName(participantEntity.getRiotIdName());
+                participantDto.setRiotIdTagline(participantEntity.getRiotIdTagline());
+                participantDto.setRole(participantEntity.getRole());
+                participantDto.setSightWardsBoughtInGame(String.valueOf(participantEntity.getSightWardsBoughtInGame()));
+                participantDto.setSpell1Casts(String.valueOf(participantEntity.getSpell1Casts()));
+                participantDto.setSpell2Casts(String.valueOf(participantEntity.getSpell2Casts()));
+                participantDto.setSpell3Casts(String.valueOf(participantEntity.getSpell3Casts()));
+                participantDto.setSpell4Casts(String.valueOf(participantEntity.getSpell4Casts()));
+                participantDto.setSummoner1Casts(String.valueOf(participantEntity.getSummoner1Casts()));
+                participantDto.setSummoner1Id(String.valueOf(participantEntity.getSummoner1Id()));
+                participantDto.setSummoner2Casts(String.valueOf(participantEntity.getSummoner2Casts()));
+                participantDto.setSummoner2Id(String.valueOf(participantEntity.getSummoner2Id()));
+                participantDto.setSummonerId(participantEntity.getSummonerId());
+                participantDto.setSummonerLevel(String.valueOf(participantEntity.getSummonerLevel()));
+                participantDto.setSummonerName(participantEntity.getSummonerName());
+                participantDto.setTeamEarlySurrendered(String.valueOf(participantEntity.isTeamEarlySurrendered()));
+                participantDto.setTeamId(String.valueOf(participantEntity.getTeamId()));
+                participantDto.setTeamPosition(participantEntity.getTeamPosition());
+                participantDto.setTimeCCingOthers(String.valueOf(participantEntity.getTimeCCingOthers()));
+                participantDto.setTimePlayed(String.valueOf(participantEntity.getTimePlayed()));
+                participantDto.setTotalDamageDealt(String.valueOf(participantEntity.getTotalDamageDealt()));
+                participantDto.setTotalDamageDealtToChampions( String.valueOf(participantEntity.getTotalDamageDealtToChampions()));
+                participantDto.setTotalDamageShieldedOnTeammates(String.valueOf(participantEntity.getTotalDamageShieldedOnTeammates()));
+                participantDto.setTotalDamageTaken(String.valueOf(participantEntity.getTotalDamageTaken()));
+                participantDto.setTotalHeal(String.valueOf(participantEntity.getTotalHeal()));
+                participantDto.setTotalHealsOnTeammates(String.valueOf(participantEntity.getTotalHealsOnTeammates()));
+                participantDto.setTotalMinionsKilled(String.valueOf(participantEntity.getTotalMinionsKilled()));
+                participantDto.setTotalTimeCCDealt(String.valueOf(participantEntity.getTotalTimeCCDealt()));
+                participantDto.setTotalTimeSpentDead(String.valueOf(participantEntity.getTotalTimeSpentDead()));
+                participantDto.setTotalUnitsHealed(String.valueOf(participantEntity.getTotalUnitsHealed()));
+                participantDto.setTripleKills(String.valueOf(participantEntity.getTripleKills()));
+                participantDto.setTrueDamageDealt(String.valueOf(participantEntity.getTrueDamageDealt()));
+                participantDto.setTrueDamageDealtToChampions(String.valueOf(participantEntity.getTrueDamageDealtToChampions()));
+                participantDto.setTrueDamageTaken(String.valueOf(participantEntity.getTrueDamageTaken()));
+                participantDto.setTurretKills(String.valueOf(participantEntity.getTurretKills()));
+                participantDto.setTurretTakedowns(String.valueOf(participantEntity.getTurretTakedowns()));
+                participantDto.setTurretsLost(String.valueOf(participantEntity.getTurretsLost()));
+                participantDto.setUnrealKills(String.valueOf(participantEntity.getUnrealKills()));
+                participantDto.setVisionScore(String.valueOf(participantEntity.getVisionScore()));
+                participantDto.setVisionWardsBoughtInGame(String.valueOf(participantEntity.getVisionWardsBoughtInGame()));
+                participantDto.setWardsKilled(String.valueOf(participantEntity.getWardsKilled()));
+                participantDto.setWardsPlaced(String.valueOf(participantEntity.getWardsPlaced()));
+                participantDto.setWin(String.valueOf(participantEntity.isWin()));
 
-                participantsInfo[index] = participantInfo;
+                participantDtoList.add(participantDto);
+
                 index++;
             }
 
-            metadataMap.put("participants", participantsPuuid);
-            infoMap.put("participants", participantsInfo);
+            metadataDto.setParticipants(participantsPuuidList);
+            infoDto.setParticipants(participantDtoList);
 
-            matchInfo.put("metadata", metadataMap);
-            matchInfo.put("info", infoMap);
+            matchInfo.setMetadata(metadataDto);
+            matchInfo.setInfo(infoDto);
 
             result.add(matchInfo);
         }

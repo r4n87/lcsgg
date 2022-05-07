@@ -1,6 +1,7 @@
 package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import dev.saariselka.inlol.dto.MatchDto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,7 @@ public class Facade {
         setLeagueInfoAtModelAndView(modelAndView, leagueInfo);
     }
 
-    private void getMatchInfoList(ModelAndView modelAndView, String name, ArrayList<HashMap<String, Object>> matchInfoList) throws JsonProcessingException {
+    private void getMatchInfoList(ModelAndView modelAndView, String name, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
         if(null != matchInfoList) {
             setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
             return;
@@ -106,12 +107,12 @@ public class Facade {
     }
 
     private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, String name) throws JsonProcessingException {
-        ArrayList<HashMap<String, Object>> matchInfoList = new ArrayList<>();
+        ArrayList<MatchDto> matchInfoList = new ArrayList<>();
         ArrayList<String> matchList = facade_get.getMatchList(name);
 
         for (int i = 0; i < matchList.size(); i++) {
             HashMap<String, Object> result =  ((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body"));
-            matchInfoList.add((HashMap<String, Object>) result.get("info"));
+            //matchInfoList.add((HashMap<String, Object>) result.get("info"));
             facade_set.setMatchInfoAtDB(result);
         }
 
@@ -128,7 +129,7 @@ public class Facade {
         setMatchInfoListAtModelAndView(modelAndView, facade_get.getMatchInfoFromDB(res.get("puuid")));
     }
 
-    private void setMatchInfoListAtModelAndView(ModelAndView modelAndView, ArrayList<HashMap<String, Object>> matchInfoList) {
+    private void setMatchInfoListAtModelAndView(ModelAndView modelAndView, ArrayList<MatchDto> matchInfoList) {
         modelAndView.addObject("matchInfoList", matchInfoList);
     }
 

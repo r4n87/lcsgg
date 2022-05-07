@@ -19,8 +19,8 @@ public class BanDto_Assembly {
         for(MatchBanEntity banEntity : banList)
         {
             BanDto banDto = new BanDto();
-            banDto.setPickTurn(banEntity.getMatchBanId().getPickTurn());
-            banDto.setChampionId(banEntity.getChampionId());
+            banDto.setPickTurn(String.valueOf(banEntity.getMatchBanId().getPickTurn()));
+            banDto.setChampionId(String.valueOf(banEntity.getChampionId()));
             bansDto.add(banDto);
         }
 
@@ -35,7 +35,7 @@ public class BanDto_Assembly {
         {
             BanDto banDto = new BanDto();
             //banDto.setPickTurn(banEntity.getMatchBanId().getPickTurn());
-            banDto.setChampionId(banEntity.getChampionId());
+            banDto.setChampionId(String.valueOf(banEntity.getChampionId()));
         }
 
         return bansDto;

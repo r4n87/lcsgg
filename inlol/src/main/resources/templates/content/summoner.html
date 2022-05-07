@@ -94,21 +94,21 @@
                     <li class="css-ja2wlz e19epo2o3">
                         <div result="LOSE" class="css-utzuox e19epo2o2">
                             <div class="info">
-                                <div class="type" th:text = "${matchInfo?.get('info')?.get('gameMode')}"></div>
+                                <div class="type" th:text = "${matchInfo.info.getGameMode()}"></div>
                                 <div style="position: relative" class>
                                     <div class="time-stamp"
-                                         th:text="${matchInfo?.get('info')?.get('gameAgoTime')}">
+                                         th:text="${matchInfo.info.getGameAgoTime()}">
                                     </div>
                                 </div>
                                 <div class="bar"></div>
                                 <div class="game-result">패배</div>
                                 <div class="game-length"
-                                     th:text="${matchInfo?.get('info')?.get('gameDuration')}">
+                                     th:text="${matchInfo.info.getGameDuration()}">
                                 </div>
                             </div>
                             <div class="champion">
                                 <div class="icon">
-                                    <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/Aatrox.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" th:alt="${matchInfo?.get('info')?.get('championName')}">
+                                    <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/Aatrox.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|">
                                 </div>
                                 <div class="spells">
                                     <div class="spell"></div>
@@ -132,13 +132,13 @@
                             </div>
                             <div class="items"></div>
                             <div class="participants">
-                                <ul th:each="participantsInfo : ${matchInfo?.get('info')?.get('participants')}">
+                                <ul th:each="participantsInfo : ${matchInfo.info.getParticipants()}">
                                     <li class="css-tegtkt e19epo2o1">
                                         <div class="icon">
-                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo?.get('championName')}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo?.get('championName')}">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionName()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionName()}">
                                         </div>
                                         <div class="name">
-                                            <a th:href="|/searchInit?name=${participantsInfo?.get('summonerName')}|" target="_blank" rel="noreferrer" th:text="${participantsInfo?.get('summonerName')}"></a>
+                                            <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
                                         </div>
                                     </li>
                                 </ul>
