@@ -22,6 +22,7 @@ public class InfoDto {
     private List<ParticipantDto> participants;
     private String platformId;
     private String gameAgoTime;
+    private ParticipantDto summoner;
 
     public List<ParticipantDto> getParticipants() {
         return participants;
@@ -148,4 +149,8 @@ public class InfoDto {
     public String getGameAgoTime() { return gameAgoTime; }
 
     public void setGameAgoTime(String gameAgoTime) { this.gameAgoTime = gameAgoTime; }
+
+    public ParticipantDto getSummoner() { return summoner; }
+
+    public void setSummoner(ParticipantDto summoner) { this.summoner = summoner; }
 }
