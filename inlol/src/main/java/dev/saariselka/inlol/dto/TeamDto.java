@@ -5,13 +5,13 @@ import java.util.List;
 public class TeamDto {
     private List<BanDto> bans;
     private ObjectivesDto objectives;
-    private int teamId;
-    private boolean win;
+    private String teamId;
+    private String win;
 
     public TeamDto() {
     }
 
-    public TeamDto(List<BanDto> bans, ObjectivesDto objectives, int teamId, boolean win) {
+    public TeamDto(List<BanDto> bans, ObjectivesDto objectives, String teamId, String win) {
         this.bans = bans;
         this.objectives = objectives;
         this.teamId = teamId;
@@ -34,19 +34,19 @@ public class TeamDto {
         this.objectives = objectives;
     }
 
-    public int getTeamId() {
+    public String getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(String teamId) {
         this.teamId = teamId;
     }
 
-    public boolean isWin() {
+    public String isWin() {
         return win;
     }
 
-    public void setWin(boolean win) {
+    public void setWin(String win) {
         this.win = win;
     }
 }

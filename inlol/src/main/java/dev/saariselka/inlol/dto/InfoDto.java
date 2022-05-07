@@ -3,23 +3,25 @@ package dev.saariselka.inlol.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 public class InfoDto {
     private long gameCreation;
-    private long gameDuration;
-    private long gameEndTimestamp;
+    private String gameDuration;
+    private LocalDateTime gameEndTimestamp;
     private long gameId;
     private String gameMode;
     private String gameName;
-    private long gameStartTimeStamp;
+    private LocalDateTime gameStartTimeStamp;
     private String gameType;
     private String gameVersion;
-    private int mapId;
+    private String mapId;
     private List<ParticipantDto> participants;
     private String platformId;
+    private String gameAgoTime;
 
     public List<ParticipantDto> getParticipants() {
         return participants;
@@ -29,7 +31,7 @@ public class InfoDto {
         this.participants = participants;
     }
 
-    private int queueId;
+    private String queueId;
     private List<TeamDto> teams;
     private String tournamentCode;
 
@@ -41,19 +43,19 @@ public class InfoDto {
         this.gameCreation = gameCreation;
     }
 
-    public long getGameDuration() {
+    public String getGameDuration() {
         return gameDuration;
     }
 
-    public void setGameDuration(long gameDuration) {
+    public void setGameDuration(String gameDuration) {
         this.gameDuration = gameDuration;
     }
 
-    public long getGameEndTimestamp() {
+    public LocalDateTime getGameEndTimestamp() {
         return gameEndTimestamp;
     }
 
-    public void setGameEndTimestamp(long gameEndTimestamp) {
+    public void setGameEndTimestamp(LocalDateTime gameEndTimestamp) {
         this.gameEndTimestamp = gameEndTimestamp;
     }
 
@@ -81,13 +83,11 @@ public class InfoDto {
         this.gameName = gameName;
     }
 
-    public long getGameStartTimeStamp() {
+    public LocalDateTime getGameStartTimeStamp() {
         return gameStartTimeStamp;
     }
 
-    public void setGameStartTimeStamp(long gameStartTimeStamp) {
-        this.gameStartTimeStamp = gameStartTimeStamp;
-    }
+    public void setGameStartTimeStamp(LocalDateTime gameStartTimeStamp) { this.gameStartTimeStamp = gameStartTimeStamp; }
 
     public String getGameType() {
         return gameType;
@@ -105,11 +105,11 @@ public class InfoDto {
         this.gameVersion = gameVersion;
     }
 
-    public int getMapId() {
+    public String getMapId() {
         return mapId;
     }
 
-    public void setMapId(int mapId) {
+    public void setMapId(String mapId) {
         this.mapId = mapId;
     }
 
@@ -121,11 +121,11 @@ public class InfoDto {
         this.platformId = platformId;
     }
 
-    public int getQueueId() {
+    public String getQueueId() {
         return queueId;
     }
 
-    public void setQueueId(int queueId) {
+    public void setQueueId(String queueId) {
         this.queueId = queueId;
     }
 
@@ -144,4 +144,8 @@ public class InfoDto {
     public void setTournamentCode(String tournamentCode) {
         this.tournamentCode = tournamentCode;
     }
+
+    public String getGameAgoTime() { return gameAgoTime; }
+
+    public void setGameAgoTime(String gameAgoTime) { this.gameAgoTime = gameAgoTime; }
 }

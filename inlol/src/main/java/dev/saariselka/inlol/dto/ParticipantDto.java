@@ -13,109 +13,109 @@ public class ParticipantDto {
     private String dataVersion;
     private String matchId;
 
-    private int assists;
-    private int baronKills;
-    private int bountyLevel;
-    private int champExperience;
-    private int champLevel;
-    private int championId;
+    private String assists;
+    private String baronKills;
+    private String bountyLevel;
+    private String champExperience;
+    private String champLevel;
+    private String championId;
     private String championName;
-    private int championTransform;
-    private int consumablesPurchased;
-    private int damageDealtToBuildings;
-    private int damageDealtToObjectives;
-    private int damageDealtToTurrets;
-    private int damageSelfMitigated;
-    private int deaths;
-    private int detectorWardsPlaced;
-    private int doubleKills;
-    private int dragonKills;
-    private boolean firstBloodAssist;
-    private boolean firstBloodKill;
-    private boolean firstTowerAssist;
-    private boolean firstTowerKill;
-    private boolean gameEndedInEarlySurrender;
-    private boolean gameEndedInSurrender;
-    private int goldEarned;
-    private int goldSpent;
+    private String championTransform;
+    private String consumablesPurchased;
+    private String damageDealtToBuildings;
+    private String damageDealtToObjectives;
+    private String damageDealtToTurrets;
+    private String damageSelfMitigated;
+    private String deaths;
+    private String detectorWardsPlaced;
+    private String doubleKills;
+    private String dragonKills;
+    private String firstBloodAssist;
+    private String firstBloodKill;
+    private String firstTowerAssist;
+    private String firstTowerKill;
+    private String gameEndedInEarlySurrender;
+    private String gameEndedInSurrender;
+    private String goldEarned;
+    private String goldSpent;
     private String individualPosition;
-    private int inhibitorKills;
-    private int inhibitorTakedowns;
-    private int inhibitorsLost;
-    private int item0;
-    private int item1;
-    private int item2;
-    private int item3;
-    private int item4;
-    private int item5;
-    private int item6;
-    private int itemsPurchased;
-    private int killingSprees;
-    private int kills;
+    private String inhibitorKills;
+    private String inhibitorTakedowns;
+    private String inhibitorsLost;
+    private String item0;
+    private String item1;
+    private String item2;
+    private String item3;
+    private String item4;
+    private String item5;
+    private String item6;
+    private String itemsPurchased;
+    private String killingSprees;
+    private String kills;
     private String lane;
-    private int largestCriticalStrike;
-    private int largestKillingSpree;
-    private int largestMultiKill;
-    private int longestTimeSpentLiving;
-    private int magicDamageDealt;
-    private int magicDamageDealtToChampions;
-    private int magicDamageTaken;
-    private int neutralMinionsKilled;
-    private int nexusKills;
-    private int nexusTakedowns;
-    private int nexusLost;
-    private int objectivesStolen;
-    private int objectivesStolenAssists;
-    private int participantId;
-    private int pentaKills;
-    private int physicalDamageDealt;
-    private int physicalDamageDealtToChampions;
-    private int physicalDamageTaken;
-    private int profileIcon;
-    private int quadraKills;
+    private String largestCriticalStrike;
+    private String largestKillingSpree;
+    private String largestMultiKill;
+    private String longestTimeSpentLiving;
+    private String magicDamageDealt;
+    private String magicDamageDealtToChampions;
+    private String magicDamageTaken;
+    private String neutralMinionsKilled;
+    private String nexusKills;
+    private String nexusTakedowns;
+    private String nexusLost;
+    private String objectivesStolen;
+    private String objectivesStolenAssists;
+    private String participantId;
+    private String pentaKills;
+    private String physicalDamageDealt;
+    private String physicalDamageDealtToChampions;
+    private String physicalDamageTaken;
+    private String profileIcon;
+    private String quadraKills;
     private String riotIdName;
     private String riotIdTagline;
     private String role;
-    private int sightWardsBoughtInGame;
-    private int spell1Casts;
-    private int spell2Casts;
-    private int spell3Casts;
-    private int spell4Casts;
-    private int summoner1Casts;
-    private int summoner1Id;
-    private int summoner2Casts;
-    private int summoner2Id;
+    private String sightWardsBoughtInGame;
+    private String spell1Casts;
+    private String spell2Casts;
+    private String spell3Casts;
+    private String spell4Casts;
+    private String summoner1Casts;
+    private String summoner1Id;
+    private String summoner2Casts;
+    private String summoner2Id;
     private String summonerId;
-    private int summonerLevel;
+    private String summonerLevel;
     private String summonerName;
-    private boolean teamEarlySurrendered;
-    private int teamId;
+    private String teamEarlySurrendered;
+    private String teamId;
     private String teamPosition;
-    private int timeCCingOthers;
-    private int timePlayed;
-    private int totalDamageDealt;
-    private int totalDamageDealtToChampions;
-    private int totalDamageShieldedOnTeammates;
-    private int totalDamageTaken;
-    private int totalHeal;
-    private int totalHealsOnTeammates;
-    private int totalMinionsKilled;
-    private int totalTimeCCDealt;
-    private int totalTimeSpentDead;
-    private int totalUnitsHealed;
-    private int tripleKills;
-    private int trueDamageDealt;
-    private int trueDamageDealtToChampions;
-    private int trueDamageTaken;
-    private int turretKills;
-    private int turretTakedowns;
-    private int turretsLost;
-    private int unrealKills;
-    private int visionScore;
-    private int visionWardsBoughtInGame;
-    private int wardsKilled;
-    private int wardsPlaced;
-    private boolean win;
+    private String timeCCingOthers;
+    private String timePlayed;
+    private String totalDamageDealt;
+    private String totalDamageDealtToChampions;
+    private String totalDamageShieldedOnTeammates;
+    private String totalDamageTaken;
+    private String totalHeal;
+    private String totalHealsOnTeammates;
+    private String totalMinionsKilled;
+    private String totalTimeCCDealt;
+    private String totalTimeSpentDead;
+    private String totalUnitsHealed;
+    private String tripleKills;
+    private String trueDamageDealt;
+    private String trueDamageDealtToChampions;
+    private String trueDamageTaken;
+    private String turretKills;
+    private String turretTakedowns;
+    private String turretsLost;
+    private String unrealKills;
+    private String visionScore;
+    private String visionWardsBoughtInGame;
+    private String wardsKilled;
+    private String wardsPlaced;
+    private String win;
     private Timestamp rrt;
 
     public String getPuuid() {
@@ -142,51 +142,51 @@ public class ParticipantDto {
         this.matchId = matchId;
     }
 
-    public int getAssists() {
+    public String getAssists() {
         return assists;
     }
 
-    public void setAssists(int assists) {
+    public void setAssists(String assists) {
         this.assists = assists;
     }
 
-    public int getBaronKills() {
+    public String getBaronKills() {
         return baronKills;
     }
 
-    public void setBaronKills(int baronKills) {
+    public void setBaronKills(String baronKills) {
         this.baronKills = baronKills;
     }
 
-    public int getBountyLevel() {
+    public String getBountyLevel() {
         return bountyLevel;
     }
 
-    public void setBountyLevel(int bountyLevel) {
+    public void setBountyLevel(String bountyLevel) {
         this.bountyLevel = bountyLevel;
     }
 
-    public int getChampExperience() {
+    public String getChampExperience() {
         return champExperience;
     }
 
-    public void setChampExperience(int champExperience) {
+    public void setChampExperience(String champExperience) {
         this.champExperience = champExperience;
     }
 
-    public int getChampLevel() {
+    public String getChampLevel() {
         return champLevel;
     }
 
-    public void setChampLevel(int champLevel) {
+    public void setChampLevel(String champLevel) {
         this.champLevel = champLevel;
     }
 
-    public int getChampionId() {
+    public String getChampionId() {
         return championId;
     }
 
-    public void setChampionId(int championId) {
+    public void setChampionId(String championId) {
         this.championId = championId;
     }
 
@@ -198,147 +198,147 @@ public class ParticipantDto {
         this.championName = championName;
     }
 
-    public int getChampionTransform() {
+    public String getChampionTransform() {
         return championTransform;
     }
 
-    public void setChampionTransform(int championTransform) {
+    public void setChampionTransform(String championTransform) {
         this.championTransform = championTransform;
     }
 
-    public int getConsumablesPurchased() {
+    public String getConsumablesPurchased() {
         return consumablesPurchased;
     }
 
-    public void setConsumablesPurchased(int consumablesPurchased) {
+    public void setConsumablesPurchased(String consumablesPurchased) {
         this.consumablesPurchased = consumablesPurchased;
     }
 
-    public int getDamageDealtToBuildings() {
+    public String getDamageDealtToBuildings() {
         return damageDealtToBuildings;
     }
 
-    public void setDamageDealtToBuildings(int damageDealtToBuildings) {
+    public void setDamageDealtToBuildings(String damageDealtToBuildings) {
         this.damageDealtToBuildings = damageDealtToBuildings;
     }
 
-    public int getDamageDealtToObjectives() {
+    public String getDamageDealtToObjectives() {
         return damageDealtToObjectives;
     }
 
-    public void setDamageDealtToObjectives(int damageDealtToObjectives) {
+    public void setDamageDealtToObjectives(String damageDealtToObjectives) {
         this.damageDealtToObjectives = damageDealtToObjectives;
     }
 
-    public int getDamageDealtToTurrets() {
+    public String getDamageDealtToTurrets() {
         return damageDealtToTurrets;
     }
 
-    public void setDamageDealtToTurrets(int damageDealtToTurrets) {
+    public void setDamageDealtToTurrets(String damageDealtToTurrets) {
         this.damageDealtToTurrets = damageDealtToTurrets;
     }
 
-    public int getDamageSelfMitigated() {
+    public String getDamageSelfMitigated() {
         return damageSelfMitigated;
     }
 
-    public void setDamageSelfMitigated(int damageSelfMitigated) {
+    public void setDamageSelfMitigated(String damageSelfMitigated) {
         this.damageSelfMitigated = damageSelfMitigated;
     }
 
-    public int getDeaths() {
+    public String getDeaths() {
         return deaths;
     }
 
-    public void setDeaths(int deaths) {
+    public void setDeaths(String deaths) {
         this.deaths = deaths;
     }
 
-    public int getDetectorWardsPlaced() {
+    public String getDetectorWardsPlaced() {
         return detectorWardsPlaced;
     }
 
-    public void setDetectorWardsPlaced(int detectorWardsPlaced) {
+    public void setDetectorWardsPlaced(String detectorWardsPlaced) {
         this.detectorWardsPlaced = detectorWardsPlaced;
     }
 
-    public int getDoubleKills() {
+    public String getDoubleKills() {
         return doubleKills;
     }
 
-    public void setDoubleKills(int doubleKills) {
+    public void setDoubleKills(String doubleKills) {
         this.doubleKills = doubleKills;
     }
 
-    public int getDragonKills() {
+    public String getDragonKills() {
         return dragonKills;
     }
 
-    public void setDragonKills(int dragonKills) {
+    public void setDragonKills(String dragonKills) {
         this.dragonKills = dragonKills;
     }
 
-    public boolean isFirstBloodAssist() {
+    public String isFirstBloodAssist() {
         return firstBloodAssist;
     }
 
-    public void setFirstBloodAssist(boolean firstBloodAssist) {
+    public void setFirstBloodAssist(String firstBloodAssist) {
         this.firstBloodAssist = firstBloodAssist;
     }
 
-    public boolean isFirstBloodKill() {
+    public String isFirstBloodKill() {
         return firstBloodKill;
     }
 
-    public void setFirstBloodKill(boolean firstBloodKill) {
+    public void setFirstBloodKill(String firstBloodKill) {
         this.firstBloodKill = firstBloodKill;
     }
 
-    public boolean isFirstTowerAssist() {
+    public String isFirstTowerAssist() {
         return firstTowerAssist;
     }
 
-    public void setFirstTowerAssist(boolean firstTowerAssist) {
+    public void setFirstTowerAssist(String firstTowerAssist) {
         this.firstTowerAssist = firstTowerAssist;
     }
 
-    public boolean isFirstTowerKill() {
+    public String isFirstTowerKill() {
         return firstTowerKill;
     }
 
-    public void setFirstTowerKill(boolean firstTowerKill) {
+    public void setFirstTowerKill(String firstTowerKill) {
         this.firstTowerKill = firstTowerKill;
     }
 
-    public boolean isGameEndedInEarlySurrender() {
+    public String isGameEndedInEarlySurrender() {
         return gameEndedInEarlySurrender;
     }
 
-    public void setGameEndedInEarlySurrender(boolean gameEndedInEarlySurrender) {
+    public void setGameEndedInEarlySurrender(String gameEndedInEarlySurrender) {
         this.gameEndedInEarlySurrender = gameEndedInEarlySurrender;
     }
 
-    public boolean isGameEndedInSurrender() {
+    public String isGameEndedInSurrender() {
         return gameEndedInSurrender;
     }
 
-    public void setGameEndedInSurrender(boolean gameEndedInSurrender) {
+    public void setGameEndedInSurrender(String gameEndedInSurrender) {
         this.gameEndedInSurrender = gameEndedInSurrender;
     }
 
-    public int getGoldEarned() {
+    public String getGoldEarned() {
         return goldEarned;
     }
 
-    public void setGoldEarned(int goldEarned) {
+    public void setGoldEarned(String goldEarned) {
         this.goldEarned = goldEarned;
     }
 
-    public int getGoldSpent() {
+    public String getGoldSpent() {
         return goldSpent;
     }
 
-    public void setGoldSpent(int goldSpent) {
+    public void setGoldSpent(String goldSpent) {
         this.goldSpent = goldSpent;
     }
 
@@ -350,107 +350,107 @@ public class ParticipantDto {
         this.individualPosition = individualPosition;
     }
 
-    public int getInhibitorKills() {
+    public String getInhibitorKills() {
         return inhibitorKills;
     }
 
-    public void setInhibitorKills(int inhibitorKills) {
+    public void setInhibitorKills(String inhibitorKills) {
         this.inhibitorKills = inhibitorKills;
     }
 
-    public int getInhibitorTakedowns() {
+    public String getInhibitorTakedowns() {
         return inhibitorTakedowns;
     }
 
-    public void setInhibitorTakedowns(int inhibitorTakedowns) {
+    public void setInhibitorTakedowns(String inhibitorTakedowns) {
         this.inhibitorTakedowns = inhibitorTakedowns;
     }
 
-    public int getInhibitorsLost() {
+    public String getInhibitorsLost() {
         return inhibitorsLost;
     }
 
-    public void setInhibitorsLost(int inhibitorsLost) {
+    public void setInhibitorsLost(String inhibitorsLost) {
         this.inhibitorsLost = inhibitorsLost;
     }
 
-    public int getItem0() {
+    public String getItem0() {
         return item0;
     }
 
-    public void setItem0(int item0) {
+    public void setItem0(String item0) {
         this.item0 = item0;
     }
 
-    public int getItem1() {
+    public String getItem1() {
         return item1;
     }
 
-    public void setItem1(int item1) {
+    public void setItem1(String item1) {
         this.item1 = item1;
     }
 
-    public int getItem2() {
+    public String getItem2() {
         return item2;
     }
 
-    public void setItem2(int item2) {
+    public void setItem2(String item2) {
         this.item2 = item2;
     }
 
-    public int getItem3() {
+    public String getItem3() {
         return item3;
     }
 
-    public void setItem3(int item3) {
+    public void setItem3(String item3) {
         this.item3 = item3;
     }
 
-    public int getItem4() {
+    public String getItem4() {
         return item4;
     }
 
-    public void setItem4(int item4) {
+    public void setItem4(String item4) {
         this.item4 = item4;
     }
 
-    public int getItem5() {
+    public String getItem5() {
         return item5;
     }
 
-    public void setItem5(int item5) {
+    public void setItem5(String item5) {
         this.item5 = item5;
     }
 
-    public int getItem6() {
+    public String getItem6() {
         return item6;
     }
 
-    public void setItem6(int item6) {
+    public void setItem6(String item6) {
         this.item6 = item6;
     }
 
-    public int getItemsPurchased() {
+    public String getItemsPurchased() {
         return itemsPurchased;
     }
 
-    public void setItemsPurchased(int itemsPurchased) {
+    public void setItemsPurchased(String itemsPurchased) {
         this.itemsPurchased = itemsPurchased;
     }
 
-    public int getKillingSprees() {
+    public String getKillingSprees() {
         return killingSprees;
     }
 
-    public void setKillingSprees(int killingSprees) {
+    public void setKillingSprees(String killingSprees) {
         this.killingSprees = killingSprees;
     }
 
-    public int getKills() {
+    public String getKills() {
         return kills;
     }
 
-    public void setKills(int kills) {
+    public void setKills(String kills) {
         this.kills = kills;
     }
 
@@ -462,163 +462,163 @@ public class ParticipantDto {
         this.lane = lane;
     }
 
-    public int getLargestCriticalStrike() {
+    public String getLargestCriticalStrike() {
         return largestCriticalStrike;
     }
 
-    public void setLargestCriticalStrike(int largestCriticalStrike) {
+    public void setLargestCriticalStrike(String largestCriticalStrike) {
         this.largestCriticalStrike = largestCriticalStrike;
     }
 
-    public int getLargestKillingSpree() {
+    public String getLargestKillingSpree() {
         return largestKillingSpree;
     }
 
-    public void setLargestKillingSpree(int largestKillingSpree) {
+    public void setLargestKillingSpree(String largestKillingSpree) {
         this.largestKillingSpree = largestKillingSpree;
     }
 
-    public int getLargestMultiKill() {
+    public String getLargestMultiKill() {
         return largestMultiKill;
     }
 
-    public void setLargestMultiKill(int largestMultiKill) {
+    public void setLargestMultiKill(String largestMultiKill) {
         this.largestMultiKill = largestMultiKill;
     }
 
-    public int getLongestTimeSpentLiving() {
+    public String getLongestTimeSpentLiving() {
         return longestTimeSpentLiving;
     }
 
-    public void setLongestTimeSpentLiving(int longestTimeSpentLiving) {
+    public void setLongestTimeSpentLiving(String longestTimeSpentLiving) {
         this.longestTimeSpentLiving = longestTimeSpentLiving;
     }
 
-    public int getMagicDamageDealt() {
+    public String getMagicDamageDealt() {
         return magicDamageDealt;
     }
 
-    public void setMagicDamageDealt(int magicDamageDealt) {
+    public void setMagicDamageDealt(String magicDamageDealt) {
         this.magicDamageDealt = magicDamageDealt;
     }
 
-    public int getMagicDamageDealtToChampions() {
+    public String getMagicDamageDealtToChampions() {
         return magicDamageDealtToChampions;
     }
 
-    public void setMagicDamageDealtToChampions(int magicDamageDealtToChampions) {
+    public void setMagicDamageDealtToChampions(String magicDamageDealtToChampions) {
         this.magicDamageDealtToChampions = magicDamageDealtToChampions;
     }
 
-    public int getMagicDamageTaken() {
+    public String getMagicDamageTaken() {
         return magicDamageTaken;
     }
 
-    public void setMagicDamageTaken(int magicDamageTaken) {
+    public void setMagicDamageTaken(String magicDamageTaken) {
         this.magicDamageTaken = magicDamageTaken;
     }
 
-    public int getNeutralMinionsKilled() {
+    public String getNeutralMinionsKilled() {
         return neutralMinionsKilled;
     }
 
-    public void setNeutralMinionsKilled(int neutralMinionsKilled) {
+    public void setNeutralMinionsKilled(String neutralMinionsKilled) {
         this.neutralMinionsKilled = neutralMinionsKilled;
     }
 
-    public int getNexusKills() {
+    public String getNexusKills() {
         return nexusKills;
     }
 
-    public void setNexusKills(int nexusKills) {
+    public void setNexusKills(String nexusKills) {
         this.nexusKills = nexusKills;
     }
 
-    public int getNexusTakedowns() {
+    public String getNexusTakedowns() {
         return nexusTakedowns;
     }
 
-    public void setNexusTakedowns(int nexusTakedowns) {
+    public void setNexusTakedowns(String nexusTakedowns) {
         this.nexusTakedowns = nexusTakedowns;
     }
 
-    public int getNexusLost() {
+    public String getNexusLost() {
         return nexusLost;
     }
 
-    public void setNexusLost(int nexusLost) {
+    public void setNexusLost(String nexusLost) {
         this.nexusLost = nexusLost;
     }
 
-    public int getObjectivesStolen() {
+    public String getObjectivesStolen() {
         return objectivesStolen;
     }
 
-    public void setObjectivesStolen(int objectivesStolen) {
+    public void setObjectivesStolen(String objectivesStolen) {
         this.objectivesStolen = objectivesStolen;
     }
 
-    public int getObjectivesStolenAssists() {
+    public String getObjectivesStolenAssists() {
         return objectivesStolenAssists;
     }
 
-    public void setObjectivesStolenAssists(int objectivesStolenAssists) {
+    public void setObjectivesStolenAssists(String objectivesStolenAssists) {
         this.objectivesStolenAssists = objectivesStolenAssists;
     }
 
-    public int getParticipantId() {
+    public String getParticipantId() {
         return participantId;
     }
 
-    public void setParticipantId(int participantId) {
+    public void setParticipantId(String participantId) {
         this.participantId = participantId;
     }
 
-    public int getPentaKills() {
+    public String getPentaKills() {
         return pentaKills;
     }
 
-    public void setPentaKills(int pentaKills) {
+    public void setPentaKills(String pentaKills) {
         this.pentaKills = pentaKills;
     }
 
-    public int getPhysicalDamageDealt() {
+    public String getPhysicalDamageDealt() {
         return physicalDamageDealt;
     }
 
-    public void setPhysicalDamageDealt(int physicalDamageDealt) {
+    public void setPhysicalDamageDealt(String physicalDamageDealt) {
         this.physicalDamageDealt = physicalDamageDealt;
     }
 
-    public int getPhysicalDamageDealtToChampions() {
+    public String getPhysicalDamageDealtToChampions() {
         return physicalDamageDealtToChampions;
     }
 
-    public void setPhysicalDamageDealtToChampions(int physicalDamageDealtToChampions) {
+    public void setPhysicalDamageDealtToChampions(String physicalDamageDealtToChampions) {
         this.physicalDamageDealtToChampions = physicalDamageDealtToChampions;
     }
 
-    public int getPhysicalDamageTaken() {
+    public String getPhysicalDamageTaken() {
         return physicalDamageTaken;
     }
 
-    public void setPhysicalDamageTaken(int physicalDamageTaken) {
+    public void setPhysicalDamageTaken(String physicalDamageTaken) {
         this.physicalDamageTaken = physicalDamageTaken;
     }
 
-    public int getProfileIcon() {
+    public String getProfileIcon() {
         return profileIcon;
     }
 
-    public void setProfileIcon(int profileIcon) {
+    public void setProfileIcon(String profileIcon) {
         this.profileIcon = profileIcon;
     }
 
-    public int getQuadraKills() {
+    public String getQuadraKills() {
         return quadraKills;
     }
 
-    public void setQuadraKills(int quadraKills) {
+    public void setQuadraKills(String quadraKills) {
         this.quadraKills = quadraKills;
     }
 
@@ -646,75 +646,75 @@ public class ParticipantDto {
         this.role = role;
     }
 
-    public int getSightWardsBoughtInGame() {
+    public String getSightWardsBoughtInGame() {
         return sightWardsBoughtInGame;
     }
 
-    public void setSightWardsBoughtInGame(int sightWardsBoughtInGame) {
+    public void setSightWardsBoughtInGame(String sightWardsBoughtInGame) {
         this.sightWardsBoughtInGame = sightWardsBoughtInGame;
     }
 
-    public int getSpell1Casts() {
+    public String getSpell1Casts() {
         return spell1Casts;
     }
 
-    public void setSpell1Casts(int spell1Casts) {
+    public void setSpell1Casts(String spell1Casts) {
         this.spell1Casts = spell1Casts;
     }
 
-    public int getSpell2Casts() {
+    public String getSpell2Casts() {
         return spell2Casts;
     }
 
-    public void setSpell2Casts(int spell2Casts) {
+    public void setSpell2Casts(String spell2Casts) {
         this.spell2Casts = spell2Casts;
     }
 
-    public int getSpell3Casts() {
+    public String getSpell3Casts() {
         return spell3Casts;
     }
 
-    public void setSpell3Casts(int spell3Casts) {
+    public void setSpell3Casts(String spell3Casts) {
         this.spell3Casts = spell3Casts;
     }
 
-    public int getSpell4Casts() {
+    public String getSpell4Casts() {
         return spell4Casts;
     }
 
-    public void setSpell4Casts(int spell4Casts) {
+    public void setSpell4Casts(String spell4Casts) {
         this.spell4Casts = spell4Casts;
     }
 
-    public int getSummoner1Casts() {
+    public String getSummoner1Casts() {
         return summoner1Casts;
     }
 
-    public void setSummoner1Casts(int summoner1Casts) {
+    public void setSummoner1Casts(String summoner1Casts) {
         this.summoner1Casts = summoner1Casts;
     }
 
-    public int getSummoner1Id() {
+    public String getSummoner1Id() {
         return summoner1Id;
     }
 
-    public void setSummoner1Id(int summoner1Id) {
+    public void setSummoner1Id(String summoner1Id) {
         this.summoner1Id = summoner1Id;
     }
 
-    public int getSummoner2Casts() {
+    public String getSummoner2Casts() {
         return summoner2Casts;
     }
 
-    public void setSummoner2Casts(int summoner2Casts) {
+    public void setSummoner2Casts(String summoner2Casts) {
         this.summoner2Casts = summoner2Casts;
     }
 
-    public int getSummoner2Id() {
+    public String getSummoner2Id() {
         return summoner2Id;
     }
 
-    public void setSummoner2Id(int summoner2Id) {
+    public void setSummoner2Id(String summoner2Id) {
         this.summoner2Id = summoner2Id;
     }
 
@@ -726,11 +726,11 @@ public class ParticipantDto {
         this.summonerId = summonerId;
     }
 
-    public int getSummonerLevel() {
+    public String getSummonerLevel() {
         return summonerLevel;
     }
 
-    public void setSummonerLevel(int summonerLevel) {
+    public void setSummonerLevel(String summonerLevel) {
         this.summonerLevel = summonerLevel;
     }
 
@@ -742,19 +742,19 @@ public class ParticipantDto {
         this.summonerName = summonerName;
     }
 
-    public boolean isTeamEarlySurrendered() {
+    public String isTeamEarlySurrendered() {
         return teamEarlySurrendered;
     }
 
-    public void setTeamEarlySurrendered(boolean teamEarlySurrendered) {
+    public void setTeamEarlySurrendered(String teamEarlySurrendered) {
         this.teamEarlySurrendered = teamEarlySurrendered;
     }
 
-    public int getTeamId() {
+    public String getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(String teamId) {
         this.teamId = teamId;
     }
 
@@ -766,203 +766,203 @@ public class ParticipantDto {
         this.teamPosition = teamPosition;
     }
 
-    public int getTimeCCingOthers() {
+    public String getTimeCCingOthers() {
         return timeCCingOthers;
     }
 
-    public void setTimeCCingOthers(int timeCCingOthers) {
+    public void setTimeCCingOthers(String timeCCingOthers) {
         this.timeCCingOthers = timeCCingOthers;
     }
 
-    public int getTimePlayed() {
+    public String getTimePlayed() {
         return timePlayed;
     }
 
-    public void setTimePlayed(int timePlayed) {
+    public void setTimePlayed(String timePlayed) {
         this.timePlayed = timePlayed;
     }
 
-    public int getTotalDamageDealt() {
+    public String getTotalDamageDealt() {
         return totalDamageDealt;
     }
 
-    public void setTotalDamageDealt(int totalDamageDealt) {
+    public void setTotalDamageDealt(String totalDamageDealt) {
         this.totalDamageDealt = totalDamageDealt;
     }
 
-    public int getTotalDamageDealtToChampions() {
+    public String getTotalDamageDealtToChampions() {
         return totalDamageDealtToChampions;
     }
 
-    public void setTotalDamageDealtToChampions(int totalDamageDealtToChampions) {
+    public void setTotalDamageDealtToChampions(String totalDamageDealtToChampions) {
         this.totalDamageDealtToChampions = totalDamageDealtToChampions;
     }
 
-    public int getTotalDamageShieldedOnTeammates() {
+    public String getTotalDamageShieldedOnTeammates() {
         return totalDamageShieldedOnTeammates;
     }
 
-    public void setTotalDamageShieldedOnTeammates(int totalDamageShieldedOnTeammates) {
+    public void setTotalDamageShieldedOnTeammates(String totalDamageShieldedOnTeammates) {
         this.totalDamageShieldedOnTeammates = totalDamageShieldedOnTeammates;
     }
 
-    public int getTotalDamageTaken() {
+    public String getTotalDamageTaken() {
         return totalDamageTaken;
     }
 
-    public void setTotalDamageTaken(int totalDamageTaken) {
+    public void setTotalDamageTaken(String totalDamageTaken) {
         this.totalDamageTaken = totalDamageTaken;
     }
 
-    public int getTotalHeal() {
+    public String getTotalHeal() {
         return totalHeal;
     }
 
-    public void setTotalHeal(int totalHeal) {
+    public void setTotalHeal(String totalHeal) {
         this.totalHeal = totalHeal;
     }
 
-    public int getTotalHealsOnTeammates() {
+    public String getTotalHealsOnTeammates() {
         return totalHealsOnTeammates;
     }
 
-    public void setTotalHealsOnTeammates(int totalHealsOnTeammates) {
+    public void setTotalHealsOnTeammates(String totalHealsOnTeammates) {
         this.totalHealsOnTeammates = totalHealsOnTeammates;
     }
 
-    public int getTotalMinionsKilled() {
+    public String getTotalMinionsKilled() {
         return totalMinionsKilled;
     }
 
-    public void setTotalMinionsKilled(int totalMinionsKilled) {
+    public void setTotalMinionsKilled(String totalMinionsKilled) {
         this.totalMinionsKilled = totalMinionsKilled;
     }
 
-    public int getTotalTimeCCDealt() {
+    public String getTotalTimeCCDealt() {
         return totalTimeCCDealt;
     }
 
-    public void setTotalTimeCCDealt(int totalTimeCCDealt) {
+    public void setTotalTimeCCDealt(String totalTimeCCDealt) {
         this.totalTimeCCDealt = totalTimeCCDealt;
     }
 
-    public int getTotalTimeSpentDead() {
+    public String getTotalTimeSpentDead() {
         return totalTimeSpentDead;
     }
 
-    public void setTotalTimeSpentDead(int totalTimeSpentDead) {
+    public void setTotalTimeSpentDead(String totalTimeSpentDead) {
         this.totalTimeSpentDead = totalTimeSpentDead;
     }
 
-    public int getTotalUnitsHealed() {
+    public String getTotalUnitsHealed() {
         return totalUnitsHealed;
     }
 
-    public void setTotalUnitsHealed(int totalUnitsHealed) {
+    public void setTotalUnitsHealed(String totalUnitsHealed) {
         this.totalUnitsHealed = totalUnitsHealed;
     }
 
-    public int getTripleKills() {
+    public String getTripleKills() {
         return tripleKills;
     }
 
-    public void setTripleKills(int tripleKills) {
+    public void setTripleKills(String tripleKills) {
         this.tripleKills = tripleKills;
     }
 
-    public int getTrueDamageDealt() {
+    public String getTrueDamageDealt() {
         return trueDamageDealt;
     }
 
-    public void setTrueDamageDealt(int trueDamageDealt) {
+    public void setTrueDamageDealt(String trueDamageDealt) {
         this.trueDamageDealt = trueDamageDealt;
     }
 
-    public int getTrueDamageDealtToChampions() {
+    public String getTrueDamageDealtToChampions() {
         return trueDamageDealtToChampions;
     }
 
-    public void setTrueDamageDealtToChampions(int trueDamageDealtToChampions) {
+    public void setTrueDamageDealtToChampions(String trueDamageDealtToChampions) {
         this.trueDamageDealtToChampions = trueDamageDealtToChampions;
     }
 
-    public int getTrueDamageTaken() {
+    public String getTrueDamageTaken() {
         return trueDamageTaken;
     }
 
-    public void setTrueDamageTaken(int trueDamageTaken) {
+    public void setTrueDamageTaken(String trueDamageTaken) {
         this.trueDamageTaken = trueDamageTaken;
     }
 
-    public int getTurretKills() {
+    public String getTurretKills() {
         return turretKills;
     }
 
-    public void setTurretKills(int turretKills) {
+    public void setTurretKills(String turretKills) {
         this.turretKills = turretKills;
     }
 
-    public int getTurretTakedowns() {
+    public String getTurretTakedowns() {
         return turretTakedowns;
     }
 
-    public void setTurretTakedowns(int turretTakedowns) {
+    public void setTurretTakedowns(String turretTakedowns) {
         this.turretTakedowns = turretTakedowns;
     }
 
-    public int getTurretsLost() {
+    public String getTurretsLost() {
         return turretsLost;
     }
 
-    public void setTurretsLost(int turretsLost) {
+    public void setTurretsLost(String turretsLost) {
         this.turretsLost = turretsLost;
     }
 
-    public int getUnrealKills() {
+    public String getUnrealKills() {
         return unrealKills;
     }
 
-    public void setUnrealKills(int unrealKills) {
+    public void setUnrealKills(String unrealKills) {
         this.unrealKills = unrealKills;
     }
 
-    public int getVisionScore() {
+    public String getVisionScore() {
         return visionScore;
     }
 
-    public void setVisionScore(int visionScore) {
+    public void setVisionScore(String visionScore) {
         this.visionScore = visionScore;
     }
 
-    public int getVisionWardsBoughtInGame() {
+    public String getVisionWardsBoughtInGame() {
         return visionWardsBoughtInGame;
     }
 
-    public void setVisionWardsBoughtInGame(int visionWardsBoughtInGame) {
+    public void setVisionWardsBoughtInGame(String visionWardsBoughtInGame) {
         this.visionWardsBoughtInGame = visionWardsBoughtInGame;
     }
 
-    public int getWardsKilled() {
+    public String getWardsKilled() {
         return wardsKilled;
     }
 
-    public void setWardsKilled(int wardsKilled) {
+    public void setWardsKilled(String wardsKilled) {
         this.wardsKilled = wardsKilled;
     }
 
-    public int getWardsPlaced() {
+    public String getWardsPlaced() {
         return wardsPlaced;
     }
 
-    public void setWardsPlaced(int wardsPlaced) {
+    public void setWardsPlaced(String wardsPlaced) {
         this.wardsPlaced = wardsPlaced;
     }
 
-    public boolean isWin() {
+    public String isWin() {
         return win;
     }
 
-    public void setWin(boolean win) {
+    public void setWin(String win) {
         this.win = win;
     }
 

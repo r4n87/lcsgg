@@ -1,22 +1,22 @@
 package dev.saariselka.inlol.dto;
 
 public class BanDto {
-    private int championId;
-    private int pickTurn;
+    private String championId;
+    private String pickTurn;
 
-    public int getChampionId() {
+    public String getChampionId() {
         return championId;
     }
 
-    public void setChampionId(int championId) {
+    public void setChampionId(String championId) {
         this.championId = championId;
     }
 
-    public int getPickTurn() {
+    public String getPickTurn() {
         return pickTurn;
     }
 
-    public void setPickTurn(int pickTurn) {
+    public void setPickTurn(String pickTurn) {
         this.pickTurn = pickTurn;
     }
 }

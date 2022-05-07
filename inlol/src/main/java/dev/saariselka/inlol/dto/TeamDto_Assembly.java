@@ -16,8 +16,8 @@ public class TeamDto_Assembly {
         TeamDto teamDto = new TeamDto();
 
         for (TeamEntity teamEntity : teamList) {
-            teamDto.setTeamId(teamEntity.getTeamId().getTeamId());
-            teamDto.setWin(teamEntity.isWin());
+            teamDto.setTeamId(String.valueOf(teamEntity.getTeamId().getTeamId()));
+            teamDto.setWin(String.valueOf(teamEntity.isWin()));
             teamDto.setBans(banDtoList);
             teamDto.setObjectives(objectivesDto);
         }
