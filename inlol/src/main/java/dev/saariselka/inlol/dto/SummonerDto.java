@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.dto;
 
+import java.sql.Timestamp;
+
 public class SummonerDto {
 
     private String puuid;
@@ -9,6 +11,7 @@ public class SummonerDto {
     private String profileIconId;
     private String revisionDate;
     private String summonerLevel;
+    private String refreshAgoTime;
 
     public void setPuuid(String puuid) {
         this.puuid = puuid;
@@ -45,4 +48,6 @@ public class SummonerDto {
     public String getSummonerLevel() { return summonerLevel; }
     public String getProfileIconId() { return profileIconId; }
     public String getRevisionDate() { return revisionDate; }
+    public String getRefreshAgoTime() { return refreshAgoTime; }
+    public void setRefreshAgoTime(String refreshAgoTime) { this.refreshAgoTime = refreshAgoTime; }
 }
