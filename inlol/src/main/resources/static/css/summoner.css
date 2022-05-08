@@ -393,6 +393,15 @@ button {
     color: rgb(234, 189, 86);
     background: url(https://s-lol-web.op.gg/static/images/site/summoner/bg-levelbox.png) 0% 0% / 100%;
 }
+.css-nvyacf .last-update {
+    position: absolute;
+    left: 160px;
+    bottom: -18px;
+    height: 12px;
+    color: rgb(153, 162, 162);
+    font-size: 11px;
+}
+
 .css-nvyacf .profile {
     position: relative;
     display: inline-block;
@@ -401,6 +410,30 @@ button {
     vertical-align: top;
     line-height: 1.1;
 }
+
+.css-nvyacf .profile .buttons {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    font-size: 0px;
+    margin: 15px 0px -6px;
+    white-space: nowrap;
+}
+
+.css-nvyacf .profile .buttons button {
+    padding: 11px 14px 10px;
+    border-radius: 2px;
+    font-size: 14px;
+    margin: 0px 6px 6px 0px;
+}
+
+.css-nvyacf .profile .buttons .tier-graph {
+    border: 1px solid rgb(204, 209, 209);
+    background: rgb(242, 242, 242);
+    color: rgb(36, 41, 41);
+}
+
 .css-nvyacf .profile .info > .name {
     color: rgb(36, 41, 41);
     font-size: 20px;
@@ -408,11 +441,19 @@ button {
     margin-right: 4px;
     vertical-align: middle;
 }
+
+.css-nvyacf .profile .rank {
+    font-size: 11px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
 .css-nvyacf .face .profile-icon img {
     display: block;
     width: 100px;
     height: 100px;
 }
+
 .css-19ozhet {
     display:flex;
     width: 1000px;
@@ -1343,3 +1384,11 @@ b, strong {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.css-1wyd9qh {
+    position: relative;
+    border: 1px solid #75b53c;
+    background: #81c147;
+    color: rgb(242, 242, 242);
+}
+

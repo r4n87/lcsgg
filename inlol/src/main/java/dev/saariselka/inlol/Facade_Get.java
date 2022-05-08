@@ -511,6 +511,24 @@ public class Facade_Get {
         if(null == puuid) return null;
 
         SummonerEntity summoner = summonerController.getSummoner(puuid).get(0);
+        String refreshAgoTime = null;
+
+        if (ChronoUnit.HOURS.between(summoner.getRrt().toLocalDateTime(), LocalDateTime.now()) >= 24)
+        {
+            refreshAgoTime = String.valueOf(ChronoUnit.DAYS.between(summoner.getRrt().toLocalDateTime(), LocalDateTime.now()))
+                    + "일 전";
+        }
+        else if (ChronoUnit.MINUTES.between(summoner.getRrt().toLocalDateTime(), LocalDateTime.now()) >= 60)
+        {
+            refreshAgoTime = String.valueOf(ChronoUnit.HOURS.between(summoner.getRrt().toLocalDateTime(), LocalDateTime.now()))
+                    + "시간 전";
+        }
+        else
+        {
+            refreshAgoTime = String.valueOf(ChronoUnit.MINUTES.between(summoner.getRrt().toLocalDateTime(), LocalDateTime.now()))
+                    + "분 전";
+        }
+
         summonerDto.setPuuid(summoner.getPuuid());
         summonerDto.setAccountId(summoner.getAccountid());
         summonerDto.setId(summoner.getId());
@@ -518,6 +536,7 @@ public class Facade_Get {
         summonerDto.setProfileIconId(String.valueOf(summoner.getProfileiconid()));
         summonerDto.setRevisionDate(String.valueOf(summoner.getRevisiondate()));
         summonerDto.setSummonerLevel(String.valueOf(summoner.getSummonerlevel()));
+        summonerDto.setRefreshAgoTime(refreshAgoTime);
 
         return summonerDto;
     }
