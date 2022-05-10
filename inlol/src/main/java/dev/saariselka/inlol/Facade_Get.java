@@ -441,8 +441,7 @@ public class Facade_Get {
         return result;
     }
 
-    public ArrayList<String> getMatchList(String name, String startTime) {
-
+    public ArrayList<String> getMatchList(String name, long startTime) {
         apiKey = apiKeyController.getAPIKey_ByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
@@ -451,7 +450,7 @@ public class Facade_Get {
         try {
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
                     + summonerController.getSummoner_Puuid_ByName(name)
-                    + "/ids?start=" + startTime + "&count=100&api_key="
+                    + "/ids?startTime=" + startTime + "&count=100&api_key="
                     + apiKey).build();
 
             // API 호출
@@ -548,7 +547,7 @@ public class Facade_Get {
         summonerDto.setRevisionDate(String.valueOf(summoner.getRevisiondate()));
         summonerDto.setSummonerLevel(String.valueOf(summoner.getSummonerlevel()));
         summonerDto.setRefreshAgoTime(refreshAgoTime);
-        summonerDto.setLastRefreshTime(String.valueOf(summoner.getRrt().toInstant().toEpochMilli()));
+        summonerDto.setLastRefreshTime(summoner.getRrt().toInstant().getEpochSecond());
 
         return summonerDto;
     }

@@ -10,7 +10,7 @@ public class SummonerDto {
     private String revisionDate;
     private String summonerLevel;
     private String refreshAgoTime;
-    private String lastRefreshTime;
+    private long lastRefreshTime;
 
     public void setPuuid(String puuid) {
         this.puuid = puuid;
@@ -50,11 +50,11 @@ public class SummonerDto {
     public String getRefreshAgoTime() { return refreshAgoTime; }
     public void setRefreshAgoTime(String refreshAgoTime) { this.refreshAgoTime = refreshAgoTime; }
 
-    public String getLastRefreshTime() {
+    public long getLastRefreshTime() {
         return lastRefreshTime;
     }
 
-    public void setLastRefreshTime(String lastRefreshTime) {
+    public void setLastRefreshTime(long lastRefreshTime) {
         this.lastRefreshTime = lastRefreshTime;
     }
 }

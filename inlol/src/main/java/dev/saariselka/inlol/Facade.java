@@ -43,6 +43,8 @@ public class Facade {
         //Step 1. Get Summoner Info and Set Summoner Info At ModelAndView
         SummonerDto summonerDto = getSummonerInfo(modelAndView, name, facade_get.getSummonerInfoFromDB(name));
 
+        System.out.println("마지막시간 : " + summonerDto.getLastRefreshTime());
+
         //Step 2. Get League Info and Set League Info At ModelAndView
         getLeagueInfo(modelAndView, summonerDto.getId(), facade_get.getLeagueInfoFromDB(summonerDto.getId()));
 
@@ -56,7 +58,7 @@ public class Facade {
     @GetMapping("searchRefresh")
     public ModelAndView refresh(@RequestParam("name") String name) throws JsonProcessingException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
-        String startTime = getRefreshTimeFromDB(name);
+        long startTime = getRefreshTimeFromDB(name);
 
         //Step 1. Get Summoner Info By Name via API
         SummonerDto summonerDto = getSummonerInfoFromAPI(modelAndView, name);
@@ -70,7 +72,7 @@ public class Facade {
         return modelAndView;
     }
 
-    private String getRefreshTimeFromDB(String name) {
+    private long getRefreshTimeFromDB(String name) {
         return facade_get.getSummonerInfoFromDB(name).getLastRefreshTime();
     }
 
@@ -118,7 +120,7 @@ public class Facade {
     }
 
     private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
-        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), "0");
+        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), 0L);
 
         for (int i = 0; i < matchList.size(); i++) {
             HashMap<String, Object> result =  ((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body"));
@@ -130,8 +132,8 @@ public class Facade {
         setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
     }
 
-    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, String startTime) throws JsonProcessingException {
-        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), "0");
+    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, long startTime) throws JsonProcessingException {
+        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), startTime);
         HashSet<String> dbMatchList = facade_get.getMatchListFromDB(summonerDto.getPuuid());
 
         matchList.removeIf(dbMatchList::contains);
