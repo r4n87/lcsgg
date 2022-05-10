@@ -19,19 +19,11 @@ public class InfoDto {
     private String gameType;
     private String gameVersion;
     private String mapId;
-    private List<ParticipantDto> participants;
+    private List<ParticipantDto> blueParticipants;
+    private List<ParticipantDto> redParticipants;
     private String platformId;
     private String gameAgoTime;
     private ParticipantDto summoner;
-
-    public List<ParticipantDto> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<ParticipantDto> participants) {
-        this.participants = participants;
-    }
-
     private String queueId;
     private List<TeamDto> teams;
     private String tournamentCode;
@@ -153,4 +145,16 @@ public class InfoDto {
     public ParticipantDto getSummoner() { return summoner; }
 
     public void setSummoner(ParticipantDto summoner) { this.summoner = summoner; }
+
+    public List<ParticipantDto> getBlueParticipants() {
+        return blueParticipants;
+    }
+
+    public void setBlueParticipants(List<ParticipantDto> participants) {
+        this.blueParticipants = participants;
+    }
+
+    public List<ParticipantDto> getRedParticipants() { return redParticipants; }
+
+    public void setRedParticipants(List<ParticipantDto> participants) { this.redParticipants = participants; }
 }

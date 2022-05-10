@@ -10,6 +10,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.Part;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -201,15 +202,15 @@ public class Facade_Get {
             //5. Match Participants 정보 생성
             List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
             List<String> participantsPuuidList = new ArrayList<>();
-            List<ParticipantDto> participantDtoList = new ArrayList<>();
+            List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
+            List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
 
             index = 0;
             for(MatchParticipantEntity participantEntity : participantsList) {
                 participantsPuuidList.add(participantEntity.getMatchParticipantId().getPuuid());
                 
-                if(puuid.equals(participantsPuuidList.get(index)))
-                {
+                if(puuid.equals(participantsPuuidList.get(index))) {
                     summonerInfo.setAssists(String.valueOf(participantEntity.getAssists()));
                     summonerInfo.setBaronKills(String.valueOf(participantEntity.getBaronKills()));
                     summonerInfo.setBountyLevel(String.valueOf(participantEntity.getBountyLevel()));
@@ -423,13 +424,22 @@ public class Facade_Get {
                 participantDto.setWardsPlaced(String.valueOf(participantEntity.getWardsPlaced()));
                 participantDto.setWin(String.valueOf(participantEntity.isWin()));
 
-                participantDtoList.add(participantDto);
+                if("100".equals(participantDto.getTeamId())) {
+                    blueParticipantDtoList.add(participantDto);
+                } else if("200".equals(participantDto.getTeamId())) {
+                    redParticipantDtoList.add(participantDto);
+                }
 
                 index++;
             }
 
             metadataDto.setParticipants(participantsPuuidList);
-            infoDto.setParticipants(participantDtoList);
+
+            sortParticipationDtoList(blueParticipantDtoList, redParticipantDtoList);
+
+            infoDto.setBlueParticipants(blueParticipantDtoList);
+            infoDto.setRedParticipants(redParticipantDtoList);
+
             infoDto.setSummoner(summonerInfo);
 
             matchInfo.setMetadata(metadataDto);
@@ -441,6 +451,35 @@ public class Facade_Get {
         return result;
     }
 
+    private void sortParticipationDtoList(List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList) {
+        blueParticipantDtoList.sort((o1, o2) -> {
+            int score1 = getScore(o1);
+            int score2 = getScore(o2);
+
+            return score2 - score1;
+        });
+
+        redParticipantDtoList.sort((o1, o2) -> {
+            int score1 = getScore(o1);
+            int score2 = getScore(o2);
+
+            return score2 - score1;
+        });
+    }
+
+    private int getScore(ParticipantDto participant) {
+        int score = 0;
+
+        switch(participant.getTeamPosition()) {
+            case "TOP" : score = 5; break;
+            case "JUNGLE" : score = 4; break;
+            case "MIDDLE" : score = 3; break;
+            case "BOTTOM" : score = 2; break;
+            case "UTILITY" : score = 1; break;
+         }
+        return score;
+    }
+
     public ArrayList<String> getMatchList(String name, long startTime) {
         apiKey = apiKeyController.getAPIKey_ByCategory("Product");
 
@@ -450,7 +489,7 @@ public class Facade_Get {
         try {
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
                     + summonerController.getSummoner_Puuid_ByName(name)
-                    + "/ids?startTime=" + startTime + "&count=100&api_key="
+                    + "/ids?startTime=" + startTime + "&count=20&api_key="
                     + apiKey).build();
 
             // API 호출

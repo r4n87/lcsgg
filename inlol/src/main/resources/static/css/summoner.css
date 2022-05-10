@@ -1027,12 +1027,12 @@ b, strong {
     background-color: #cea7a7;
 }
 .css-utzuox>div.participants {
-    width: 170px;
+    width: 85px;
     font-size: 0;
 }
 .css-utzuox>div.participants ul {
     float: left;
-    width: 50%;
+    width: 100%;
 }
 .css-tegtkt {
     display: block;
@@ -1319,12 +1319,12 @@ b, strong {
     vertical-align: middle;
 }
 .css-7uadie > div.participants {
-    width: 170px;
+    width: 85px;
     font-size: 0px;
 }
 .css-7uadie > div.participants ul {
     float: left;
-    width: 50%;
+    width: 100%;
 }
 .css-1wh3ggh {
     display: block;
