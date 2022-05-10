@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.*;
 
 @RestController
@@ -53,6 +56,7 @@ public class Facade {
     @GetMapping("searchRefresh")
     public ModelAndView refresh(@RequestParam("name") String name) throws JsonProcessingException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
+        String startTime = getRefreshTimeFromDB(name);
 
         //Step 1. Get Summoner Info By Name via API
         SummonerDto summonerDto = getSummonerInfoFromAPI(modelAndView, name);
@@ -61,9 +65,13 @@ public class Facade {
         getLeagueInfoFromAPI(modelAndView, summonerDto.getId());
 
         //Step 3. Get Match Info List by Name via API
-        getMatchInfoFromAPI_Refresh(modelAndView, summonerDto);
+        getMatchInfoFromAPI_Refresh(modelAndView, summonerDto, startTime);
 
         return modelAndView;
+    }
+
+    private String getRefreshTimeFromDB(String name) {
+        return facade_get.getSummonerInfoFromDB(name).getLastRefreshTime();
     }
 
     private SummonerDto getSummonerInfo(ModelAndView modelAndView, String name, SummonerDto summonerInfoFromDB) {
@@ -76,11 +84,9 @@ public class Facade {
     }
 
     private SummonerDto getSummonerInfoFromAPI(ModelAndView modelAndView, String name) {
-        SummonerDto summonerDto = new SummonerDto();
+        facade_set.setSummonerInfoAtDB((LinkedHashMap<String, String>) facade_get.getSummonerInfo(name).get("body"));
 
-        facade_set.setSummonerInfoAtDB((LinkedHashMap) facade_get.getSummonerInfo(name).get("body"));
-
-        summonerDto = facade_get.getSummonerInfoFromDB(name);
+        SummonerDto summonerDto = facade_get.getSummonerInfoFromDB(name);
 
         setSummonerInfoAtModelAndView(modelAndView, summonerDto, name);
 
@@ -112,21 +118,23 @@ public class Facade {
     }
 
     private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
-        ArrayList<MatchDto> matchInfoList = new ArrayList<>();
-        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName());
+        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), "0");
 
         for (int i = 0; i < matchList.size(); i++) {
             HashMap<String, Object> result =  ((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body"));
             facade_set.setMatchInfoAtDB(result);
         }
 
-        matchInfoList = facade_get.getMatchInfoFromDB(summonerDto.getPuuid());
+        ArrayList<MatchDto> matchInfoList = facade_get.getMatchInfoFromDB(summonerDto.getPuuid());
 
         setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
     }
 
-    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
-        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName());
+    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, String startTime) throws JsonProcessingException {
+        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), "0");
+        HashSet<String> dbMatchList = facade_get.getMatchListFromDB(summonerDto.getPuuid());
+
+        matchList.removeIf(dbMatchList::contains);
 
         for (int i = 0; i < matchList.size(); i++) {
             facade_set.setMatchInfoAtDB(((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body")));
