@@ -43,8 +43,6 @@ public class Facade {
         //Step 1. Get Summoner Info and Set Summoner Info At ModelAndView
         SummonerDto summonerDto = getSummonerInfo(modelAndView, name, facade_get.getSummonerInfoFromDB(name));
 
-        System.out.println("마지막시간 : " + summonerDto.getLastRefreshTime());
-
         //Step 2. Get League Info and Set League Info At ModelAndView
         getLeagueInfo(modelAndView, summonerDto.getId(), facade_get.getLeagueInfoFromDB(summonerDto.getId()));
 
@@ -96,7 +94,7 @@ public class Facade {
     }
 
     private void getLeagueInfo(ModelAndView modelAndView, String encryptedSummonerId, HashSet<Object> leagueInfoFromDB) {
-        if(null != leagueInfoFromDB) {
+        if(null != leagueInfoFromDB && !leagueInfoFromDB.isEmpty()) {
             setLeagueInfoAtModelAndView(modelAndView, leagueInfoFromDB);
             return;
         }
@@ -106,7 +104,9 @@ public class Facade {
 
     private void getLeagueInfoFromAPI(ModelAndView modelAndView, String encryptedSummonerId) {
         HashSet<Object> leagueInfo = (HashSet<Object>) facade_get.getLeagueInfo(encryptedSummonerId).get("body");
-        facade_set.setLeagueInfoAtDB(leagueInfo);
+        if(!leagueInfo.isEmpty()) {
+            facade_set.setLeagueInfoAtDB(leagueInfo);
+        }
         setLeagueInfoAtModelAndView(modelAndView, leagueInfo);
     }
 
@@ -155,19 +155,18 @@ public class Facade {
     }
 
     private void setLeagueInfoAtModelAndView(ModelAndView modelAndView, HashSet<Object> res) {
-        Iterator<Object> iterator = res.iterator();
-        while(iterator.hasNext()) {
-            HashMap<String, String> map = (HashMap) iterator.next();
+        for (Object re : res) {
+            HashMap<String, String> map = (HashMap) re;
             String tierInfo = map.get("tier");
             String tierImg = "";
 
-            if(null != tierInfo && !"".equals(tierInfo)) {
+            if (null != tierInfo && !"".equals(tierInfo)) {
                 tierImg = "/images/ranked-emblems/" + tierInfo + ".png";
             }
 
             String rankInfo = map.get("queueType");
 
-            if("RANKED_SOLO_5x5".equals(rankInfo)) {
+            if ("RANKED_SOLO_5x5".equals(rankInfo)) {
                 modelAndView.addObject("soloRankInfo", map);
                 modelAndView.addObject("soloRankImg", tierImg);
             } else {
