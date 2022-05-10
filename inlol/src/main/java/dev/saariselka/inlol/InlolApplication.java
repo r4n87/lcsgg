@@ -1,6 +1,8 @@
 package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import dev.saariselka.inlol.controller.SummonerController;
+import dev.saariselka.inlol.entity.SummonerEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
