@@ -1,0 +1,62 @@
+[
+  {
+    "queueId": 400,
+    "map": "Summoner's Rift",
+    "description": "5v5 Draft Pick games",
+    "notes": null
+  },
+  {
+    "queueId": 410,
+    "map": "Summoner's Rift",
+    "description": "5v5 Ranked Dynamic games",
+    "notes": "Game mode deprecated in patch 6.22"
+  },
+  {
+    "queueId": 420,
+    "map": "Summoner's Rift",
+    "description": "솔랭",
+    "notes": null
+  },
+  {
+    "queueId": 430,
+    "map": "Summoner's Rift",
+    "description": "일반",
+    "notes": null
+  },
+  {
+    "queueId": 440,
+    "map": "Summoner's Rift",
+    "description": "자유 5:5 랭크",
+    "notes": null
+  },
+  {
+    "queueId": 450,
+    "map": "Howling Abyss",
+    "description": "무작위 총력전",
+    "notes": null
+  },
+  {
+    "queueId": 900,
+    "map": "Summoner's Rift",
+    "description": "U.R.F.",
+    "notes": null
+  },
+  {
+    "queueId": 830,
+    "map": "Summoner's Rift",
+    "description": "입문",
+    "notes": null
+  },
+  {
+    "queueId": 840,
+    "map": "Summoner's Rift",
+    "description": "초보",
+    "notes": null
+  },
+  {
+    "queueId": 850,
+    "map": "Summoner's Rift",
+    "description": "중급",
+    "notes": null
+  }
+]

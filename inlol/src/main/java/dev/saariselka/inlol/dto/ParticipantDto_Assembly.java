@@ -48,7 +48,7 @@ public class ParticipantDto_Assembly {
         participantDto.setChampExperience(String.valueOf(participantEntity.getChampExperience()));
         participantDto.setChampLevel(String.valueOf(participantEntity.getChampLevel()));
         participantDto.setChampionId(String.valueOf(participantEntity.getChampionName()));
-        participantDto.setChampionName(participantEntity.getChampionName());
+        participantDto.setChampionNameENG(participantEntity.getChampionName());
         participantDto.setChampionTransform(String.valueOf(participantEntity.getChampionTransform()));
         participantDto.setConsumablesPurchased(String.valueOf(participantEntity.getConsumablesPurchased()));
         participantDto.setDamageDealtToBuildings(String.valueOf(participantEntity.getDamageDealtToBuildings()));

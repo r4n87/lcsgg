@@ -3,6 +3,7 @@ package dev.saariselka.inlol;
 import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
+import dev.saariselka.inlol.util.JSONParserForLOL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -10,7 +11,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.servlet.http.Part;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -122,7 +122,8 @@ public class Facade_Get {
             infoDto.setGameDuration(gameDuration);
             infoDto.setGameEndTimestamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
             infoDto.setGameId(masterEntity.getGameId());
-            infoDto.setGameMode(masterEntity.getGameMode());
+            //infoDto.setGameMode(masterEntity.getGameMode());
+            infoDto.setGameMode(JSONParserForLOL.getKRGameModeByQueueId(masterEntity.getQueueId()));
             infoDto.setGameName(masterEntity.getGameName());
             infoDto.setGameStartTimeStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(masterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
             infoDto.setGameType(masterEntity.getGameType());
@@ -161,8 +162,8 @@ public class Facade_Get {
 
                 //4. Match Objectives 정보 생성
                 MatchObjectivesEntity objectivesEntity = matchObjectivesController
-                                                        .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
-                                                        .get(0);
+                        .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
+                        .get(0);
 
                 ObjectivesDto objectivesDto = new ObjectivesDto();
                 ObjectiveDto baron = new ObjectiveDto();
@@ -209,7 +210,7 @@ public class Facade_Get {
             index = 0;
             for(MatchParticipantEntity participantEntity : participantsList) {
                 participantsPuuidList.add(participantEntity.getMatchParticipantId().getPuuid());
-                
+
                 if(puuid.equals(participantsPuuidList.get(index))) {
                     summonerInfo.setAssists(String.valueOf(participantEntity.getAssists()));
                     summonerInfo.setBaronKills(String.valueOf(participantEntity.getBaronKills()));
@@ -217,7 +218,7 @@ public class Facade_Get {
                     summonerInfo.setChampExperience(String.valueOf(participantEntity.getChampExperience()));
                     summonerInfo.setChampLevel(String.valueOf(participantEntity.getChampLevel()));
                     summonerInfo.setChampionId(String.valueOf(participantEntity.getChampionName()));
-                    summonerInfo.setChampionName(participantEntity.getChampionName());
+                    summonerInfo.setChampionNameENG(participantEntity.getChampionName());
                     summonerInfo.setChampionTransform(String.valueOf(participantEntity.getChampionTransform()));
                     summonerInfo.setConsumablesPurchased(String.valueOf(participantEntity.getConsumablesPurchased()));
                     summonerInfo.setDamageDealtToBuildings(String.valueOf(participantEntity.getDamageDealtToBuildings()));
@@ -316,7 +317,7 @@ public class Facade_Get {
                     summonerInfo.setWardsPlaced(String.valueOf(participantEntity.getWardsPlaced()));
                     summonerInfo.setWin(String.valueOf(participantEntity.isWin()));
                 }
-                
+
                 ParticipantDto participantDto = new ParticipantDto();
 
                 participantDto.setAssists(String.valueOf(participantEntity.getAssists()));
@@ -325,7 +326,7 @@ public class Facade_Get {
                 participantDto.setChampExperience(String.valueOf(participantEntity.getChampExperience()));
                 participantDto.setChampLevel(String.valueOf(participantEntity.getChampLevel()));
                 participantDto.setChampionId(String.valueOf(participantEntity.getChampionName()));
-                participantDto.setChampionName(participantEntity.getChampionName());
+                participantDto.setChampionNameENG(participantEntity.getChampionName());
                 participantDto.setChampionTransform(String.valueOf(participantEntity.getChampionTransform()));
                 participantDto.setConsumablesPurchased(String.valueOf(participantEntity.getConsumablesPurchased()));
                 participantDto.setDamageDealtToBuildings(String.valueOf(participantEntity.getDamageDealtToBuildings()));
@@ -440,6 +441,7 @@ public class Facade_Get {
             infoDto.setBlueParticipants(blueParticipantDtoList);
             infoDto.setRedParticipants(redParticipantDtoList);
 
+            summonerInfo.setChampionNameKR(JSONParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
             infoDto.setSummoner(summonerInfo);
 
             matchInfo.setMetadata(metadataDto);
@@ -476,7 +478,7 @@ public class Facade_Get {
             case "MIDDLE" : score = 3; break;
             case "BOTTOM" : score = 2; break;
             case "UTILITY" : score = 1; break;
-         }
+        }
         return score;
     }
 
@@ -647,4 +649,5 @@ public class Facade_Get {
 
         return result;
     }
+
 }

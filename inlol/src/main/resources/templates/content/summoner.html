@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="champion">
                                     <div class="icon">
-                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionName()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionName()}">
+                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
                                         <div class="spell"></div>
@@ -130,7 +130,7 @@
                                         <div class="rune"></div>
                                         <div class="rune"></div>
                                     </div>
-                                    <div class="name" th:text="${matchInfo.info.summoner.getChampionName()}"></div>
+                                    <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
                                 <div class="kda">
                                     <div class="k-d-a"></div>
@@ -147,7 +147,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionName()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionName()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
@@ -159,7 +159,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getRedParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionName()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionName()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
@@ -187,7 +187,7 @@
                                 </div>
                                 <div class="champion">
                                     <div class="icon">
-                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionName()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionName()}">
+                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
                                         <div class="spell"></div>
@@ -197,7 +197,7 @@
                                         <div class="rune"></div>
                                         <div class="rune"></div>
                                     </div>
-                                    <div class="name" th:text="${matchInfo.info.summoner.getChampionName()}"></div>
+                                    <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
                                 <div class="kda">
                                     <div class="k-d-a"></div>
@@ -214,7 +214,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionName()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionName()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
@@ -226,7 +226,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getRedParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionName()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionName()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>

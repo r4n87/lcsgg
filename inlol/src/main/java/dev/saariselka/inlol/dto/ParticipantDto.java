@@ -3,7 +3,6 @@ package dev.saariselka.inlol.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 
 @NoArgsConstructor
@@ -19,7 +18,8 @@ public class ParticipantDto {
     private String champExperience;
     private String champLevel;
     private String championId;
-    private String championName;
+    private String championNameENG;
+    private String championNameKR;
     private String championTransform;
     private String consumablesPurchased;
     private String damageDealtToBuildings;
@@ -190,13 +190,17 @@ public class ParticipantDto {
         this.championId = championId;
     }
 
-    public String getChampionName() {
-        return championName;
+    public String getChampionNameENG() {
+        return championNameENG;
     }
 
-    public void setChampionName(String championName) {
-        this.championName = championName;
+    public void setChampionNameENG(String championNameENG) {
+        this.championNameENG = championNameENG;
     }
+
+    public String getChampionNameKR() { return championNameKR; }
+
+    public void setChampionNameKR(String championNameKR) { this.championNameKR = championNameKR; }
 
     public String getChampionTransform() {
         return championTransform;
