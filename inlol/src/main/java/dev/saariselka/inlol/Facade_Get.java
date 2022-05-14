@@ -108,14 +108,15 @@ public class Facade_Get {
             List<TeamDto> teamDtoList = new ArrayList<>();
 
             for(TeamEntity teamEntity : teamsList) {
+                List<MatchBanEntity> matchBanEntityList = matchBanController.getBans_ByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
 
-                List<MatchBanEntity> bansList = matchBanController.getBans_ByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
-
-                MatchObjectivesEntity objectivesEntity = matchObjectivesController
+                MatchObjectivesEntity matchObjectivesEntity = matchObjectivesController
                         .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
                         .get(0);
 
-                teamDtoList.add(teamDto_assembly.getTeamDto_byEntityAndDto(teamEntity,banDto_assembly.getBanList_byEntity(bansList),objectivesDto_assembly.getObjectivesDto_byEntity(objectivesEntity)));
+                teamDtoList.add(teamDto_assembly.getTeamDto_byEntityAndDto(teamEntity
+                                                                          ,banDto_assembly.getBanList_byEntity(matchBanEntityList)
+                                                                          ,objectivesDto_assembly.getObjectivesDto_byEntity(matchObjectivesEntity)));
             }
 
             //5. Match Participants 정보 생성
