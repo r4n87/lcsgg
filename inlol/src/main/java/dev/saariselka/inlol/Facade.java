@@ -1,6 +1,7 @@
 package dev.saariselka.inlol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.SummonerDto;
 import lombok.AllArgsConstructor;
@@ -93,7 +94,7 @@ public class Facade {
         return summonerDto;
     }
 
-    private void getLeagueInfo(ModelAndView modelAndView, String encryptedSummonerId, HashSet<Object> leagueInfoFromDB) {
+    private void getLeagueInfo(ModelAndView modelAndView, String encryptedSummonerId, List<LeagueEntryDto> leagueInfoFromDB) {
         if(null != leagueInfoFromDB && !leagueInfoFromDB.isEmpty()) {
             setLeagueInfoAtModelAndView(modelAndView, leagueInfoFromDB);
             return;
@@ -104,10 +105,12 @@ public class Facade {
 
     private void getLeagueInfoFromAPI(ModelAndView modelAndView, String encryptedSummonerId) {
         HashSet<Object> leagueInfo = (HashSet<Object>) facade_get.getLeagueInfo(encryptedSummonerId).get("body");
+
         if(!leagueInfo.isEmpty()) {
             facade_set.setLeagueInfoAtDB(leagueInfo);
         }
-        setLeagueInfoAtModelAndView(modelAndView, leagueInfo);
+
+        setLeagueInfoAtModelAndView(modelAndView, facade_get.getLeagueInfoFromDB(encryptedSummonerId));
     }
 
     private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
@@ -154,23 +157,22 @@ public class Facade {
         modelAndView.addObject("summonerName", name);
     }
 
-    private void setLeagueInfoAtModelAndView(ModelAndView modelAndView, HashSet<Object> res) {
-        for (Object re : res) {
-            HashMap<String, String> map = (HashMap) re;
-            String tierInfo = map.get("tier");
+    private void setLeagueInfoAtModelAndView(ModelAndView modelAndView, List<LeagueEntryDto> leagueEntryDtoList) {
+        for (LeagueEntryDto leagueEntryDto : leagueEntryDtoList) {
+            String tierInfo = leagueEntryDto.getTier();
             String tierImg = "";
 
             if (null != tierInfo && !"".equals(tierInfo)) {
                 tierImg = "/images/ranked-emblems/" + tierInfo + ".png";
             }
 
-            String rankInfo = map.get("queueType");
+            String rankInfo = leagueEntryDto.getQueueType();
 
             if ("RANKED_SOLO_5x5".equals(rankInfo)) {
-                modelAndView.addObject("soloRankInfo", map);
+                modelAndView.addObject("soloRankInfo", leagueEntryDto);
                 modelAndView.addObject("soloRankImg", tierImg);
             } else {
-                modelAndView.addObject("flexRankInfo", map);
+                modelAndView.addObject("flexRankInfo", leagueEntryDto);
                 modelAndView.addObject("flexRankImg", tierImg);
             }
         }

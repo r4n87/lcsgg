@@ -136,4 +136,11 @@ public class MatchDto_Assembly {
 
         return matchDto;
     }
+
+    public MatchDto getMatchDto_byDto(MetadataDto metadataDto, InfoDto infoDto) {
+        MatchDto matchDto = new MatchDto();
+        matchDto.setInfo(infoDto);
+        matchDto.setMetadata(metadataDto);
+        return matchDto;
+    }
 }

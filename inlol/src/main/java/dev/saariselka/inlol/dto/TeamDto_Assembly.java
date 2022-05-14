@@ -24,4 +24,17 @@ public class TeamDto_Assembly {
 
         return teamDto;
     }
+
+    public TeamDto getTeamDto_byEntityAndDto(TeamEntity teamEntity, List<BanDto> banDtoList, ObjectivesDto objectivesDto) {
+        TeamDto teamDto = new TeamDto();
+
+        teamDto.setTeamId(String.valueOf(teamEntity.getTeamId().getTeamId()));
+        teamDto.setWin(String.valueOf(teamEntity.isWin()));
+
+        teamDto.setBans(banDtoList);
+
+        teamDto.setObjectives(objectivesDto);
+
+        return  teamDto;
+    }
 }
