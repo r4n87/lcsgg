@@ -78,7 +78,7 @@ public class Facade_Get {
     }
 
     public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) {
-        ArrayList<MatchDto> result = new ArrayList<>();
+        ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
         MetadataDto_Assembly metadataDto_assembly = new MetadataDto_Assembly();
         InfoDto_Assembly infoDto_assembly = new InfoDto_Assembly();
@@ -86,6 +86,7 @@ public class Facade_Get {
         ObjectivesDto_Assembly objectivesDto_assembly = new ObjectivesDto_Assembly();
         TeamDto_Assembly teamDto_assembly = new TeamDto_Assembly();
         MatchDto_Assembly matchDto_assembly = new MatchDto_Assembly();
+        ParticipantDto_Assembly participantDto_assembly = new ParticipantDto_Assembly();
 
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
 
@@ -104,10 +105,10 @@ public class Facade_Get {
             InfoDto infoDto = new InfoDto();
 
             //2. Team 정보 생성
-            List<TeamEntity> teamsList = teamController.getTeams_ByMatchId(matchId);
+            List<TeamEntity> teamEntityList = teamController.getTeams_ByMatchId(matchId);
             List<TeamDto> teamDtoList = new ArrayList<>();
 
-            for(TeamEntity teamEntity : teamsList) {
+            for(TeamEntity teamEntity : teamEntityList) {
                 List<MatchBanEntity> matchBanEntityList = matchBanController.getBans_ByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
 
                 MatchObjectivesEntity matchObjectivesEntity = matchObjectivesController
@@ -124,8 +125,6 @@ public class Facade_Get {
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
-
-            ParticipantDto_Assembly participantDto_assembly = new ParticipantDto_Assembly();
 
             for(MatchParticipantEntity participantEntity : participantsList) {
 
@@ -151,10 +150,10 @@ public class Facade_Get {
 
             matchInfo = matchDto_assembly.getMatchDto_byDto(metadataDto,infoDto);
 
-            result.add(matchInfo);
+            matchDtos.add(matchInfo);
         }
 
-        return result;
+        return matchDtos;
     }
 
     private void sortParticipationDtoList(List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList) {
