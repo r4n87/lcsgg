@@ -87,9 +87,9 @@ public class Facade_Get {
         String dataVersion;
 
         for(MatchParticipantEntity match : matchList) {
-            MatchMasterEntity masterEntity = matchMasterController.getMatchMaster_ByMatchId(match.getMatchParticipantId().getMatchId()).get(0);
-            matchId = masterEntity.getMatchMasterId().getMatchId();
-            dataVersion = masterEntity.getMatchMasterId().getDataVersion();
+            MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMaster_ByMatchId(match.getMatchParticipantId().getMatchId()).get(0);
+            matchId = matchMasterEntity.getMatchMasterId().getMatchId();
+            dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
 
             MatchDto matchInfo = new MatchDto();
             MetadataDto metadataDto = new MetadataDto();
@@ -144,8 +144,8 @@ public class Facade_Get {
 
             summonerInfo.setChampionNameKR(JSONParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
 
-            metadataDto = metadataDto_assembly.getMetadataDto_byEntity(masterEntity,participantsList);
-            infoDto = infoDto_assembly.getInfoDto_byEntityAndDto(masterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+            metadataDto = metadataDto_assembly.getMetadataDto_byEntity(matchMasterEntity,participantsList);
+            infoDto = infoDto_assembly.getInfoDto_byEntityAndDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
 
             matchInfo = matchDto_assembly.getMatchDto_byDto(metadataDto,infoDto);
 
