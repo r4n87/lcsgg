@@ -40,4 +40,18 @@ public class BanDto_Assembly {
 
         return bansDto;
     }
+
+    public List<BanDto> getBanList_byEntity(List<MatchBanEntity> matchBanEntityList) {
+        List<BanDto> banDtoList = new ArrayList<>();
+
+        for(MatchBanEntity banEntity : matchBanEntityList) {
+            BanDto banDto = new BanDto();
+            banDto.setChampionId(String.valueOf(banEntity.getChampionId()));
+            banDto.setPickTurn(String.valueOf(banEntity.getMatchBanId().getPickTurn()));
+
+            banDtoList.add(banDto);
+        }
+
+        return banDtoList;
+    }
 }
