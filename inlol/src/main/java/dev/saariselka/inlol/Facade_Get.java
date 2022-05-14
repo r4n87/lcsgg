@@ -79,6 +79,14 @@ public class Facade_Get {
 
     public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) {
         ArrayList<MatchDto> result = new ArrayList<>();
+
+        MetadataDto_Assembly metadataDto_assembly = new MetadataDto_Assembly();
+        InfoDto_Assembly infoDto_assembly = new InfoDto_Assembly();
+        BanDto_Assembly banDto_assembly = new BanDto_Assembly();
+        ObjectivesDto_Assembly objectivesDto_assembly = new ObjectivesDto_Assembly();
+        TeamDto_Assembly teamDto_assembly = new TeamDto_Assembly();
+        MatchDto_Assembly matchDto_assembly = new MatchDto_Assembly();
+
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
@@ -94,13 +102,6 @@ public class Facade_Get {
             MatchDto matchInfo = new MatchDto();
             MetadataDto metadataDto = new MetadataDto();
             InfoDto infoDto = new InfoDto();
-
-            MetadataDto_Assembly metadataDto_assembly = new MetadataDto_Assembly();
-            InfoDto_Assembly infoDto_assembly = new InfoDto_Assembly();
-            BanDto_Assembly banDto_assembly = new BanDto_Assembly();
-            ObjectivesDto_Assembly objectivesDto_assembly = new ObjectivesDto_Assembly();
-            TeamDto_Assembly teamDto_assembly = new TeamDto_Assembly();
-            MatchDto_Assembly matchDto_assembly = new MatchDto_Assembly();
 
             //2. Team 정보 생성
             List<TeamEntity> teamsList = teamController.getTeams_ByMatchId(matchId);
