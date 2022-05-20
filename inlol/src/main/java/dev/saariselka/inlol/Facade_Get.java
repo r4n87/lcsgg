@@ -3,7 +3,7 @@ package dev.saariselka.inlol;
 import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
-import dev.saariselka.inlol.util.JSONParserForLOL;
+import dev.saariselka.inlol.util.JsonParserForLOL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -11,9 +11,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -143,7 +140,7 @@ public class Facade_Get {
 
             sortParticipationDtoList(blueParticipantDtoList, redParticipantDtoList);
 
-            summonerInfo.setChampionNameKR(JSONParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
+            summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
 
             metadataDto = metadataDto_assembly.getMetadataDto_byEntity(matchMasterEntity,participantsList);
             infoDto = infoDto_assembly.getInfoDto_byEntityAndDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
