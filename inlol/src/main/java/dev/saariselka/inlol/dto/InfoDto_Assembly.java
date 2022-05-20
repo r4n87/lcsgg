@@ -11,9 +11,9 @@ import java.util.TimeZone;
 
 public class InfoDto_Assembly {
 
-    public InfoDto getInfoDto_byEntityAndDto(MatchMasterEntity matchMasterEntity,
-                                             List<TeamDto> teamDtoList, List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList,
-                                             ParticipantDto summonerInfo) {
+    public InfoDto getInfoDtoByEntityAndDto(MatchMasterEntity matchMasterEntity,
+                                            List<TeamDto> teamDtoList, List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList,
+                                            ParticipantDto summonerInfo) {
         InfoDto infoDto = new InfoDto();
 
         //시간 차이 계산

@@ -33,7 +33,7 @@ public class APIKeyController {
     }
 
     @GetMapping(value ="/{category}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public String getAPIKey_ByCategory(@PathVariable("category") String category) {
+    public String getAPIKeyByCategory(@PathVariable("category") String category) {
         List<APIKeyEntity> keys = APIKeyService.findByCategory(category);
 
         if(!keys.isEmpty()) {
