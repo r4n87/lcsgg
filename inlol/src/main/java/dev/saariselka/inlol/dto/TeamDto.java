@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.dto;
 
+import dev.saariselka.inlol.entity.TeamEntity;
+
 import java.util.List;
 
 public class TeamDto {
@@ -16,6 +18,13 @@ public class TeamDto {
         this.objectives = objectives;
         this.teamId = teamId;
         this.win = win;
+    }
+
+    public TeamDto (TeamEntity teamEntity, List<BanDto> banDtoList, ObjectivesDto objectivesDto) {
+        this.teamId = String.valueOf(teamEntity.getTeamId().getTeamId());
+        this.win = String.valueOf(teamEntity.isWin());
+        this.bans = banDtoList;
+        this.objectives = objectivesDto;
     }
 
     public List<BanDto> getBans() {

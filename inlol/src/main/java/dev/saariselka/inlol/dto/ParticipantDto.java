@@ -1,11 +1,11 @@
 package dev.saariselka.inlol.dto;
 
+import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
-@NoArgsConstructor
 @AllArgsConstructor
 public class ParticipantDto {
     private String puuid;
@@ -117,6 +117,121 @@ public class ParticipantDto {
     private String wardsPlaced;
     private String win;
     private Timestamp rrt;
+
+    public ParticipantDto() {
+
+    }
+
+    public ParticipantDto(MatchParticipantEntity matchParticipantEntity) {
+        this.puuid = matchParticipantEntity.getMatchParticipantId().getPuuid();
+        this.dataVersion = matchParticipantEntity.getMatchParticipantId().getDataVersion();
+        this.matchId = matchParticipantEntity.getMatchParticipantId().getMatchId();
+        this.assists = String.valueOf(matchParticipantEntity.getAssists());
+        this.baronKills = String.valueOf(matchParticipantEntity.getBaronKills());
+        this.bountyLevel = String.valueOf(matchParticipantEntity.getBountyLevel());
+        this.champExperience = String.valueOf(matchParticipantEntity.getChampExperience());
+        this.champLevel = String.valueOf(matchParticipantEntity.getChampLevel());
+        this.championId = String.valueOf(matchParticipantEntity.getChampionName());
+        this.championNameENG = matchParticipantEntity.getChampionName();
+        this.championTransform = String.valueOf(matchParticipantEntity.getChampionTransform());
+        this.consumablesPurchased = String.valueOf(matchParticipantEntity.getConsumablesPurchased());
+        this.damageDealtToBuildings = String.valueOf(matchParticipantEntity.getDamageDealtToBuildings());
+        this.damageDealtToObjectives = String.valueOf(matchParticipantEntity.getDamageDealtToObjectives());
+        this.damageDealtToTurrets = String.valueOf(matchParticipantEntity.getDamageDealtToTurrets());
+        this.damageSelfMitigated = String.valueOf(matchParticipantEntity.getDamageSelfMitigated());
+        this.deaths = String.valueOf(matchParticipantEntity.getDeaths());
+        this.detectorWardsPlaced = String.valueOf(matchParticipantEntity.getDetectorWardsPlaced());
+        this.doubleKills = String.valueOf(matchParticipantEntity.getDoubleKills());
+        this.dragonKills = String.valueOf(matchParticipantEntity.getDragonKills());
+        this.firstBloodAssist = String.valueOf(matchParticipantEntity.isFirstBloodAssist());
+        this.firstBloodKill = String.valueOf(matchParticipantEntity.isFirstBloodKill());
+        this.firstTowerAssist = String.valueOf(matchParticipantEntity.isFirstTowerAssist());
+        this.firstTowerKill = String.valueOf(matchParticipantEntity.isFirstTowerKill());
+        this.gameEndedInEarlySurrender = String.valueOf(matchParticipantEntity.isGameEndedInEarlySurrender());
+        this.gameEndedInSurrender = String.valueOf(matchParticipantEntity.isGameEndedInSurrender());
+        this.goldEarned = String.valueOf(matchParticipantEntity.getGoldEarned());
+        this.goldSpent = String.valueOf(matchParticipantEntity.getGoldSpent());
+        this.individualPosition = matchParticipantEntity.getIndividualPosition();
+        this.inhibitorKills = String.valueOf(matchParticipantEntity.getInhibitorKills());
+        this.inhibitorTakedowns = String.valueOf(matchParticipantEntity.getInhibitorTakedowns());
+        this.inhibitorsLost = String.valueOf(matchParticipantEntity.getInhibitorsLost());
+        this.item0 = String.valueOf(matchParticipantEntity.getItem0());
+        this.item1 = String.valueOf(matchParticipantEntity.getItem1());
+        this.item2 = String.valueOf(matchParticipantEntity.getItem2());
+        this.item3 = String.valueOf(matchParticipantEntity.getItem3());
+        this.item4 = String.valueOf(matchParticipantEntity.getItem4());
+        this.item5 = String.valueOf(matchParticipantEntity.getItem5());
+        this.item6 = String.valueOf(matchParticipantEntity.getItem6());
+        this.itemsPurchased = String.valueOf(matchParticipantEntity.getItemsPurchased());
+        this.killingSprees = String.valueOf(matchParticipantEntity.getKillingSprees());
+        this.kills = String.valueOf(matchParticipantEntity.getKills());
+        this.lane = matchParticipantEntity.getLane();
+        this.largestCriticalStrike = String.valueOf(matchParticipantEntity.getLargestCriticalStrike());
+        this.largestKillingSpree = String.valueOf(matchParticipantEntity.getLargestKillingSpree());
+        this.largestMultiKill = String.valueOf(matchParticipantEntity.getLargestMultiKill());
+        this.longestTimeSpentLiving = String.valueOf(matchParticipantEntity.getLongestTimeSpentLiving());
+        this.magicDamageDealt = String.valueOf(matchParticipantEntity.getMagicDamageDealt());
+        this.magicDamageDealtToChampions = String.valueOf(matchParticipantEntity.getMagicDamageDealtToChampions());
+        this.magicDamageTaken = String.valueOf(matchParticipantEntity.getMagicDamageTaken());
+        this.neutralMinionsKilled = String.valueOf(matchParticipantEntity.getNeutralMinionsKilled());
+        this.nexusKills = String.valueOf(matchParticipantEntity.getNexusKills());
+        this.nexusLost = String.valueOf(matchParticipantEntity.getNexusLost());
+        this.nexusTakedowns = String.valueOf(matchParticipantEntity.getNexusTakedowns());
+        this.objectivesStolen = String.valueOf(matchParticipantEntity.getObjectivesStolen());
+        this.objectivesStolenAssists = String.valueOf(matchParticipantEntity.getObjectivesStolenAssists());
+        this.participantId = String.valueOf(matchParticipantEntity.getParticipantId());
+        this.pentaKills = String.valueOf(matchParticipantEntity.getPentaKills());
+        this.physicalDamageDealt = String.valueOf(matchParticipantEntity.getPhysicalDamageDealt());
+        this.physicalDamageDealtToChampions = String.valueOf(matchParticipantEntity.getPhysicalDamageDealtToChampions());
+        this.physicalDamageTaken = String.valueOf(matchParticipantEntity.getPhysicalDamageTaken());
+        this.profileIcon = String.valueOf(matchParticipantEntity.getProfileIcon());
+        this.quadraKills = String.valueOf(matchParticipantEntity.getQuadraKills());
+        this.riotIdName = matchParticipantEntity.getRiotIdName();
+        this.riotIdTagline = matchParticipantEntity.getRiotIdTagline();
+        this.role = matchParticipantEntity.getRole();
+        this.sightWardsBoughtInGame = String.valueOf(matchParticipantEntity.getSightWardsBoughtInGame());
+        this.spell1Casts = String.valueOf(matchParticipantEntity.getSpell1Casts());
+        this.spell2Casts = String.valueOf(matchParticipantEntity.getSpell2Casts());
+        this.spell3Casts = String.valueOf(matchParticipantEntity.getSpell3Casts());
+        this.spell4Casts = String.valueOf(matchParticipantEntity.getSpell4Casts());
+        this.summoner1Casts = String.valueOf(matchParticipantEntity.getSummoner1Casts());
+        this.summoner1Id = String.valueOf(matchParticipantEntity.getSummoner1Id());
+        this.summoner2Casts = String.valueOf(matchParticipantEntity.getSummoner2Casts());
+        this.summoner2Id = String.valueOf(matchParticipantEntity.getSummoner2Id());
+        this.summonerId = matchParticipantEntity.getSummonerId();
+        this.summonerLevel = String.valueOf(matchParticipantEntity.getSummonerLevel());
+        this.summonerName = matchParticipantEntity.getSummonerName();
+        this.teamEarlySurrendered = String.valueOf(matchParticipantEntity.isTeamEarlySurrendered());
+        this.teamId = String.valueOf(matchParticipantEntity.getTeamId());
+        this.teamPosition = matchParticipantEntity.getTeamPosition();
+        this.timeCCingOthers = String.valueOf(matchParticipantEntity.getTimeCCingOthers());
+        this.timePlayed = String.valueOf(matchParticipantEntity.getTimePlayed());
+        this.totalDamageDealt = String.valueOf(matchParticipantEntity.getTotalDamageDealt());
+        this.totalDamageDealtToChampions = String.valueOf(matchParticipantEntity.getTotalDamageDealtToChampions());
+        this.totalDamageShieldedOnTeammates = String.valueOf(matchParticipantEntity.getTotalDamageShieldedOnTeammates());
+        this.totalDamageTaken = String.valueOf(matchParticipantEntity.getTotalDamageTaken());
+        this.totalHeal = String.valueOf(matchParticipantEntity.getTotalHeal());
+        this.totalHealsOnTeammates = String.valueOf(matchParticipantEntity.getTotalHealsOnTeammates());
+        this.totalMinionsKilled = String.valueOf(matchParticipantEntity.getTotalMinionsKilled());
+        this.totalTimeCCDealt = String.valueOf(matchParticipantEntity.getTotalTimeCCDealt());
+        this.totalTimeSpentDead = String.valueOf(matchParticipantEntity.getTotalTimeSpentDead());
+        this.totalUnitsHealed = String.valueOf(matchParticipantEntity.getTotalUnitsHealed());
+        this.tripleKills = String.valueOf(matchParticipantEntity.getTripleKills());
+        this.trueDamageDealt = String.valueOf(matchParticipantEntity.getTrueDamageDealt());
+        this.trueDamageDealtToChampions = String.valueOf(matchParticipantEntity.getTrueDamageDealtToChampions());
+        this.trueDamageTaken = String.valueOf(matchParticipantEntity.getTrueDamageTaken());
+        this.turretKills = String.valueOf(matchParticipantEntity.getTurretKills());
+        this.turretTakedowns = String.valueOf(matchParticipantEntity.getTurretTakedowns());
+        this.turretsLost = String.valueOf(matchParticipantEntity.getTurretsLost());
+        this.unrealKills = String.valueOf(matchParticipantEntity.getUnrealKills());
+        this.visionScore = String.valueOf(matchParticipantEntity.getVisionScore());
+        this.visionWardsBoughtInGame = String.valueOf(matchParticipantEntity.getVisionWardsBoughtInGame());
+        this.wardsKilled = String.valueOf(matchParticipantEntity.getWardsKilled());
+        this.wardsPlaced = String.valueOf(matchParticipantEntity.getWardsPlaced());
+        this.win = String.valueOf(matchParticipantEntity.isWin());
+        this.rrt = matchParticipantEntity.getRrt();
+
+    }
 
     public String getPuuid() {
         return puuid;

@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.dto;
 
+import dev.saariselka.inlol.entity.LeagueEntryEntity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,22 @@ public class LeagueEntryDto {
     boolean freshBlood;
     boolean inactive;
     //MiniSeriesDto miniSeries;
+
+    public LeagueEntryDto (LeagueEntryEntity leagueEntryEntity) {
+        this.leagueId = leagueEntryEntity.getLeagueId();
+        this.summonerId = leagueEntryEntity.getLeagueEntryId().getSummonerId();
+        this.summonerName = leagueEntryEntity.getSummonerName();
+        this.queueType = leagueEntryEntity.getLeagueEntryId().getQueueType();
+        this.tier = leagueEntryEntity.getTier();
+        this.rank = leagueEntryEntity.getRanks();
+        this.leaguePoints = leagueEntryEntity.getLeaguePoints();
+        this.wins = leagueEntryEntity.getWins();
+        this.losses = leagueEntryEntity.getLosses();
+        this.hotStreak = leagueEntryEntity.isHotStreak();
+        this.veteran = leagueEntryEntity.isVeteran();
+        this.freshBlood = leagueEntryEntity.isFreshBlood();
+        this.inactive = leagueEntryEntity.isInactive();
+    }
 
     public String getLeagueId() {
         return leagueId;
