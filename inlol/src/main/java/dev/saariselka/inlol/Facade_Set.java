@@ -260,14 +260,12 @@ public class Facade_Set {
                 Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
     }
 
-    public void setLeagueInfoAtDB(HashSet<Object> leagueInfo) {
+    public void setLeagueInfoAtDB(HashSet<Object> leagueInfos) {
         // parsing
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        Iterator<Object> it = leagueInfo.iterator();
-        while(it.hasNext())
-        {
-            LinkedHashMap<String, Object> data = (LinkedHashMap) it.next();
+        for(Object leagueInfo : leagueInfos) {
+            LinkedHashMap<String, Object> data = (LinkedHashMap) leagueInfo;
 
             // DB Insert
             leagueEntryController.insertLeagueEntryInfo(data.get("summonerId").toString(), data.get("queueType").toString(), data.get("leagueId").toString(),
@@ -279,8 +277,7 @@ public class Facade_Set {
 
             LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
 
-            if(miniSeriesData != null)
-            {
+            if (miniSeriesData != null) {
                 leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
                         data.get("summonerId").toString(),
                         data.get("queueType").toString(),
@@ -291,6 +288,5 @@ public class Facade_Set {
                         timestamp);
             }
         }
-
     }
 }

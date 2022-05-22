@@ -169,14 +169,11 @@ public class Facade {
                 modelAndView.addObject("soloRankInfo", leagueEntryDto);
                 modelAndView.addObject("soloRankImg", tierImg);
 
-                if(leagueEntryDto.getMiniSeries() != null)
-                {
+                if(leagueEntryDto.getMiniSeries().getSummonerId() != null) {
                     modelAndView.addObject("soloRankIsIncrement","true");
 
                     modelAndView.addObject("soloRankIncrementProgress",leagueEntryDto.getMiniSeries().getProgress());
-                }
-                else
-                {
+                } else {
                     modelAndView.addObject("soloRankIsIncrement","false");
                 }
             } else {
