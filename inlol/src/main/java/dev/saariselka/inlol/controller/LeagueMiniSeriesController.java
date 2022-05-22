@@ -22,7 +22,7 @@ public class LeagueMiniSeriesController {
     @Autowired
     LeagueMiniSeriesService leagueMiniSeriesService;
 
-    public List<LeagueMiniSeriesEntity> getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(String summonerId, String queueType) {
+    public LeagueMiniSeriesEntity getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(String summonerId, String queueType) {
         return leagueMiniSeriesService.findByLeagueMiniSeriesId(new LeagueMiniSeriesId(summonerId, queueType));
     }
 

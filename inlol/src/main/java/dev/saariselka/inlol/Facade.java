@@ -171,10 +171,34 @@ public class Facade {
             if ("RANKED_SOLO_5x5".equals(rankInfo)) {
                 modelAndView.addObject("soloRankInfo", leagueEntryDto);
                 modelAndView.addObject("soloRankImg", tierImg);
+
+                if(leagueEntryDto.getMiniSeries() != null)
+                {
+                    modelAndView.addObject("soloRankIsIncrement","true");
+
+                    modelAndView.addObject("soloRankIncrementProgress",leagueEntryDto.getMiniSeries().getProgress());
+                }
+                else
+                {
+                    modelAndView.addObject("soloRankIsIncrement","false");
+                }
             } else {
                 modelAndView.addObject("flexRankInfo", leagueEntryDto);
                 modelAndView.addObject("flexRankImg", tierImg);
+
+                if(leagueEntryDto.getMiniSeries() != null)
+                {
+                    modelAndView.addObject("flexRankIsIncrement","true");
+
+                    modelAndView.addObject("flexRankIncrementProgress",leagueEntryDto.getMiniSeries().getProgress());
+                }
+                else
+                {
+                    modelAndView.addObject("flexRankIsIncrement","false");
+                }
             }
+
+
         }
     }
 }
