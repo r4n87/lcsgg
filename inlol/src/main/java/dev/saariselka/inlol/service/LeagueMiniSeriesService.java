@@ -23,7 +23,7 @@ public class LeagueMiniSeriesService {
         return miniSeriesEntities;
     }
 
-    public List<LeagueMiniSeriesEntity> findByLeagueMiniSeriesId(LeagueMiniSeriesId leagueMiniSeriesId) {
+    public LeagueMiniSeriesEntity findByLeagueMiniSeriesId(LeagueMiniSeriesId leagueMiniSeriesId) {
         return leagueMiniSeriesRepository.findByLeagueMiniSeriesId(leagueMiniSeriesId);
     }
 

@@ -20,9 +20,9 @@ public class LeagueEntryDto {
     boolean veteran;
     boolean freshBlood;
     boolean inactive;
-    //MiniSeriesDto miniSeries;
+    LeagueMiniSeriesDto miniSeries;
 
-    public LeagueEntryDto (LeagueEntryEntity leagueEntryEntity) {
+    public LeagueEntryDto (LeagueEntryEntity leagueEntryEntity, LeagueMiniSeriesDto leagueMiniSeriesDto) {
         this.leagueId = leagueEntryEntity.getLeagueId();
         this.summonerId = leagueEntryEntity.getLeagueEntryId().getSummonerId();
         this.summonerName = leagueEntryEntity.getSummonerName();
@@ -36,6 +36,7 @@ public class LeagueEntryDto {
         this.veteran = leagueEntryEntity.isVeteran();
         this.freshBlood = leagueEntryEntity.isFreshBlood();
         this.inactive = leagueEntryEntity.isInactive();
+        this.miniSeries = leagueMiniSeriesDto;
     }
 
     public String getLeagueId() {
@@ -142,11 +143,11 @@ public class LeagueEntryDto {
         this.inactive = inactive;
     }
 
-//    public MiniSeriesDto getMiniSeries() {
-//        return miniSeries;
-//    }
-//
-//    public void setMiniSeries(MiniSeriesDto miniSeries) {
-//        this.miniSeries = miniSeries;
-//    }
+    public LeagueMiniSeriesDto getMiniSeries() {
+        return miniSeries;
+    }
+
+    public void setMiniSeries(LeagueMiniSeriesDto miniSeries) {
+        this.miniSeries = miniSeries;
+    }
 }

@@ -34,8 +34,10 @@ public class Facade_Get {
     MatchObjectivesController matchObjectivesController;
     @Autowired
     LeagueEntryController leagueEntryController;
+    @Autowired
+    LeagueMiniSeriesController leagueMiniSeriesController;
 
-    private API api;
+    private final API api;
     private String apiKey;
 
     public Facade_Get()
@@ -294,7 +296,16 @@ public class Facade_Get {
         List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntries_BySummonerId(summonerId);
 
         for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
-            LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity);
+
+            LeagueMiniSeriesEntity leagueMiniSeriesEntity = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(summonerId,leagueEntryEntity.getLeagueEntryId().getQueueType());
+            LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto();
+
+            if(leagueMiniSeriesEntity != null)
+            {
+                leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
+            }
+
+            LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity, leagueMiniSeriesDto);
             result.add(leagueEntryDto);
         }
 

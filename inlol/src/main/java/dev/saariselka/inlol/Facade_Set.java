@@ -30,6 +30,8 @@ public class Facade_Set {
     MatchObjectivesController matchObjectivesController;
     @Autowired
     LeagueEntryController leagueEntryController;
+    @Autowired
+    LeagueMiniSeriesController leagueMiniSeriesController;
 
     public void setMatchInfoAtDB(HashMap<String, Object> matchInfo) throws JsonProcessingException {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -223,22 +225,36 @@ public class Facade_Set {
                 Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
     }
 
-    public void setLeagueInfoAtDB(HashSet<Object> result) {
+    public void setLeagueInfoAtDB(HashSet<Object> leagueInfo) {
         // parsing
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        Iterator<Object> it = result.iterator();
+        Iterator<Object> it = leagueInfo.iterator();
         while(it.hasNext())
         {
             LinkedHashMap<String, Object> data = (LinkedHashMap) it.next();
+
             // DB Insert
             leagueEntryController.insertLeagueEntryInfo(data.get("summonerId").toString(), data.get("queueType").toString(), data.get("leagueId").toString(),
                     data.get("summonerName").toString(), data.get("tier").toString(), data.get("rank").toString(), Integer.parseInt(String.valueOf(data.get("leaguePoints"))),
                     Integer.parseInt(String.valueOf(data.get("wins"))), Integer.parseInt(String.valueOf(data.get("losses"))),
                     Boolean.parseBoolean(data.get("hotStreak").toString()), Boolean.parseBoolean(data.get("veteran").toString()),
                     Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
-                    timestamp
-            );
+                    timestamp);
+
+            LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
+
+            if(miniSeriesData != null)
+            {
+                leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
+                        data.get("summonerId").toString(),
+                        data.get("queueType").toString(),
+                        Integer.parseInt(String.valueOf(miniSeriesData.get("losses"))),
+                        miniSeriesData.get("progress").toString(),
+                        Integer.parseInt(String.valueOf(miniSeriesData.get("target"))),
+                        Integer.parseInt(String.valueOf(miniSeriesData.get("wins"))),
+                        timestamp);
+            }
         }
 
     }

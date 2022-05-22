@@ -1419,4 +1419,26 @@ b, strong {
     background: #81c147;
     color: rgb(242, 242, 242);
 }
-
+.css-13uv2u8 .wrapper .info .series .title {
+    margin-bottom: 5px;
+    color: rgb(135, 146, 146);
+    font-size: 11px;
+    font-weight: normal;
+}
+.css-13uv2u8 .wrapper .info .series .content {
+    width: 120px;
+    height: 17px;
+    background-image: url(https://s-lol-web.op.gg/static/images/site/spectate/pro/icon-promoBattle-slot.png);
+    background-size: 120px 17px;
+}
+.css-13uv2u8 .wrapper .info .series .content img:nth-of-type(1) {
+    margin-left: 0px;
+}
+.css-13uv2u8 .wrapper .info .series .content img {
+    margin-left: 9px;
+}
+img {
+     border: 0px;
+     vertical-align: middle;
+     max-width: 100%;
+}

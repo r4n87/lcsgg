@@ -72,27 +72,39 @@
                                 <span class="lp" th:text="${soloRankInfo.getLeaguePoints()} + LP"></span>
                                 <span class="win-lose" th:text="|&nbsp;&#47; ${soloRankInfo.getWins()}승 ${soloRankInfo.getLosses()}패|"><br>승률 53%</span>
                             </div>
+                            <div th:if="${soloRankIsIncrement} == 'true'">
+                                <div class="series">
+                                    <div class="title"> 승급전 진행중 </div>
+                                    <div class="content">
+                                        <tr th:each="seriesResult : ${soloRankIncrementProgress}">
+                                            <td th:if="${seriesResult} != 'N'">
+                                                <img th:src="|/images/ranked-miniseries/icon-promoBattle-${seriesResult}.png|">
+                                            </td>
+                                        </tr>
+                                    </div>
+                                </div>
+                            </div>
 <!--                            <div class="league-name">빅토르의 그림자들</div>-->
                         </div>
                     </div>
                 </div>
-                <div class="css-rxctzc e135kpg1">
-                    <div class="wrapper">
-                        <div class="medal">
-                            <div style="position: relative" class>
-                                <img th:src="${flexRankImg}">
-                            </div>
-                        </div>
-                        <div class="info">
-                            <div class="type">자유랭크</div>
-                            <div class="tier-rank" th:text="${flexRankInfo.getTier()} + ${flexRankInfo.getRank()}"></div>
-                            <div class="tier-info">
-                                <span class="lp" th:text="${flexRankInfo.getLeaguePoints()} + LP"></span>
-                                <span class="win-lose" th:text="|&nbsp;&#47; ${flexRankInfo.getWins()}승 ${flexRankInfo.getLosses()}패|"><br>승률 48%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="css-rxctzc e135kpg1">-->
+<!--                    <div class="wrapper">-->
+<!--                        <div class="medal">-->
+<!--                            <div style="position: relative" class>-->
+<!--                                <img th:src="${flexRankImg}">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="info">-->
+<!--                            <div class="type">자유랭크</div>-->
+<!--                            <div class="tier-rank" th:text="${flexRankInfo.getTier()} + ${flexRankInfo.getRank()}"></div>-->
+<!--                            <div class="tier-info">-->
+<!--                                <span class="lp" th:text="${flexRankInfo.getLeaguePoints()} + LP"></span>-->
+<!--                                <span class="win-lose" th:text="|&nbsp;&#47; ${flexRankInfo.getWins()}승 ${flexRankInfo.getLosses()}패|"><br>승률 48%</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 <!--                <div class="css-1s4j24f exxtup3"> </div>-->
 <!--                <div class="css-19xo3qz etgm35o1"> </div>-->
 <!--                <div class="css-b9il6f etgm35o1"> </div>-->
