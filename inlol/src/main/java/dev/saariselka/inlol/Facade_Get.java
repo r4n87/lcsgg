@@ -36,6 +36,8 @@ public class Facade_Get {
     LeagueEntryController leagueEntryController;
     @Autowired
     LeagueMiniSeriesController leagueMiniSeriesController;
+    @Autowired
+    MatchPerksController matchPerksController;
 
     private final API api;
     private String apiKey;
@@ -122,12 +124,16 @@ public class Facade_Get {
             ParticipantDto summonerInfo = new ParticipantDto();
 
             for(MatchParticipantEntity participantEntity : participantsList) {
+                List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participantEntity.getMatchParticipantId().getPuuid());
+                MatchPerksEntity perksEntity = (0 == perksList.size())
+                                                ? new MatchPerksEntity() : perksList.get(0);
+                PerksDto perksDto = new PerksDto(perksEntity);
+                ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
+
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
-                    summonerInfo = new ParticipantDto(participantEntity);
+                    summonerInfo = participantDto;
                     summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
                 }
-
-                ParticipantDto participantDto = new ParticipantDto(participantEntity);
 
                 if("100".equals(participantDto.getTeamId())) {
                     blueParticipantDtoList.add(participantDto);

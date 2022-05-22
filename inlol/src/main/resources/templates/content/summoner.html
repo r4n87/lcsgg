@@ -148,13 +148,13 @@
                                     </div>
                                     <div class="runes">
                                         <div class="rune">
-                                            <div class="" style="position: relative;">
-                                                <img src="https://opgg-static.akamaized.net/images/lol/perk/8351.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="빙결 강화">
+                                            <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getPrimaryPerk1()} != '0'">
+                                                <img th:src="|https://opgg-static.akamaized.net/images/lol/perk/${matchInfo.info.summoner.getPerks()?.getPrimaryPerk1()}.png|" th:alt="${matchInfo.info.summoner.getPerks()?.getPrimaryPerk1()}">
                                             </div>
                                         </div>
                                         <div class="rune">
-                                            <div class="" style="position: relative;">
-                                                <img src="https://opgg-static.akamaized.net/images/lol/perk/8351.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="빙결 강화">
+                                            <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getSubStyle()} != '0'">
+                                                <img th:src="|https://opgg-static.akamaized.net/images/lol/perkStyle/${matchInfo.info.summoner.getPerks()?.getSubStyle()}.png|" th:alt="${matchInfo.info.summoner.getPerks()?.getSubStyle()}">
                                             </div>
                                         </div>
                                     </div>
@@ -276,8 +276,16 @@
                                         <div class="spell"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점멸"></div></div>
                                     </div>
                                     <div class="runes">
-                                        <div class="rune"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/perk/8351.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="빙결 강화"></div></div>
-                                        <div class="rune"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/perkStyle/8400.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="결의"></div></div>
+                                        <div class="rune">
+                                            <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getPrimaryPerk1()} != '0'">
+                                                <img th:src="|https://opgg-static.akamaized.net/images/lol/perk/${matchInfo.info.summoner.getPerks()?.getPrimaryPerk1()}.png|" th:alt="${matchInfo.info.summoner.getPerks()?.getPrimaryPerk1()}">
+                                            </div>
+                                        </div>
+                                        <div class="rune">
+                                            <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getSubStyle()} != '0'">
+                                                <img th:src="|https://opgg-static.akamaized.net/images/lol/perkStyle/${matchInfo.info.summoner.getPerks()?.getSubStyle()}.png|" th:alt="${matchInfo.info.summoner.getPerks()?.getSubStyle()}">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
