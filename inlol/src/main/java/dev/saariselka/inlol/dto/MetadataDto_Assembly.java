@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MetadataDto_Assembly {
 
-    public MetadataDto getMetadataDto_byEntity(MatchMasterEntity matchMasterEntity, List<MatchParticipantEntity> participantsList) {
+    public MetadataDto getMetadataDtoByEntity(MatchMasterEntity matchMasterEntity, List<MatchParticipantEntity> participantsList) {
         MetadataDto metadataDto = new MetadataDto();
         List<String> participantsPuuidList = new ArrayList<>();
 

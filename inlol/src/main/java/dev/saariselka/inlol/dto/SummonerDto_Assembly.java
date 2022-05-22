@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 
 public class SummonerDto_Assembly {
 
-    public SummonerDto getSummonerDto_byEntity(SummonerEntity summonerEntity) {
+    public SummonerDto getSummonerDtoByEntity(SummonerEntity summonerEntity) {
         SummonerDto summonerDto = new SummonerDto();
 
         String refreshAgoTime = null;

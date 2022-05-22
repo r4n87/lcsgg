@@ -45,7 +45,7 @@ public class Facade_Get {
 
     public HashMap<String, Object> getMatchInfo(ArrayList<String> matchList, int i) {
 
-        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
+        apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -112,9 +112,9 @@ public class Facade_Get {
                         .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
                         .get(0);
 
-                teamDtoList.add(teamDto_assembly.getTeamDto_byEntityAndDto(teamEntity
-                                                                          ,banDto_assembly.getBanList_byEntity(matchBanEntityList)
-                                                                          ,objectivesDto_assembly.getObjectivesDto_byEntity(matchObjectivesEntity)));
+                teamDtoList.add(teamDto_assembly.getTeamDtoByEntityAndDto(teamEntity
+                                                                          ,banDto_assembly.getBanDtoListByEntity(matchBanEntityList)
+                                                                          ,objectivesDto_assembly.getObjectivesDtoByEntity(matchObjectivesEntity)));
             }
 
             //5. Match Participants 정보 생성
@@ -126,10 +126,10 @@ public class Facade_Get {
             for(MatchParticipantEntity participantEntity : participantsList) {
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
-                    summonerInfo = participantDto_assembly.getParticipantDto_byEntity(participantEntity);
+                    summonerInfo = participantDto_assembly.getParticipantDtoByEntity(participantEntity);
                 }
 
-                ParticipantDto participantDto = participantDto_assembly.getParticipantDto_byEntity(participantEntity);
+                ParticipantDto participantDto = participantDto_assembly.getParticipantDtoByEntity(participantEntity);
 
                 if("100".equals(participantDto.getTeamId())) {
                     blueParticipantDtoList.add(participantDto);
@@ -142,10 +142,10 @@ public class Facade_Get {
 
             summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
 
-            metadataDto = metadataDto_assembly.getMetadataDto_byEntity(matchMasterEntity,participantsList);
-            infoDto = infoDto_assembly.getInfoDto_byEntityAndDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+            metadataDto = metadataDto_assembly.getMetadataDtoByEntity(matchMasterEntity,participantsList);
+            infoDto = infoDto_assembly.getInfoDtoByEntityAndDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
 
-            matchInfo = matchDto_assembly.getMatchDto_byDto(metadataDto,infoDto);
+            matchInfo = matchDto_assembly.getMatchDtoByMatadataDtoAndInfoDto(metadataDto,infoDto);
 
             matchDtos.add(matchInfo);
         }
@@ -183,7 +183,7 @@ public class Facade_Get {
     }
 
     public ArrayList<String> getMatchList(String name, long startTime) {
-        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
+        apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
         ArrayList<String> matchList = new ArrayList<>();
@@ -227,7 +227,7 @@ public class Facade_Get {
 
     public HashMap<String, Object> getSummonerInfo(String name) {
 
-        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
+        apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -265,13 +265,13 @@ public class Facade_Get {
 
         SummonerEntity summoner = summonerController.getSummoner(puuid).get(0);
 
-        summonerDto = summonerDto_assembly.getSummonerDto_byEntity(summoner);
+        summonerDto = summonerDto_assembly.getSummonerDtoByEntity(summoner);
 
         return summonerDto;
     }
 
     public HashMap<String, Object> getLeagueInfo(String encryptedSummonerId) {
-        apiKey = apiKeyController.getAPIKey_ByCategory("Product");
+        apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
 
@@ -306,7 +306,7 @@ public class Facade_Get {
         LeagueEntryDto_Assembly leagueEntryDto_assembly = new LeagueEntryDto_Assembly();
 
         for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
-            result.add(leagueEntryDto_assembly.getLeagueEntryDto_byEntity(leagueEntryEntity));
+            result.add(leagueEntryDto_assembly.getLeagueEntryDtoByEntity(leagueEntryEntity));
         }
 
         return result;
