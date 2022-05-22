@@ -123,26 +123,96 @@
                                         <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
-                                        <div class="spell"></div>
-                                        <div class="spell"></div>
+                                        <div class="spell">
+                                            <div class="" style="position: relative;">
+                                                <img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerDot.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점화">
+                                            </div>
+                                        </div>
+                                        <div class="spell">
+                                            <div class="" style="position: relative;">
+                                                <img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerDot.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점화">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="runes">
-                                        <div class="rune"></div>
-                                        <div class="rune"></div>
+                                        <div class="rune">
+                                            <div class="" style="position: relative;">
+                                                <img src="https://opgg-static.akamaized.net/images/lol/perk/8351.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="빙결 강화">
+                                            </div>
+                                        </div>
+                                        <div class="rune">
+                                            <div class="" style="position: relative;">
+                                                <img src="https://opgg-static.akamaized.net/images/lol/perk/8351.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="빙결 강화">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
                                 <div class="kda">
-                                    <div class="k-d-a"></div>
-                                    <div class="ratio"></div>
+                                    <div class="k-d-a"><span>1</span> / <span class="d">6</span> / <span>19</span></div>
+                                    <div class="ratio"><span>3.33:1</span> 평점</div>
                                 </div>
                                 <div class="stats">
-                                    <div class="level"></div>
-                                    <div class="cs"></div>
-                                    <div class="kill-participantion"></div>
-                                    <div class="mmr"></div>
+                                    <div class="level">레벨 14</div>
+                                    <div class="cs"><div class="" style="position: relative;">41 (1.2)</div>CS</div>
+                                    <div class="kill-participantion"><div class="" style="position: relative;">킬관여 54%</div></div>
+                                    <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
                                 </div>
-                                <div class="items"></div>
+                                <div class="items">
+                                   <div>
+                                       <div class="item">
+                                           <ul>
+                                               <li>
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem0()} != '0'">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem0()}.png|">
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem1()} != '0'">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem1()}.png|">
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem2()} != '0'">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem2()}.png|">
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem3()} != '0'">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem3()}.png|">
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem4()} != '0'">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem4()}.png|">
+                                                   </div>
+                                               </li>
+                                               <li>
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem5()} != '0'">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem5()}.png|">
+                                                   </div>
+                                               </li>
+                                           </ul>
+                                           <div>
+                                               <div class="ward">
+                                                   <div class="" style="position: relative;">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem6()}.png|">
+                                                   </div>
+                                               </div>
+                                               <div class="build">
+                                                   <div class="" style="position: relative;">
+                                                       <button>
+                                                           <img src="https://s-lol-web.op.gg/static/images/icon/common/icon-buildblue-p.png?v=1652951865197" alt="build">
+                                                       </button>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                                    <div class="control">
+                                        <img src="https://s-lol-web.op.gg/static/images/icon/common/icon-ward-blue.png?v=1652951865197" alt="control ward"> 제어 와드 14
+                                    </div>
+                                </div>
                                 <div class="participants">
                                     <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
@@ -190,26 +260,80 @@
                                         <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
-                                        <div class="spell"></div>
-                                        <div class="spell"></div>
+                                        <div class="spell"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerDot.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점화"></div></div>
+                                        <div class="spell"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점멸"></div></div>
                                     </div>
                                     <div class="runes">
-                                        <div class="rune"></div>
-                                        <div class="rune"></div>
+                                        <div class="rune"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/perk/8351.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="빙결 강화"></div></div>
+                                        <div class="rune"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/perkStyle/8400.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="결의"></div></div>
                                     </div>
                                     <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
                                 <div class="kda">
-                                    <div class="k-d-a"></div>
-                                    <div class="ratio"></div>
+                                    <div class="k-d-a"><span>3</span> / <span class="d">6</span> / <span>5</span></div>
+                                    <div class="ratio"><span>1.33:1</span> 평점</div>
                                 </div>
                                 <div class="stats">
-                                    <div class="level"></div>
-                                    <div class="cs"></div>
-                                    <div class="kill-participantion"></div>
-                                    <div class="mmr"></div>
+                                    <div class="level">레벨 10</div>
+                                    <div class="cs"><div class="" style="position: relative;">28 (1.2)</div>CS</div>
+                                    <div class="kill-participantion"><div class="" style="position: relative;">킬관여 57%</div></div>
+                                    <div class="mmr"><span>매치 평균</span><br><b>silver 2</b></div>
                                 </div>
-                                <div class="items"></div>
+                                <div class="items">
+                                    <div>
+                                        <div class="item">
+                                            <ul>
+                                                <li>
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem0()} != '0'">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem0()}.png|">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem1()} != '0'">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem1()}.png|">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem2()} != '0'">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem2()}.png|">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem3()} != '0'">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem3()}.png|">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem4()} != '0'">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem4()}.png|">
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem5()} != '0'">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem5()}.png|">
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div>
+                                                <div class="ward">
+                                                    <div class="" style="position: relative;">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem6()}.png|">
+                                                    </div>
+                                                </div>
+                                                <div class="build">
+                                                    <div class="" style="position: relative;">
+                                                        <button>
+                                                            <img src="https://s-lol-web.op.gg/static/images/icon/common/icon-buildred-p.png?v=1652951865197" alt="build">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control">
+                                        <img src="https://s-lol-web.op.gg/static/images/icon/common/icon-ward-red.png?v=1652951865197" alt="control ward">제어 와드 14
+                                    </div>
+                                </div>
                                 <div class="participants">
                                     <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">

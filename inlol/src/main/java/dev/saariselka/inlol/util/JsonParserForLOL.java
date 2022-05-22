@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 // TODO : exception 부분 리팩토링 필요
-public class JSONParserForLOL {
+public class JsonParserForLOL {
     private static JsonParser jsonParser = new JsonParser();
 
     public static String getKRChampionNameByENGChampionName(String championName) {

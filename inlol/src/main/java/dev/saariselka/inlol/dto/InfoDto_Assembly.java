@@ -1,7 +1,7 @@
 package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.entity.MatchMasterEntity;
-import dev.saariselka.inlol.util.JSONParserForLOL;
+import dev.saariselka.inlol.util.JsonParserForLOL;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -42,7 +42,7 @@ public class InfoDto_Assembly {
         infoDto.setGameEndTimestamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
         infoDto.setGameId(matchMasterEntity.getGameId());
         //infoDto.setGameMode(masterEntity.getGameMode());
-        infoDto.setGameMode(JSONParserForLOL.getKRGameModeByQueueId(matchMasterEntity.getQueueId()));
+        infoDto.setGameMode(JsonParserForLOL.getKRGameModeByQueueId(matchMasterEntity.getQueueId()));
         infoDto.setGameName(matchMasterEntity.getGameName());
         infoDto.setGameStartTimeStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
         infoDto.setGameType(matchMasterEntity.getGameType());
