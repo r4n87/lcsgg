@@ -77,14 +77,6 @@ public class Facade_Get {
     public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
-        MetadataDto_Assembly metadataDto_assembly = new MetadataDto_Assembly();
-        InfoDto_Assembly infoDto_assembly = new InfoDto_Assembly();
-        BanDto_Assembly banDto_assembly = new BanDto_Assembly();
-        ObjectivesDto_Assembly objectivesDto_assembly = new ObjectivesDto_Assembly();
-        TeamDto_Assembly teamDto_assembly = new TeamDto_Assembly();
-        MatchDto_Assembly matchDto_assembly = new MatchDto_Assembly();
-        ParticipantDto_Assembly participantDto_assembly = new ParticipantDto_Assembly();
-
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
@@ -97,10 +89,6 @@ public class Facade_Get {
             matchId = matchMasterEntity.getMatchMasterId().getMatchId();
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
 
-            MatchDto matchInfo = new MatchDto();
-            MetadataDto metadataDto = new MetadataDto();
-            InfoDto infoDto = new InfoDto();
-
             //2. Team 정보 생성
             List<TeamEntity> teamEntityList = teamController.getTeams_ByMatchId(matchId);
             List<TeamDto> teamDtoList = new ArrayList<>();
@@ -112,9 +100,17 @@ public class Facade_Get {
                         .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
                         .get(0);
 
-                teamDtoList.add(teamDto_assembly.getTeamDtoByEntityAndDto(teamEntity
-                                                                          ,banDto_assembly.getBanDtoListByEntity(matchBanEntityList)
-                                                                          ,objectivesDto_assembly.getObjectivesDtoByEntity(matchObjectivesEntity)));
+                List<BanDto> banDtoList = new ArrayList<>();
+
+                for(MatchBanEntity matchBanEntity : matchBanEntityList) {
+                    BanDto banDto = new BanDto(matchBanEntity);
+                    banDtoList.add(banDto);
+                }
+
+                ObjectivesDto objectivesDto = new ObjectivesDto(matchObjectivesEntity);
+
+                TeamDto teamDto = new TeamDto(teamEntity,banDtoList,objectivesDto);
+                teamDtoList.add(teamDto);
             }
 
             //5. Match Participants 정보 생성
@@ -124,12 +120,12 @@ public class Facade_Get {
             ParticipantDto summonerInfo = new ParticipantDto();
 
             for(MatchParticipantEntity participantEntity : participantsList) {
-
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
-                    summonerInfo = participantDto_assembly.getParticipantDtoByEntity(participantEntity);
+                    summonerInfo = new ParticipantDto(participantEntity);
+                    summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
                 }
 
-                ParticipantDto participantDto = participantDto_assembly.getParticipantDtoByEntity(participantEntity);
+                ParticipantDto participantDto = new ParticipantDto(participantEntity);
 
                 if("100".equals(participantDto.getTeamId())) {
                     blueParticipantDtoList.add(participantDto);
@@ -140,12 +136,10 @@ public class Facade_Get {
 
             sortParticipationDtoList(blueParticipantDtoList, redParticipantDtoList);
 
-            summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
+            MetadataDto metadataDto = new MetadataDto(matchMasterEntity,participantsList);
+            InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
 
-            metadataDto = metadataDto_assembly.getMetadataDtoByEntity(matchMasterEntity,participantsList);
-            infoDto = infoDto_assembly.getInfoDtoByEntityAndDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
-
-            matchInfo = matchDto_assembly.getMatchDtoByMatadataDtoAndInfoDto(metadataDto,infoDto);
+            MatchDto matchInfo = new MatchDto(metadataDto,infoDto);
 
             matchDtos.add(matchInfo);
         }
@@ -256,16 +250,12 @@ public class Facade_Get {
     }
 
     public SummonerDto getSummonerInfoFromDB(String name) {
-        SummonerDto summonerDto = new SummonerDto();
-        SummonerDto_Assembly summonerDto_assembly = new SummonerDto_Assembly();
-
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
 
         if(null == puuid) return null;
 
-        SummonerEntity summoner = summonerController.getSummoner(puuid).get(0);
-
-        summonerDto = summonerDto_assembly.getSummonerDtoByEntity(summoner);
+        SummonerEntity summonerEntity = summonerController.getSummoner(puuid).get(0);
+        SummonerDto summonerDto = new SummonerDto(summonerEntity);
 
         return summonerDto;
     }
@@ -303,10 +293,9 @@ public class Facade_Get {
 
         List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntries_BySummonerId(summonerId);
 
-        LeagueEntryDto_Assembly leagueEntryDto_assembly = new LeagueEntryDto_Assembly();
-
         for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
-            result.add(leagueEntryDto_assembly.getLeagueEntryDtoByEntity(leagueEntryEntity));
+            LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity);
+            result.add(leagueEntryDto);
         }
 
         return result;

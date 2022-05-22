@@ -3,11 +3,15 @@ package dev.saariselka.inlol.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 public class MatchDto {
     private MetadataDto metadata;
     private InfoDto info;
+
+    public MatchDto(MetadataDto metadataDto, InfoDto infoDto) {
+        this.info = infoDto;
+        this.metadata = metadataDto;
+    }
 
     public MetadataDto getMetadata() {
         return metadata;
