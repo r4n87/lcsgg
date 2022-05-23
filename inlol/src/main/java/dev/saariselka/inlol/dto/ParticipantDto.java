@@ -118,11 +118,14 @@ public class ParticipantDto {
     private String win;
     private Timestamp rrt;
 
+    private PerksDto perks;
+
     public ParticipantDto() {
 
     }
 
-    public ParticipantDto(MatchParticipantEntity matchParticipantEntity) {
+    public ParticipantDto(MatchParticipantEntity matchParticipantEntity
+                        , PerksDto perksDto) {
         this.puuid = matchParticipantEntity.getMatchParticipantId().getPuuid();
         this.dataVersion = matchParticipantEntity.getMatchParticipantId().getDataVersion();
         this.matchId = matchParticipantEntity.getMatchParticipantId().getMatchId();
@@ -230,7 +233,7 @@ public class ParticipantDto {
         this.wardsPlaced = String.valueOf(matchParticipantEntity.getWardsPlaced());
         this.win = String.valueOf(matchParticipantEntity.isWin());
         this.rrt = matchParticipantEntity.getRrt();
-
+        this.perks = perksDto;
     }
 
     public String getPuuid() {
@@ -1091,5 +1094,41 @@ public class ParticipantDto {
 
     public void setRrt(Timestamp rrt) {
         this.rrt = rrt;
+    }
+
+    public String getFirstBloodAssist() {
+        return firstBloodAssist;
+    }
+
+    public String getFirstBloodKill() {
+        return firstBloodKill;
+    }
+
+    public String getFirstTowerAssist() {
+        return firstTowerAssist;
+    }
+
+    public String getFirstTowerKill() {
+        return firstTowerKill;
+    }
+
+    public String getGameEndedInEarlySurrender() {
+        return gameEndedInEarlySurrender;
+    }
+
+    public String getGameEndedInSurrender() {
+        return gameEndedInSurrender;
+    }
+
+    public String getTeamEarlySurrendered() {
+        return teamEarlySurrendered;
+    }
+
+    public PerksDto getPerks() {
+        return perks;
+    }
+
+    public void setPerks(PerksDto perks) {
+        this.perks = perks;
     }
 }

@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.ZoneId;
 import java.util.*;
 
 @RestController
@@ -172,14 +169,11 @@ public class Facade {
                 modelAndView.addObject("soloRankInfo", leagueEntryDto);
                 modelAndView.addObject("soloRankImg", tierImg);
 
-                if(leagueEntryDto.getMiniSeries() != null)
-                {
+                if(leagueEntryDto.getMiniSeries().getSummonerId() != null) {
                     modelAndView.addObject("soloRankIsIncrement","true");
 
                     modelAndView.addObject("soloRankIncrementProgress",leagueEntryDto.getMiniSeries().getProgress());
-                }
-                else
-                {
+                } else {
                     modelAndView.addObject("soloRankIsIncrement","false");
                 }
             } else {

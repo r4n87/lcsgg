@@ -32,6 +32,8 @@ public class Facade_Set {
     LeagueEntryController leagueEntryController;
     @Autowired
     LeagueMiniSeriesController leagueMiniSeriesController;
+    @Autowired
+    MatchPerksController matchPerksController;
 
     public void setMatchInfoAtDB(HashMap<String, Object> matchInfo) throws JsonProcessingException {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -213,6 +215,39 @@ public class Facade_Set {
                     Boolean.parseBoolean(participantObj.get("win").getAsString()),
                     timestamp
                     );
+
+            JsonObject perks = (JsonObject) participantObj.get("perks");
+            JsonObject statPerks = (JsonObject) perks.get("statPerks");
+            JsonObject primaryStyle = null;
+            JsonArray primaryPerks = null;
+            JsonObject subStyle = null;
+            JsonArray subPerks = null;
+
+            for(Object styleObj : (JsonArray)perks.get("styles")) {
+                JsonObject style = (JsonObject) styleObj;
+                if("primaryStyle".equals(style.get("description").getAsString())) {
+                    primaryStyle = style;
+                    primaryPerks = (JsonArray) style.get("selections");
+                } else {
+                    subStyle = style;
+                    subPerks = (JsonArray) style.get("selections");
+                }
+            }
+
+            matchPerksController.insertPerks(jsonObjectForMetadata.get("matchId").getAsString()
+                    , participantObj.get("puuid").getAsString()
+                    , Integer.parseInt(primaryStyle.get("style").getAsString())
+                    , Integer.parseInt(((JsonObject) primaryPerks.get(0)).get("perk").getAsString())
+                    , Integer.parseInt(((JsonObject) primaryPerks.get(1)).get("perk").getAsString())
+                    , Integer.parseInt(((JsonObject) primaryPerks.get(2)).get("perk").getAsString())
+                    , Integer.parseInt(((JsonObject) primaryPerks.get(3)).get("perk").getAsString())
+                    , Integer.parseInt(subStyle.get("style").getAsString())
+                    , Integer.parseInt(((JsonObject) subPerks.get(0)).get("perk").getAsString())
+                    , Integer.parseInt(((JsonObject) subPerks.get(1)).get("perk").getAsString())
+                    , Integer.parseInt(statPerks.get("defense").getAsString())
+                    , Integer.parseInt(statPerks.get("flex").getAsString())
+                    , Integer.parseInt(statPerks.get("offense").getAsString())
+                    , timestamp);
         }
     }
 
@@ -225,14 +260,12 @@ public class Facade_Set {
                 Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
     }
 
-    public void setLeagueInfoAtDB(HashSet<Object> leagueInfo) {
+    public void setLeagueInfoAtDB(HashSet<Object> leagueInfos) {
         // parsing
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-        Iterator<Object> it = leagueInfo.iterator();
-        while(it.hasNext())
-        {
-            LinkedHashMap<String, Object> data = (LinkedHashMap) it.next();
+        for(Object leagueInfo : leagueInfos) {
+            LinkedHashMap<String, Object> data = (LinkedHashMap) leagueInfo;
 
             // DB Insert
             leagueEntryController.insertLeagueEntryInfo(data.get("summonerId").toString(), data.get("queueType").toString(), data.get("leagueId").toString(),
@@ -244,8 +277,7 @@ public class Facade_Set {
 
             LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
 
-            if(miniSeriesData != null)
-            {
+            if (miniSeriesData != null) {
                 leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
                         data.get("summonerId").toString(),
                         data.get("queueType").toString(),
@@ -256,6 +288,5 @@ public class Facade_Set {
                         timestamp);
             }
         }
-
     }
 }
