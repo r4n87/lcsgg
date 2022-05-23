@@ -1,4 +1,4 @@
-package dev.saariselka.inlol;
+package dev.saariselka.inlol.utils;
 
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
