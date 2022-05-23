@@ -1,7 +1,7 @@
 package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.entity.MatchMasterEntity;
-import dev.saariselka.inlol.util.JsonParserForLOL;
+import dev.saariselka.inlol.utils.JsonParserForLOL;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 

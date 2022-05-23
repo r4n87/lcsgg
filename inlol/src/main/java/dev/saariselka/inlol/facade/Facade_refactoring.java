@@ -1,11 +1,10 @@
-package dev.saariselka.inlol;
+package dev.saariselka.inlol.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.SummonerDto;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,46 +14,35 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.*;
 
 @RestController
-@NoArgsConstructor
-@AllArgsConstructor
-public class Facade {
-
+@RequiredArgsConstructor
+// 작업 완료 후 클래스명 Facade로 변경 예정
+public class Facade_refactoring {
     @Autowired
-    private Facade_Get facade_get;
+    private APIFacade apiFacade;
     @Autowired
-    private Facade_Set facade_set;
+    private DBFacade dbFacade;
 
-    private String name;
-
-    // 테스트를 위해 주석 처리
-//    public Facade(String name)
-//    {
-//        this.name = name;
-//    }
-
-
-    // 소환사 검색 수행
-    //@GetMapping("searchInit")
+    @GetMapping("searchInit")
     public ModelAndView search(@RequestParam("name") String name) throws JsonProcessingException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
         //Step 1. Get Summoner Info and Set Summoner Info At ModelAndView
-        SummonerDto summonerDto = getSummonerInfo(modelAndView, name, facade_get.getSummonerInfoFromDB(name));
+        SummonerDto summonerDto = getSummonerInfo(modelAndView, name, dbFacade.getSummonerDtoBySummonerName(name));
 
         //Step 2. Get League Info and Set League Info At ModelAndView
-        getLeagueInfo(modelAndView, summonerDto.getId(), facade_get.getLeagueInfoFromDB(summonerDto.getId()));
+        getLeagueInfo(modelAndView, summonerDto.getId(), dbFacade.getLeagueEntryDtoListBySummonerId(summonerDto.getId()));
 
         //Step 3. Get Match Info List
-        getMatchInfoList(modelAndView, summonerDto, facade_get.getMatchInfoFromDB(summonerDto.getPuuid()));
+        getMatchInfoList(modelAndView, summonerDto, dbFacade.getMatchDtoListBySummonerPuuid(summonerDto.getPuuid()));
 
         return modelAndView;
     }
 
     // 소환사 검색 결과 새로고침
-    //@GetMapping("searchRefresh")
+    @GetMapping("searchRefresh")
     public ModelAndView refresh(@RequestParam("name") String name) throws JsonProcessingException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
-        long startTime = getRefreshTimeFromDB(name);
+        long startTime = dbFacade.getSummonerDtoBySummonerName(name).getLastRefreshTime();
 
         //Step 1. Get Summoner Info By Name via API
         SummonerDto summonerDto = getSummonerInfoFromAPI(modelAndView, name);
@@ -68,10 +56,7 @@ public class Facade {
         return modelAndView;
     }
 
-    private long getRefreshTimeFromDB(String name) {
-        return facade_get.getSummonerInfoFromDB(name).getLastRefreshTime();
-    }
-
+    // TODO : refactoring 대상 - modelandview와 분리
     private SummonerDto getSummonerInfo(ModelAndView modelAndView, String name, SummonerDto summonerInfoFromDB) {
         if(null != summonerInfoFromDB) {
             setSummonerInfoAtModelAndView(modelAndView, summonerInfoFromDB, name);
@@ -81,16 +66,18 @@ public class Facade {
         return getSummonerInfoFromAPI(modelAndView, name);
     }
 
+    // TODO : refactoring 대상 - modelandview와 분리
     private SummonerDto getSummonerInfoFromAPI(ModelAndView modelAndView, String name) {
-        facade_set.setSummonerInfoAtDB((LinkedHashMap<String, String>) facade_get.getSummonerInfo(name).get("body"));
+        dbFacade.setSummonerInfo((LinkedHashMap<String, String>) apiFacade.getSummonerInfoBySummonerName(name).get("body"));
 
-        SummonerDto summonerDto = facade_get.getSummonerInfoFromDB(name);
+        SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerName(name);
 
         setSummonerInfoAtModelAndView(modelAndView, summonerDto, name);
 
         return summonerDto;
     }
 
+    // TODO : refactoring 대상 - modelandview와 분리
     private void getLeagueInfo(ModelAndView modelAndView, String encryptedSummonerId, List<LeagueEntryDto> leagueInfoFromDB) {
         if(null != leagueInfoFromDB && !leagueInfoFromDB.isEmpty()) {
             setLeagueInfoAtModelAndView(modelAndView, leagueInfoFromDB);
@@ -100,16 +87,18 @@ public class Facade {
         getLeagueInfoFromAPI(modelAndView, encryptedSummonerId);
     }
 
+    // TODO : refactoring 대상 - modelandview와 분리
     private void getLeagueInfoFromAPI(ModelAndView modelAndView, String encryptedSummonerId) {
-        HashSet<Object> leagueInfo = (HashSet<Object>) facade_get.getLeagueInfo(encryptedSummonerId).get("body");
+        HashSet<Object> leagueInfo = (HashSet<Object>) apiFacade.getLeagueInfoBySummonerId(encryptedSummonerId).get("body");
 
         if(!leagueInfo.isEmpty()) {
-            facade_set.setLeagueInfoAtDB(leagueInfo);
+            dbFacade.setLeagueInfo(leagueInfo);
         }
 
-        setLeagueInfoAtModelAndView(modelAndView, facade_get.getLeagueInfoFromDB(encryptedSummonerId));
+        setLeagueInfoAtModelAndView(modelAndView, dbFacade.getLeagueEntryDtoListBySummonerId(encryptedSummonerId));
     }
 
+    // TODO : refactoring 대상 - modelandview와 분리
     private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
         if(null != matchInfoList) {
             setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
@@ -119,35 +108,89 @@ public class Facade {
         getMatchInfoFromAPI_Init(modelAndView, summonerDto);
     }
 
+    // TODO : refactoring 대상 - modelandview와 분리
     private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
-        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), 0L);
+        ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), 0L);
 
         for (int i = 0; i < matchList.size(); i++) {
-            HashMap<String, Object> result =  ((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body"));
-            facade_set.setMatchInfoAtDB(result);
+            HashMap<String, Object> result =  ((HashMap<String, Object>) apiFacade.getMatchInfoByMatchId(matchList, i).get("body"));
+            dbFacade.setMatchInfo(result);
         }
 
-        ArrayList<MatchDto> matchInfoList = facade_get.getMatchInfoFromDB(summonerDto.getPuuid());
+        ArrayList<MatchDto> matchInfoList = dbFacade.getMatchDtoListBySummonerPuuid(summonerDto.getPuuid());
 
         setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
     }
 
+    // TODO : refactoring 대상 - modelandview와 분리
     private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, long startTime) throws JsonProcessingException {
-        ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), startTime);
-        HashSet<String> dbMatchList = facade_get.getMatchListFromDB(summonerDto.getPuuid());
+        ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), startTime);
+        HashSet<String> dbMatchList = dbFacade.getMatchIdListBySummonerPuuid(summonerDto.getPuuid());
 
         matchList.removeIf(dbMatchList::contains);
 
         for (int i = 0; i < matchList.size(); i++) {
-            facade_set.setMatchInfoAtDB(((HashMap<String, Object>) facade_get.getMatchInfo(matchList, i).get("body")));
+            dbFacade.setMatchInfo(((HashMap<String, Object>) apiFacade.getMatchInfoByMatchId(matchList, i).get("body")));
         }
 
-        setMatchInfoListAtModelAndView(modelAndView, facade_get.getMatchInfoFromDB(summonerDto.getPuuid()));
+        setMatchInfoListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(summonerDto.getPuuid()));
     }
 
-    private void setMatchInfoListAtModelAndView(ModelAndView modelAndView, ArrayList<MatchDto> matchInfoList) {
-        modelAndView.addObject("matchInfoList", matchInfoList);
+    // refactoring 후 new 버전
+    @GetMapping("search")
+    public ModelAndView searchSummoner(@RequestParam("name") String name) throws JsonProcessingException {
+        ModelAndView modelAndView = new ModelAndView("content/summoner");
+
+        //Step 1. Check DB
+        String puuid = dbFacade.getSummonerPuuidBySummonerName(name);
+        if(puuid == null)
+            return initSummoner(name);
+
+        //Step 2. Get Summoner Dto and Set Summoner Info At ModelAndView
+        SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerPuuid(puuid);
+        setSummonerInfoAtModelAndView(modelAndView, summonerDto, name);
+
+        //Step 3. Get League Dto and Set League Info At ModelAndView
+        setLeagueInfoAtModelAndView(modelAndView, dbFacade.getLeagueEntryListDtoBySummonerId(summonerDto.getId()));
+
+        //Step 4. Get Match Info List
+        setMatchInfoListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(puuid));
+
+        return modelAndView;
     }
+
+    @GetMapping("init")
+    public ModelAndView initSummoner(@RequestParam("name") String name) throws JsonProcessingException {
+        ModelAndView modelAndView = new ModelAndView("content/summoner");
+
+        //Step 1. initial Summoner
+        dbFacade.setSummonerInfo((LinkedHashMap<String, String>) apiFacade.getSummonerInfoBySummonerName(name).get("body"));
+
+        //Step 2. Get Summoner Dto and Set Summoner Info At ModelAndView
+        String puuid = dbFacade.getSummonerPuuidBySummonerName(name);
+        SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerPuuid(puuid);
+        setSummonerInfoAtModelAndView(modelAndView, summonerDto, name);
+
+        //Step 3. Get League Dto and Set League Info At ModelAndView
+        dbFacade.setLeagueInfo( (HashSet<Object>) apiFacade.getLeagueInfoBySummonerId(summonerDto.getId()).get("body") );
+        setLeagueInfoAtModelAndView(modelAndView, dbFacade.getLeagueEntryDtoListBySummonerId(summonerDto.getId()));
+
+        //Step 4. Get Match Id List
+        // ..
+
+        return modelAndView;
+    }
+
+    @GetMapping("refresh")
+    public ModelAndView refreshSummoner(@RequestParam("name") String name) throws JsonProcessingException {
+        ModelAndView modelAndView = new ModelAndView("content/summoner");
+
+
+
+        return modelAndView;
+    }
+
+
 
     private void setSummonerInfoAtModelAndView(ModelAndView modelAndView, SummonerDto summonerDto, String name) {
         modelAndView.addObject("summoner", summonerDto);
@@ -169,11 +212,14 @@ public class Facade {
                 modelAndView.addObject("soloRankInfo", leagueEntryDto);
                 modelAndView.addObject("soloRankImg", tierImg);
 
-                if(leagueEntryDto.getMiniSeries().getSummonerId() != null) {
+                if(leagueEntryDto.getMiniSeries() != null)
+                {
                     modelAndView.addObject("soloRankIsIncrement","true");
 
                     modelAndView.addObject("soloRankIncrementProgress",leagueEntryDto.getMiniSeries().getProgress());
-                } else {
+                }
+                else
+                {
                     modelAndView.addObject("soloRankIsIncrement","false");
                 }
             } else {
@@ -194,5 +240,9 @@ public class Facade {
 
 
         }
+    }
+
+    private void setMatchInfoListAtModelAndView(ModelAndView modelAndView, ArrayList<MatchDto> matchInfoList) {
+        modelAndView.addObject("matchInfoList", matchInfoList);
     }
 }

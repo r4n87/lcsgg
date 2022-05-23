@@ -1,4 +1,4 @@
-package dev.saariselka.inlol.util;
+package dev.saariselka.inlol.utils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
