@@ -207,7 +207,7 @@
                                            </ul>
                                            <div>
                                                <div class="ward">
-                                                   <div class="" style="position: relative;">
+                                                   <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem6()} != '0'">
                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem6()}.png|">
                                                    </div>
                                                </div>
@@ -336,7 +336,7 @@
                                             </ul>
                                             <div>
                                                 <div class="ward">
-                                                    <div class="" style="position: relative;">
+                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem6()} != '0'">
                                                         <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem6()}.png|">
                                                     </div>
                                                 </div>
