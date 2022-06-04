@@ -12,6 +12,7 @@ import dev.saariselka.inlol.utils.JsonParserForLOL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -170,7 +171,7 @@ public class DBFacade {
         return result;
     }
 
-    public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) {
+    public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
