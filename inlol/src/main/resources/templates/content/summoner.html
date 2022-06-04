@@ -137,12 +137,12 @@
                                     <div class="spells">
                                         <div class="spell">
                                             <div class="" style="position: relative;">
-                                                <img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerDot.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점화">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
                                             </div>
                                         </div>
                                         <div class="spell">
                                             <div class="" style="position: relative;">
-                                                <img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerDot.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점화">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
                                             </div>
                                         </div>
                                     </div>
@@ -272,8 +272,8 @@
                                         <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
-                                        <div class="spell"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerDot.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점화"></div></div>
-                                        <div class="spell"><div class="" style="position: relative;"><img src="https://opgg-static.akamaized.net/images/lol/spell/SummonerFlash.png?image=q_auto,f_webp,w_auto&amp;v=1652951865197" alt="점멸"></div></div>
+                                        <div class="spell"><div class="" style="position: relative;"><img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|"></div></div>
+                                        <div class="spell"><div class="" style="position: relative;"><img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|"></div></div>
                                     </div>
                                     <div class="runes">
                                         <div class="rune">
@@ -346,7 +346,7 @@
                                                             <img src="https://s-lol-web.op.gg/static/images/icon/common/icon-buildred-p.png?v=1652951865197" alt="build">
                                                         </button>
                                                     </div>
-                                                </div>
+                                                                     </div>
                                             </div>
                                         </div>
                                     </div>

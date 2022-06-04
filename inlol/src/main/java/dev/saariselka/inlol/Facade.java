@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -35,7 +36,7 @@ public class Facade {
 
     // 소환사 검색 수행
     //@GetMapping("searchInit")
-    public ModelAndView search(@RequestParam("name") String name) throws JsonProcessingException {
+    public ModelAndView search(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
         //Step 1. Get Summoner Info and Set Summoner Info At ModelAndView
@@ -52,7 +53,7 @@ public class Facade {
 
     // 소환사 검색 결과 새로고침
     //@GetMapping("searchRefresh")
-    public ModelAndView refresh(@RequestParam("name") String name) throws JsonProcessingException {
+    public ModelAndView refresh(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
         long startTime = getRefreshTimeFromDB(name);
 
@@ -110,7 +111,7 @@ public class Facade {
         setLeagueInfoAtModelAndView(modelAndView, facade_get.getLeagueInfoFromDB(encryptedSummonerId));
     }
 
-    private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
+    private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws IOException {
         if(null != matchInfoList) {
             setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
             return;
@@ -119,7 +120,7 @@ public class Facade {
         getMatchInfoFromAPI_Init(modelAndView, summonerDto);
     }
 
-    private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
+    private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws IOException {
         ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), 0L);
 
         for (int i = 0; i < matchList.size(); i++) {
@@ -132,7 +133,7 @@ public class Facade {
         setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
     }
 
-    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, long startTime) throws JsonProcessingException {
+    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, long startTime) throws IOException {
         ArrayList<String> matchList = facade_get.getMatchList(summonerDto.getName(), startTime);
         HashSet<String> dbMatchList = facade_get.getMatchListFromDB(summonerDto.getPuuid());
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -23,7 +24,7 @@ public class Facade_refactoring {
     private DBFacade dbFacade;
 
     @GetMapping("searchInit")
-    public ModelAndView search(@RequestParam("name") String name) throws JsonProcessingException {
+    public ModelAndView search(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
         //Step 1. Get Summoner Info and Set Summoner Info At ModelAndView
@@ -40,7 +41,7 @@ public class Facade_refactoring {
 
     // 소환사 검색 결과 새로고침
     @GetMapping("searchRefresh")
-    public ModelAndView refresh(@RequestParam("name") String name) throws JsonProcessingException {
+    public ModelAndView refresh(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
         long startTime = dbFacade.getSummonerDtoBySummonerName(name).getLastRefreshTime();
 
@@ -99,7 +100,7 @@ public class Facade_refactoring {
     }
 
     // TODO : refactoring 대상 - modelandview와 분리
-    private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws JsonProcessingException {
+    private void getMatchInfoList(ModelAndView modelAndView, SummonerDto summonerDto, ArrayList<MatchDto> matchInfoList) throws IOException {
         if(null != matchInfoList) {
             setMatchInfoListAtModelAndView(modelAndView, matchInfoList);
             return;
@@ -109,7 +110,7 @@ public class Facade_refactoring {
     }
 
     // TODO : refactoring 대상 - modelandview와 분리
-    private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws JsonProcessingException {
+    private void getMatchInfoFromAPI_Init(ModelAndView modelAndView, SummonerDto summonerDto) throws IOException {
         ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), 0L);
 
         for (int i = 0; i < matchList.size(); i++) {
@@ -123,7 +124,7 @@ public class Facade_refactoring {
     }
 
     // TODO : refactoring 대상 - modelandview와 분리
-    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, long startTime) throws JsonProcessingException {
+    private void getMatchInfoFromAPI_Refresh(ModelAndView modelAndView, SummonerDto summonerDto, long startTime) throws IOException {
         ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), startTime);
         HashSet<String> dbMatchList = dbFacade.getMatchIdListBySummonerPuuid(summonerDto.getPuuid());
 
@@ -138,7 +139,7 @@ public class Facade_refactoring {
 
     // refactoring 후 new 버전
     @GetMapping("search")
-    public ModelAndView searchSummoner(@RequestParam("name") String name) throws JsonProcessingException {
+    public ModelAndView searchSummoner(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
         //Step 1. Check DB

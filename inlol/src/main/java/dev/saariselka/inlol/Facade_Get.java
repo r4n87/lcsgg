@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -79,7 +80,7 @@ public class Facade_Get {
         return result;
     }
 
-    public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) {
+    public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
         List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);

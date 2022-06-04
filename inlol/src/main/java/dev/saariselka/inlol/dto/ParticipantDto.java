@@ -1,10 +1,17 @@
 package dev.saariselka.inlol.dto;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @AllArgsConstructor
 public class ParticipantDto {
@@ -125,7 +132,47 @@ public class ParticipantDto {
     }
 
     public ParticipantDto(MatchParticipantEntity matchParticipantEntity
-                        , PerksDto perksDto) {
+                        , PerksDto perksDto) throws IOException {
+
+        ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
+        JsonObject summonerJson = (JsonObject) new JsonParser().parse(new InputStreamReader(summonerResource.getInputStream(),"UTF-8"));
+        JsonObject jsonObjectForSummonersData = (JsonObject)summonerJson.get("data");
+
+        JsonObject jsonObjectForSummonerBarrier = (JsonObject)jsonObjectForSummonersData.get("SummonerBarrier");
+        JsonObject jsonObjectForSummonerBoost = (JsonObject)jsonObjectForSummonersData.get("SummonerBoost");
+        JsonObject jsonObjectForSummonerDot = (JsonObject)jsonObjectForSummonersData.get("SummonerDot");
+        JsonObject jsonObjectForSummonerExhaust = (JsonObject)jsonObjectForSummonersData.get("SummonerExhaust");
+        JsonObject jsonObjectForSummonerFlash = (JsonObject)jsonObjectForSummonersData.get("SummonerFlash");
+        JsonObject jsonObjectForSummonerHaste = (JsonObject)jsonObjectForSummonersData.get("SummonerHaste");
+        JsonObject jsonObjectForSummonerHeal = (JsonObject)jsonObjectForSummonersData.get("SummonerHeal");
+        JsonObject jsonObjectForSummonerMana = (JsonObject)jsonObjectForSummonersData.get("SummonerMana");
+        JsonObject jsonObjectForSummonerPoroRecall = (JsonObject)jsonObjectForSummonersData.get("SummonerPoroRecall");
+        JsonObject jsonObjectForSummonerPoroThrow = (JsonObject)jsonObjectForSummonersData.get("SummonerPoroThrow");
+        JsonObject jsonObjectForSummonerSmite = (JsonObject)jsonObjectForSummonersData.get("SummonerSmite");
+        JsonObject jsonObjectForSummonerSnowURFSnowball_Mark = (JsonObject)jsonObjectForSummonersData.get("SummonerSnowURFSnowball_Mark");
+        JsonObject jsonObjectForSummonerSnowball = (JsonObject)jsonObjectForSummonersData.get("SummonerSnowball");
+        JsonObject jsonObjectForSummonerTeleport = (JsonObject)jsonObjectForSummonersData.get("SummonerTeleport");
+        JsonObject jsonObjectForSummoner_UltBookPlaceholder = (JsonObject)jsonObjectForSummonersData.get("Summoner_UltBookPlaceholder");
+        JsonObject jsonObjectForSummoner_UltBookSmitePlaceholder = (JsonObject)jsonObjectForSummonersData.get("Summoner_UltBookSmitePlaceholder");
+
+        HashMap<Integer,JsonObject> hashMapForSummonersData = new HashMap<>();
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerBarrier.get("key").getAsString()),(JsonObject) jsonObjectForSummonerBarrier.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerBoost.get("key").getAsString()),(JsonObject) jsonObjectForSummonerBoost.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerDot.get("key").getAsString()),(JsonObject) jsonObjectForSummonerDot.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerExhaust.get("key").getAsString()),(JsonObject) jsonObjectForSummonerExhaust.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerFlash.get("key").getAsString()),(JsonObject) jsonObjectForSummonerFlash.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerHaste.get("key").getAsString()),(JsonObject) jsonObjectForSummonerHaste.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerHeal.get("key").getAsString()),(JsonObject) jsonObjectForSummonerHeal.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerMana.get("key").getAsString()),(JsonObject) jsonObjectForSummonerMana.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerPoroRecall.get("key").getAsString()),(JsonObject) jsonObjectForSummonerPoroRecall.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerPoroThrow.get("key").getAsString()),(JsonObject) jsonObjectForSummonerPoroThrow.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerSmite.get("key").getAsString()),(JsonObject) jsonObjectForSummonerSmite.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerSnowURFSnowball_Mark.get("key").getAsString()),(JsonObject) jsonObjectForSummonerSnowURFSnowball_Mark.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerSnowball.get("key").getAsString()),(JsonObject) jsonObjectForSummonerSnowball.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummonerTeleport.get("key").getAsString()),(JsonObject) jsonObjectForSummonerTeleport.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummoner_UltBookPlaceholder.get("key").getAsString()),(JsonObject) jsonObjectForSummoner_UltBookPlaceholder.get("image"));
+        hashMapForSummonersData.put(Integer.parseInt(jsonObjectForSummoner_UltBookSmitePlaceholder.get("key").getAsString()),(JsonObject) jsonObjectForSummoner_UltBookSmitePlaceholder.get("image"));
+
         this.puuid = matchParticipantEntity.getMatchParticipantId().getPuuid();
         this.dataVersion = matchParticipantEntity.getMatchParticipantId().getDataVersion();
         this.matchId = matchParticipantEntity.getMatchParticipantId().getMatchId();
@@ -198,9 +245,9 @@ public class ParticipantDto {
         this.spell3Casts = String.valueOf(matchParticipantEntity.getSpell3Casts());
         this.spell4Casts = String.valueOf(matchParticipantEntity.getSpell4Casts());
         this.summoner1Casts = String.valueOf(matchParticipantEntity.getSummoner1Casts());
-        this.summoner1Id = String.valueOf(matchParticipantEntity.getSummoner1Id());
+        this.summoner1Id = String.valueOf(hashMapForSummonersData.get(matchParticipantEntity.getSummoner1Id()).get("full")).replaceAll("\"", "");
         this.summoner2Casts = String.valueOf(matchParticipantEntity.getSummoner2Casts());
-        this.summoner2Id = String.valueOf(matchParticipantEntity.getSummoner2Id());
+        this.summoner2Id = String.valueOf(hashMapForSummonersData.get(matchParticipantEntity.getSummoner2Id()).get("full")).replaceAll("\"", "");
         this.summonerId = matchParticipantEntity.getSummonerId();
         this.summonerLevel = String.valueOf(matchParticipantEntity.getSummonerLevel());
         this.summonerName = matchParticipantEntity.getSummonerName();
