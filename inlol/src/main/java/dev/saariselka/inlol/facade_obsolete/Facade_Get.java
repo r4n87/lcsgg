@@ -1,4 +1,4 @@
-package dev.saariselka.inlol;
+package dev.saariselka.inlol.facade_obsolete;
 
 import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.*;

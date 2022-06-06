@@ -13,6 +13,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.*;
 
 @Service
+// TODO : exception 리팩토링 필요
 public class APIFacade {
     private static API api;
     private static String apiKey;
@@ -26,7 +27,7 @@ public class APIFacade {
         api = new API();
     }
 
-    public HashMap<String, Object> getSummonerInfoBySummonerName(String name) {
+    public HashMap<String, Object> getSummonerBySummonerName(String name) {
 
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
@@ -56,7 +57,7 @@ public class APIFacade {
         return result;
     }
 
-    public HashMap<String, Object> getLeagueInfoBySummonerId(String encryptedSummonerId) {
+    public HashMap<String, Object> getLeagueBySummonerId(String encryptedSummonerId) {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
@@ -115,7 +116,7 @@ public class APIFacade {
         return matchList;
     }
 
-    public HashMap<String, Object> getMatchInfoByMatchId(ArrayList<String> matchList, int i) {
+    public HashMap<String, Object> getMatchByMatchId(ArrayList<String> matchList, int i) {
 
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 

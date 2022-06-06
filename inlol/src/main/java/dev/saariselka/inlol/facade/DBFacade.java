@@ -40,7 +40,6 @@ public class DBFacade {
     @Autowired
     MatchPerksController matchPerksController;
 
-    // TODO : refactoring 대상
     public SummonerDto getSummonerDtoBySummonerName(String name) {
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
 
@@ -127,25 +126,28 @@ public class DBFacade {
         for(Object leagueInfo : leagueInfos) {
             LinkedHashMap<String, Object> data = (LinkedHashMap) leagueInfo;
 
-            // DB Insert
-            leagueEntryController.insertLeagueEntryInfo(data.get("summonerId").toString(), data.get("queueType").toString(), data.get("leagueId").toString(),
-                    data.get("summonerName").toString(), data.get("tier").toString(), data.get("rank").toString(), Integer.parseInt(String.valueOf(data.get("leaguePoints"))),
-                    Integer.parseInt(String.valueOf(data.get("wins"))), Integer.parseInt(String.valueOf(data.get("losses"))),
-                    Boolean.parseBoolean(data.get("hotStreak").toString()), Boolean.parseBoolean(data.get("veteran").toString()),
-                    Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
-                    timestamp);
-
-            LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
-
-            if (miniSeriesData != null) {
-                leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
-                        data.get("summonerId").toString(),
-                        data.get("queueType").toString(),
-                        Integer.parseInt(String.valueOf(miniSeriesData.get("losses"))),
-                        miniSeriesData.get("progress").toString(),
-                        Integer.parseInt(String.valueOf(miniSeriesData.get("target"))),
-                        Integer.parseInt(String.valueOf(miniSeriesData.get("wins"))),
+            if(data.get("queueType").toString().equals("RANKED_FLEX_SR") || data.get("queueType").toString().equals("RANKED_SOLO_5x5"))
+            {
+                // DB Insert
+                leagueEntryController.insertLeagueEntryInfo(data.get("summonerId").toString(), data.get("queueType").toString(), data.get("leagueId").toString(),
+                        data.get("summonerName").toString(), data.get("tier").toString(), data.get("rank").toString(), Integer.parseInt(String.valueOf(data.get("leaguePoints"))),
+                        Integer.parseInt(String.valueOf(data.get("wins"))), Integer.parseInt(String.valueOf(data.get("losses"))),
+                        Boolean.parseBoolean(data.get("hotStreak").toString()), Boolean.parseBoolean(data.get("veteran").toString()),
+                        Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
                         timestamp);
+
+                LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
+
+                if (miniSeriesData != null) {
+                    leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
+                            data.get("summonerId").toString(),
+                            data.get("queueType").toString(),
+                            Integer.parseInt(String.valueOf(miniSeriesData.get("losses"))),
+                            miniSeriesData.get("progress").toString(),
+                            Integer.parseInt(String.valueOf(miniSeriesData.get("target"))),
+                            Integer.parseInt(String.valueOf(miniSeriesData.get("wins"))),
+                            timestamp);
+                }
             }
         }
 
@@ -273,7 +275,7 @@ public class DBFacade {
         return killRatio;
     }
 
-    public void setMatchInfo(HashMap<String, Object> matchInfo) throws JsonProcessingException {
+    public void setMatch(HashMap<String, Object> matchInfo) throws JsonProcessingException {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         ObjectMapper mapper = new ObjectMapper();
@@ -498,5 +500,18 @@ public class DBFacade {
         }
 
         return matchList;
+    }
+
+    public long getLastRefreshTimeBySummonerName(String puuid) {
+        return getSummonerDtoBySummonerPuuid(puuid).getLastRefreshTime();
+    }
+
+    public void setSummoner(HashMap<String, String> result) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        // DB Insert
+        summonerController.insertSummoner(result.get("accountId"),Integer.parseInt(String.valueOf(result.get("profileIconId"))),
+                Long.parseLong(String.valueOf(result.get("revisionDate"))),result.get("name"),result.get("id"),
+                Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
     }
 }

@@ -1,4 +1,4 @@
-package dev.saariselka.inlol;
+package dev.saariselka.inlol.facade_obsolete;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

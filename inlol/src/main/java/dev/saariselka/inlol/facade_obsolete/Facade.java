@@ -1,6 +1,5 @@
-package dev.saariselka.inlol;
+package dev.saariselka.inlol.facade_obsolete;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.SummonerDto;
@@ -35,7 +34,7 @@ public class Facade {
 
 
     // 소환사 검색 수행
-    //@GetMapping("searchInit")
+    @GetMapping("searchInit")
     public ModelAndView search(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
 
@@ -52,7 +51,7 @@ public class Facade {
     }
 
     // 소환사 검색 결과 새로고침
-    //@GetMapping("searchRefresh")
+    @GetMapping("searchRefresh")
     public ModelAndView refresh(@RequestParam("name") String name) throws IOException {
         ModelAndView modelAndView = new ModelAndView("content/summoner");
         long startTime = getRefreshTimeFromDB(name);
