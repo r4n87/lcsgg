@@ -224,7 +224,9 @@ public class DBFacade {
                         ? new MatchPerksEntity() : perksList.get(0);
                 PerksDto perksDto = new PerksDto(perksEntity);
                 ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
-                participantDto.setKillRatio(getKillRatioFromKDA(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists()));
+
+                String killRatio = getKillRatioFromKDA(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists());
+                participantDto.setKillRatio(killRatio);
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
