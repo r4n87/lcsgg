@@ -161,8 +161,14 @@
                                     <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
                                 <div class="kda">
-                                    <div class="k-d-a"><span>1</span> / <span class="d">6</span> / <span>19</span></div>
-                                    <div class="ratio"><span>3.33:1</span> 평점</div>
+                                    <div class="k-d-a">
+                                        <span th:text="${matchInfo?.info.summoner.getKills()}"/> /
+                                        <span class="d" th:text="${matchInfo?.info.summoner.getDeaths()}"/> /
+                                        <span th:text="${matchInfo?.info.summoner.getAssists()}"/>
+                                    </div>
+                                    <div class="ratio">
+                                        <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/> 평점
+                                    </div>
                                 </div>
                                 <div class="stats">
                                     <div class="level">레벨 14</div>
@@ -290,8 +296,14 @@
                                     <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
                                 </div>
                                 <div class="kda">
-                                    <div class="k-d-a"><span>3</span> / <span class="d">6</span> / <span>5</span></div>
-                                    <div class="ratio"><span>1.33:1</span> 평점</div>
+                                    <div class="k-d-a">
+                                        <span th:text="${matchInfo?.info.summoner.getKills()}"/> /
+                                        <span class="d" th:text="${matchInfo?.info.summoner.getDeaths()}"/> /
+                                        <span th:text="${matchInfo?.info.summoner.getAssists()}"/>
+                                    </div>
+                                    <div class="ratio">
+                                        <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/> 평점
+                                    </div>
                                 </div>
                                 <div class="stats">
                                     <div class="level">레벨 10</div>
