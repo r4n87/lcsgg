@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="css-1wyd9qh ejbh9aw1" th:onclick="|location.href='@{searchRefresh(name=${summoner.getName()})}'|">전적 갱신</button>
+                    <button class="css-1wyd9qh ejbh9aw1" th:onclick="|location.href='@{search(name=${summoner.getName()})}'|">전적 갱신</button>
                     <button class="tier-graph">티어 그래프</button>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         <div class="css-1u0uowu e1ijocqp2">
             <dl>
                 <dd>
-                    <a th:onclick="|location.href='@{searchInit(name=${summoner.getName()})}'|" class="css-1a8o8sd e1ijocqp1">
+                    <a th:onclick="|location.href='@{search(name=${summoner.getName()})}'|" class="css-1a8o8sd e1ijocqp1">
                         종합
                     </a>
                 </dd>
@@ -238,7 +238,7 @@
                                                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
-                                                <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                                <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
                                             </div>
                                         </li>
                                     </ul>
@@ -250,7 +250,7 @@
                                                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
-                                                <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                                <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
                                             </div>
                                         </li>
                                     </ul>
@@ -373,7 +373,7 @@
                                                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
-                                                <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                                <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
                                             </div>
                                         </li>
                                     </ul>
@@ -385,7 +385,7 @@
                                                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
-                                                <a th:href="|/searchInit?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                                <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
                                             </div>
                                         </li>
                                     </ul>
