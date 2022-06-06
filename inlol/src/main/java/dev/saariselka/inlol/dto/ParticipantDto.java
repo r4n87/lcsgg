@@ -126,6 +126,7 @@ public class ParticipantDto {
     private Timestamp rrt;
 
     private PerksDto perks;
+    private String killRatio;
 
     public ParticipantDto() {
 
@@ -1177,5 +1178,13 @@ public class ParticipantDto {
 
     public void setPerks(PerksDto perks) {
         this.perks = perks;
+    }
+
+    public String getKillRatio() {
+        return killRatio;
+    }
+
+    public void setKillRatio(String killRatio) {
+        this.killRatio = killRatio;
     }
 }

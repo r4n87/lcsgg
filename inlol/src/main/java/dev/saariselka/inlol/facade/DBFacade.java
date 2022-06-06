@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -222,6 +224,7 @@ public class DBFacade {
                         ? new MatchPerksEntity() : perksList.get(0);
                 PerksDto perksDto = new PerksDto(perksEntity);
                 ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
+                participantDto.setKillRatio(getKillRatioFromKDA(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists()));
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
@@ -246,6 +249,26 @@ public class DBFacade {
         }
 
         return matchDtos;
+    }
+
+    private String getKillRatioFromKDA(String kill, String death, String assist) {
+        String killRatio = ":1";
+        BigDecimal kills = new BigDecimal(kill);
+        BigDecimal deaths = new BigDecimal(death);
+        BigDecimal assists = new BigDecimal(assist);
+
+        if(0 != deaths.compareTo(BigDecimal.ZERO)
+          && 0 == kills.compareTo(BigDecimal.ZERO)
+          && 0 == assists.compareTo(BigDecimal.ZERO)) {
+            killRatio = "0.00" + killRatio;
+        } else if(0 == deaths.compareTo(BigDecimal.ZERO)) {
+            killRatio = "Perfect";
+        } else {
+            BigDecimal ratio = kills.add(assists).divide(deaths, 2, RoundingMode.HALF_UP);
+            killRatio = ratio + killRatio;
+        }
+
+        return killRatio;
     }
 
     public void setMatchInfo(HashMap<String, Object> matchInfo) throws JsonProcessingException {
