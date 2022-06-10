@@ -46,9 +46,8 @@ public class DBFacade {
         if(null == puuid) return null;
 
         SummonerEntity summonerEntity = summonerController.getSummoner(puuid).get(0);
-        SummonerDto summonerDto = new SummonerDto(summonerEntity);
 
-        return summonerDto;
+        return new SummonerDto(summonerEntity);
     }
 
     public String getSummonerPuuidBySummonerName(String name) {
@@ -227,8 +226,11 @@ public class DBFacade {
                 PerksDto perksDto = new PerksDto(perksEntity);
                 ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
 
-                String killRatio = getKillRatioFromKDA(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists());
-                participantDto.setKillRatio(killRatio);
+                String kda = getKda(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists());
+                participantDto.setKda(kda);
+
+                String minionsKilledPerMin = getMinionsKilledPerMin(participantDto.getTotalMinionsKilled(), matchMasterEntity.getGameDuration());
+                participantDto.setMinionsKilledPerMin(minionsKilledPerMin);
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
@@ -255,8 +257,15 @@ public class DBFacade {
         return matchDtos;
     }
 
-    private String getKillRatioFromKDA(String kill, String death, String assist) {
-        String killRatio = ":1";
+    private String getMinionsKilledPerMin(String totalMinionsKilled, long gameDuration) {
+        BigDecimal minionsKilledCount = new BigDecimal(totalMinionsKilled);
+        BigDecimal gameDurationMin = BigDecimal.valueOf(gameDuration).divide(BigDecimal.valueOf(60), RoundingMode.FLOOR);
+
+        return minionsKilledCount.divide(gameDurationMin, 1, RoundingMode.HALF_UP).toString();
+    }
+
+    private String getKda(String kill, String death, String assist) {
+        String killRatio = "";
         BigDecimal kills = new BigDecimal(kill);
         BigDecimal deaths = new BigDecimal(death);
         BigDecimal assists = new BigDecimal(assist);

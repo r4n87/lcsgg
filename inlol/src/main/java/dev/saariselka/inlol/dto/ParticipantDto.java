@@ -1,6 +1,5 @@
 package dev.saariselka.inlol.dto;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
@@ -9,8 +8,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 @AllArgsConstructor
@@ -126,7 +125,8 @@ public class ParticipantDto {
     private Timestamp rrt;
 
     private PerksDto perks;
-    private String killRatio;
+    private String kda;
+    private String minionsKilledPerMin;
 
     public ParticipantDto() {
 
@@ -136,7 +136,7 @@ public class ParticipantDto {
                         , PerksDto perksDto) throws IOException {
 
         ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
-        JsonObject summonerJson = (JsonObject) new JsonParser().parse(new InputStreamReader(summonerResource.getInputStream(),"UTF-8"));
+        JsonObject summonerJson = (JsonObject) new JsonParser().parse(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8));
         JsonObject jsonObjectForSummonersData = (JsonObject)summonerJson.get("data");
 
         JsonObject jsonObjectForSummonerBarrier = (JsonObject)jsonObjectForSummonersData.get("SummonerBarrier");
@@ -1180,11 +1180,19 @@ public class ParticipantDto {
         this.perks = perks;
     }
 
-    public String getKillRatio() {
-        return killRatio;
+    public String getKda() {
+        return kda;
     }
 
-    public void setKillRatio(String killRatio) {
-        this.killRatio = killRatio;
+    public void setKda(String kda) {
+        this.kda = kda;
+    }
+
+    public String getMinionsKilledPerMin() {
+        return minionsKilledPerMin;
+    }
+
+    public void setMinionsKilledPerMin(String minionsKilledPerMin) {
+        this.minionsKilledPerMin = minionsKilledPerMin;
     }
 }
