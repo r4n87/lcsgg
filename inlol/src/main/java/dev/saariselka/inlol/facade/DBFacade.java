@@ -123,7 +123,7 @@ public class DBFacade {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         for(Object leagueInfo : leagueInfos) {
-            LinkedHashMap<String, Object> data = (LinkedHashMap) leagueInfo;
+            LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) leagueInfo;
 
             if(data.get("queueType").toString().equals("RANKED_FLEX_SR") || data.get("queueType").toString().equals("RANKED_SOLO_5x5"))
             {
@@ -135,7 +135,7 @@ public class DBFacade {
                         Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
                         timestamp);
 
-                LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
+                LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap<String, Object>) data.get("miniSeries");
 
                 if (miniSeriesData != null) {
                     leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
@@ -308,8 +308,7 @@ public class DBFacade {
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = mapper.writeValueAsString(matchInfo);
 
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject)jsonParser.parse(jsonInString);
+        JsonObject jsonObject = JsonParser.parseString(jsonInString).getAsJsonObject();
         JsonObject jsonObjectForMetadata = (JsonObject) jsonObject.get("metadata");
         JsonObject jsonObjectForInfo = (JsonObject) jsonObject.get("info");
         JsonArray jsonArrayForTeams = (JsonArray)jsonObjectForInfo.get("teams");

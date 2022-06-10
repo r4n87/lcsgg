@@ -137,7 +137,7 @@ public class ParticipantDto {
                         , PerksDto perksDto) throws IOException {
 
         ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
-        JsonObject summonerJson = (JsonObject) new JsonParser().parse(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8));
+        JsonObject summonerJson = JsonParser.parseReader(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
         JsonObject jsonObjectForSummonersData = (JsonObject)summonerJson.get("data");
 
         JsonObject jsonObjectForSummonerBarrier = (JsonObject)jsonObjectForSummonersData.get("SummonerBarrier");
