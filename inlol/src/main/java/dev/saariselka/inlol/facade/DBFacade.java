@@ -218,6 +218,8 @@ public class DBFacade {
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
+            int blueTeamKills = 0;
+            int redTeamKills = 0;
 
             for(MatchParticipantEntity participantEntity : participantsList) {
                 List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participantEntity.getMatchParticipantId().getPuuid());
@@ -238,11 +240,16 @@ public class DBFacade {
                 }
 
                 if("100".equals(participantDto.getTeamId())) {
+                    blueTeamKills += Integer.parseInt(participantDto.getKills());
                     blueParticipantDtoList.add(participantDto);
                 } else if("200".equals(participantDto.getTeamId())) {
+                    redTeamKills += Integer.parseInt(participantDto.getKills());
                     redParticipantDtoList.add(participantDto);
                 }
             }
+
+            getAndSetKillRatio(blueParticipantDtoList, blueTeamKills);
+            getAndSetKillRatio(redParticipantDtoList, redTeamKills);
 
             sortParticipantDtoList(blueParticipantDtoList, redParticipantDtoList);
 
@@ -255,6 +262,17 @@ public class DBFacade {
         }
 
         return matchDtos;
+    }
+
+    private void getAndSetKillRatio(List<ParticipantDto> participantDtoList, int teamKills) {
+        for(ParticipantDto participant : participantDtoList) {
+            BigDecimal killAndAssists = new BigDecimal(participant.getKills()).add(new BigDecimal(participant.getAssists()));
+            BigDecimal killRatio = killAndAssists.divide(new BigDecimal(teamKills), 2, RoundingMode.HALF_UP)
+                                                 .multiply(BigDecimal.valueOf(100))
+                                                 .setScale(0, RoundingMode.HALF_UP);
+
+            participant.setKillRatio(killRatio.toString());
+        }
     }
 
     private String getMinionsKilledPerMin(String totalMinionsKilled, long gameDuration) {

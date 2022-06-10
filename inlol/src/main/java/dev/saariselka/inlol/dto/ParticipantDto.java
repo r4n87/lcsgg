@@ -127,6 +127,7 @@ public class ParticipantDto {
     private PerksDto perks;
     private String kda;
     private String minionsKilledPerMin;
+    private String killRatio;
 
     public ParticipantDto() {
 
@@ -1194,5 +1195,13 @@ public class ParticipantDto {
 
     public void setMinionsKilledPerMin(String minionsKilledPerMin) {
         this.minionsKilledPerMin = minionsKilledPerMin;
+    }
+
+    public String getKillRatio() {
+        return killRatio;
+    }
+
+    public void setKillRatio(String killRatio) {
+        this.killRatio = killRatio;
     }
 }

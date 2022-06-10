@@ -183,7 +183,8 @@
                                     </div>
                                     <div class="kill-participation">
                                         <div class="" style="position: relative;">
-                                            킬관여 54%
+                                            킬관여
+                                            <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
                                         </div>
                                     </div>
                                     <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
@@ -330,7 +331,8 @@
                                     </div>
                                     <div class="kill-participation">
                                         <div class="" style="position: relative;">
-                                            킬관여 54%
+                                            킬관여
+                                            <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
                                         </div>
                                     </div>
                                     <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
