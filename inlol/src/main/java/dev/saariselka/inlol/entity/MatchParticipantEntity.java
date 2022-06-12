@@ -19,7 +19,6 @@ public class MatchParticipantEntity {
     private int bountyLevel;
     private int champExperience;
     private int champLevel;
-    private int championId;
     private String championName;
     private int championTransform;
     private int consumablesPurchased;

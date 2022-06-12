@@ -136,12 +136,12 @@
                                     </div>
                                     <div class="spells">
                                         <div class="spell">
-                                            <div class="" style="position: relative;">
+                                            <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner1Id()} != 'bot'">
                                                 <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
                                             </div>
                                         </div>
                                         <div class="spell">
-                                            <div class="" style="position: relative;">
+                                            <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner2Id()} != 'bot'">
                                                 <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
                                             </div>
                                         </div>
@@ -291,8 +291,16 @@
                                         <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
-                                        <div class="spell"><div class="" style="position: relative;"><img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|"></div></div>
-                                        <div class="spell"><div class="" style="position: relative;"><img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|"></div></div>
+                                        <div class="spell">
+                                            <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner1Id()} != 'bot'">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
+                                            </div>
+                                        </div>
+                                        <div class="spell">
+                                            <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner2Id()} != 'bot'">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="runes">
                                         <div class="rune">

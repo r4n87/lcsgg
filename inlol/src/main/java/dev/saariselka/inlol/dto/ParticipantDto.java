@@ -247,9 +247,17 @@ public class ParticipantDto {
         this.spell3Casts = String.valueOf(matchParticipantEntity.getSpell3Casts());
         this.spell4Casts = String.valueOf(matchParticipantEntity.getSpell4Casts());
         this.summoner1Casts = String.valueOf(matchParticipantEntity.getSummoner1Casts());
-        this.summoner1Id = String.valueOf(hashMapForSummonersData.get(matchParticipantEntity.getSummoner1Id()).get("full")).replaceAll("\"", "");
+        if(matchParticipantEntity.getSummoner1Id() != 0) {
+            this.summoner1Id = String.valueOf(hashMapForSummonersData.get(matchParticipantEntity.getSummoner1Id()).get("full")).replaceAll("\"", "");
+        } else {
+            this.summoner1Id = "bot";
+        }
         this.summoner2Casts = String.valueOf(matchParticipantEntity.getSummoner2Casts());
-        this.summoner2Id = String.valueOf(hashMapForSummonersData.get(matchParticipantEntity.getSummoner2Id()).get("full")).replaceAll("\"", "");
+        if(matchParticipantEntity.getSummoner2Id() != 0) {
+            this.summoner2Id = String.valueOf(hashMapForSummonersData.get(matchParticipantEntity.getSummoner2Id()).get("full")).replaceAll("\"", "");
+        } else {
+            this.summoner2Id = "bot";
+        }
         this.summonerId = matchParticipantEntity.getSummonerId();
         this.summonerLevel = String.valueOf(matchParticipantEntity.getSummonerLevel());
         this.summonerName = matchParticipantEntity.getSummonerName();
