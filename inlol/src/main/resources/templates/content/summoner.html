@@ -167,13 +167,26 @@
                                         <span th:text="${matchInfo?.info.summoner.getAssists()}"/>
                                     </div>
                                     <div class="ratio">
-                                        <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/> 평점
+                                        <span th:text="${matchInfo?.info.summoner.getKda()}"/>:1 평점
                                     </div>
                                 </div>
                                 <div class="stats">
-                                    <div class="level">레벨 14</div>
-                                    <div class="cs"><div class="" style="position: relative;">41 (1.2)</div>CS</div>
-                                    <div class="kill-participantion"><div class="" style="position: relative;">킬관여 54%</div></div>
+                                    <div class="level">
+                                        레벨 <span th:text="${matchInfo?.info.summoner.getChampLevel()}"/>
+                                    </div>
+                                    <div class="cs">
+                                        <div class="" style="position: relative;">
+                                            <span th:text="${matchInfo?.info.summoner.getTotalMinionsKilled()}"/>
+                                            (<span th:text="${matchInfo?.info.summoner.getMinionsKilledPerMin()}"/>)
+                                            CS
+                                        </div>
+                                    </div>
+                                    <div class="kill-participation">
+                                        <div class="" style="position: relative;">
+                                            킬관여
+                                            <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
+                                        </div>
+                                    </div>
                                     <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
                                 </div>
                                 <div class="items">
@@ -302,14 +315,27 @@
                                         <span th:text="${matchInfo?.info.summoner.getAssists()}"/>
                                     </div>
                                     <div class="ratio">
-                                        <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/> 평점
+                                        <span th:text="${matchInfo?.info.summoner.getKda()}"/>:1 평점
                                     </div>
                                 </div>
                                 <div class="stats">
-                                    <div class="level">레벨 10</div>
-                                    <div class="cs"><div class="" style="position: relative;">28 (1.2)</div>CS</div>
-                                    <div class="kill-participantion"><div class="" style="position: relative;">킬관여 57%</div></div>
-                                    <div class="mmr"><span>매치 평균</span><br><b>silver 2</b></div>
+                                    <div class="level">
+                                        레벨 <span th:text="${matchInfo?.info.summoner.getChampLevel()}"/>
+                                    </div>
+                                    <div class="cs">
+                                        <div class="" style="position: relative;">
+                                            <span th:text="${matchInfo?.info.summoner.getTotalMinionsKilled()}"/>
+                                            (<span th:text="${matchInfo?.info.summoner.getMinionsKilledPerMin()}"/>)
+                                            CS
+                                        </div>
+                                    </div>
+                                    <div class="kill-participation">
+                                        <div class="" style="position: relative;">
+                                            킬관여
+                                            <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
+                                        </div>
+                                    </div>
+                                    <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
                                 </div>
                                 <div class="items">
                                     <div>

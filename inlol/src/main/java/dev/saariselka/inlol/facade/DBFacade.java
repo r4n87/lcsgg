@@ -46,9 +46,8 @@ public class DBFacade {
         if(null == puuid) return null;
 
         SummonerEntity summonerEntity = summonerController.getSummoner(puuid).get(0);
-        SummonerDto summonerDto = new SummonerDto(summonerEntity);
 
-        return summonerDto;
+        return new SummonerDto(summonerEntity);
     }
 
     public String getSummonerPuuidBySummonerName(String name) {
@@ -102,7 +101,7 @@ public class DBFacade {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         for(Object leagueInfo : leagueInfos) {
-            LinkedHashMap<String, Object> data = (LinkedHashMap) leagueInfo;
+            LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) leagueInfo;
 
             if(data.get("queueType").toString().equals("RANKED_FLEX_SR") || data.get("queueType").toString().equals("RANKED_SOLO_5x5"))
             {
@@ -114,7 +113,7 @@ public class DBFacade {
                         Boolean.parseBoolean(data.get("freshBlood").toString()), Boolean.parseBoolean(data.get("inactive").toString()),
                         timestamp);
 
-                LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap) data.get("miniSeries");
+                LinkedHashMap<String, Object> miniSeriesData = (LinkedHashMap<String, Object>) data.get("miniSeries");
 
                 if (miniSeriesData != null) {
                     leagueMiniSeriesController.insertLeagueMiniSeriesInfo(
@@ -197,6 +196,8 @@ public class DBFacade {
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
+            int blueTeamKills = 0;
+            int redTeamKills = 0;
 
             for(MatchParticipantEntity participantEntity : participantsList) {
                 List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participantEntity.getMatchParticipantId().getPuuid());
@@ -205,8 +206,11 @@ public class DBFacade {
                 PerksDto perksDto = new PerksDto(perksEntity);
                 ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
 
-                String killRatio = getKillRatioFromKDA(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists());
-                participantDto.setKillRatio(killRatio);
+                String kda = getKda(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists());
+                participantDto.setKda(kda);
+
+                String minionsKilledPerMin = getMinionsKilledPerMin(participantDto.getTotalMinionsKilled(), matchMasterEntity.getGameDuration());
+                participantDto.setMinionsKilledPerMin(minionsKilledPerMin);
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
@@ -214,11 +218,16 @@ public class DBFacade {
                 }
 
                 if("100".equals(participantDto.getTeamId())) {
+                    blueTeamKills += Integer.parseInt(participantDto.getKills());
                     blueParticipantDtoList.add(participantDto);
                 } else if("200".equals(participantDto.getTeamId())) {
+                    redTeamKills += Integer.parseInt(participantDto.getKills());
                     redParticipantDtoList.add(participantDto);
                 }
             }
+
+            getAndSetKillRatio(blueParticipantDtoList, blueTeamKills);
+            getAndSetKillRatio(redParticipantDtoList, redTeamKills);
 
             sortParticipantDtoList(blueParticipantDtoList, redParticipantDtoList);
 
@@ -233,8 +242,26 @@ public class DBFacade {
         return matchDtos;
     }
 
-    private String getKillRatioFromKDA(String kill, String death, String assist) {
-        String killRatio = ":1";
+    private void getAndSetKillRatio(List<ParticipantDto> participantDtoList, int teamKills) {
+        for(ParticipantDto participant : participantDtoList) {
+            BigDecimal killAndAssists = new BigDecimal(participant.getKills()).add(new BigDecimal(participant.getAssists()));
+            BigDecimal killRatio = killAndAssists.divide(new BigDecimal(teamKills), 2, RoundingMode.HALF_UP)
+                                                 .multiply(BigDecimal.valueOf(100))
+                                                 .setScale(0, RoundingMode.HALF_UP);
+
+            participant.setKillRatio(killRatio.toString());
+        }
+    }
+
+    private String getMinionsKilledPerMin(String totalMinionsKilled, long gameDuration) {
+        BigDecimal minionsKilledCount = new BigDecimal(totalMinionsKilled);
+        BigDecimal gameDurationMin = BigDecimal.valueOf(gameDuration).divide(BigDecimal.valueOf(60), RoundingMode.FLOOR);
+
+        return minionsKilledCount.divide(gameDurationMin, 1, RoundingMode.HALF_UP).toString();
+    }
+
+    private String getKda(String kill, String death, String assist) {
+        String killRatio = "";
         BigDecimal kills = new BigDecimal(kill);
         BigDecimal deaths = new BigDecimal(death);
         BigDecimal assists = new BigDecimal(assist);
@@ -259,8 +286,7 @@ public class DBFacade {
         ObjectMapper mapper = new ObjectMapper();
         String jsonInString = mapper.writeValueAsString(matchInfo);
 
-        JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject)jsonParser.parse(jsonInString);
+        JsonObject jsonObject = JsonParser.parseString(jsonInString).getAsJsonObject();
         JsonObject jsonObjectForMetadata = (JsonObject) jsonObject.get("metadata");
         JsonObject jsonObjectForInfo = (JsonObject) jsonObject.get("info");
         JsonArray jsonArrayForTeams = (JsonArray)jsonObjectForInfo.get("teams");

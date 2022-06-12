@@ -1,6 +1,5 @@
 package dev.saariselka.inlol.dto;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
@@ -9,8 +8,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 @AllArgsConstructor
@@ -126,6 +125,8 @@ public class ParticipantDto {
     private Timestamp rrt;
 
     private PerksDto perks;
+    private String kda;
+    private String minionsKilledPerMin;
     private String killRatio;
 
     public ParticipantDto() {
@@ -136,7 +137,7 @@ public class ParticipantDto {
                         , PerksDto perksDto) throws IOException {
 
         ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
-        JsonObject summonerJson = (JsonObject) new JsonParser().parse(new InputStreamReader(summonerResource.getInputStream(),"UTF-8"));
+        JsonObject summonerJson = JsonParser.parseReader(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
         JsonObject jsonObjectForSummonersData = (JsonObject)summonerJson.get("data");
 
         JsonObject jsonObjectForSummonerBarrier = (JsonObject)jsonObjectForSummonersData.get("SummonerBarrier");
@@ -1178,6 +1179,22 @@ public class ParticipantDto {
 
     public void setPerks(PerksDto perks) {
         this.perks = perks;
+    }
+
+    public String getKda() {
+        return kda;
+    }
+
+    public void setKda(String kda) {
+        this.kda = kda;
+    }
+
+    public String getMinionsKilledPerMin() {
+        return minionsKilledPerMin;
+    }
+
+    public void setMinionsKilledPerMin(String minionsKilledPerMin) {
+        this.minionsKilledPerMin = minionsKilledPerMin;
     }
 
     public String getKillRatio() {
