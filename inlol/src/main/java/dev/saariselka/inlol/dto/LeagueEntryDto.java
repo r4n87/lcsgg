@@ -7,20 +7,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LeagueEntryDto {
-    String leagueId;
-    String summonerId;
-    String summonerName;
-    String queueType;
-    String tier;
-    String rank;
-    int leaguePoints;
-    int wins;
-    int losses;
-    boolean hotStreak;
-    boolean veteran;
-    boolean freshBlood;
-    boolean inactive;
-    LeagueMiniSeriesDto miniSeries;
+    private String leagueId;
+    private String summonerId;
+    private String summonerName;
+    private String queueType;
+    private String tier;
+    private String rank;
+    private int leaguePoints;
+    private int wins;
+    private int losses;
+    private boolean hotStreak;
+    private boolean veteran;
+    private boolean freshBlood;
+    private boolean inactive;
+    private LeagueMiniSeriesDto miniSeries;
 
     public LeagueEntryDto (LeagueEntryEntity leagueEntryEntity, LeagueMiniSeriesDto leagueMiniSeriesDto) {
         this.leagueId = leagueEntryEntity.getLeagueId();
