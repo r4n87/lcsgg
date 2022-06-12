@@ -54,7 +54,7 @@ public class Facade_refactoring {
         setSummonerAtModelAndView(modelAndView, summonerDto, name);
 
         //Step 3. Get League Dto and Set League Info At ModelAndView
-        setLeagueAtModelAndView(modelAndView, dbFacade.getLeagueEntryListDtoBySummonerId(summonerDto.getId()));
+        setLeagueAtModelAndView(modelAndView, dbFacade.getLeagueEntryDtoListBySummonerId(summonerDto.getId()));
 
         //Step 4. Get Match Info List
         setMatchListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(puuid));

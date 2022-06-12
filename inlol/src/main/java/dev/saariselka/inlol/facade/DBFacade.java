@@ -59,28 +59,6 @@ public class DBFacade {
         return new SummonerDto(summonerController.getSummoner(puuid).get(0));
     }
 
-    public ArrayList<LeagueEntryDto> getLeagueEntryListDtoBySummonerId(String summonerId) {
-        ArrayList<LeagueEntryDto> result = new ArrayList<>();
-
-        List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntries_BySummonerId(summonerId);
-
-        for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
-
-            LeagueMiniSeriesEntity leagueMiniSeriesEntity = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(summonerId,leagueEntryEntity.getLeagueEntryId().getQueueType());
-            LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto();
-
-            if(leagueMiniSeriesEntity != null)
-            {
-                leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
-            }
-
-            LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity, leagueMiniSeriesDto);
-            result.add(leagueEntryDto);
-        }
-
-        return result;
-    }
-
     private void sortParticipantDtoList(List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList) {
         blueParticipantDtoList.sort((o1, o2) -> {
             int score1 = getParticipantPositionScore(o1);
