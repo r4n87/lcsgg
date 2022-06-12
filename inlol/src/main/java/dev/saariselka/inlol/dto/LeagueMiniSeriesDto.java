@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 public class LeagueMiniSeriesDto {
-    String summonerId;
-    String queueType;
-    int wins;
-    int losses;
-    int target;
-    char[] progress;
+    private String summonerId;
+    private String queueType;
+    private int wins;
+    private int losses;
+    private int target;
+    private char[] progress;
 
     public LeagueMiniSeriesDto() {}
 
