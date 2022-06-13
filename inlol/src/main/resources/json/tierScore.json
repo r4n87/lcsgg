@@ -1,0 +1,134 @@
+[
+  {
+    "tier": "IRON",
+    "rank": "IV",
+    "score": 1
+  },
+  {
+    "tier": "IRON",
+    "rank": "III",
+    "score": 2
+  },
+  {
+    "tier": "IRON",
+    "rank": "II",
+    "score": 3
+  },
+  {
+    "tier": "IRON",
+    "rank": "I",
+    "score": 4
+  },
+  {
+    "tier": "BRONZE",
+    "rank": "IV",
+    "score": 5
+  },
+  {
+    "tier": "BRONZE",
+    "rank": "III",
+    "score": 6
+  },
+  {
+    "tier": "BRONZE",
+    "rank": "II",
+    "score": 7
+  },
+  {
+    "tier": "BRONZE",
+    "rank": "I",
+    "score": 8
+  },
+  {
+    "tier": "SILVER",
+    "rank": "IV",
+    "score": 9
+  },
+  {
+    "tier": "SILVER",
+    "rank": "III",
+    "score": 10
+  },
+  {
+    "tier": "SILVER",
+    "rank": "II",
+    "score": 11
+  },
+  {
+    "tier": "SILVER",
+    "rank": "I",
+    "score": 12
+  },
+  {
+    "tier": "GOLD",
+    "rank": "IV",
+    "score": 13
+  },
+  {
+    "tier": "GOLD",
+    "rank": "III",
+    "score": 14
+  },
+  {
+    "tier": "GOLD",
+    "rank": "II",
+    "score": 15
+  },
+  {
+    "tier": "GOLD",
+    "rank": "I",
+    "score": 16
+  },
+  {
+    "tier": "PLATINUM",
+    "rank": "IV",
+    "score": 17
+  },
+  {
+    "tier": "PLATINUM",
+    "rank": "III",
+    "score": 18
+  },
+  {
+    "tier": "PLATINUM",
+    "rank": "II",
+    "score": 19
+  },
+  {
+    "tier": "PLATINUM",
+    "rank": "I",
+    "score": 20
+  },
+  {
+    "tier": "DIAMOND",
+    "rank": "IV",
+    "score": 21
+  },
+  {
+    "tier": "DIAMOND",
+    "rank": "III",
+    "score": 22
+  },
+  {
+    "tier": "DIAMOND",
+    "rank": "II",
+    "score": 23
+  },
+  {
+    "tier": "DIAMOND",
+    "rank": "I",
+    "score": 24
+  },
+  {
+    "tier": "MASTER",
+    "score": 30
+  },
+  {
+    "tier": "GRANDMASTER",
+    "score": 40
+  },
+  {
+    "tier": "CHALLENGER",
+    "score": 50
+  }
+]
