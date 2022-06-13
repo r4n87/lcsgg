@@ -245,9 +245,15 @@ public class DBFacade {
     private void getAndSetKillRatio(List<ParticipantDto> participantDtoList, int teamKills) {
         for(ParticipantDto participant : participantDtoList) {
             BigDecimal killAndAssists = new BigDecimal(participant.getKills()).add(new BigDecimal(participant.getAssists()));
-            BigDecimal killRatio = killAndAssists.divide(new BigDecimal(teamKills), 2, RoundingMode.HALF_UP)
-                                                 .multiply(BigDecimal.valueOf(100))
-                                                 .setScale(0, RoundingMode.HALF_UP);
+            BigDecimal killRatio;
+
+            if(teamKills == 0) {
+                killRatio = BigDecimal.ZERO;
+            } else {
+                killRatio = killAndAssists.divide(new BigDecimal(teamKills), 2, RoundingMode.HALF_UP)
+                        .multiply(BigDecimal.valueOf(100))
+                        .setScale(0, RoundingMode.HALF_UP);
+            }
 
             participant.setKillRatio(killRatio.toString());
         }
