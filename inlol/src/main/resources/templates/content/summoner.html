@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="buttons">
-                    <button class="css-1wyd9qh ejbh9aw1" th:onclick="|location.href='@{search(name=${summoner.getName()})}'|">전적 갱신</button>
+                    <button class="css-1wyd9qh ejbh9aw1" th:onclick="|location.href='@{refresh(name=${summoner.getName()})}'|">전적 갱신</button>
                     <button class="tier-graph">티어 그래프</button>
                 </div>
             </div>
@@ -58,49 +58,61 @@
         </div>
         <div class="css-19ozhet e1sjz9pt1">
             <div>
-                <div class="css-13uv2u8 e135kpg1" th:if="${soloRankInfo} != null">
+                <div class="css-13uv2u8 e135kpg1">
                     <div class="wrapper">
                         <div class="medal">
                             <div style="position: relative" class>
-                                <img th:src="${soloRankImg}">
+                                <img th:if="${soloRankInfo} != null" th:src="${soloRankImg}">
+                                <img th:if="${soloRankInfo} == null" th:src="|/images/ranked-emblems/UNRANKED.svg|">
                             </div>
                         </div>
                         <div class="info">
                             <div class="type">솔로랭크</div>
-                            <div class="tier-rank" th:text="${soloRankInfo.getTier()} + ${soloRankInfo.getRank()}"></div>
-                            <div class="tier-info">
-                                <span class="lp" th:text="${soloRankInfo.getLeaguePoints()} + LP"></span>
-                                <span class="win-lose" th:text="|&nbsp;&#47; ${soloRankInfo.getWins()}승 ${soloRankInfo.getLosses()}패|"><br>승률 53%</span>
-                            </div>
-                            <div th:if="${soloRankIsIncrement} == 'true'">
-                                <div class="series">
-                                    <div class="title"> 승급전 진행중 </div>
-                                    <div class="content">
-                                        <tr th:each="seriesResult : ${soloRankIncrementProgress}">
-                                            <td th:if="${seriesResult} != 'N'">
-                                                <img th:src="|/images/ranked-miniseries/icon-promoBattle-${seriesResult}.png|">
-                                            </td>
-                                        </tr>
+                            <div th:if="${soloRankInfo} != null">
+                                <div class="tier-rank" th:text="${soloRankInfo.getTier()} + ${soloRankInfo.getRank()}"></div>
+                                <div class="tier-info">
+                                    <span class="lp" th:text="${soloRankInfo.getLeaguePoints()} + LP"></span>
+                                    <span class="win-lose" th:text="|&nbsp;&#47; ${soloRankInfo.getWins()}승 ${soloRankInfo.getLosses()}패|"><br>승률 53%</span>
+                                </div>
+                                <div th:if="${soloRankIsIncrement} == 'true'">
+                                    <div class="series">
+                                        <div class="title"> 승급전 진행중 </div>
+                                        <div class="content">
+                                            <tr th:each="seriesResult : ${soloRankIncrementProgress}">
+                                                <td th:if="${seriesResult} != 'N'">
+                                                    <img th:src="|/images/ranked-miniseries/icon-promoBattle-${seriesResult}.png|">
+                                                </td>
+                                            </tr>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div th:if="${soloRankInfo} == null">
+                                <div class="tier-rank" th:text="Unranked"/>
                             </div>
 <!--                            <div class="league-name">빅토르의 그림자들</div>-->
                         </div>
                     </div>
                 </div>
-                <div class="css-rxctzc e135kpg1" th:if="${flexRankInfo} != null">
+                <div class="css-rxctzc e135kpg1">
                     <div class="wrapper">
                         <div class="medal">
                             <div style="position: relative" class>
-                                <img th:src="${flexRankImg}">
+                                <img th:if="${flexRankInfo} != null" th:src="${flexRankImg}">
+                                <img th:if="${flexRankInfo} == null" th:src="|/images/ranked-emblems/UNRANKED.svg|">
                             </div>
                         </div>
                         <div class="info">
                             <div class="type">자유랭크</div>
-                            <div class="tier-rank" th:text="${flexRankInfo.getTier()} + ${flexRankInfo.getRank()}"></div>
-                            <div class="tier-info">
-                                <span class="lp" th:text="${flexRankInfo.getLeaguePoints()} + LP"></span>
-                                <span class="win-lose" th:text="|&nbsp;&#47; ${flexRankInfo.getWins()}승 ${flexRankInfo.getLosses()}패|"><br>승률 48%</span>
+                            <div th:if="${flexRankInfo} != null">
+                                <div class="tier-rank" th:text="${flexRankInfo.getTier()} + ${flexRankInfo.getRank()}"></div>
+                                <div class="tier-info">
+                                    <span class="lp" th:text="${flexRankInfo.getLeaguePoints()} + LP"></span>
+                                    <span class="win-lose" th:text="|&nbsp;&#47; ${flexRankInfo.getWins()}승 ${flexRankInfo.getLosses()}패|"><br>승률 48%</span>
+                                </div>
+                            </div>
+                            <div th:if="${flexRankInfo} == null">
+                                <div class="tier-rank" th:text="Unranked"/>
                             </div>
                         </div>
                     </div>

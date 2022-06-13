@@ -94,7 +94,7 @@ public class APIFacade {
         try {
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
                     + puuid
-                    + "/ids?startTime=" + startTime + "&count=20&api_key="
+                    + "/ids?start=0&count=20&api_key="
                     + apiKey).build();
 
             // API 호출
