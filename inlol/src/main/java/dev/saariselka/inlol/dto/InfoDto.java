@@ -3,7 +3,9 @@ package dev.saariselka.inlol.dto;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.utils.JsonParserForLOL;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -13,6 +15,8 @@ import java.util.TimeZone;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class InfoDto {
     private long gameCreation;
     private String gameDuration;
@@ -76,134 +80,4 @@ public class InfoDto {
         this.redParticipants = redParticipantDtoList;
         this.summoner = summonerInfo;
     }
-
-    public long getGameCreation() {
-        return gameCreation;
-    }
-
-    public void setGameCreation(long gameCreation) {
-        this.gameCreation = gameCreation;
-    }
-
-    public String getGameDuration() {
-        return gameDuration;
-    }
-
-    public void setGameDuration(String gameDuration) {
-        this.gameDuration = gameDuration;
-    }
-
-    public LocalDateTime getGameEndTimestamp() {
-        return gameEndTimestamp;
-    }
-
-    public void setGameEndTimestamp(LocalDateTime gameEndTimestamp) {
-        this.gameEndTimestamp = gameEndTimestamp;
-    }
-
-    public long getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(long gameId) {
-        this.gameId = gameId;
-    }
-
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    public void setGameMode(String gameMode) {
-        this.gameMode = gameMode;
-    }
-
-    public String getGameName() {
-        return gameName;
-    }
-
-    public void setGameName(String gameName) {
-        this.gameName = gameName;
-    }
-
-    public LocalDateTime getGameStartTimeStamp() {
-        return gameStartTimeStamp;
-    }
-
-    public void setGameStartTimeStamp(LocalDateTime gameStartTimeStamp) { this.gameStartTimeStamp = gameStartTimeStamp; }
-
-    public String getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
-    }
-
-    public String getGameVersion() {
-        return gameVersion;
-    }
-
-    public void setGameVersion(String gameVersion) {
-        this.gameVersion = gameVersion;
-    }
-
-    public String getMapId() {
-        return mapId;
-    }
-
-    public void setMapId(String mapId) {
-        this.mapId = mapId;
-    }
-
-    public String getPlatformId() {
-        return platformId;
-    }
-
-    public void setPlatformId(String platformId) {
-        this.platformId = platformId;
-    }
-
-    public String getQueueId() {
-        return queueId;
-    }
-
-    public void setQueueId(String queueId) {
-        this.queueId = queueId;
-    }
-
-    public List<TeamDto> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<TeamDto> teams) {
-        this.teams = teams;
-    }
-
-    public String getTournamentCode() {
-        return tournamentCode;
-    }
-
-    public void setTournamentCode(String tournamentCode) {
-        this.tournamentCode = tournamentCode;
-    }
-
-    public String getGameAgoTime() { return gameAgoTime; }
-
-    public void setGameAgoTime(String gameAgoTime) { this.gameAgoTime = gameAgoTime; }
-
-    public ParticipantDto getSummoner() { return summoner; }
-
-    public void setSummoner(ParticipantDto summoner) { this.summoner = summoner; }
-
-    public List<ParticipantDto> getBlueParticipants() {
-        return blueParticipants;
-    }
-
-    public void setBlueParticipants(List<ParticipantDto> participants) {
-        this.blueParticipants = participants;
-    }
-
-    public List<ParticipantDto> getRedParticipants() { return redParticipants; }
-
-    public void setRedParticipants(List<ParticipantDto> participants) { this.redParticipants = participants; }
 }
