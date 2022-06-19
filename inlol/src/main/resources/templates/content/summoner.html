@@ -16,7 +16,7 @@
             <ul> </ul>
             <div class="face">
                 <div class="profile-icon">
-                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.8.1/img/profileicon/${summoner.getProfileIconId()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="profile image">
+                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/profileicon/${summoner.getProfileIconId()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="profile image">
                     <span class="level" th:text="${summoner.getSummonerLevel()}"> </span>
                 </div>
             </div>
@@ -144,17 +144,17 @@
                                 </div>
                                 <div class="champion">
                                     <div class="icon">
-                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
+                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
                                         <div class="spell">
                                             <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner1Id()} != 'bot'">
-                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
                                             </div>
                                         </div>
                                         <div class="spell">
                                             <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner2Id()} != 'bot'">
-                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
                                             </div>
                                         </div>
                                     </div>
@@ -210,39 +210,39 @@
                                            <ul>
                                                <li>
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem0()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem0()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem0()}.png|">
                                                    </div>
                                                </li>
                                                <li>
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem1()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem1()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem1()}.png|">
                                                    </div>
                                                </li>
                                                <li>
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem2()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem2()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem2()}.png|">
                                                    </div>
                                                </li>
                                                <li>
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem3()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem3()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem3()}.png|">
                                                    </div>
                                                </li>
                                                <li>
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem4()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem4()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem4()}.png|">
                                                    </div>
                                                </li>
                                                <li>
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem5()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem5()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem5()}.png|">
                                                    </div>
                                                </li>
                                            </ul>
                                            <div>
                                                <div class="ward">
                                                    <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem6()} != '0'">
-                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem6()}.png|">
+                                                       <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem6()}.png|">
                                                    </div>
                                                </div>
                                                <div class="build">
@@ -263,7 +263,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
@@ -275,7 +275,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getRedParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
@@ -303,17 +303,17 @@
                                 </div>
                                 <div class="champion">
                                     <div class="icon">
-                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
+                                        <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${matchInfo.info.summoner.getChampionNameENG()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
                                     </div>
                                     <div class="spells">
                                         <div class="spell">
                                             <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner1Id()} != 'bot'">
-                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
                                             </div>
                                         </div>
                                         <div class="spell">
                                             <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner2Id()} != 'bot'">
-                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.10.1/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
+                                                <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
                                             </div>
                                         </div>
                                     </div>
@@ -369,39 +369,39 @@
                                             <ul>
                                                 <li>
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem0()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem0()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem0()}.png|">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem1()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem1()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem1()}.png|">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem2()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem2()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem2()}.png|">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem3()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem3()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem3()}.png|">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem4()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem4()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem4()}.png|">
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem5()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem5()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem5()}.png|">
                                                     </div>
                                                 </li>
                                             </ul>
                                             <div>
                                                 <div class="ward">
                                                     <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem6()} != '0'">
-                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/12.9.1/img/item/${matchInfo.info.summoner.getItem6()}.png|">
+                                                        <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem6()}.png|">
                                                     </div>
                                                 </div>
                                                 <div class="build">
@@ -422,7 +422,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
@@ -434,7 +434,7 @@
                                     <ul th:each="participantsInfo : ${matchInfo.info.getRedParticipants()}">
                                         <li class="css-tegtkt e19epo2o1">
                                             <div class="icon">
-                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/12.8.1/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                             </div>
                                             <div class="name">
                                                 <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>

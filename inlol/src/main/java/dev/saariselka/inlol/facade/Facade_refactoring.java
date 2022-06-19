@@ -59,6 +59,9 @@ public class Facade_refactoring {
         //Step 4. Get Match Info List
         setMatchListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(puuid));
 
+        //Step 5. Get Ddragon Version And Set Ddragon Version At ModelAndView
+        setDdragonVersionAtModelAndView(modelAndView, dbFacade.getCurrentDdragonVersion());
+
         return modelAndView;
     }
 
@@ -90,6 +93,10 @@ public class Facade_refactoring {
         }
 
         return summonerDto.getPuuid();
+    }
+
+    private void setDdragonVersionAtModelAndView(ModelAndView modelAndView, String ddragonVersion) {
+        modelAndView.addObject("DdragonVersion", ddragonVersion);
     }
 
     private void setSummonerAtModelAndView(ModelAndView modelAndView, SummonerDto summonerDto, String name) {
