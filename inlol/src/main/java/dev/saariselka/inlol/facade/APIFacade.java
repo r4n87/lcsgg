@@ -2,6 +2,7 @@ package dev.saariselka.inlol.facade;
 
 import dev.saariselka.inlol.controller.APIController;
 import dev.saariselka.inlol.controller.APIKeyController;
+import dev.saariselka.inlol.exception.ApiException;
 import dev.saariselka.inlol.utils.API;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,15 +45,18 @@ public class APIFacade {
 
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            result.put("statusCode", e.getRawStatusCode());
+            throw new ApiException("[Error][Get] getSummonerBySummonerName() : " + e.getRawStatusCode() + "HttpError");
+
+            /*result.put("statusCode", e.getRawStatusCode());
             result.put("body"  , e.getStatusText());
             System.out.println("summoner info get error");
-            System.out.println(e);
+            System.out.println(e);*/
 
         } catch (Exception e) {
-            result.put("statusCode", "999");
+            throw new ApiException("[Error][Get] getSummonerBySummonerName() : Unknown");
+            /*result.put("statusCode", "999");
             result.put("body"  , "summoner info get exception");
-            System.out.println(e);
+            System.out.println(e);*/
         }
         return result;
     }
