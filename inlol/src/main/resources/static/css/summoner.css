@@ -958,6 +958,22 @@ img {
 .css-utzuox > div.kda .k-d-a span.d {
     color: #c6443e;
 }
+
+.css-utzuox > div.kda .multi-kill {
+    display: inline-block;
+    margin: 8px 4px 0px;
+    font-size: 10px;
+    color: rgb(242, 242, 242);
+}
+.css-utzuox > div.kda .multi-kill span {
+    display: inline-block;
+    background: rgb(238, 90, 82);
+    border: 1px solid rgb(198, 68, 62);
+    border-radius: 15px;
+    padding: 2px 5px;
+    line-height: 1;
+}
+
 .css-utzuox > div.kda .ratio {
     color: #555e5e;
     font-size: 12px;
@@ -1242,19 +1258,7 @@ b, strong {
 .css-7uadie > div.kda .k-d-a span.d {
     color: rgb(198, 68, 62);
 }
-.css-7uadie > div.kda .k-d-a span {
-    color: rgb(85, 94, 94);
-    font-weight: bold;
-}
-.css-7uadie > div.kda .ratio {
-    color: rgb(85, 94, 94);
-    font-size: 12px;
-    font-weight: bold;
-    margin-top: 6px;
-}
-.css-7uadie > div.kda .ratio span {
-    color: rgb(53, 58, 58);
-}
+
 .css-7uadie > div.kda .multi-kill {
     display: inline-block;
     margin: 8px 4px 0px;
@@ -1269,6 +1273,18 @@ b, strong {
     padding: 2px 5px;
     line-height: 1;
 }
+
+.css-7uadie > div.kda .ratio {
+    color: rgb(85, 94, 94);
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.css-7uadie > div.kda .ratio span {
+    color: rgb(53, 58, 58);
+}
+
 .css-7uadie > div.stats {
     width: 90px;
     font-size: 11px;
