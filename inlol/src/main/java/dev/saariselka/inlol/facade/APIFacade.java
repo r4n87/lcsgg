@@ -2,6 +2,7 @@ package dev.saariselka.inlol.facade;
 
 import dev.saariselka.inlol.controller.APIController;
 import dev.saariselka.inlol.controller.APIKeyController;
+import dev.saariselka.inlol.exception.APIType;
 import dev.saariselka.inlol.exception.ApiException;
 import dev.saariselka.inlol.utils.API;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class APIFacade {
 
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
-            throw new ApiException("[Error][Get] getSummonerBySummonerName() : " + e.getRawStatusCode() + "HttpError");
+            throw new ApiException("[Error][Get] getSummonerBySummonerName() : " + e.getRawStatusCode() + "HttpError" , APIType.SUMMONER);
 
             /*result.put("statusCode", e.getRawStatusCode());
             result.put("body"  , e.getStatusText());
@@ -53,7 +54,7 @@ public class APIFacade {
             System.out.println(e);*/
 
         } catch (Exception e) {
-            throw new ApiException("[Error][Get] getSummonerBySummonerName() : Unknown");
+            throw new ApiException("[Error][Get] getSummonerBySummonerName() : Unknown", APIType.SUMMONER);
             /*result.put("statusCode", "999");
             result.put("body"  , "summoner info get exception");
             System.out.println(e);*/
