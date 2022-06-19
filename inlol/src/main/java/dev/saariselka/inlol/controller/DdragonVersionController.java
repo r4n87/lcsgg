@@ -32,9 +32,9 @@ public class DdragonVersionController {
         return new ResponseEntity<List<DdragonVersionEntity>>(ddragonVersionEntities, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/{current}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public String getCurrentDdragonVersion(@PathVariable("current") String current) {
-        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionService.findByCurrent(current);
+    @GetMapping(value ="/{currentVersion}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    public String getCurrentDdragonVersion() {
+        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionService.getCurrentDdragonVersion();
 
         if(!ddragonVersionEntities.isEmpty()) {
             return ddragonVersionEntities.get(0).getVersion();

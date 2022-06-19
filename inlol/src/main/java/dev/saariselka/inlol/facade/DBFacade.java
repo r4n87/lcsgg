@@ -528,7 +528,6 @@ public class DBFacade {
     }
 
     public String getCurrentDdragonVersion() {
-        String version = ddragonVersionController.getCurrentDdragonVersion("Y");
-        return version;
+        return ddragonVersionController.getCurrentDdragonVersion();
     }
 }
