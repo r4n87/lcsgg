@@ -31,7 +31,12 @@ public class DdragonVersionService {
     }
 
     public List<DdragonVersionEntity> findByCurrent(String current) {
-        List<DdragonVersionEntity> ddragonVersionEntity = ddragonVersionRepository.findByCurrent(current);
-        return ddragonVersionEntity;
+        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionRepository.findByCurrent(current);
+        return ddragonVersionEntities;
+    }
+
+    public List<DdragonVersionEntity> getCurrentDdragonVersion() {
+        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionRepository.getCurrentDdragonVersion();
+        return ddragonVersionEntities;
     }
 }
