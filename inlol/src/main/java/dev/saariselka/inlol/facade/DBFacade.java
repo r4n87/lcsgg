@@ -39,6 +39,8 @@ public class DBFacade {
     LeagueMiniSeriesController leagueMiniSeriesController;
     @Autowired
     MatchPerksController matchPerksController;
+    @Autowired
+    DdragonVersionController ddragonVersionController;
 
     public SummonerDto getSummonerDtoBySummonerName(String name) {
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
@@ -523,5 +525,10 @@ public class DBFacade {
         summonerController.insertSummoner(result.get("accountId"),Integer.parseInt(String.valueOf(result.get("profileIconId"))),
                 Long.parseLong(String.valueOf(result.get("revisionDate"))),result.get("name"),result.get("id"),
                 Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
+    }
+
+    public String getCurrentDdragonVersion() {
+        String version = ddragonVersionController.getCurrentDdragonVersion("Y");
+        return version;
     }
 }
