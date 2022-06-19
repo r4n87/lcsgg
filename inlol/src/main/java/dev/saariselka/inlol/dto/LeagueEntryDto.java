@@ -32,7 +32,13 @@ public class LeagueEntryDto {
         this.summonerName = leagueEntryEntity.getSummonerName();
         this.queueType = leagueEntryEntity.getLeagueEntryId().getQueueType();
         this.tier = leagueEntryEntity.getTier();
-        this.rank = leagueEntryEntity.getRanks();
+        if(leagueEntryEntity.getTier().equals("MASTER")||leagueEntryEntity.getTier().equals("GRANDMASTER")||leagueEntryEntity.getTier().equals("CHALLENGER"))
+        {
+            this.rank = "";
+        }
+        else {
+            this.rank = leagueEntryEntity.getRanks();
+        }
         this.leaguePoints = leagueEntryEntity.getLeaguePoints();
         this.wins = leagueEntryEntity.getWins();
         this.losses = leagueEntryEntity.getLosses();
