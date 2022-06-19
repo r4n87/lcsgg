@@ -219,7 +219,14 @@ public class ParticipantDto {
         this.summoner2Id = JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner2Id());
         this.summonerId = matchParticipantEntity.getSummonerId();
         this.summonerLevel = String.valueOf(matchParticipantEntity.getSummonerLevel());
-        this.summonerName = matchParticipantEntity.getSummonerName();
+        if(matchParticipantEntity.getMatchParticipantId().getPuuid().equals("BOT"))
+        {
+            this.summonerName = "(봇)";
+        }
+        else
+        {
+            this.summonerName = matchParticipantEntity.getSummonerName();
+        }
         this.teamEarlySurrendered = String.valueOf(matchParticipantEntity.isTeamEarlySurrendered());
         this.teamId = String.valueOf(matchParticipantEntity.getTeamId());
         this.teamPosition = matchParticipantEntity.getTeamPosition();
