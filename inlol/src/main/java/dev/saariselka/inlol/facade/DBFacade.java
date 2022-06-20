@@ -206,13 +206,7 @@ public class DBFacade {
                 MatchPerksEntity perksEntity = (0 == perksList.size())
                         ? new MatchPerksEntity() : perksList.get(0);
                 PerksDto perksDto = new PerksDto(perksEntity);
-                ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
-
-                String kda = getKda(participantDto.getKills(), participantDto.getDeaths(), participantDto.getAssists());
-                participantDto.setKda(kda);
-
-                String minionsKilledPerMin = getMinionsKilledPerMin(participantDto.getTotalMinionsKilled(), matchMasterEntity.getGameDuration());
-                participantDto.setMinionsKilledPerMin(minionsKilledPerMin);
+                ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto, matchMasterEntity.getGameDuration());
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
@@ -259,33 +253,6 @@ public class DBFacade {
 
             participant.setKillRatio(killRatio.toString());
         }
-    }
-
-    private String getMinionsKilledPerMin(String totalMinionsKilled, long gameDuration) {
-        BigDecimal minionsKilledCount = new BigDecimal(totalMinionsKilled);
-        BigDecimal gameDurationMin = BigDecimal.valueOf(gameDuration).divide(BigDecimal.valueOf(60), RoundingMode.FLOOR);
-
-        return minionsKilledCount.divide(gameDurationMin, 1, RoundingMode.HALF_UP).toString();
-    }
-
-    private String getKda(String kill, String death, String assist) {
-        String killRatio = "";
-        BigDecimal kills = new BigDecimal(kill);
-        BigDecimal deaths = new BigDecimal(death);
-        BigDecimal assists = new BigDecimal(assist);
-
-        if(0 != deaths.compareTo(BigDecimal.ZERO)
-          && 0 == kills.compareTo(BigDecimal.ZERO)
-          && 0 == assists.compareTo(BigDecimal.ZERO)) {
-            killRatio = "0.00" + killRatio;
-        } else if(0 == deaths.compareTo(BigDecimal.ZERO)) {
-            killRatio = "Perfect";
-        } else {
-            BigDecimal ratio = kills.add(assists).divide(deaths, 2, RoundingMode.HALF_UP);
-            killRatio = ratio + killRatio;
-        }
-
-        return killRatio;
     }
 
     public void setMatch(HashMap<String, Object> matchInfo) throws JsonProcessingException {

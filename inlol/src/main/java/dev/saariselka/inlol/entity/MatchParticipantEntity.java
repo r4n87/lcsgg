@@ -19,6 +19,7 @@ public class MatchParticipantEntity {
     private int bountyLevel;
     private int champExperience;
     private int champLevel;
+    private int championId;
     private String championName;
     private int championTransform;
     private int consumablesPurchased;
@@ -66,7 +67,6 @@ public class MatchParticipantEntity {
     private int nexusLost;
     private int objectivesStolen;
     private int objectivesStolenAssists;
-    private int participantId;
     private int pentaKills;
     private int physicalDamageDealt;
     private int physicalDamageDealtToChampions;
