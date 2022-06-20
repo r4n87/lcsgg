@@ -1,14 +1,16 @@
 package dev.saariselka.inlol.dto;
 
+import com.google.gson.JsonParser;
 import dev.saariselka.inlol.entity.MatchPerksEntity;
+import dev.saariselka.inlol.utils.JsonParserForLOL;
 
 public class PerksDto {
     private int primaryStyle;
-    private int primaryPerk1;
+    private String primaryPerk1;
     private int primaryPerk2;
     private int primaryPerk3;
     private int primaryPerk4;
-    private int subStyle;
+    private String subStyle;
     private int subPerk1;
     private int subPerk2;
     private int statPerkDefense;
@@ -21,11 +23,11 @@ public class PerksDto {
 
     public PerksDto(MatchPerksEntity matchPerksEntity) {
         this.primaryStyle = matchPerksEntity.getPrimaryStyle();
-        this.primaryPerk1 = matchPerksEntity.getPrimaryPerk1();
+        this.primaryPerk1 = JsonParserForLOL.getRuneIconImageByPerkStyle("primary", this.primaryStyle, matchPerksEntity.getPrimaryPerk1());
         this.primaryPerk2 = matchPerksEntity.getPrimaryPerk2();
         this.primaryPerk3 = matchPerksEntity.getPrimaryPerk3();
         this.primaryPerk4 = matchPerksEntity.getPrimaryPerk4();
-        this.subStyle = matchPerksEntity.getSubStyle();
+        this.subStyle = JsonParserForLOL.getRuneIconImageByPerkStyle("sub", matchPerksEntity.getSubStyle(), 0);
         this.subPerk1 = matchPerksEntity.getSubPerk1();
         this.subPerk2 = matchPerksEntity.getSubPerk2();
         this.statPerkDefense = matchPerksEntity.getStatPerkDefense();
@@ -41,11 +43,11 @@ public class PerksDto {
         this.primaryStyle = primaryStyle;
     }
 
-    public int getPrimaryPerk1() {
+    public String getPrimaryPerk1() {
         return primaryPerk1;
     }
 
-    public void setPrimaryPerk1(int primaryPerk1) {
+    public void setPrimaryPerk1(String primaryPerk1) {
         this.primaryPerk1 = primaryPerk1;
     }
 
@@ -65,11 +67,11 @@ public class PerksDto {
         this.primaryPerk3 = primaryPerk3;
     }
 
-    public int getSubStyle() {
+    public String getSubStyle() {
         return subStyle;
     }
 
-    public void setSubStyle(int subStyle) {
+    public void setSubStyle(String subStyle) {
         this.subStyle = subStyle;
     }
 
