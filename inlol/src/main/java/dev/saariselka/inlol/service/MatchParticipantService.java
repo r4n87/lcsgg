@@ -48,14 +48,14 @@ public class MatchParticipantService {
                        int trueDamageTaken, int turretKills, int turretTakedowns, int turretsLost, int unrealKills, int visionScore, int visionWardsBoughtInGame,
                        int wardsKilled, int wardsPlaced, boolean win, Timestamp rrt) {
 
-        matchParticipantRepository.save(new MatchParticipantEntity(new MatchParticipantId(puuid, dataVersion, matchId, championId), assists, baronKills,
-                bountyLevel, champExperience, champLevel, championName, championTransform, consumablesPurchased, damageDealtToBuildings,
+        matchParticipantRepository.save(new MatchParticipantEntity(new MatchParticipantId(puuid, dataVersion, matchId, participantId), assists, baronKills,
+                bountyLevel, champExperience, champLevel, championId, championName, championTransform, consumablesPurchased, damageDealtToBuildings,
                 damageDealtToObjectives, damageDealtToTurrets, damageSelfMitigated, deaths, detectorWardsPlaced, doubleKills, dragonKills,
                 firstBloodAssist, firstBloodKill, firstTowerAssist, firstTowerKill, gameEndedInEarlySurrender, gameEndedInSurrender, goldEarned,
                 goldSpent, individualPosition, inhibitorKills, inhibitorTakedowns, inhibitorsLost, item0, item1, item2, item3, item4, item5, item6,
                 itemsPurchased, killingSprees, kills, lane, largestCriticalStrike, largestKillingSpree, largestMultiKill, longestTimeSpentLiving,
                 magicDamageDealt, magicDamageDealtToChampions, magicDamageTaken, neutralMinionsKilled, nexusKills, nexusTakedowns, nexusLost,
-                objectivesStolen, objectivesStolenAssists, participantId, pentaKills, physicalDamageDealt, physicalDamageDealtToChampions,
+                objectivesStolen, objectivesStolenAssists, pentaKills, physicalDamageDealt, physicalDamageDealtToChampions,
                 physicalDamageTaken, profileIcon, quadraKills, riotIdName, riotIdTagline, role, sightWardsBoughtInGame, spell1Casts, spell2Casts,
                 spell3Casts, spell4Casts, summoner1Casts, summoner1Id, summoner2Casts, summoner2Id, summonerId, summonerLevel, summonerName,
                 teamEarlySurrendered, teamId, teamPosition, timeCCingOthers, timePlayed, totalDamageDealt, totalDamageDealtToChampions,

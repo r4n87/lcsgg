@@ -3,13 +3,18 @@ package dev.saariselka.inlol.dto;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
+
 public class MetadataDto {
     private String dataVersion;
     private String matchId;
@@ -26,29 +31,5 @@ public class MetadataDto {
         }
 
         this.participants = participantsPuuidList;
-    }
-
-    public String getDataVersion() {
-        return dataVersion;
-    }
-
-    public void setDataVersion(String dataVersion) {
-        this.dataVersion = dataVersion;
-    }
-
-    public String getMatchId() {
-        return matchId;
-    }
-
-    public void setMatchId(String matchId) {
-        this.matchId = matchId;
-    }
-
-    public List<String> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<String> participants) {
-        this.participants = participants;
     }
 }

@@ -1,30 +1,16 @@
 package dev.saariselka.inlol.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+
 public class ObjectiveDto {
     private boolean first;
     private int kills;
-
-    public ObjectiveDto() {
-    }
-
-    public ObjectiveDto(boolean first, int kills) {
-        this.first = first;
-        this.kills = kills;
-    }
-
-    public boolean isFirst() {
-        return first;
-    }
-
-    public void setFirst(boolean first) {
-        this.first = first;
-    }
-
-    public int getKills() {
-        return kills;
-    }
-
-    public void setKills(int kills) {
-        this.kills = kills;
-    }
 }

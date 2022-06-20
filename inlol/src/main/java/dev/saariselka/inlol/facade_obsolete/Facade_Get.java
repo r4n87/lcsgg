@@ -130,7 +130,7 @@ public class Facade_Get {
                 MatchPerksEntity perksEntity = (0 == perksList.size())
                                                 ? new MatchPerksEntity() : perksList.get(0);
                 PerksDto perksDto = new PerksDto(perksEntity);
-                ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto);
+                ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto, matchMasterEntity.getGameDuration());
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
@@ -147,7 +147,7 @@ public class Facade_Get {
             sortParticipationDtoList(blueParticipantDtoList, redParticipantDtoList);
 
             MetadataDto metadataDto = new MetadataDto(matchMasterEntity,participantsList);
-            InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+            InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,summonerInfo);
 
             MatchDto matchInfo = new MatchDto(metadataDto,infoDto);
 

@@ -1,23 +1,22 @@
 package dev.saariselka.inlol.dto;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.utils.JsonParserForLOL;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
-import java.util.HashMap;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
+
 public class ParticipantDto {
     private String puuid;
     private String dataVersion;
@@ -135,16 +134,14 @@ public class ParticipantDto {
     private String killRatio;
     private String multiKills;
 
-    public ParticipantDto() {
-
-    }
-
     public ParticipantDto(MatchParticipantEntity matchParticipantEntity
-                        , PerksDto perksDto) throws IOException {
+                        , PerksDto perksDto
+                        , long gameDuration) {
 
         this.puuid = matchParticipantEntity.getMatchParticipantId().getPuuid();
         this.dataVersion = matchParticipantEntity.getMatchParticipantId().getDataVersion();
         this.matchId = matchParticipantEntity.getMatchParticipantId().getMatchId();
+        this.participantId = String.valueOf(matchParticipantEntity.getMatchParticipantId().getParticipantId());
         this.assists = String.valueOf(matchParticipantEntity.getAssists());
         this.baronKills = String.valueOf(matchParticipantEntity.getBaronKills());
         this.bountyLevel = String.valueOf(matchParticipantEntity.getBountyLevel());
@@ -198,7 +195,6 @@ public class ParticipantDto {
         this.nexusTakedowns = String.valueOf(matchParticipantEntity.getNexusTakedowns());
         this.objectivesStolen = String.valueOf(matchParticipantEntity.getObjectivesStolen());
         this.objectivesStolenAssists = String.valueOf(matchParticipantEntity.getObjectivesStolenAssists());
-        this.participantId = String.valueOf(matchParticipantEntity.getParticipantId());
         this.pentaKills = String.valueOf(matchParticipantEntity.getPentaKills());
         this.physicalDamageDealt = String.valueOf(matchParticipantEntity.getPhysicalDamageDealt());
         this.physicalDamageDealtToChampions = String.valueOf(matchParticipantEntity.getPhysicalDamageDealtToChampions());
@@ -268,6 +264,36 @@ public class ParticipantDto {
             this.multiKills = "더블킬";
         else
             this.multiKills = null;
+
+        this.kda = getKda(this.kills, this.deaths, this.assists);
+        this.minionsKilledPerMin = getMinionsKilledPerMin(this.totalMinionsKilled, gameDuration);
+
+    }
+
+    private String getMinionsKilledPerMin(String totalMinionsKilled, long gameDuration) {
+        BigDecimal minionsKilledCount = new BigDecimal(totalMinionsKilled);
+        BigDecimal gameDurationMin = BigDecimal.valueOf(gameDuration).divide(BigDecimal.valueOf(60), RoundingMode.FLOOR);
+
+        return minionsKilledCount.divide(gameDurationMin, 1, RoundingMode.HALF_UP).toString();
+    }
+
+    private String getKda(String kill, String death, String assist) {
+        String kda = ":1";
+        BigDecimal kills = new BigDecimal(kill);
+        BigDecimal deaths = new BigDecimal(death);
+        BigDecimal assists = new BigDecimal(assist);
+
+        if(0 == kills.compareTo(BigDecimal.ZERO)
+          && 0 == assists.compareTo(BigDecimal.ZERO)) {
+            kda = "0.00" + kda;
+        } else if(0 == deaths.compareTo(BigDecimal.ZERO)) {
+            kda = "Perfect";
+        } else {
+            BigDecimal ratio = kills.add(assists).divide(deaths, 2, RoundingMode.HALF_UP);
+            kda = ratio + kda;
+        }
+
+        return kda;
     }
 
 }

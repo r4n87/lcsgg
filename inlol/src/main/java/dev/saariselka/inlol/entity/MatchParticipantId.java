@@ -20,7 +20,7 @@ public class MatchParticipantId implements Serializable {
     @Column(nullable = false)
     private String matchId;
     @Column(nullable = false)
-    private int championId;
+    private int participantId;
 
     public MatchParticipantId(String dataVersion, String matchId) {
         this.dataVersion = dataVersion;

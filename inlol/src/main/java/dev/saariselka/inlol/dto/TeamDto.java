@@ -15,6 +15,8 @@ public class TeamDto {
     private ObjectivesDto objectives;
     private String teamId;
     private String win;
+    private int teamKills;
+    private List<ParticipantDto> participants;
 
     public TeamDto (TeamEntity teamEntity, List<BanDto> banDtoList, ObjectivesDto objectivesDto) {
         this.teamId = String.valueOf(teamEntity.getTeamId().getTeamId());
