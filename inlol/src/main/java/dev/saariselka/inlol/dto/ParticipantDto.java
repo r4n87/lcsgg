@@ -1,25 +1,22 @@
 package dev.saariselka.inlol.dto;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.utils.JsonParserForLOL;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
-import java.util.HashMap;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
+
 public class ParticipantDto {
     private String puuid;
     private String dataVersion;
@@ -137,13 +134,9 @@ public class ParticipantDto {
     private String killRatio;
     private String multiKills;
 
-    public ParticipantDto() {
-
-    }
-
     public ParticipantDto(MatchParticipantEntity matchParticipantEntity
                         , PerksDto perksDto
-                        , long gameDuration) throws IOException {
+                        , long gameDuration) {
 
         this.puuid = matchParticipantEntity.getMatchParticipantId().getPuuid();
         this.dataVersion = matchParticipantEntity.getMatchParticipantId().getDataVersion();
