@@ -28,8 +28,6 @@ public class InfoDto {
     private String gameType;
     private String gameVersion;
     private String mapId;
-    private List<ParticipantDto> blueParticipants;
-    private List<ParticipantDto> redParticipants;
     private String platformId;
     private String gameAgoTime;
     private ParticipantDto summoner;
@@ -37,8 +35,7 @@ public class InfoDto {
     private List<TeamDto> teams;
     private String tournamentCode;
 
-    public InfoDto (MatchMasterEntity matchMasterEntity, List<TeamDto> teamDtoList, List<ParticipantDto> blueParticipantDtoList,
-                    List<ParticipantDto> redParticipantDtoList, ParticipantDto summonerInfo) {
+    public InfoDto (MatchMasterEntity matchMasterEntity, List<TeamDto> teamDtoList, ParticipantDto summonerInfo) {
 
         //시간 차이 계산
         String gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())))
@@ -76,8 +73,6 @@ public class InfoDto {
         this.tournamentCode = matchMasterEntity.getTournamentCode();
         this.gameAgoTime = gameAgoTime;
         this.teams = teamDtoList;
-        this.blueParticipants = blueParticipantDtoList;
-        this.redParticipants = redParticipantDtoList;
         this.summoner = summonerInfo;
     }
 }

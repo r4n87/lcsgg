@@ -9,6 +9,8 @@ public class TeamDto {
     private ObjectivesDto objectives;
     private String teamId;
     private String win;
+    private int teamKills;
+    private List<ParticipantDto> participants;
 
     public TeamDto() {
     }
@@ -18,6 +20,15 @@ public class TeamDto {
         this.objectives = objectives;
         this.teamId = teamId;
         this.win = win;
+    }
+
+    public TeamDto(List<BanDto> bans, ObjectivesDto objectives, String teamId, String win, int teamKills, List<ParticipantDto> participants) {
+        this.bans = bans;
+        this.objectives = objectives;
+        this.teamId = teamId;
+        this.win = win;
+        this.teamKills = teamKills;
+        this.participants = participants;
     }
 
     public TeamDto (TeamEntity teamEntity, List<BanDto> banDtoList, ObjectivesDto objectivesDto) {
@@ -57,5 +68,25 @@ public class TeamDto {
 
     public void setWin(String win) {
         this.win = win;
+    }
+
+    public String getWin() {
+        return win;
+    }
+
+    public int getTeamKills() {
+        return teamKills;
+    }
+
+    public void setTeamKills(int teamKills) {
+        this.teamKills = teamKills;
+    }
+
+    public List<ParticipantDto> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<ParticipantDto> participants) {
+        this.participants = participants;
     }
 }

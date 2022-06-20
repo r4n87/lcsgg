@@ -60,15 +60,10 @@ public class DBFacade {
         return new SummonerDto(summonerController.getSummoner(puuid).get(0));
     }
 
-    private void sortParticipantDtoList(List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList) {
-        blueParticipantDtoList.sort((o1, o2) -> {
-            int score1 = getParticipantPositionScore(o1);
-            int score2 = getParticipantPositionScore(o2);
+    private void sortParticipants(TeamDto team) {
+        List<ParticipantDto> participants = team.getParticipants();
 
-            return score2 - score1;
-        });
-
-        redParticipantDtoList.sort((o1, o2) -> {
+        participants.sort((o1, o2) -> {
             int score1 = getParticipantPositionScore(o1);
             int score2 = getParticipantPositionScore(o2);
 
@@ -222,13 +217,10 @@ public class DBFacade {
                 }
             }
 
-            getAndSetKillRatio(blueParticipantDtoList, blueTeamKills);
-            getAndSetKillRatio(redParticipantDtoList, redTeamKills);
+            setTeamsInformation(teamDtoList, blueParticipantDtoList, redParticipantDtoList, blueTeamKills, redTeamKills);
 
-            sortParticipantDtoList(blueParticipantDtoList, redParticipantDtoList);
-
-            MetadataDto metadataDto = new MetadataDto(matchMasterEntity,participantsList);
-            InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+            MetadataDto metadataDto = new MetadataDto(matchMasterEntity, participantsList);
+            InfoDto infoDto = new InfoDto(matchMasterEntity, teamDtoList, summonerInfo);
 
             MatchDto matchInfo = new MatchDto(metadataDto,infoDto);
 
@@ -238,15 +230,30 @@ public class DBFacade {
         return matchDtos;
     }
 
-    private void getAndSetKillRatio(List<ParticipantDto> participantDtoList, int teamKills) {
-        for(ParticipantDto participant : participantDtoList) {
+    private void setTeamsInformation(List<TeamDto> teamDtoList, List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList, int blueTeamKills, int redTeamKills) {
+        for(TeamDto team : teamDtoList) {
+            if("100".equals(team.getTeamId())) {
+                team.setTeamKills(blueTeamKills);
+                team.setParticipants(blueParticipantDtoList);
+            } else if("200".equals(team.getTeamId())) {
+                team.setTeamKills(redTeamKills);
+                team.setParticipants(redParticipantDtoList);
+            }
+
+            getAndSetKillRatio(team);
+            sortParticipants(team);
+        }
+    }
+
+    private void getAndSetKillRatio(TeamDto team) {
+        for(ParticipantDto participant : team.getParticipants()) {
             BigDecimal killAndAssists = new BigDecimal(participant.getKills()).add(new BigDecimal(participant.getAssists()));
             BigDecimal killRatio;
 
-            if(teamKills == 0) {
+            if(team.getTeamKills() == 0) {
                 killRatio = BigDecimal.ZERO;
             } else {
-                killRatio = killAndAssists.divide(new BigDecimal(teamKills), 2, RoundingMode.HALF_UP)
+                killRatio = killAndAssists.divide(new BigDecimal(team.getTeamKills()), 2, RoundingMode.HALF_UP)
                         .multiply(BigDecimal.valueOf(100))
                         .setScale(0, RoundingMode.HALF_UP);
             }

@@ -290,9 +290,8 @@ public class ParticipantDto {
         BigDecimal deaths = new BigDecimal(death);
         BigDecimal assists = new BigDecimal(assist);
 
-        if(0 != deaths.compareTo(BigDecimal.ZERO)
-                && 0 == kills.compareTo(BigDecimal.ZERO)
-                && 0 == assists.compareTo(BigDecimal.ZERO)) {
+        if(0 == kills.compareTo(BigDecimal.ZERO)
+          && 0 == assists.compareTo(BigDecimal.ZERO)) {
             kda = "0.00" + kda;
         } else if(0 == deaths.compareTo(BigDecimal.ZERO)) {
             kda = "Perfect";

@@ -147,7 +147,7 @@ public class Facade_Get {
             sortParticipationDtoList(blueParticipantDtoList, redParticipantDtoList);
 
             MetadataDto metadataDto = new MetadataDto(matchMasterEntity,participantsList);
-            InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+            InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,summonerInfo);
 
             MatchDto matchInfo = new MatchDto(metadataDto,infoDto);
 

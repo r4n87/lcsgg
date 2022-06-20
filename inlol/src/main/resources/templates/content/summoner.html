@@ -202,7 +202,6 @@
                                         <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
                                     </div>
                                 </div>
-                                <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
                             </div>
                             <div class="items">
                                 <div>
@@ -260,25 +259,25 @@
                                 </div>
                             </div>
                             <div class="participants">
-                                <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(0).getParticipants()}">
                                     <li class="css-tegtkt e19epo2o1">
                                         <div class="icon">
-                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                         </div>
                                         <div class="name">
-                                            <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                             <div class="participants">
-                                <ul th:each="participantsInfo : ${matchInfo.info.getRedParticipants()}">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(1).getParticipants()}">
                                     <li class="css-tegtkt e19epo2o1">
                                         <div class="icon">
-                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                         </div>
                                         <div class="name">
-                                            <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
                                         </div>
                                     </li>
                                 </ul>
@@ -361,7 +360,6 @@
                                         <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
                                     </div>
                                 </div>
-                                <div class="mmr"><span>매치 평균</span><br><b>silver 1</b></div>
                             </div>
                             <div class="items">
                                 <div>
@@ -419,25 +417,25 @@
                                 </div>
                             </div>
                             <div class="participants">
-                                <ul th:each="participantsInfo : ${matchInfo.info.getBlueParticipants()}">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(0).getParticipants()}">
                                     <li class="css-tegtkt e19epo2o1">
                                         <div class="icon">
-                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                         </div>
                                         <div class="name">
-                                            <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                             <div class="participants">
-                                <ul th:each="participantsInfo : ${matchInfo.info.getRedParticipants()}">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(1).getParticipants}">
                                     <li class="css-tegtkt e19epo2o1">
                                         <div class="icon">
-                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participantsInfo.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionNameENG()}.png?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
                                         </div>
                                         <div class="name">
-                                            <a th:href="|/search?name=${participantsInfo.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participantsInfo.getSummonerName()}"></a>
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
                                         </div>
                                     </li>
                                 </ul>
