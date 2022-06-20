@@ -55,7 +55,6 @@ public class JsonParserForLOL {
 
         ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
         JsonObject summonerJson = null;
-        String spellImg = "";
 
         try {
             summonerJson = JsonParser.parseReader(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
@@ -70,11 +69,11 @@ public class JsonParserForLOL {
             JsonObject summonerSpell = (JsonObject) summonerJsonObject.get(key);
 
             if(spellId == summonerSpell.get("key").getAsInt()) {
-                spellImg = ((JsonObject) summonerSpell.get("image")).get("full").getAsString();
+                return ((JsonObject) summonerSpell.get("image")).get("full").getAsString();
             }
         }
 
-        return spellImg;
+        return null;
     }
 
     public static String getRuneIconImageByPerkStyle(String type, int styleId, int perkId) {
