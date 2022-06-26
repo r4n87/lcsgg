@@ -2,6 +2,8 @@ package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.utils.JsonParserForLOL;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -16,35 +18,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class InfoDtoTest {
 
+    MatchMasterEntity matchMasterEntity;
+    List<TeamDto> teamDtoList;
+    ParticipantDto summonerInfo;
+
+    @BeforeEach
+    public void init() {
+        matchMasterEntity = createTestMatchMasterEntity();
+        teamDtoList = createTestTeamDtoList();
+        summonerInfo = createTestSummonerInfo();
+    }
+
     @Test
+    @DisplayName("InfoDto Lombok Get Function 테스트")
     public void testLombokGetFunction() {
         // Given
-        String dataVersion = "testDataVersion";
-        String matchId = "testMatchId";
-        long gameCreation = 100;
-        long gameDuration = 100;
-        long gameEndTimeStamp = 1646754647544L;
-        long gameId = 100;
-        String gameMode = "testGameMode";
-        String gameName = "testGameName";
-        long gameStartTimeStamp = 1646753953169L;
-        String gameType = "testGameType";
-        String gameVersion = "testGameVersion";
-        int mapId = 100;
-        String platformId = "testPlatformId";
-        int queueId = 420;
-        int teamId1 = 100;
-        int teamId2 = 200;
-        String tournamentCode = "testTournamentCode";
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());
-
-        MatchMasterEntity matchMasterEntity = new MatchMasterEntity(new MatchMasterId(dataVersion,matchId),gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2,tournamentCode,rrt);
-
-        List<TeamDto> teamDtoList = new ArrayList<>();
-        List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
-        List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
-
-        ParticipantDto summonerInfo = new ParticipantDto();
 
         //시간 차이 계산
         String convert_gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())))
@@ -66,93 +54,47 @@ public class InfoDtoTest {
         }
 
         // When
-        InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+        InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,summonerInfo);
 
         // Then
-        assertThat(infoDto.getGameCreation()).isEqualTo(gameCreation);
+        assertThat(infoDto.getGameCreation()).isEqualTo(matchMasterEntity.getGameCreation());
         assertThat(infoDto.getGameDuration()).isEqualTo(convert_gameDuration);
-        assertThat(infoDto.getGameEndTimestamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(gameEndTimeStamp),TimeZone.getDefault().toZoneId()));
-        assertThat(infoDto.getGameId()).isEqualTo(gameId);
-        assertThat(infoDto.getGameMode()).isEqualTo(JsonParserForLOL.getKRGameModeByQueueId(queueId));
-        assertThat(infoDto.getGameName()).isEqualTo(gameName);
-        assertThat(infoDto.getGameStartTimeStamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(gameStartTimeStamp),TimeZone.getDefault().toZoneId()));
-        assertThat(infoDto.getGameType()).isEqualTo(gameType);
-        assertThat(infoDto.getGameVersion()).isEqualTo(gameVersion);
-        assertThat(infoDto.getMapId()).isEqualTo(String.valueOf(mapId));
-        assertThat(infoDto.getBlueParticipants()).isEqualTo(blueParticipantDtoList);
-        assertThat(infoDto.getRedParticipants()).isEqualTo(redParticipantDtoList);
-        assertThat(infoDto.getPlatformId()).isEqualTo(platformId);
+        assertThat(infoDto.getGameEndTimestamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
+        assertThat(infoDto.getGameId()).isEqualTo(matchMasterEntity.getGameId());
+        assertThat(infoDto.getGameMode()).isEqualTo(JsonParserForLOL.getKRGameModeByQueueId(matchMasterEntity.getQueueId()));
+        assertThat(infoDto.getGameName()).isEqualTo(matchMasterEntity.getGameName());
+        assertThat(infoDto.getGameStartTimeStamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
+        assertThat(infoDto.getGameType()).isEqualTo(matchMasterEntity.getGameType());
+        assertThat(infoDto.getGameVersion()).isEqualTo(matchMasterEntity.getGameVersion());
+        assertThat(infoDto.getMapId()).isEqualTo(String.valueOf(matchMasterEntity.getMapId()));
+        assertThat(infoDto.getPlatformId()).isEqualTo(matchMasterEntity.getPlatformId());
         assertThat(infoDto.getGameAgoTime()).isEqualTo(convert_gameAgoTime);
         assertThat(infoDto.getSummoner()).isEqualTo(summonerInfo);
-        assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(queueId));
+        assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(matchMasterEntity.getQueueId()));
         assertThat(infoDto.getTeams()).isEqualTo(teamDtoList);
-        assertThat(infoDto.getTournamentCode()).isEqualTo(tournamentCode);
+        assertThat(infoDto.getTournamentCode()).isEqualTo(matchMasterEntity.getTournamentCode());
     }
 
 
     @Test
+    @DisplayName("InfoDto Lombok Set Function 테스트")
     public void testLombokSetFunction() {
 
         // Given
-        String dataVersion = "testDataVersion";
-        String matchId = "testMatchId";
-        long gameCreation = 100;
         long tobe_gameCreation = 101;
-        long gameDuration = 100;
-        long gameEndTimeStamp = 1646754647544L;
         long tobe_gameEndTimeStamp = 1646754647545L;
-        long gameId = 100;
         long tobe_gameId = 101;
-        String gameMode = "testGameMode";
-        String gameName = "testGameName";
         String tobe_gameName = "tobe_testGameName";
-        long gameStartTimeStamp = 1646753953169L;
         long tobe_gameStartTimeStamp = 1646753953170L;
-        String gameType = "testGameType";
         String tobe_gameType = "tobe_testGameType";
-        String gameVersion = "testGameVersion";
         String tobe_gameVersion = "tobe_testGameVersion";
-        int mapId = 100;
         int tobe_mapId = 101;
-        String platformId = "testPlatformId";
         String tobe_platformId = "tobe_testPlatformId";
-        int queueId = 420;
         int tobe_queueId = 450;
-        int teamId1 = 100;
-        int teamId2 = 200;
-        String tournamentCode = "testTournamentCode";
         String tobe_tournamentCode = "testTournamentCode";
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        MatchMasterEntity matchMasterEntity = new MatchMasterEntity(new MatchMasterId(dataVersion,matchId),gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2,tournamentCode,rrt);
-
-        List<TeamDto> teamDtoList = new ArrayList<>();
         List<TeamDto> tobe_teamDtoList = new ArrayList<>();
-        List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
-        List<ParticipantDto> tobe_blueParticipantDtoList = new ArrayList<>();
-        List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
-        List<ParticipantDto> tobe_redParticipantDtoList = new ArrayList<>();
-        ParticipantDto summonerInfo = new ParticipantDto();
         ParticipantDto tobe_summonerInfo = new ParticipantDto();
-
-        //시간 차이 계산
-        String convert_gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())))
-                + "분 "
-                + String.valueOf(ChronoUnit.SECONDS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())) - (ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())) * 60))
-                + "초";
-
-        String convert_gameAgoTime = null;
-
-        if (ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.now()) >= 24)
-        {
-            convert_gameAgoTime = String.valueOf(ChronoUnit.DAYS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
-                    + "일 전";
-        }
-        else
-        {
-            convert_gameAgoTime = String.valueOf(ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
-                    + "시간 전";
-        }
 
         //시간 차이 계산
         String tobe_convert_gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameStartTimeStamp), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp), TimeZone.getDefault().toZoneId())))
@@ -164,16 +106,16 @@ public class InfoDtoTest {
 
         if (ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp), TimeZone.getDefault().toZoneId()), LocalDateTime.now()) >= 24)
         {
-            convert_gameAgoTime = String.valueOf(ChronoUnit.DAYS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
+            tobe_convert_gameAgoTime = String.valueOf(ChronoUnit.DAYS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
                     + "일 전";
         }
         else
         {
-            convert_gameAgoTime = String.valueOf(ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
+            tobe_convert_gameAgoTime = String.valueOf(ChronoUnit.HOURS.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()), LocalDateTime.now()))
                     + "시간 전";
         }
 
-        InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,blueParticipantDtoList,redParticipantDtoList,summonerInfo);
+        InfoDto infoDto = new InfoDto(matchMasterEntity,teamDtoList,summonerInfo);
 
         // When
         infoDto.setGameCreation(tobe_gameCreation);
@@ -186,8 +128,6 @@ public class InfoDtoTest {
         infoDto.setGameType(tobe_gameType);
         infoDto.setGameVersion(tobe_gameVersion);
         infoDto.setMapId(String.valueOf(tobe_mapId));
-        infoDto.setBlueParticipants(tobe_blueParticipantDtoList);
-        infoDto.setRedParticipants(tobe_redParticipantDtoList);
         infoDto.setPlatformId(tobe_platformId);
         infoDto.setGameAgoTime(tobe_convert_gameAgoTime);
         infoDto.setSummoner(tobe_summonerInfo);
@@ -206,13 +146,47 @@ public class InfoDtoTest {
         assertThat(infoDto.getGameType()).isEqualTo(tobe_gameType);
         assertThat(infoDto.getGameVersion()).isEqualTo(tobe_gameVersion);
         assertThat(infoDto.getMapId()).isEqualTo(String.valueOf(tobe_mapId));
-        assertThat(infoDto.getBlueParticipants()).isEqualTo(tobe_blueParticipantDtoList);
-        assertThat(infoDto.getRedParticipants()).isEqualTo(tobe_redParticipantDtoList);
         assertThat(infoDto.getPlatformId()).isEqualTo(tobe_platformId);
         assertThat(infoDto.getGameAgoTime()).isEqualTo(tobe_convert_gameAgoTime);
         assertThat(infoDto.getSummoner()).isEqualTo(tobe_summonerInfo);
         assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(tobe_queueId));
         assertThat(infoDto.getTeams()).isEqualTo(tobe_teamDtoList);
         assertThat(infoDto.getTournamentCode()).isEqualTo(tobe_tournamentCode);
+    }
+
+
+    private ParticipantDto createTestSummonerInfo() {
+        ParticipantDto summoner = new ParticipantDto();
+        return summoner;
+
+    }
+
+    private List<TeamDto> createTestTeamDtoList() {
+        List<TeamDto> teamlist = new ArrayList<>();
+        return teamlist;
+    }
+
+    private MatchMasterEntity createTestMatchMasterEntity() {
+
+        String dataVersion = "testDataVersion";
+        String matchId = "testMatchId";
+        long gameCreation = 100;
+        long gameDuration = 100;
+        long gameEndTimeStamp = 1646754647544L;
+        long gameId = 100;
+        String gameMode = "testGameMode";
+        String gameName = "testGameName";
+        long gameStartTimeStamp = 1646753953169L;
+        String gameType = "testGameType";
+        String gameVersion = "testGameVersion";
+        int mapId = 100;
+        String platformId = "testPlatformId";
+        int queueId = 420;
+        int teamId1 = 100;
+        int teamId2 = 200;
+        String tournamentCode = "testTournamentCode";
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+
+        return new MatchMasterEntity(new MatchMasterId(dataVersion,matchId),gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2,tournamentCode,rrt);
     }
 }
