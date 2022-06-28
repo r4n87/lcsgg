@@ -19,19 +19,7 @@ public class APIKeyRepositoryTest {
     @Test
     @DisplayName("APIKeyEntity Save Test")
     public void saveAPIKeyEntity() {
-        //given
-        Long id = 5L;
-        String category = "Category1";
-        String key = "RGAPI-523619a3-42fc-468c-8c38-e376e2d3fa6f";
 
-        //when
-        APIKeyEntity apiKeyEntity = new APIKeyEntity(id, category, key);
-        APIKeyEntity apiKeyEntityForTest = apiKeyRepository.save(apiKeyEntity);
-
-        //then
-        assertThat(apiKeyEntity.getId()).isEqualTo(apiKeyEntityForTest.getId());
-        assertThat(apiKeyEntity.getCategory()).isEqualTo(apiKeyEntityForTest.getCategory());
-        assertThat(apiKeyEntity.getKey()).isEqualTo(apiKeyEntityForTest.getKey());
     }
 
     @Test
