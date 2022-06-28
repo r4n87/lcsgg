@@ -117,4 +117,8 @@ public class MatchParticipantEntity {
     private int wardsPlaced;
     private boolean win;
     private Timestamp rrt;
+
+    public MatchParticipantEntity(MatchParticipantId matchParticipantId) {
+        this.matchParticipantId = matchParticipantId;
+    }
 }

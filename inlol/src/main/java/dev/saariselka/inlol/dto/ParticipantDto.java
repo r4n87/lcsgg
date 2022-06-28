@@ -147,7 +147,7 @@ public class ParticipantDto {
         this.bountyLevel = String.valueOf(matchParticipantEntity.getBountyLevel());
         this.champExperience = String.valueOf(matchParticipantEntity.getChampExperience());
         this.champLevel = String.valueOf(matchParticipantEntity.getChampLevel());
-        this.championId = String.valueOf(matchParticipantEntity.getChampionName());
+        this.championId = String.valueOf(matchParticipantEntity.getChampionId());
         this.championNameENG = matchParticipantEntity.getChampionName();
         this.championTransform = String.valueOf(matchParticipantEntity.getChampionTransform());
         this.consumablesPurchased = String.valueOf(matchParticipantEntity.getConsumablesPurchased());
@@ -254,20 +254,23 @@ public class ParticipantDto {
         this.rrt = matchParticipantEntity.getRrt();
         this.perks = perksDto;
 
-        if(Integer.parseInt(this.pentaKills) > 0)
-            this.multiKills = "펜타킬";
-        else if (Integer.parseInt(this.quadraKills) > 0)
-            this.multiKills = "쿼드라킬";
-        else if (Integer.parseInt(this.tripleKills) > 0)
-            this.multiKills = "트리플킬";
-        else if (Integer.parseInt(this.doubleKills) > 0)
-            this.multiKills = "더블킬";
-        else
-            this.multiKills = null;
-
+        this.multiKills = getMultiKills(this.doubleKills, this.tripleKills, this.quadraKills, this.pentaKills);
         this.kda = getKda(this.kills, this.deaths, this.assists);
         this.minionsKilledPerMin = getMinionsKilledPerMin(this.totalMinionsKilled, gameDuration);
 
+    }
+
+    private String getMultiKills(String doubleKills, String tripleKills, String quadraKills, String pentaKills) {
+        if(Integer.parseInt(pentaKills) > 0)
+            return "펜타킬";
+        else if (Integer.parseInt(quadraKills) > 0)
+            return "쿼드라킬";
+        else if (Integer.parseInt(tripleKills) > 0)
+            return "트리플킬";
+        else if (Integer.parseInt(doubleKills) > 0)
+            return "더블킬";
+        else
+            return null;
     }
 
     private String getMinionsKilledPerMin(String totalMinionsKilled, long gameDuration) {
