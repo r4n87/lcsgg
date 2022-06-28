@@ -28,16 +28,16 @@ public class APIKeyController {
 
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<List<APIKeyEntity>> getAllkeys() {
-        List<APIKeyEntity> key = APIKeyService.findAll();
-        return new ResponseEntity<List<APIKeyEntity>>(key, HttpStatus.OK);
+        List<APIKeyEntity> apiKey = APIKeyService.findAll();
+        return new ResponseEntity<>(apiKey, HttpStatus.OK);
     }
 
     @GetMapping(value ="/{category}",produces = { MediaType.APPLICATION_JSON_VALUE })
     public String getAPIKeyByCategory(@PathVariable("category") String category) {
-        List<APIKeyEntity> keys = APIKeyService.findByCategory(category);
+        List<APIKeyEntity> apiKeys = APIKeyService.findByCategory(category);
 
-        if(!keys.isEmpty()) {
-            return keys.get(0).getKey();
+        if(!apiKeys.isEmpty()) {
+            return apiKeys.get(0).getApiKey();
         } else {
             return null;
         }

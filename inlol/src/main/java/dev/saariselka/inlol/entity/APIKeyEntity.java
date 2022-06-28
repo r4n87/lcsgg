@@ -1,10 +1,14 @@
 package dev.saariselka.inlol.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Entity
 @Builder
 @AllArgsConstructor
@@ -17,10 +21,23 @@ public class APIKeyEntity {
     private Long id;
 
     private String category;
-    private String key;
+    private String apiKey;
 
-    public APIKeyEntity(String category, String key) {
+    public APIKeyEntity(String category, String apiKey) {
         this.category = category;
-        this.key = key;
+        this.apiKey = apiKey;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        APIKeyEntity that = (APIKeyEntity) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
