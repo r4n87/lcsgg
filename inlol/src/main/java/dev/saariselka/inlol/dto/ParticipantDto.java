@@ -255,6 +255,7 @@ public class ParticipantDto {
         this.perks = perksDto;
 
         this.multiKills = getMultiKills(this.doubleKills, this.tripleKills, this.quadraKills, this.pentaKills);
+
         this.kda = getKda(this.kills, this.deaths, this.assists);
         this.minionsKilledPerMin = getMinionsKilledPerMin(this.totalMinionsKilled, gameDuration);
 
