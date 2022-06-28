@@ -33,4 +33,8 @@ public class MatchMasterEntity {
     private int teamId2;
     private String tournamentCode;
     private Timestamp rrt;
+
+    public MatchMasterEntity(MatchMasterId matchMasterId) {
+        this.matchMasterId = matchMasterId;
+    }
 }
