@@ -18,20 +18,15 @@ public class APIKeyService {
     private final APIKeyRepository APIKeyRepository;
 
     public List<APIKeyEntity> findAll() {
-        List<APIKeyEntity> keys = new ArrayList<>();
-        APIKeyRepository.findAll().forEach(e -> keys.add(e));
-
-        return keys;
+        return new ArrayList<>(APIKeyRepository.findAll());
     }
 
     public Optional<APIKeyEntity> findById(Long id) {
-        Optional<APIKeyEntity> key = APIKeyRepository.findById(id);
-        return key;
+        return APIKeyRepository.findById(id);
     }
 
     public List<APIKeyEntity> findByCategory(String category) {
-        List<APIKeyEntity> key = APIKeyRepository.findByCategory(category);
-        return key;
+        return APIKeyRepository.findByCategory(category);
     }
 
 }
