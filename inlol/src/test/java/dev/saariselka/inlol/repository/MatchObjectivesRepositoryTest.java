@@ -19,7 +19,7 @@ public class MatchObjectivesRepositoryTest {
     @Autowired MatchObjectivesRepository matchObjectivesRepository;
 
     @Test
-    @DisplayName("Save")
+    @DisplayName("Save Entity")
     void saveMatchObjectivesRepository() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
@@ -47,8 +47,8 @@ public class MatchObjectivesRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find by MatchObjectivesId")
-    void findMatchObjectivesRepository_ByMatchObjectivesId() {
+    @DisplayName("Find Entity By MatchObjectivesId")
+    void findMatchObjectivesRepositoryByMatchObjectivesId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         matchObjectivesRepository.save(createMatchObjectivesEntity(rrt));

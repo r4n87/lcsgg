@@ -21,7 +21,7 @@ public class MatchPerksRepositoryTest {
     @Autowired MatchPerksRepository matchPerksRepository;
 
     @Test
-    @DisplayName("Save")
+    @DisplayName("Save Entity")
     void saveMatchPerksRepository() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
@@ -48,8 +48,8 @@ public class MatchPerksRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find by MatchPerksId")
-    void findMatchPerksRepository_ByMatchPerksId() {
+    @DisplayName("Find Entity By MatchPerksId")
+    void findMatchPerksRepositoryByMatchPerksId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         matchPerksRepository.save(createTestMatchPerksEntity(rrt));

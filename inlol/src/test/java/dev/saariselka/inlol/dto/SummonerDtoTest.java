@@ -24,8 +24,8 @@ public class SummonerDtoTest {
     }
 
     @Test
-    @DisplayName("SummonerDto 생성자 테스트")
-    void SummonerDto_생성자_테스트() {
+    @DisplayName("Constructor")
+    void constructor() {
         //given
         //Timestamp rrt = new Timestamp(System.currentTimeMillis());
         //SummonerEntity entity = createSummonerEntity(rrt);
@@ -46,8 +46,8 @@ public class SummonerDtoTest {
     }
 
     @Test
-    @DisplayName("SummonerDto Setter 테스트")
-    void SummonerDto_Setter_테스트() {
+    @DisplayName("Setter")
+    void setter() {
         //given
         // rrt = new Timestamp(System.currentTimeMillis());
         //SummonerEntity faker = createSummonerEntity(rrt);

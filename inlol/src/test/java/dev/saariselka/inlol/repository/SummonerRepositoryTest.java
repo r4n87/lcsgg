@@ -19,7 +19,7 @@ public class SummonerRepositoryTest {
     @Autowired SummonerRepository summonerRepository;
 
     @Test
-    @DisplayName("Save")
+    @DisplayName("Save Entity")
     void saveSummonerRepository() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
@@ -40,8 +40,8 @@ public class SummonerRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find by puuid")
-    void findSummonerRepository_ByPuuid() {
+    @DisplayName("Find Entity By Puuid")
+    void findSummonerRepositoryByPuuid() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         summonerRepository.save(createSummonerEntity(rrt));
@@ -61,8 +61,8 @@ public class SummonerRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find by name")
-    void findSummonerRepository_ByName() {
+    @DisplayName("Find Entity By Name")
+    void findSummonerRepositoryByName() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         summonerRepository.save(createSummonerEntity(rrt));

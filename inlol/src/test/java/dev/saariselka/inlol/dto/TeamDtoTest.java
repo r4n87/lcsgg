@@ -24,8 +24,8 @@ public class TeamDtoTest {
     }
 
     @Test
-    @DisplayName("TeamDto 생성자 테스트")
-    void TeamDto_생성자_테스트() {
+    @DisplayName("Constructor")
+    void constructor() {
         //given
         //TeamEntity entity = createTestTeamEntity();
         //List<BanDto> banDtoList = createTestBanDtoList();
@@ -64,8 +64,8 @@ public class TeamDtoTest {
     }
 
     @Test
-    @DisplayName("TeamDto Setter 테스트")
-    void TeamDto_Setter_테스트() {
+    @DisplayName("Setter")
+    void setter() {
         // given
         TeamDto dto = new TeamDto(entity, banDtoList, objectivesDto);
 

@@ -24,8 +24,8 @@ public class PerksDtoTest {
     }
 
     @Test
-    @DisplayName("PerksDto 테스트")
-    void PerksDto_테스트() {
+    @DisplayName("Constructor")
+    void constructor() {
         //given
 
         //when
