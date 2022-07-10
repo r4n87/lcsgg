@@ -22,11 +22,11 @@ public class LeagueEntryController {
     @Autowired
     LeagueEntryService leagueEntryService;
 
-    public List<LeagueEntryEntity> getLeagueEntries_ByLeagueEntryId(String summonerId, String queueType) {
+    public List<LeagueEntryEntity> getLeagueEntriesByLeagueEntryId(String summonerId, String queueType) {
         return leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId, queueType));
     }
 
-    public List<LeagueEntryEntity> getLeagueEntries_BySummonerId(String summonerId) {
+    public List<LeagueEntryEntity> getLeagueEntriesBySummonerId(String summonerId) {
         return leagueEntryService.findByLeagueEntryId_SummonerId(summonerId);
     }
 

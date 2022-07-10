@@ -1,13 +1,12 @@
-package dev.saariselka.inlol.service;
+package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.repository.MatchBanRepository;
+import dev.saariselka.inlol.service.MatchBanService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,16 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-public class MatchBanServiceTest {
+public class MatchBanControllerTest {
 
     @Autowired
-    private MatchBanService matchBanService;
+    private MatchBanController matchBanController;
     @Autowired
-    private MatchBanRepository matchBanRepository;
+    private MatchBanService matchBanService;
+
 
     @Test
     @DisplayName("Insert Entity")
-    public void insert() {
+    public void insertBanInfo() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         String matchId = "KR_5804413147";
@@ -35,19 +35,18 @@ public class MatchBanServiceTest {
         int championId = 99;
 
         // when
-        matchBanService.insert(matchId,pickTurn,teamId,championId,rrt);
+        matchBanController.insertBanInfo(matchId,pickTurn,teamId,championId,rrt);
 
         // then
-        MatchBanEntity matchBanEntitySaved = matchBanRepository.findByMatchBanId(new MatchBanId(matchId,pickTurn,teamId)).get(0);
+        MatchBanEntity matchBanEntitySaved = matchBanService.findByMatchBanId(new MatchBanId(matchId,pickTurn,teamId)).get(0);
 
         assertThat(new MatchBanId(matchId, pickTurn, teamId)).isEqualTo(matchBanEntitySaved.getMatchBanId());
         assertThat(matchBanEntitySaved.getMatchBanId()).isNotNull();
-        assertThat(matchBanRepository.count()).isGreaterThan(0);
     }
 
     @Test
     @DisplayName("Find Entity By MatchBanId")
-    public void findByMatchBanId() {
+    public void getBansByMatchBanId() {
         // given
         String matchId = "KR_5804413147";
         int pickTurnFirst = 1;
@@ -59,18 +58,14 @@ public class MatchBanServiceTest {
 
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        MatchBanEntity matchBanEntityFirst = new MatchBanEntity(new MatchBanId(matchId, pickTurnFirst, teamIdFirst), championIdFirst, rrt);
-        MatchBanEntity matchBanEntitySecond = new MatchBanEntity(new MatchBanId(matchId, pickTurnSecond, teamIdSecond), championIdSecond, rrt);
-
-        MatchBanEntity matchBanEntitySavedFirst = matchBanRepository.save(matchBanEntityFirst);
-        MatchBanEntity matchBanEntitySavedSecond = matchBanRepository.save(matchBanEntitySecond);
+        matchBanService.insert(matchId,pickTurnFirst,teamIdFirst,championIdFirst,rrt);
+        matchBanService.insert(matchId,pickTurnSecond,teamIdSecond,championIdSecond,rrt);
 
         // when
-        MatchBanEntity matchBanEntityFindFirst = matchBanService.findByMatchBanId(matchBanEntitySavedFirst.getMatchBanId()).get(0);
-        MatchBanEntity matchBanEntityFindSecond = matchBanService.findByMatchBanId(matchBanEntitySavedSecond.getMatchBanId()).get(0);
+        MatchBanEntity matchBanEntityFindFirst = matchBanController.getBansByMatchBanId(matchId,pickTurnFirst,teamIdFirst).get(0);
+        MatchBanEntity matchBanEntityFindSecond = matchBanController.getBansByMatchBanId(matchId,pickTurnSecond,teamIdSecond).get(0);
 
         // then
-        assertThat(matchBanRepository.count()).isGreaterThan(0);
         assertThat(matchBanEntityFindFirst.getMatchBanId().getPickTurn()).isEqualTo(1);
         assertThat(matchBanEntityFindFirst.getChampionId()).isEqualTo(99);
         assertThat(matchBanEntityFindSecond.getMatchBanId().getPickTurn()).isEqualTo(2);
@@ -79,7 +74,7 @@ public class MatchBanServiceTest {
 
     @Test
     @DisplayName("Find Entity By MatchBanId.MatchId")
-    public void findByMatchId() {
+    public void getBansByMatchId() {
         // given
         String matchIdFirst = "KR_5804413147";
         String matchIdSecond = "KR_5804413148";
@@ -92,18 +87,14 @@ public class MatchBanServiceTest {
 
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        MatchBanEntity matchBanEntityFirst = new MatchBanEntity(new MatchBanId(matchIdFirst, pickTurnFirst, teamIdFirst), championIdFirst, rrt);
-        MatchBanEntity matchBanEntitySecond = new MatchBanEntity(new MatchBanId(matchIdSecond, pickTurnSecond, teamIdSecond), championIdSecond, rrt);
-
-        MatchBanEntity matchBanEntitySavedFirst = matchBanRepository.save(matchBanEntityFirst);
-        MatchBanEntity matchBanEntitySavedSecond = matchBanRepository.save(matchBanEntitySecond);
+        matchBanService.insert(matchIdFirst,pickTurnFirst,teamIdFirst,championIdFirst,rrt);
+        matchBanService.insert(matchIdSecond,pickTurnSecond,teamIdSecond,championIdSecond,rrt);
 
         // when
-        MatchBanEntity matchBanEntityFindFirst = matchBanService.findByMatchId(matchBanEntitySavedFirst.getMatchBanId().getMatchId()).get(0);
-        MatchBanEntity matchBanEntityFindSecond = matchBanService.findByMatchId(matchBanEntitySavedSecond.getMatchBanId().getMatchId()).get(0);
+        MatchBanEntity matchBanEntityFindFirst = matchBanController.getBansByMatchId(matchIdFirst).get(0);
+        MatchBanEntity matchBanEntityFindSecond = matchBanController.getBansByMatchId(matchIdSecond).get(0);
 
         // then
-        assertThat(matchBanRepository.count()).isGreaterThan(0);
         assertThat(matchBanEntityFindFirst.getMatchBanId().getMatchId()).isEqualTo("KR_5804413147");
         assertThat(matchBanEntityFindFirst.getChampionId()).isEqualTo(99);
         assertThat(matchBanEntityFindSecond.getMatchBanId().getMatchId()).isEqualTo("KR_5804413148");
@@ -112,7 +103,7 @@ public class MatchBanServiceTest {
 
     @Test
     @DisplayName("Find Entity By MatchBanId.MatchId, MatchBanId.TeamId")
-    public void findByMatchIdAndTeamId() {
+    public void getBansByMatchBanIdAndTeamId() {
         // given
         String matchId = "KR_5804413147";
         int pickTurnFirst = 1;
@@ -124,18 +115,14 @@ public class MatchBanServiceTest {
 
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        MatchBanEntity matchBanEntityFirst = new MatchBanEntity(new MatchBanId(matchId, pickTurnFirst, teamIdFirst), championIdFirst, rrt);
-        MatchBanEntity matchBanEntitySecond = new MatchBanEntity(new MatchBanId(matchId, pickTurnSecond, teamIdSecond), championIdSecond, rrt);
-
-        MatchBanEntity matchBanEntitySavedFirst = matchBanRepository.save(matchBanEntityFirst);
-        MatchBanEntity matchBanEntitySavedSecond = matchBanRepository.save(matchBanEntitySecond);
+        matchBanService.insert(matchId,pickTurnFirst,teamIdFirst,championIdFirst,rrt);
+        matchBanService.insert(matchId,pickTurnSecond,teamIdSecond,championIdSecond,rrt);
 
         // when
-        MatchBanEntity matchBanEntityFindFirst = matchBanService.findByMatchIdAndTeamId(matchBanEntitySavedFirst.getMatchBanId().getMatchId(),matchBanEntitySavedFirst.getMatchBanId().getTeamId()).get(0);
-        MatchBanEntity matchBanEntityFindSecond = matchBanService.findByMatchIdAndTeamId(matchBanEntitySavedSecond.getMatchBanId().getMatchId(),matchBanEntitySavedSecond.getMatchBanId().getTeamId()).get(0);
+        MatchBanEntity matchBanEntityFindFirst = matchBanController.getBansByMatchBanIdAndTeamId(matchId,teamIdFirst).get(0);
+        MatchBanEntity matchBanEntityFindSecond = matchBanController.getBansByMatchBanIdAndTeamId(matchId,teamIdSecond).get(0);
 
         // then
-        assertThat(matchBanRepository.count()).isGreaterThan(0);
         assertThat(matchBanEntityFindFirst.getMatchBanId().getMatchId()).isEqualTo("KR_5804413147");
         assertThat(matchBanEntityFindFirst.getMatchBanId().getTeamId()).isEqualTo(100);
         assertThat(matchBanEntityFindSecond.getMatchBanId().getMatchId()).isEqualTo("KR_5804413147");

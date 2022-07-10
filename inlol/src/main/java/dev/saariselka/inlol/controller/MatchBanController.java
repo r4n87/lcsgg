@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,18 +25,15 @@ public class MatchBanController {
     @Autowired
     MatchBanService matchBanService;
 
-    @GetMapping(value ="/{matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchBanEntity> getBans_ByMatchId(@PathVariable("matchId") String matchId) {
+    public List<MatchBanEntity> getBansByMatchId(String matchId) {
         return matchBanService.findByMatchId(matchId);
     }
 
-    @GetMapping(value ="/{matchId, pickTurn, teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchBanEntity> getBans_ByMatchBanId(@PathVariable("matchId") String matchId, @PathVariable("pickTurn") int pickTurn, @PathVariable("teamId") int teamId) {
+    public List<MatchBanEntity> getBansByMatchBanId(String matchId, int pickTurn, int teamId) {
         return matchBanService.findByMatchBanId(new MatchBanId(matchId, pickTurn, teamId));
     }
 
-    @GetMapping(value = "/{matchId, teamId}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<MatchBanEntity> getBans_ByMatchBanIdAndTeamId(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId) {
+    public List<MatchBanEntity> getBansByMatchBanIdAndTeamId(String matchId, int teamId) {
         return matchBanService.findByMatchIdAndTeamId(matchId, teamId);
     }
 

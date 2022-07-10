@@ -91,7 +91,7 @@ public class Facade_Get {
         String dataVersion;
 
         for(MatchParticipantEntity match : matchList) {
-            MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMaster_ByMatchId(match.getMatchParticipantId().getMatchId()).get(0);
+            MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMasterByMatchId(match.getMatchParticipantId().getMatchId()).get(0);
             matchId = matchMasterEntity.getMatchMasterId().getMatchId();
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
 
@@ -100,7 +100,7 @@ public class Facade_Get {
             List<TeamDto> teamDtoList = new ArrayList<>();
 
             for(TeamEntity teamEntity : teamEntityList) {
-                List<MatchBanEntity> matchBanEntityList = matchBanController.getBans_ByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
+                List<MatchBanEntity> matchBanEntityList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
 
                 MatchObjectivesEntity matchObjectivesEntity = matchObjectivesController
                         .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
@@ -301,7 +301,7 @@ public class Facade_Get {
     public ArrayList<LeagueEntryDto> getLeagueInfoFromDB(String summonerId) {
         ArrayList<LeagueEntryDto> result = new ArrayList<>();
 
-        List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntries_BySummonerId(summonerId);
+        List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntriesBySummonerId(summonerId);
 
         for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
 
