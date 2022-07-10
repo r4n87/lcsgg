@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+//@RequiredArgsConstructor 빌드에러로 주석처리
 @Entity
 @Builder
 @AllArgsConstructor
