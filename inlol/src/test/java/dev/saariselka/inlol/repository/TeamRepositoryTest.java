@@ -21,7 +21,7 @@ public class TeamRepositoryTest {
     @Autowired TeamRepository teamRepository;
 
     @Test
-    @DisplayName("Save")
+    @DisplayName("Save Entity")
     void saveTeamRepository() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
@@ -38,8 +38,8 @@ public class TeamRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find by TeamId")
-    void findTeamRepository_ByTeamId() {
+    @DisplayName("Find Entity By TeamId")
+    void findTeamRepositoryByTeamId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         teamRepository.save(createTestTeamEntity(rrt));
@@ -55,8 +55,8 @@ public class TeamRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find by matchId")
-    void findTeamRepository_ByMatchId() {
+    @DisplayName("Find Entity By TeamId.MatchId")
+    void findTeamRepositoryByMatchId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         teamRepository.save(createTestTeamEntity(rrt));

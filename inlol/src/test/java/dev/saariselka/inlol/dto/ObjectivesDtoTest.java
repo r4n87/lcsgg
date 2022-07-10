@@ -21,8 +21,8 @@ public class ObjectivesDtoTest {
     }
 
     @Test
-    @DisplayName("ObjectivesDto 생성자 테스트")
-    void ObjectivesDto_생성자_테스트() {
+    @DisplayName("Constructor")
+    void constructor() {
         // given
 
         // when
@@ -44,8 +44,8 @@ public class ObjectivesDtoTest {
     }
 
     @Test
-    @DisplayName("ObjectivesDto Setter 테스트")
-    void ObjectivesDto_Setter_테스트() {
+    @DisplayName("Setter")
+    void setter() {
         // given
         ObjectivesDto dto = new ObjectivesDto(entity);
 
