@@ -4,6 +4,7 @@ import dev.saariselka.inlol.entity.LeagueEntryEntity;
 import dev.saariselka.inlol.entity.LeagueEntryId;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesEntity;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesId;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -11,7 +12,9 @@ import java.sql.Timestamp;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LeagueEntryDtoTest {
+
     @Test
+    @DisplayName("LeagueEntryDto Lombok Get Function")
     public void testLombokGetFunction() {
         // Given
         String summonerId = "TestUser";
@@ -20,7 +23,7 @@ public class LeagueEntryDtoTest {
         String progress = "Test";
         int target = 3;
         int leagueMiniSeries_wins = 1;
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
         String leagueId = "TestLeagueId";
         String summonerName = "TestName";
@@ -55,6 +58,7 @@ public class LeagueEntryDtoTest {
     }
 
     @Test
+    @DisplayName("LeagueEntryDto Lombok Set Function")
     public void testLombokSetFunction() {
         // Given
         String summonerId = "TestUser";
@@ -69,7 +73,7 @@ public class LeagueEntryDtoTest {
         int tobe_target = 4;
         int leagueMiniSeries_wins = 1;
         int tobe_leagueMiniSeries_wins = 2;
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
         String leagueId = "TestLeagueId";
         String tobe_leagueId = "tobe_TestLeagueId";

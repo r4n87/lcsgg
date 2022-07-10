@@ -30,7 +30,7 @@ public class InfoDtoTest {
     }
 
     @Test
-    @DisplayName("InfoDto Lombok Get Function 테스트")
+    @DisplayName("InfoDto Lombok Get Function")
     public void testLombokGetFunction() {
         // Given
 
@@ -77,7 +77,7 @@ public class InfoDtoTest {
 
 
     @Test
-    @DisplayName("InfoDto Lombok Set Function 테스트")
+    @DisplayName("InfoDto Lombok Set Function")
     public void testLombokSetFunction() {
 
         // Given
