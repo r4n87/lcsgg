@@ -17,12 +17,6 @@ public class LeagueMiniSeriesService {
     @Autowired
     private final LeagueMiniSeriesRepository leagueMiniSeriesRepository;
 
-    public List<LeagueMiniSeriesEntity> findAll(){
-        List<LeagueMiniSeriesEntity> miniSeriesEntities = new ArrayList<>();
-        leagueMiniSeriesRepository.findAll().forEach(e -> miniSeriesEntities.add(e));
-        return miniSeriesEntities;
-    }
-
     public LeagueMiniSeriesEntity findByLeagueMiniSeriesId(LeagueMiniSeriesId leagueMiniSeriesId) {
         return leagueMiniSeriesRepository.findByLeagueMiniSeriesId(leagueMiniSeriesId);
     }

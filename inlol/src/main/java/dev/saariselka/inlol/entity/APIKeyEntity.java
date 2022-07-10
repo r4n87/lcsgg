@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @ToString
 @Table(name="MST_KEY")
 public class APIKeyEntity {

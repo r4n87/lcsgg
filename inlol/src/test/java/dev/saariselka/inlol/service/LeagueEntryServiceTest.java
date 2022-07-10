@@ -1,26 +1,28 @@
-package dev.saariselka.inlol.repository;
+package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.LeagueEntryEntity;
 import dev.saariselka.inlol.entity.LeagueEntryId;
+import dev.saariselka.inlol.repository.LeagueEntryRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class LeagueEntryRepositoryTest {
+@SpringBootTest
+public class LeagueEntryServiceTest {
 
+    @Autowired
+    private LeagueEntryService leagueEntryService;
     @Autowired
     private LeagueEntryRepository leagueEntryRepository;
 
     @Test
-    @DisplayName("Save Entity")
-    public void saveLeagueEntryEntity() {
+    @DisplayName("Insert Entity")
+    public void insert() {
         // given
         String summonerId = "testSummonerId";
         String queueType = "RANKED_SOLO_5x5";
@@ -37,13 +39,13 @@ public class LeagueEntryRepositoryTest {
         boolean inactive = false;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        LeagueEntryEntity leagueEntryEntity = new LeagueEntryEntity(new LeagueEntryId(summonerId, queueType), leagueId, summonerName, tier, ranks, leaguePoints, wins, losses, hotStreak, veteran, freshBlood, inactive, rrt);
-
         // when
-        LeagueEntryEntity leagueEntryEntitySaved = leagueEntryRepository.save(leagueEntryEntity);
+        leagueEntryService.insert(summonerId,queueType,leagueId,summonerName,tier,ranks,leaguePoints,wins,losses,hotStreak,veteran,freshBlood,inactive,rrt);
 
         // then
-        assertThat(leagueEntryEntity.getLeagueEntryId()).isEqualTo(leagueEntryEntitySaved.getLeagueEntryId());
+        LeagueEntryEntity leagueEntryEntitySaved = leagueEntryRepository.findByLeagueEntryId(new LeagueEntryId(summonerId,queueType)).get(0);
+
+        assertThat(new LeagueEntryId(summonerId,queueType)).isEqualTo(leagueEntryEntitySaved.getLeagueEntryId());
         assertThat(leagueEntryEntitySaved.getLeagueEntryId()).isNotNull();
         assertThat(leagueEntryRepository.count()).isGreaterThan(1);
     }
@@ -88,9 +90,8 @@ public class LeagueEntryRepositoryTest {
         LeagueEntryEntity leagueEntryEntitySavedKeria = leagueEntryRepository.save(leagueEntryEntityKeria);
 
         // when
-
-        LeagueEntryEntity leagueEntryEntityFindFaker = leagueEntryRepository.findByLeagueEntryId(leagueEntryEntitySavedFaker.getLeagueEntryId()).get(0);
-        LeagueEntryEntity leagueEntryEntityFindKeria = leagueEntryRepository.findByLeagueEntryId(leagueEntryEntitySavedKeria.getLeagueEntryId()).get(0);
+        LeagueEntryEntity leagueEntryEntityFindFaker = leagueEntryService.findByLeagueEntryId(leagueEntryEntitySavedFaker.getLeagueEntryId()).get(0);
+        LeagueEntryEntity leagueEntryEntityFindKeria = leagueEntryService.findByLeagueEntryId(leagueEntryEntitySavedKeria.getLeagueEntryId()).get(0);
 
         // then
         assertThat(leagueEntryRepository.count()).isGreaterThan(2);
@@ -101,8 +102,8 @@ public class LeagueEntryRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find Entity By SummonerId")
-    public void findBySummonerId() {
+    @DisplayName("Find Entity By LeagueEntryId, SummonerId")
+    public void findByLeagueEntryIdAndSummonerId() {
         // given
         String summonerIdFaker = "qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA";
         String summonerIdKeria = "WZ5VlMpcG1fdbCMf2EKYRgcl6JPMljsZjaJrWeLqAAjoWVc";
@@ -141,11 +142,10 @@ public class LeagueEntryRepositoryTest {
 
         // when
 
-        LeagueEntryEntity leagueEntryEntityFindFaker = leagueEntryRepository.findByLeagueEntryId_SummonerId(leagueEntryEntitySavedFaker.getLeagueEntryId().getSummonerId()).get(0);
-        LeagueEntryEntity leagueEntryEntityFindKeria = leagueEntryRepository.findByLeagueEntryId_SummonerId(leagueEntryEntitySavedKeria.getLeagueEntryId().getSummonerId()).get(0);
+        LeagueEntryEntity leagueEntryEntityFindFaker = leagueEntryService.findByLeagueEntryId_SummonerId(leagueEntryEntitySavedFaker.getLeagueEntryId().getSummonerId()).get(0);
+        LeagueEntryEntity leagueEntryEntityFindKeria = leagueEntryService.findByLeagueEntryId_SummonerId(leagueEntryEntitySavedKeria.getLeagueEntryId().getSummonerId()).get(0);
 
         // then
-        assertThat(leagueEntryRepository.count()).isGreaterThan(2);
         assertThat(leagueEntryEntityFindFaker.getSummonerName()).isEqualTo("Hide on bush");
         assertThat(leagueEntryEntityFindFaker.getLeaguePoints()).isEqualTo(1008);
         assertThat(leagueEntryEntityFindKeria.getSummonerName()).isEqualTo("역천괴");

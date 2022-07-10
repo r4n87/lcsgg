@@ -1,29 +1,30 @@
-package dev.saariselka.inlol.repository;
+package dev.saariselka.inlol.service;
 
-import dev.saariselka.inlol.entity.LeagueEntryEntity;
-import dev.saariselka.inlol.entity.LeagueEntryId;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesEntity;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesId;
+import dev.saariselka.inlol.repository.LeagueMiniSeriesRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class LeagueMiniSeriesRepositoryTest {
+@SpringBootTest
+public class LeagueMiniSeriesServiceTest {
 
+    @Autowired
+    private LeagueMiniSeriesService leagueMiniSeriesService;
     @Autowired
     private LeagueMiniSeriesRepository leagueMiniSeriesRepository;
 
     @Test
-    @DisplayName("Save Entity")
-    public void saveLeagueMiniSeriesEntity() {
+    @DisplayName("Insert Entity")
+    public void insert() {
         // given
         String summonerId = "testSummonerId";
         String queueType = "RANKED_SOLO_5x5";
@@ -33,13 +34,13 @@ public class LeagueMiniSeriesRepositoryTest {
         String progress = "Test";
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId, queueType), losses, progress, target, wins, rrt);
-
         // when
-        LeagueMiniSeriesEntity leagueMiniSeriesEntitySaved = leagueMiniSeriesRepository.save(leagueMiniSeriesEntity);
+        leagueMiniSeriesService.insert(summonerId,queueType,losses,progress,target,wins,rrt);
 
         // then
-        assertThat(leagueMiniSeriesEntity.getLeagueMiniSeriesId()).isEqualTo(leagueMiniSeriesEntitySaved.getLeagueMiniSeriesId());
+        LeagueMiniSeriesEntity leagueMiniSeriesEntitySaved = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId, queueType), losses, progress, target, wins, rrt);
+
+        assertThat(new LeagueMiniSeriesId(summonerId, queueType)).isEqualTo(leagueMiniSeriesEntitySaved.getLeagueMiniSeriesId());
         assertThat(leagueMiniSeriesEntitySaved.getLeagueMiniSeriesId()).isNotNull();
         assertThat(leagueMiniSeriesRepository.count()).isGreaterThan(0);
     }
@@ -70,9 +71,8 @@ public class LeagueMiniSeriesRepositoryTest {
         LeagueMiniSeriesEntity leagueMiniSeriesEntitySavedKeria = leagueMiniSeriesRepository.save(leagueMiniSeriesEntityKeria);
 
         // when
-
-        LeagueMiniSeriesEntity leagueMiniSeriesEntityFindFaker = leagueMiniSeriesRepository.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedFaker.getLeagueMiniSeriesId());
-        LeagueMiniSeriesEntity leagueMiniSeriesEntityFindKeria = leagueMiniSeriesRepository.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedKeria.getLeagueMiniSeriesId());
+        LeagueMiniSeriesEntity leagueMiniSeriesEntityFindFaker = leagueMiniSeriesService.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedFaker.getLeagueMiniSeriesId());
+        LeagueMiniSeriesEntity leagueMiniSeriesEntityFindKeria = leagueMiniSeriesService.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedKeria.getLeagueMiniSeriesId());
 
         // then
         assertThat(leagueMiniSeriesRepository.count()).isGreaterThan(0);

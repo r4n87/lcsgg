@@ -2,6 +2,7 @@ package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.entity.LeagueMiniSeriesEntity;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesId;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LeagueMiniSeriesDtoTest {
 
     @Test
+    @DisplayName("LeagueMiniSeriesDto Lombok Get Function")
     public void testLombokGetFunction() {
         // Given
         String summonerId = "TestUser";
@@ -19,7 +21,7 @@ public class LeagueMiniSeriesDtoTest {
         String progress = "Test";
         int target = 3;
         int wins = 1;
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
         LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),losses,progress,target,wins,rrt);
 
@@ -36,6 +38,7 @@ public class LeagueMiniSeriesDtoTest {
     }
 
     @Test
+    @DisplayName("LeagueMiniSeriesDto Lombok Set Function")
     public void testLombokSetFunction() {
         // Given
         String summonerId = "TestUser";
@@ -50,7 +53,7 @@ public class LeagueMiniSeriesDtoTest {
         int tobe_target = 4;
         int wins = 1;
         int tobe_wins = 2;
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
         LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),losses,progress,target,wins,rrt);
 

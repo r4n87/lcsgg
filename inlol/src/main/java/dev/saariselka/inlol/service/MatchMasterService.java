@@ -17,13 +17,6 @@ public class MatchMasterService {
     @Autowired
     private final MatchMasterRepository matchMasterRepository;
 
-    public List<MatchMasterEntity> findAll() {
-        List<MatchMasterEntity> matches = new ArrayList<>();
-        matchMasterRepository.findAll().forEach(e -> matches.add(e));
-
-        return matches;
-    }
-
     public List<MatchMasterEntity> findByMatchId(String matchId) {
         return matchMasterRepository.findByMatchMasterId_MatchId(matchId);
     }

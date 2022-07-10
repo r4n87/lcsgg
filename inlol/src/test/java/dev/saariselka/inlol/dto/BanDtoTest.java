@@ -2,6 +2,7 @@ package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Timestamp;
@@ -11,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BanDtoTest {
 
     @Test
+    @DisplayName("BanDto Lombok Get Function")
     public void testLombokGetFunction() {
         // Given
         String matchId = "KR_5804413147";
@@ -29,6 +31,7 @@ public class BanDtoTest {
     }
 
     @Test
+    @DisplayName("BanDto Lombok Set Function")
     public void testLombokSetFunction() {
         // Given
         String matchId = "KR_5804413147";

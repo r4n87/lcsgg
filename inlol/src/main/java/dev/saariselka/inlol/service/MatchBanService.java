@@ -17,12 +17,6 @@ public class MatchBanService {
     @Autowired
     private final MatchBanRepository matchBanRepository;
 
-    public List<MatchBanEntity> findAll() {
-        List<MatchBanEntity> bans = new ArrayList<>();
-        matchBanRepository.findAll().forEach(e -> bans.add(e));
-        return bans;
-    }
-
     public List<MatchBanEntity> findByMatchId(String matchId) {
         return matchBanRepository.findByMatchBanId_MatchId(matchId);
     }
