@@ -290,8 +290,8 @@ public class MatchParticipantServiceTest {
         //when
         List<MatchParticipantEntity> matchParticipantEntityList
                 = matchParticipantService.findByDataVersionAndMatchId(
-                matchParticipantEntityA.getMatchParticipantId().getDataVersion(),
-                matchParticipantEntityB.getMatchParticipantId().getMatchId());
+                matchParticipantEntityAForTest.getMatchParticipantId().getDataVersion(),
+                matchParticipantEntityAForTest.getMatchParticipantId().getMatchId());
 
         //then
         assertThat(matchParticipantEntityList.size()).isEqualTo(2);
