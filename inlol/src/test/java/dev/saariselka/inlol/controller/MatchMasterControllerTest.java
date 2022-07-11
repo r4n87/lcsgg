@@ -1,13 +1,11 @@
-package dev.saariselka.inlol.service;
+package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
-import dev.saariselka.inlol.repository.MatchMasterRepository;
+import dev.saariselka.inlol.service.MatchMasterService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,16 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-public class MatchMasterServiceTest {
+public class MatchMasterControllerTest {
 
     @Autowired
-    private MatchMasterService matchMasterService;
+    private MatchMasterController matchMasterController;
     @Autowired
-    private MatchMasterRepository matchMasterRepository;
+    private MatchMasterService matchMasterService;
+
 
     @Test
     @DisplayName("Insert Entity")
-    public void insert() {
+    public void insertMatchMaster() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
@@ -49,19 +48,18 @@ public class MatchMasterServiceTest {
         String tournamentCode = null;
 
         // when
-        matchMasterService.insert(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,tournamentCode,teamId1,teamId2,rrt);
+        matchMasterController.insertMatchMaster(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,tournamentCode,teamId1,teamId2,rrt);
 
         // then
-        MatchMasterEntity matchMasterEntitySaved = matchMasterRepository.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)).get(0);
+        MatchMasterEntity matchMasterEntitySaved = matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)).get(0);
 
         assertThat(new MatchMasterId(dataVersion, matchId)).isEqualTo(matchMasterEntitySaved.getMatchMasterId());
         assertThat(matchMasterEntitySaved.getMatchMasterId()).isNotNull();
-        assertThat(matchMasterRepository.count()).isGreaterThan(0);
     }
 
     @Test
     @DisplayName("Find Entity By MatchMasterId")
-    public void findByMatchMasterId() {
+    public void getMatchMasterByMatchMasterId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
@@ -100,23 +98,14 @@ public class MatchMasterServiceTest {
         String tournamentCodeFirst = null;
         String tournamentCodeSecond = null;
 
-        MatchMasterEntity matchMasterEntityFirst = new MatchMasterEntity(new MatchMasterId(dataVersionFirst, matchIdFirst),gameCreationFirst,gameDurationFirst,
-                gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,
-                gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,teamId1First,teamId2First, tournamentCodeFirst, rrt);
-
-        MatchMasterEntity matchMasterEntitySecond = new MatchMasterEntity(new MatchMasterId(dataVersionSecond, matchIdSecond),gameCreationSecond,gameDurationSecond,
-                gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,
-                gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,teamId1Second,teamId2Second, tournamentCodeSecond, rrt);
-
-        MatchMasterEntity matchMasterEntitySavedFirst = matchMasterRepository.save(matchMasterEntityFirst);
-        MatchMasterEntity matchMasterEntitySavedSecond = matchMasterRepository.save(matchMasterEntitySecond);
+        matchMasterService.insert(dataVersionFirst,matchIdFirst,gameCreationFirst,gameDurationFirst,gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,tournamentCodeFirst,teamId1First,teamId2First,rrt);
+        matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
 
         // when
-        MatchMasterEntity matchMasterEntityFindFirst = matchMasterService.findByMatchMasterId(matchMasterEntitySavedFirst.getMatchMasterId()).get(0);
-        MatchMasterEntity matchMasterEntityFindSecond = matchMasterService.findByMatchMasterId(matchMasterEntitySavedSecond.getMatchMasterId()).get(0);
+        MatchMasterEntity matchMasterEntityFindFirst = matchMasterController.getMatchMasterByMatchMasterId(dataVersionFirst,matchIdFirst).get(0);
+        MatchMasterEntity matchMasterEntityFindSecond = matchMasterController.getMatchMasterByMatchMasterId(dataVersionSecond,matchIdSecond).get(0);
 
         // then
-        assertThat(matchMasterRepository.count()).isGreaterThan(0);
         assertThat(matchMasterEntityFindFirst.getMatchMasterId().getMatchId()).isEqualTo("KR_5804413147");
         assertThat(matchMasterEntityFindFirst.getGameId()).isEqualTo(5803564866L);
         assertThat(matchMasterEntityFindSecond.getMatchMasterId().getMatchId()).isEqualTo("KR_5803565065");
@@ -125,7 +114,7 @@ public class MatchMasterServiceTest {
 
     @Test
     @DisplayName("Find Entity By MatchMasterId.MatchId")
-    public void findByMatchMasterId_MatchId() {
+    public void getMatchMasterByMatchId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
@@ -164,23 +153,14 @@ public class MatchMasterServiceTest {
         String tournamentCodeFirst = null;
         String tournamentCodeSecond = null;
 
-        MatchMasterEntity matchMasterEntityFirst = new MatchMasterEntity(new MatchMasterId(dataVersionFirst, matchIdFirst),gameCreationFirst,gameDurationFirst,
-                gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,
-                gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,teamId1First,teamId2First, tournamentCodeFirst, rrt);
-
-        MatchMasterEntity matchMasterEntitySecond = new MatchMasterEntity(new MatchMasterId(dataVersionSecond, matchIdSecond),gameCreationSecond,gameDurationSecond,
-                gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,
-                gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,teamId1Second,teamId2Second, tournamentCodeSecond, rrt);
-
-        MatchMasterEntity matchMasterEntitySavedFirst = matchMasterRepository.save(matchMasterEntityFirst);
-        MatchMasterEntity matchMasterEntitySavedSecond = matchMasterRepository.save(matchMasterEntitySecond);
+        matchMasterService.insert(dataVersionFirst,matchIdFirst,gameCreationFirst,gameDurationFirst,gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,tournamentCodeFirst,teamId1First,teamId2First,rrt);
+        matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
 
         // when
-        MatchMasterEntity matchMasterEntityFindFirst = matchMasterService.findByMatchId(matchMasterEntitySavedFirst.getMatchMasterId().getMatchId()).get(0);
-        MatchMasterEntity matchMasterEntityFindSecond = matchMasterService.findByMatchId(matchMasterEntitySavedSecond.getMatchMasterId().getMatchId()).get(0);
+        MatchMasterEntity matchMasterEntityFindFirst = matchMasterController.getMatchMasterByMatchId(matchIdFirst).get(0);
+        MatchMasterEntity matchMasterEntityFindSecond = matchMasterController.getMatchMasterByMatchId(matchIdSecond).get(0);
 
         // then
-        assertThat(matchMasterRepository.count()).isGreaterThan(0);
         assertThat(matchMasterEntityFindFirst.getMatchMasterId().getMatchId()).isEqualTo("KR_5804413147");
         assertThat(matchMasterEntityFindFirst.getGameId()).isEqualTo(5803564866L);
         assertThat(matchMasterEntityFindSecond.getMatchMasterId().getMatchId()).isEqualTo("KR_5803565065");
