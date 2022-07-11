@@ -17,7 +17,7 @@ public class DdragonVersionRepositoryTest {
     private DdragonVersionRepository ddragonVersionRepository;
 
     @Test
-    @DisplayName("DdragonVersionEntity Save Test")
+    @DisplayName("Save Entity")
     public void saveDdragonVersionEntity() {
         //given
         String version = "2";
@@ -34,7 +34,7 @@ public class DdragonVersionRepositoryTest {
     }
 
     @Test
-    @DisplayName("DdragonVersionEntity FindById Test")
+    @DisplayName("Find Entity By Version, Current")
     public void findDdragonVersionEntityById() {
         //given
         String versionA = "versionA";
@@ -64,7 +64,7 @@ public class DdragonVersionRepositoryTest {
     }
 
     @Test
-    @DisplayName("DdragonVersionEntity FindByCurrent Test")
+    @DisplayName("Find Entity By Current")
     public void findDdragonVersionEntityByCurrent() {
         //given
         String versionA = "versionA";
@@ -94,7 +94,7 @@ public class DdragonVersionRepositoryTest {
     }
 
     @Test
-    @DisplayName("DdragonVersionEntity GetCurrentDdragonVersion Test")
+    @DisplayName("Get Entity By Current")
     public void getDdragonVersionEntityByCurrent() {
         //given
         //when

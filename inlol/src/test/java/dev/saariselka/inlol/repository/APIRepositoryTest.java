@@ -17,7 +17,7 @@ public class APIRepositoryTest {
     private APIRepository apiRepository;
 
     @Test
-    @DisplayName("APIEntity Save Test")
+    @DisplayName("Save Entity")
     public void saveAPIEntity() {
         //given
         String category = "CATEGORY1";
@@ -36,7 +36,7 @@ public class APIRepositoryTest {
     }
 
     @Test
-    @DisplayName("APIEntity FindById Test")
+    @DisplayName("Find Entity By Category, Operation, Url")
     public void findAPIEntityById() {
         //given
         String categoryA = "categoryA";
@@ -69,7 +69,7 @@ public class APIRepositoryTest {
     }
 
     @Test
-    @DisplayName("APIEntity FindByCategoryAndOperation Test")
+    @DisplayName("Find Entity By Category, Operation")
     public void findAPIEntityByCategoryAndOperation() {
         //given
         String categoryA = "categoryA";
