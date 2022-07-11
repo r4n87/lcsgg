@@ -1,17 +1,11 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.entity.MatchObjectivesEntity;
-import dev.saariselka.inlol.entity.MatchObjectivesId;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
-import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.service.MatchParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,22 +56,13 @@ public class MatchParticipantController {
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
     }
 
-    @GetMapping(value ="/{dataVersion,matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchParticipantEntity> getMatchParticipantList_ByDataVersionAndMatchId(@PathVariable("dataVersion") String dataVersion
-            ,@PathVariable("matchId") String matchId) {
+    public List<MatchParticipantEntity> getMatchParticipantList_ByDataVersionAndMatchId(
+            String dataVersion
+            , String matchId) {
         return matchParticipantService.findByDataVersionAndMatchId(dataVersion, matchId);
     }
 
-    @GetMapping(value ="/{puuid,dataVersion,matchId,chamionId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchParticipantEntity> getMatchParticipant_ByMatchParticipantId(@PathVariable("puuid") String puuid
-            ,@PathVariable("dataVersion") String dataVersion
-            ,@PathVariable("matchId") String matchId
-            ,@PathVariable("championId") int championId) {
-        return matchParticipantService.findById(new MatchParticipantId(puuid, dataVersion, matchId, championId));
-    }
-
-    @GetMapping(value = "/{puuid}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchParticipantEntity> getMatchParticipantList_ByPuuid(@PathVariable("puuid") String puuid) {
+    public List<MatchParticipantEntity> getMatchParticipantList_ByPuuid(String puuid) {
         return matchParticipantService.findByPuuid(puuid);
     }
 }
