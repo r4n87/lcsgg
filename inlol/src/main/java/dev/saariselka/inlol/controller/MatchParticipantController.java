@@ -56,13 +56,13 @@ public class MatchParticipantController {
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
     }
 
-    public List<MatchParticipantEntity> getMatchParticipantList_ByDataVersionAndMatchId(
+    public List<MatchParticipantEntity> getMatchParticipantListByDataVersionAndMatchId(
             String dataVersion
             , String matchId) {
         return matchParticipantService.findByDataVersionAndMatchId(dataVersion, matchId);
     }
 
-    public List<MatchParticipantEntity> getMatchParticipantList_ByPuuid(String puuid) {
+    public List<MatchParticipantEntity> getMatchParticipantListByPuuid(String puuid) {
         return matchParticipantService.findByPuuid(puuid);
     }
 }

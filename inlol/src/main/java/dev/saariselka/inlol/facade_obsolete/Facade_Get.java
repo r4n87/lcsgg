@@ -83,7 +83,7 @@ public class Facade_Get {
     public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
-        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
+        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
 
@@ -120,7 +120,7 @@ public class Facade_Get {
             }
 
             //5. Match Participants 정보 생성
-            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
+            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
@@ -218,7 +218,7 @@ public class Facade_Get {
     }
 
     public HashSet<String> getMatchListFromDB(String puuid) {
-        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
+        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
         HashSet<String> matchList = new HashSet<>();
 
         for(MatchParticipantEntity entity : list) {

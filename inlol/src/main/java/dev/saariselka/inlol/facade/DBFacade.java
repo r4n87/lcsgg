@@ -152,7 +152,7 @@ public class DBFacade {
     public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
-        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
+        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
 
@@ -189,7 +189,7 @@ public class DBFacade {
             }
 
             //5. Match Participants 정보 생성
-            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
+            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
@@ -478,7 +478,7 @@ public class DBFacade {
     }
 
     public HashSet<String> getMatchIdListBySummonerPuuid(String puuid) {
-        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
+        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
         HashSet<String> matchList = new HashSet<>();
 
         for(MatchParticipantEntity entity : list) {
