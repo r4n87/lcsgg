@@ -57,7 +57,7 @@ public class Facade_Get {
 
         try {
             UriComponents uri;
-            uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH","GET_MATCH_BY_MATCHID")
+            uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("MATCH","GET_MATCH_BY_MATCHID")
                     + matchList.get(i)
                     + "?"
                     + "api_key=" + apiKey).build();
@@ -83,7 +83,7 @@ public class Facade_Get {
     public ArrayList<MatchDto> getMatchInfoFromDB(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
-        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
+        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
 
@@ -120,7 +120,7 @@ public class Facade_Get {
             }
 
             //5. Match Participants 정보 생성
-            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantList_ByDataVersionAndMatchId(dataVersion, matchId);
+            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
@@ -193,7 +193,7 @@ public class Facade_Get {
         ArrayList<String> matchList = new ArrayList<>();
 
         try {
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
                     + summonerController.getSummoner_Puuid_ByName(name)
                     + "/ids?startTime=" + startTime + "&count=20&api_key="
                     + apiKey).build();
@@ -218,7 +218,7 @@ public class Facade_Get {
     }
 
     public HashSet<String> getMatchListFromDB(String puuid) {
-        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantList_ByPuuid(puuid);
+        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
         HashSet<String> matchList = new HashSet<>();
 
         for(MatchParticipantEntity entity : list) {
@@ -236,7 +236,7 @@ public class Facade_Get {
         HashMap<String, Object> result = new HashMap<>();
 
         try {
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("SUMMONER","GET_PUUID_BY_NAME")
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("SUMMONER","GET_PUUID_BY_NAME")
                     + name
                     + "?"+"api_key="
                     + apiKey).build();
@@ -276,7 +276,7 @@ public class Facade_Get {
         HashMap<String, Object> result = new HashMap<>();
 
         try {
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("LEAGUE","GET_LEAGUE_BY_ENCRYPTEDID")
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("LEAGUE","GET_LEAGUE_BY_ENCRYPTEDID")
                     + encryptedSummonerId
                     + "?"+"api_key="
                     + apiKey).build();
