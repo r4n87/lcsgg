@@ -40,6 +40,8 @@ public class Facade_Get {
     LeagueMiniSeriesController leagueMiniSeriesController;
     @Autowired
     MatchPerksController matchPerksController;
+    @Autowired
+    SummonerPerkController summonerPerkController;
 
     private final API api;
     private String apiKey;
@@ -129,7 +131,9 @@ public class Facade_Get {
                 List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participantEntity.getMatchParticipantId().getPuuid());
                 MatchPerksEntity perksEntity = (0 == perksList.size())
                                                 ? new MatchPerksEntity() : perksList.get(0);
-                PerksDto perksDto = new PerksDto(perksEntity);
+                String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getPrimaryPerk1()).get(0).getIcon();
+                String subIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getSubStyle()).get(0).getIcon();
+                PerksDto perksDto = new PerksDto(perksEntity, primaryIconPath, subIconPath);
                 ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto, matchMasterEntity.getGameDuration());
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
