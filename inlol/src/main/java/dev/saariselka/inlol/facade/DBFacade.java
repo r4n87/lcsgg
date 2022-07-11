@@ -41,6 +41,8 @@ public class DBFacade {
     MatchPerksController matchPerksController;
     @Autowired
     DdragonVersionController ddragonVersionController;
+    @Autowired
+    SummonerPerkController summonerPerkController;
 
     public SummonerDto getSummonerDtoBySummonerName(String name) {
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
@@ -200,7 +202,9 @@ public class DBFacade {
                 List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participantEntity.getMatchParticipantId().getPuuid());
                 MatchPerksEntity perksEntity = (0 == perksList.size())
                         ? new MatchPerksEntity() : perksList.get(0);
-                PerksDto perksDto = new PerksDto(perksEntity);
+                String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getPrimaryPerk1()).get(0).getIcon();
+                String subIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getSubStyle()).get(0).getIcon();
+                PerksDto perksDto = new PerksDto(perksEntity, primaryIconPath, subIconPath);
                 ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto, matchMasterEntity.getGameDuration());
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
