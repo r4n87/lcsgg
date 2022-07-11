@@ -23,7 +23,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/Team")
 public class TeamController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,26 +30,22 @@ public class TeamController {
     @Autowired
     TeamService TeamService;
 
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<List<TeamEntity>> getAllteams() {
         List<TeamEntity> teams = TeamService.findAll();
         return new ResponseEntity<List<TeamEntity>>(teams, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/{matchId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<TeamEntity> getTeams_ByMatchId(@PathVariable("matchId") String matchId) {
+    public List<TeamEntity> getTeams_ByMatchId(String matchId) {
         List<TeamEntity> teams = TeamService.findByMatchId(matchId);
         return teams;
     }
 
-    @GetMapping(value ="/{matchId,teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<TeamEntity> getTeams_ByMatchIdAndTeamId(@PathVariable("matchId") String matchId,@PathVariable("teamId") int teamId) {
+    public List<TeamEntity> getTeams_ByMatchIdAndTeamId(String matchId, int teamId) {
         List<TeamEntity> teams = TeamService.findByMatchIdAndTeamId(new TeamId(matchId,teamId));
         return teams;
     }
 
-    @GetMapping(value = "/insert/{matchId, teamId, win, rrt}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public void insertTeamInfo(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId, @PathVariable("win") boolean win, @PathVariable("rrt")Timestamp rrt) {
+    public void insertTeamInfo(String matchId, int teamId, boolean win, Timestamp rrt) {
         TeamService.insert(matchId,teamId,win, rrt);
     }
 }

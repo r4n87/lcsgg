@@ -17,27 +17,22 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/test/Summoner")
-
 public class SummonerController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     SummonerService summonerService;
 
-    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<List<SummonerEntity>> getAllSummoners() {
         List<SummonerEntity> summonerList = summonerService.findAll();
         return new ResponseEntity<List<SummonerEntity>>(summonerList, HttpStatus.OK);
     }
 
-    @GetMapping(value ="/{puuid}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<SummonerEntity> getSummoner(@PathVariable("puuid") String puuid) {
+    public List<SummonerEntity> getSummoner(String puuid) {
         return summonerService.findByPuuid(puuid);
     }
 
-    @GetMapping(value ="/{name}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public String getSummoner_Puuid_ByName(@PathVariable("name") String name) {
+    public String getSummoner_Puuid_ByName(String name) {
         List<SummonerEntity> summoner = summonerService.findByName(name);
 
         if(!summoner.isEmpty()) {
@@ -47,13 +42,8 @@ public class SummonerController {
         }
     }
 
-    @GetMapping(value = "/insert/{accountid,profileIconid,revisiondate,name,id,summonerlevel,puuid,rrt}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public void insertSummoner(@PathVariable("accountid") String accountId
-            , @PathVariable("profileiconid") int profileIconid, @PathVariable("revisionDate") long revisiondate
-            , @PathVariable("name") String name, @PathVariable("id") String id
-            , @PathVariable("summonerLevel") long summonerlevel, @PathVariable("puuid") String puuid
-            , @PathVariable("rrt") Timestamp rrt
-    ) {
+    public void insertSummoner(String accountId, int profileIconid, long revisiondate
+            , String name, String id, long summonerlevel, String puuid, Timestamp rrt) {
         summonerService.insert(accountId,profileIconid,revisiondate,name,id,summonerlevel,puuid, rrt);
     }
 
