@@ -22,7 +22,7 @@ public class TeamServiceTest {
 
     @Test
     @DisplayName("Find Entity By TeamId")
-    void FindEntityByTeamId() {
+    void findEntityByTeamId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         teamService.insert("KR_9999999999", 100, true, rrt);
@@ -40,7 +40,7 @@ public class TeamServiceTest {
 
     @Test
     @DisplayName("Find Entity By TeamId.MatchId")
-    void FindEntityByMatchId() {
+    void findEntityByMatchId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
         teamService.insert("KR_9999999999", 100, true, rrt);
@@ -58,7 +58,7 @@ public class TeamServiceTest {
 
     @Test
     @DisplayName("Find All")
-    void FindAll() {
+    void findAll() {
         // given
         List<TeamEntity> before = teamService.findAll();
         Timestamp rrt = new Timestamp(System.currentTimeMillis());

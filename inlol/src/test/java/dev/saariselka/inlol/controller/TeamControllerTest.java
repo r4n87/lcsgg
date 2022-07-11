@@ -27,7 +27,7 @@ public class TeamControllerTest {
         teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamEntity> entity = teamController.getTeams_ByMatchIdAndTeamId("KR_9999999999",100);
+        List<TeamEntity> entity = teamController.getTeamsByMatchIdAndTeamId("KR_9999999999",100);
         TeamEntity test = entity.get(0);
 
         // then
@@ -45,7 +45,7 @@ public class TeamControllerTest {
         teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamEntity> entity = teamController.getTeams_ByMatchId("KR_9999999999");
+        List<TeamEntity> entity = teamController.getTeamsByMatchId("KR_9999999999");
         TeamEntity test = entity.get(0);
 
         // then

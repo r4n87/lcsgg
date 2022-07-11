@@ -98,7 +98,7 @@ public class Facade_Get {
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
 
             //2. Team 정보 생성
-            List<TeamEntity> teamEntityList = teamController.getTeams_ByMatchId(matchId);
+            List<TeamEntity> teamEntityList = teamController.getTeamsByMatchId(matchId);
             List<TeamDto> teamDtoList = new ArrayList<>();
 
             for(TeamEntity teamEntity : teamEntityList) {
