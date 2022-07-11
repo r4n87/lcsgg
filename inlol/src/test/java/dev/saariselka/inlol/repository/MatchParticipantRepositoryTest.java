@@ -472,7 +472,7 @@ public class MatchParticipantRepositoryTest {
     }
 
     @Test
-    @DisplayName("Find Entity By MatchParticipantId.DataVersion and MatchParticipantId.MatchId")
+    @DisplayName("Find Entity By MatchParticipantId.DataVersion, MatchParticipantId.MatchId")
     public void findMatchParticipantEntityByMatchParticipantId_DataVersionAndMatchParticipantId_MatchId() {
         //given
         MatchParticipantEntity matchParticipantEntityA = createMatchParticipantEntityA();

@@ -5,10 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface APIKeyRepository extends JpaRepository<APIKeyEntity, Long> {
 
-    public List<APIKeyEntity> findById(String id);
-    public List<APIKeyEntity> findByCategory(String category);
+    Optional<APIKeyEntity> findById(Long id);
+    List<APIKeyEntity> findByCategory(String category);
 }
