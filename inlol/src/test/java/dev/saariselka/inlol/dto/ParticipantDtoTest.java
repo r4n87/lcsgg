@@ -171,11 +171,11 @@ public class ParticipantDtoTest {
         assertThat(participantDto.getSummoner1Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner1Casts()));
         assertThat(participantDto.getSummoner1Id()).isEqualTo(
-                JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner1Id()));
+                String.valueOf(matchParticipantEntity.getSummoner1Id()));
         assertThat(participantDto.getSummoner2Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner2Casts()));
         assertThat(participantDto.getSummoner2Id()).isEqualTo(
-                JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner2Id()));
+                String.valueOf(matchParticipantEntity.getSummoner2Id()));
         assertThat(participantDto.getSummonerId()).isEqualTo(
                 matchParticipantEntity.getSummonerId());
         assertThat(participantDto.getSummonerLevel()).isEqualTo(
@@ -408,11 +408,11 @@ public class ParticipantDtoTest {
         participantDto.setSummoner1Casts(
                 String.valueOf(matchParticipantEntity.getSummoner1Casts()));
         participantDto.setSummoner1Id(
-                JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner1Id()));
+                String.valueOf(matchParticipantEntity.getSummoner1Id()));
         participantDto.setSummoner2Casts(
                 String.valueOf(matchParticipantEntity.getSummoner2Casts()));
         participantDto.setSummoner2Id(
-                JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner2Id()));
+                String.valueOf(matchParticipantEntity.getSummoner2Id()));
         participantDto.setSummonerId(
                 matchParticipantEntity.getSummonerId());
         participantDto.setSummonerLevel(
@@ -635,11 +635,11 @@ public class ParticipantDtoTest {
         assertThat(participantDto.getSummoner1Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner1Casts()));
         assertThat(participantDto.getSummoner1Id()).isEqualTo(
-                JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner1Id()));
+                String.valueOf(matchParticipantEntity.getSummoner1Id()));
         assertThat(participantDto.getSummoner2Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner2Casts()));
         assertThat(participantDto.getSummoner2Id()).isEqualTo(
-                JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner2Id()));
+                String.valueOf(matchParticipantEntity.getSummoner2Id()));
         assertThat(participantDto.getSummonerId()).isEqualTo(
                 matchParticipantEntity.getSummonerId());
         assertThat(participantDto.getSummonerLevel()).isEqualTo(
@@ -798,9 +798,9 @@ public class ParticipantDtoTest {
         int spell3Casts = 3;
         int spell4Casts = 4;
         int summoner1Casts = 5;
-        int summoner1Id = 6;
+        String summoner1Id = "6";
         int summoner2Casts = 7;
-        int summoner2Id = 8;
+        String summoner2Id = "8";
         String summonerId = "HelloSummoner";
         int summonerLevel = 10;
         String summonerName = "EZREALISGOD";
@@ -1016,9 +1016,9 @@ public class ParticipantDtoTest {
         int spell3Casts = 56;
         int spell4Casts = 55;
         int summoner1Casts = 54;
-        int summoner1Id = 53;
+        String summoner1Id = "53";
         int summoner2Casts = 52;
-        int summoner2Id = 50;
+        String summoner2Id = "50";
         String summonerId = "ByeSummoner";
         int summonerLevel = 49;
         String summonerName = "ARIISGOD";

@@ -3,17 +3,22 @@ package dev.saariselka.inlol.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dev.saariselka.inlol.controller.SummonerSpellController;
+import dev.saariselka.inlol.entity.SummonerSpellEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 // TODO : exception 부분 리팩토링 필요
 public class JsonParserForLOL {
+
+    @Autowired
+    SummonerSpellController summonerSpellController;
+
     public static String getKRChampionNameByENGChampionName(String championName) {
         ClassPathResource resource = new ClassPathResource("json/champions.json");
         JsonObject jsonObject = null;
@@ -74,6 +79,37 @@ public class JsonParserForLOL {
         }
 
         return null;
+    }
+
+    public List<SummonerSpellEntity> getSummonerSpellEntities() {
+        ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
+        JsonObject summonerJson = null;
+
+        try {
+            summonerJson = JsonParser.parseReader(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JsonObject summonerJsonObject = (JsonObject) summonerJson.get("data");
+        Set<String> keys = summonerJsonObject.keySet();
+
+        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
+
+        for(String key : keys) {
+            JsonObject summonerSpell = (JsonObject) summonerJsonObject.get(key);
+
+            String name = summonerSpell.get("name").getAsString();
+            String description = summonerSpell.get("description").getAsString();
+            int spellKey = summonerSpell.get("key").getAsInt();
+            String image = ((JsonObject) summonerSpell.get("image")).get("full").getAsString();
+
+            SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(name, description, spellKey, image);
+
+            summonerSpellEntities.add(summonerSpellEntity);
+        }
+
+        return summonerSpellEntities;
     }
 
     public static String getRuneIconImageByPerkStyle(String type, int styleId, int perkId) {

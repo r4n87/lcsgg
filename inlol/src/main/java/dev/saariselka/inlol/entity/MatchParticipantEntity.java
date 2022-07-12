@@ -82,9 +82,9 @@ public class MatchParticipantEntity {
     private int spell3Casts;
     private int spell4Casts;
     private int summoner1Casts;
-    private int summoner1Id;
+    private String summoner1Id;
     private int summoner2Casts;
-    private int summoner2Id;
+    private String summoner2Id;
     private String summonerId;
     private int summonerLevel;
     private String summonerName;
