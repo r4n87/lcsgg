@@ -80,7 +80,6 @@ public class JsonParserForLOL {
 
         return null;
     }
-
     public List<SummonerSpellEntity> getSummonerSpellEntities() {
         ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
         JsonObject summonerJson = null;

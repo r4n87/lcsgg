@@ -18,15 +18,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/match_objectives")
 public class MatchObjectivesController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     MatchObjectivesService matchObjectivesService;
 
-    @GetMapping(value ="/{matchId,teamId}",produces = { MediaType.APPLICATION_JSON_VALUE })
-    public List<MatchObjectivesEntity> getMatchObjectives_ByMatchIdAndTeamId(@PathVariable("matchId") String matchId, @PathVariable("teamId") int teamId) {
+    public List<MatchObjectivesEntity> getMatchObjectives_ByMatchIdAndTeamId(String matchId, int teamId) {
         List<MatchObjectivesEntity> objectives = matchObjectivesService.findByMatchObjectivesId(new MatchObjectivesId(matchId, teamId));
         return objectives;
     }

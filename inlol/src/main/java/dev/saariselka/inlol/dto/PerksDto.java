@@ -1,15 +1,19 @@
 package dev.saariselka.inlol.dto;
 
+import dev.saariselka.inlol.controller.SummonerPerkController;
 import dev.saariselka.inlol.entity.MatchPerksEntity;
-import dev.saariselka.inlol.utils.JsonParserForLOL;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class PerksDto {
+    @Autowired
+    private SummonerPerkController summonerPerkController;
+
     private int primaryStyle;
     private int primaryPerk1;
     private int primaryPerk2;
@@ -25,7 +29,7 @@ public class PerksDto {
     private String primaryIconPath;
     private String subIconPath;
 
-    public PerksDto(MatchPerksEntity matchPerksEntity) {
+    public PerksDto(MatchPerksEntity matchPerksEntity, String primaryIconPath, String subIconPath) {
         this.primaryStyle = matchPerksEntity.getPrimaryStyle();
         this.primaryPerk1 = matchPerksEntity.getPrimaryPerk1();
         this.primaryPerk2 = matchPerksEntity.getPrimaryPerk2();
@@ -38,7 +42,7 @@ public class PerksDto {
         this.statPerkFlex = matchPerksEntity.getStatPerkFlex();
         this.statPerkOffence = matchPerksEntity.getStatPerkOffense();
 
-        this.primaryIconPath = JsonParserForLOL.getRuneIconImageByPerkStyle("primary", this.primaryStyle, matchPerksEntity.getPrimaryPerk1());
-        this.subIconPath = JsonParserForLOL.getRuneIconImageByPerkStyle("sub", matchPerksEntity.getSubStyle(), 0);
+        this.primaryIconPath = primaryIconPath;
+        this.subIconPath = subIconPath;
     }
 }

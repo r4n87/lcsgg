@@ -36,7 +36,7 @@ public class APIFacade {
         HashMap<String, Object> result = new HashMap<>();
 
         try {
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("SUMMONER","GET_PUUID_BY_NAME")
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("SUMMONER","GET_PUUID_BY_NAME")
                     + name
                     + "?"+"api_key="
                     + apiKey).build();
@@ -68,7 +68,7 @@ public class APIFacade {
         HashMap<String, Object> result = new HashMap<>();
 
         try {
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("LEAGUE","GET_LEAGUE_BY_ENCRYPTEDID")
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("LEAGUE","GET_LEAGUE_BY_ENCRYPTEDID")
                     + encryptedSummonerId
                     + "?"+"api_key="
                     + apiKey).build();
@@ -97,7 +97,7 @@ public class APIFacade {
         ArrayList<String> matchList = new ArrayList<>();
 
         try {
-            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
+            UriComponents uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("MATCH", "GET_MATCHES_BY_PUUID")
                     + puuid
                     + "/ids?start=0&count=20&api_key="
                     + apiKey).build();
@@ -129,7 +129,7 @@ public class APIFacade {
 
         try {
             UriComponents uri;
-            uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIURL_ByCategoryAndOperation("MATCH","GET_MATCH_BY_MATCHID")
+            uri = UriComponentsBuilder.fromHttpUrl(apiController.getAPIUrlByCategoryAndOperation("MATCH","GET_MATCH_BY_MATCHID")
                     + matchList.get(i)
                     + "?"
                     + "api_key=" + apiKey).build();

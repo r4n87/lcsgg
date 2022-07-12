@@ -27,9 +27,11 @@ public class PerksDtoTest {
     @DisplayName("Constructor")
     void constructor() {
         //given
+        String primaryIconPath = "1111";
+        String subIconPath = "2222";
 
         //when
-        PerksDto test = new PerksDto(entity);
+        PerksDto test = new PerksDto(entity, primaryIconPath, subIconPath);
 
         //then
         assertThat(test.getPrimaryStyle()).isEqualTo(dto.getPrimaryStyle());
@@ -43,7 +45,8 @@ public class PerksDtoTest {
         assertThat(test.getStatPerkDefense()).isEqualTo(dto.getStatPerkDefense());
         assertThat(test.getStatPerkFlex()).isEqualTo(dto.getStatPerkFlex());
         assertThat(test.getStatPerkOffence()).isEqualTo(dto.getStatPerkOffence());
-
+        assertThat(test.getPrimaryIconPath()).isEqualTo(dto.getPrimaryIconPath());
+        assertThat(test.getSubIconPath()).isEqualTo(dto.getSubIconPath());
     }
 
     MatchPerksEntity createTestMatchPerksEntity() {
@@ -65,6 +68,8 @@ public class PerksDtoTest {
         dto.setStatPerkDefense(5003);
         dto.setStatPerkFlex(5008);
         dto.setStatPerkOffence(5008);
+        dto.setPrimaryIconPath("1111");
+        dto.setSubIconPath("2222");
         return dto;
     }
 }
