@@ -16,7 +16,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/Perks")
 public class MatchPerksController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -57,8 +56,7 @@ public class MatchPerksController {
                                 , rrt);
     }
 
-    public List<MatchPerksEntity> getMatchPerksListByMatchIdAndPuuid(@PathVariable("matchId") String matchId
-                                                                    , @PathVariable("puuid") String puuid) {
+    public List<MatchPerksEntity> getMatchPerksListByMatchIdAndPuuid(String matchId, String puuid) {
         return matchPerksService.findByMatchPerksId(new MatchPerksId(matchId, puuid));
     }
 }

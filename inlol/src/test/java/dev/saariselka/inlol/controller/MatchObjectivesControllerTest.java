@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.entity.MatchObjectivesEntity;
-import dev.saariselka.inlol.entity.MatchObjectivesId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class MatchObjectivesControllerTest {
                 true, 1, false, 0, false, 11, rrt);
 
         // when
-        List<MatchObjectivesEntity> entity = matchObjectivesController.getMatchObjectives_ByMatchIdAndTeamId("KR_9999999999", 100);
+        List<MatchObjectivesEntity> entity = matchObjectivesController.getMatchObjectivesByMatchIdAndTeamId("KR_9999999999", 100);
         MatchObjectivesEntity test = entity.get(0);
 
         // then
