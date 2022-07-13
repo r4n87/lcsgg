@@ -42,6 +42,8 @@ public class DBFacade {
     @Autowired
     DdragonVersionController ddragonVersionController;
     @Autowired
+    SummonerSpellController summonerSpellController;
+    @Autowired
     SummonerPerkController summonerPerkController;
 
     public SummonerDto getSummonerDtoBySummonerName(String name) {
@@ -409,9 +411,9 @@ public class DBFacade {
                     Integer.parseInt(participantObj.get("spell3Casts").getAsString()),
                     Integer.parseInt(participantObj.get("spell4Casts").getAsString()),
                     Integer.parseInt(participantObj.get("summoner1Casts").getAsString()),
-                    Integer.parseInt(participantObj.get("summoner1Id").getAsString()),
+                    getSummonerSpellImageByKey(Integer.parseInt(participantObj.get("summoner1Id").getAsString())),
                     Integer.parseInt(participantObj.get("summoner2Casts").getAsString()),
-                    Integer.parseInt(participantObj.get("summoner2Id").getAsString()),
+                    getSummonerSpellImageByKey(Integer.parseInt(participantObj.get("summoner2Id").getAsString())),
                     participantObj.get("summonerId").getAsString(),
                     Integer.parseInt(participantObj.get("summonerLevel").getAsString()),
                     participantObj.get("summonerName").getAsString(),
@@ -507,5 +509,20 @@ public class DBFacade {
 
     public String getCurrentDdragonVersion() {
         return ddragonVersionController.getCurrentDdragonVersion();
+    }
+
+    public String getSummonerSpellImageByKey(int spellKey) {
+        if(spellKey == 0) {
+            return "bot";
+        }
+        else {
+            return summonerSpellController.getSummonerSpellByKey(spellKey).get(0).getImage();
+        }
+    }
+
+    public void setSummonerSpell(List<SummonerSpellEntity> summonerSpellEntities) {
+        for(SummonerSpellEntity summonerSpellEntity : summonerSpellEntities) {
+            summonerSpellController.insertSummonerSpell(summonerSpellEntity.getName(),summonerSpellEntity.getDescription(),summonerSpellEntity.getSpellKey(),summonerSpellEntity.getImage());
+        }
     }
 }

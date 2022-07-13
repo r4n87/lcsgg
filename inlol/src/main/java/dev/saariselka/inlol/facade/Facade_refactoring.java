@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.MatchDto;
 import dev.saariselka.inlol.dto.SummonerDto;
+import dev.saariselka.inlol.utils.JsonParserForLOL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -143,12 +144,17 @@ public class Facade_refactoring {
                     modelAndView.addObject("flexRankIsIncrement","false");
                 }
             }
-
-
         }
     }
 
     private void setMatchListAtModelAndView(ModelAndView modelAndView, ArrayList<MatchDto> matchInfoList) {
         modelAndView.addObject("matchInfoList", matchInfoList);
+    }
+
+    @GetMapping("initJsonResource")
+    private void initJsonResource() {
+        JsonParserForLOL jsonParserForLOL = new JsonParserForLOL();
+
+        dbFacade.setSummonerSpell(jsonParserForLOL.getSummonerSpellEntities());
     }
 }

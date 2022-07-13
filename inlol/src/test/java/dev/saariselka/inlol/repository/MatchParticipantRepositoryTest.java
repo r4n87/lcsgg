@@ -998,9 +998,9 @@ public class MatchParticipantRepositoryTest {
         int spell3Casts = 3;
         int spell4Casts = 4;
         int summoner1Casts = 5;
-        int summoner1Id = 6;
+        String summoner1Id = "6";
         int summoner2Casts = 7;
-        int summoner2Id = 8;
+        String summoner2Id = "8";
         String summonerId = "HelloSummoner";
         int summonerLevel = 10;
         String summonerName = "EZREALISGOD";
@@ -1216,9 +1216,9 @@ public class MatchParticipantRepositoryTest {
         int spell3Casts = 56;
         int spell4Casts = 55;
         int summoner1Casts = 54;
-        int summoner1Id = 53;
+        String summoner1Id = "53";
         int summoner2Casts = 52;
-        int summoner2Id = 50;
+        String summoner2Id = "50";
         String summonerId = "ByeSummoner";
         int summonerLevel = 49;
         String summonerName = "ARIISGOD";

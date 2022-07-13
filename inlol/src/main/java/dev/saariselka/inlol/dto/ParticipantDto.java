@@ -210,9 +210,9 @@ public class ParticipantDto {
         this.spell3Casts = String.valueOf(matchParticipantEntity.getSpell3Casts());
         this.spell4Casts = String.valueOf(matchParticipantEntity.getSpell4Casts());
         this.summoner1Casts = String.valueOf(matchParticipantEntity.getSummoner1Casts());
-        this.summoner1Id = JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner1Id());
+        this.summoner1Id = String.valueOf(matchParticipantEntity.getSummoner1Id());
         this.summoner2Casts = String.valueOf(matchParticipantEntity.getSummoner2Casts());
-        this.summoner2Id = JsonParserForLOL.getSpellImageBySpellId(matchParticipantEntity.getSummoner2Id());
+        this.summoner2Id = String.valueOf(matchParticipantEntity.getSummoner2Id());
         this.summonerId = matchParticipantEntity.getSummonerId();
         this.summonerLevel = String.valueOf(matchParticipantEntity.getSummonerLevel());
         if(matchParticipantEntity.getMatchParticipantId().getPuuid().equals("BOT"))
