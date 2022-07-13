@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.SummonerSpellController;
+import dev.saariselka.inlol.entity.ChampionEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -33,6 +34,37 @@ public class JsonParserForLOL {
         JsonObject jsonMyChampion = (JsonObject) jsonChampions.get(championName);
 
         return jsonMyChampion.get("name").getAsString();
+    }
+
+    public static List<ChampionEntity> getChampionEntities() {
+        ClassPathResource resource = new ClassPathResource("json/champions.json");
+        JsonObject jsonObject = null;
+
+        try {
+            jsonObject = JsonParser.parseReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        List<ChampionEntity> championEntities = new ArrayList<>();
+
+        JsonObject jsonChampions = (JsonObject) jsonObject.get("data");
+        Set<String> keys = jsonChampions.keySet();
+
+        for(String key : keys) {
+            JsonObject champion = (JsonObject) jsonChampions.get(key);
+
+            int id = champion.get("key").getAsInt();
+            String nameEng = champion.get("id").getAsString();
+            String nameKo = champion.get("name").getAsString();
+
+            JsonObject image = (JsonObject) champion.get("image");
+            String imagePath = image.get("full").getAsString();
+
+            championEntities.add(new ChampionEntity(id, nameEng, nameKo, imagePath));
+        }
+
+        return championEntities;
     }
 
     public static String getKRGameModeByQueueId(int queueId){
