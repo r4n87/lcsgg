@@ -105,7 +105,7 @@ public class Facade_Get {
                 List<MatchBanEntity> matchBanEntityList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
 
                 MatchObjectivesEntity matchObjectivesEntity = matchObjectivesController
-                        .getMatchObjectives_ByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
+                        .getMatchObjectivesByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
                         .get(0);
 
                 List<BanDto> banDtoList = new ArrayList<>();
