@@ -1,7 +1,11 @@
 package dev.saariselka.inlol.facade;
 
+import dev.saariselka.inlol.controller.SummonerController;
 import dev.saariselka.inlol.controller.SummonerSpellController;
+import dev.saariselka.inlol.dto.SummonerDto;
+import dev.saariselka.inlol.entity.SummonerEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,8 +25,108 @@ public class DBFacadeTest {
     DBFacade dbFacade;
     @Autowired
     SummonerSpellController summonerSpellController;
+    @Autowired
+    SummonerController summonerController;
 
     @Test
+    @DisplayName("Find SummonerDto By SummonerName When SummonerName is Null")
+    public void getSummonerDtoBySummonerNameWhenSummonerNameIsNull() {
+        //given
+        String name = null;
+        SummonerEntity summonerEntity = null;
+        SummonerDto summonerDto = null;
+
+        //when
+        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        if(puuid != null)
+        {
+            summonerEntity = summonerController.getSummoner(puuid).get(0);
+            summonerDto = new SummonerDto(summonerEntity);
+        }
+
+        //then
+        assertThat(summonerDto).isNull();
+    }
+
+    @Test
+    @DisplayName("Find SummonerDto By SummonerName When SummonerName is Not Null")
+    public void getSummonerDtoBySummonerNameWhenSummonerNameIsNotNull() {
+        //given
+        String name = "Petaluma";
+
+        //when
+        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        SummonerEntity summonerEntity = summonerController.getSummoner(puuid).get(0);
+        SummonerDto summonerDto = new SummonerDto(summonerEntity);
+
+        //then
+        assertThat(summonerDto).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Find SummonerDto By SummonerName When Invalid SummonerName")
+    public void getSummonerDtoBySummonerNameWhenInvalidSummonerName() {
+        //given
+        String name = "A";
+        SummonerEntity summonerEntity = null;
+        SummonerDto summonerDto = null;
+
+        //when
+        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        if(puuid != null)
+        {
+            summonerEntity = summonerController.getSummoner(puuid).get(0);
+            summonerDto = new SummonerDto(summonerEntity);
+        }
+
+        //then
+        assertThat(summonerDto).isNull();
+    }
+
+    @Test
+    @DisplayName("Find Summoner Puuid By SummonerName When SummonerName Is Null")
+    public void getSummonerPuuidBySummonerNameWhenSummonerNameIsNull() {
+
+        //given
+        String name = null;
+
+        //when
+        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+
+        //then
+        assertThat(puuid).isNull();
+    }
+
+    @Test
+    @DisplayName("Find Summoner Puuid By SummonerName When SummonerName Is Not Null")
+    public void getSummonerPuuidBySummonerNameWhenSummonerNameIsNotNull() {
+
+        //given
+        String name = "Petaluma";
+
+        //when
+        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+
+        //then
+        assertThat(puuid).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Find Summoner Puuid By SummonerName When SummonerName Is Not Null")
+    public void getSummonerPuuidBySummonerNameWhenInvalidSummonerName() {
+
+        //given
+        String name = "A";
+
+        //when
+        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+
+        //then
+        assertThat(puuid).isNull();
+    }
+
+    @Test
+    @DisplayName("Save SummonerSpell")
     public void setSummonerSpell()
     {
         // given
@@ -48,6 +152,7 @@ public class DBFacadeTest {
     }
 
     @Test
+    @DisplayName("Find SummonerSpellImage By SummonerSpellKey")
     public void getSummonerSpellByKey()
     {
         //given
