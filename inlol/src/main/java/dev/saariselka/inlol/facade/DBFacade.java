@@ -47,6 +47,8 @@ public class DBFacade {
     SummonerPerkController summonerPerkController;
     @Autowired
     ChampionController championController;
+    @Autowired
+    QueueTypeController queueTypeController;
 
     public SummonerDto getSummonerDtoBySummonerName(String name) {
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
@@ -213,7 +215,7 @@ public class DBFacade {
 
                 if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
                     summonerInfo = participantDto;
-                    summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
+                    //summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
                 }
 
                 if("100".equals(participantDto.getTeamId())) {
@@ -282,6 +284,9 @@ public class DBFacade {
         JsonArray jsonArrayForTeams = (JsonArray)jsonObjectForInfo.get("teams");
         JsonArray jsonArrayForParticipants = (JsonArray)jsonObjectForInfo.get("participants");
 
+        int queueId = Integer.parseInt(jsonObjectForInfo.get("queueId").getAsString());
+        String queueType = queueTypeController.getQueueTypeByQueueId(queueId);
+
         //DB Insert
         matchMasterController.insertMatchMaster(jsonObjectForMetadata.get("dataVersion").getAsString(),jsonObjectForMetadata.get("matchId").getAsString(),
                 Long.parseLong(jsonObjectForInfo.get("gameCreation").getAsString()),Long.parseLong(jsonObjectForInfo.get("gameDuration").getAsString()),
@@ -289,8 +294,8 @@ public class DBFacade {
                 jsonObjectForInfo.get("gameMode").getAsString(),jsonObjectForInfo.get("gameName").getAsString(),
                 Long.parseLong(jsonObjectForInfo.get("gameStartTimestamp").getAsString()),jsonObjectForInfo.get("gameType").getAsString(),
                 jsonObjectForInfo.get("gameVersion").getAsString(),Integer.parseInt(jsonObjectForInfo.get("mapId").getAsString()),
-
-                jsonObjectForInfo.get("platformId").getAsString(),Integer.parseInt(jsonObjectForInfo.get("queueId").getAsString()),
+                jsonObjectForInfo.get("platformId").getAsString(),
+                queueId, queueType,
                 jsonObjectForInfo.get("tournamentCode").getAsString(), 100, 200
                 ,timestamp);
 
@@ -340,6 +345,11 @@ public class DBFacade {
 
         for (Object obj : jsonArrayForParticipants) {
             JsonObject participantObj = (JsonObject)obj;
+
+            String championName = participantObj.get("championName").getAsString();
+            String championNameKR = championController.getNameKoByNameEng(championName);
+            String championImg = championController.getImagePathByNameEng(championName);
+
             matchParticipantController.insertParticipantInfo(
                     participantObj.get("puuid").getAsString(),
                     jsonObjectForMetadata.get("dataVersion").getAsString(),
@@ -350,7 +360,7 @@ public class DBFacade {
                     Integer.parseInt(participantObj.get("champExperience").getAsString()),
                     Integer.parseInt(participantObj.get("champLevel").getAsString()),
                     Integer.parseInt(participantObj.get("championId").getAsString()),
-                    participantObj.get("championName").getAsString(),
+                    championName, championNameKR, championImg,
                     Integer.parseInt(participantObj.get("championTransform").getAsString()),
                     Integer.parseInt(participantObj.get("consumablesPurchased").getAsString()),
                     Integer.parseInt(participantObj.get("damageDealtToBuildings").getAsString()),

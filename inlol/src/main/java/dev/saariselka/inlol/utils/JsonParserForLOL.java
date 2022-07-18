@@ -20,22 +20,6 @@ public class JsonParserForLOL {
     @Autowired
     SummonerSpellController summonerSpellController;
 
-    public static String getKRChampionNameByENGChampionName(String championName) {
-        ClassPathResource resource = new ClassPathResource("json/champions.json");
-        JsonObject jsonObject = null;
-
-        try {
-            jsonObject = JsonParser.parseReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        JsonObject jsonChampions = (JsonObject) jsonObject.get("data");
-        JsonObject jsonMyChampion = (JsonObject) jsonChampions.get(championName);
-
-        return jsonMyChampion.get("name").getAsString();
-    }
-
     public static List<ChampionEntity> getChampionEntities() {
         ClassPathResource resource = new ClassPathResource("json/champions.json");
         JsonObject jsonObject = null;
@@ -65,26 +49,6 @@ public class JsonParserForLOL {
         }
 
         return championEntities;
-    }
-
-    public static String getKRGameModeByQueueId(int queueId){
-        JsonArray jsonArray = null;
-        ClassPathResource resource = new ClassPathResource("json/queueTypes.json");
-        try {
-            jsonArray = JsonParser.parseReader(new InputStreamReader(resource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(Object typeObj : jsonArray)
-        {
-            JsonObject type = (JsonObject)typeObj;
-
-            if(type.get("queueId").getAsInt() == queueId)
-                return type.get("description").getAsString();
-        }
-
-        return "NoneType"; // TODO : 예외처리인데 하드코딩말고 교체할까?
     }
 
     public static String getSpellImageBySpellId(int spellId) {

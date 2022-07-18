@@ -34,6 +34,10 @@ public class Facade_Set {
     LeagueMiniSeriesController leagueMiniSeriesController;
     @Autowired
     MatchPerksController matchPerksController;
+    @Autowired
+    ChampionController championController;
+    @Autowired
+    QueueTypeController queueTypeController;
 
     public void setMatchInfoAtDB(HashMap<String, Object> matchInfo) throws JsonProcessingException {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -48,6 +52,9 @@ public class Facade_Set {
         JsonArray jsonArrayForTeams = (JsonArray)jsonObjectForInfo.get("teams");
         JsonArray jsonArrayForParticipants = (JsonArray)jsonObjectForInfo.get("participants");
 
+        int queueId = Integer.parseInt(jsonObjectForInfo.get("queueId").getAsString());
+        String queueType = queueTypeController.getQueueTypeByQueueId(queueId);
+
         //DB Insert
         matchMasterController.insertMatchMaster(jsonObjectForMetadata.get("dataVersion").getAsString(),jsonObjectForMetadata.get("matchId").getAsString(),
                 Long.parseLong(jsonObjectForInfo.get("gameCreation").getAsString()),Long.parseLong(jsonObjectForInfo.get("gameDuration").getAsString()),
@@ -55,8 +62,8 @@ public class Facade_Set {
                 jsonObjectForInfo.get("gameMode").getAsString(),jsonObjectForInfo.get("gameName").getAsString(),
                 Long.parseLong(jsonObjectForInfo.get("gameStartTimestamp").getAsString()),jsonObjectForInfo.get("gameType").getAsString(),
                 jsonObjectForInfo.get("gameVersion").getAsString(),Integer.parseInt(jsonObjectForInfo.get("mapId").getAsString()),
-
-                jsonObjectForInfo.get("platformId").getAsString(),Integer.parseInt(jsonObjectForInfo.get("queueId").getAsString()),
+                jsonObjectForInfo.get("platformId").getAsString(),
+                queueId, queueType,
                 jsonObjectForInfo.get("tournamentCode").getAsString(), 100, 200
                 ,timestamp);
       
@@ -106,6 +113,11 @@ public class Facade_Set {
 
         for (Object obj : jsonArrayForParticipants) {
             JsonObject participantObj = (JsonObject)obj;
+
+            String championName = participantObj.get("championName").getAsString();
+            String championNameKR = championController.getNameKoByNameEng(championName);
+            String championImg = championController.getImagePathByNameEng(championName);
+
             matchParticipantController.insertParticipantInfo(
                     participantObj.get("puuid").getAsString(),
                     jsonObjectForMetadata.get("dataVersion").getAsString(),
@@ -116,7 +128,7 @@ public class Facade_Set {
                     Integer.parseInt(participantObj.get("champExperience").getAsString()),
                     Integer.parseInt(participantObj.get("champLevel").getAsString()),
                     Integer.parseInt(participantObj.get("championId").getAsString()),
-                    participantObj.get("championName").getAsString(),
+                    championName, championNameKR, championImg,
                     Integer.parseInt(participantObj.get("championTransform").getAsString()),
                     Integer.parseInt(participantObj.get("consumablesPurchased").getAsString()),
                     Integer.parseInt(participantObj.get("damageDealtToBuildings").getAsString()),

@@ -21,24 +21,24 @@ public class QueueTypeControllerTest {
         // given
 
         // when
-        QueueTypeEntity solo = queueTypeController.getQueueTypeByQueueId(420);
-        QueueTypeEntity normal = queueTypeController.getQueueTypeByQueueId(430);
-        QueueTypeEntity free = queueTypeController.getQueueTypeByQueueId(440);
-        QueueTypeEntity wind = queueTypeController.getQueueTypeByQueueId(450);
-        QueueTypeEntity ai1 = queueTypeController.getQueueTypeByQueueId(830);
-        QueueTypeEntity ai2 = queueTypeController.getQueueTypeByQueueId(840);
-        QueueTypeEntity ai3 = queueTypeController.getQueueTypeByQueueId(850);
-        QueueTypeEntity urf = queueTypeController.getQueueTypeByQueueId(900);
+        String solo = queueTypeController.getQueueTypeByQueueId(420);
+        String normal = queueTypeController.getQueueTypeByQueueId(430);
+        String free = queueTypeController.getQueueTypeByQueueId(440);
+        String wind = queueTypeController.getQueueTypeByQueueId(450);
+        String ai1 = queueTypeController.getQueueTypeByQueueId(830);
+        String ai2 = queueTypeController.getQueueTypeByQueueId(840);
+        String ai3 = queueTypeController.getQueueTypeByQueueId(850);
+        String urf = queueTypeController.getQueueTypeByQueueId(900);
 
         // then
-        assertThat(solo.getDescription()).isEqualTo("솔랭");
-        assertThat(normal.getDescription()).isEqualTo("일반");
-        assertThat(free.getDescription()).isEqualTo("자유 5:5 랭크");
-        assertThat(wind.getDescription()).isEqualTo("무작위 총력전");
-        assertThat(ai1.getDescription()).isEqualTo("입문");
-        assertThat(ai2.getDescription()).isEqualTo("초보");
-        assertThat(ai3.getDescription()).isEqualTo("중급");
-        assertThat(urf.getDescription()).isEqualTo("U.R.F.");
+        assertThat(solo).isEqualTo("솔랭");
+        assertThat(normal).isEqualTo("일반");
+        assertThat(free).isEqualTo("자유 5:5 랭크");
+        assertThat(wind).isEqualTo("무작위 총력전");
+        assertThat(ai1).isEqualTo("입문");
+        assertThat(ai2).isEqualTo("초보");
+        assertThat(ai3).isEqualTo("중급");
+        assertThat(urf).isEqualTo("U.R.F.");
     }
 
 }

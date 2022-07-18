@@ -39,6 +39,8 @@ public class MatchParticipantServiceTest {
         int champLevel = 10;
         int championId = 32;
         String championName = "Ezreal";
+        String championNameKR = "이즈리얼";
+        String championImg = "Ezreal.png";
         int championTransform = 0;
         int consumablesPurchased = 0;
         int damageDealtToBuildings = 562;
@@ -138,7 +140,7 @@ public class MatchParticipantServiceTest {
 
         //when
         matchParticipantService.insert(puuid, dataVersion, matchId, assists, baronKills,
-                bountyLevel, champExperience, champLevel, championId, championName, championTransform, consumablesPurchased, damageDealtToBuildings,
+                bountyLevel, champExperience, champLevel, championId, championName, championNameKR, championImg, championTransform, consumablesPurchased, damageDealtToBuildings,
                 damageDealtToObjectives, damageDealtToTurrets, damageSelfMitigated, deaths, detectorWardsPlaced, doubleKills, dragonKills,
                 firstBloodAssist, firstBloodKill, firstTowerAssist, firstTowerKill, gameEndedInEarlySurrender, gameEndedInSurrender, goldEarned,
                 goldSpent, individualPosition, inhibitorKills, inhibitorTakedowns, inhibitorsLost, item0, item1, item2, item3, item4, item5, item6,
@@ -343,6 +345,8 @@ public class MatchParticipantServiceTest {
         int champLevel = 10;
         int championId = 32;
         String championName = "Ezreal";
+        String championNameKR = "이즈리얼";
+        String championImg = "Ezreal.png";
         int championTransform = 0;
         int consumablesPurchased = 0;
         int damageDealtToBuildings = 562;
@@ -449,6 +453,8 @@ public class MatchParticipantServiceTest {
                 champLevel,
                 championId,
                 championName,
+                championNameKR,
+                championImg,
                 championTransform,
                 consumablesPurchased,
                 damageDealtToBuildings,
@@ -561,6 +567,8 @@ public class MatchParticipantServiceTest {
         int champLevel = 5;
         int championId = 4;
         String championName = "Ari";
+        String championNameKR = "아리";
+        String championImg = "Ahri.png";
         int championTransform = 3;
         int consumablesPurchased = 2;
         int damageDealtToBuildings = 1;
@@ -667,6 +675,8 @@ public class MatchParticipantServiceTest {
                 champLevel,
                 championId,
                 championName,
+                championNameKR,
+                championImg,
                 championTransform,
                 consumablesPurchased,
                 damageDealtToBuildings,

@@ -61,7 +61,7 @@ public class InfoDtoTest {
         assertThat(infoDto.getGameDuration()).isEqualTo(convert_gameDuration);
         assertThat(infoDto.getGameEndTimestamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId()));
         assertThat(infoDto.getGameId()).isEqualTo(matchMasterEntity.getGameId());
-        assertThat(infoDto.getGameMode()).isEqualTo(JsonParserForLOL.getKRGameModeByQueueId(matchMasterEntity.getQueueId()));
+        assertThat(infoDto.getQueueType()).isEqualTo(matchMasterEntity.getQueueType());
         assertThat(infoDto.getGameName()).isEqualTo(matchMasterEntity.getGameName());
         assertThat(infoDto.getGameStartTimeStamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId()));
         assertThat(infoDto.getGameType()).isEqualTo(matchMasterEntity.getGameType());
@@ -71,6 +71,7 @@ public class InfoDtoTest {
         assertThat(infoDto.getGameAgoTime()).isEqualTo(convert_gameAgoTime);
         assertThat(infoDto.getSummoner()).isEqualTo(summonerInfo);
         assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(matchMasterEntity.getQueueId()));
+        assertThat(infoDto.getQueueType()).isEqualTo(String.valueOf(matchMasterEntity.getQueueType()));
         assertThat(infoDto.getTeams()).isEqualTo(teamDtoList);
         assertThat(infoDto.getTournamentCode()).isEqualTo(matchMasterEntity.getTournamentCode());
     }
@@ -92,6 +93,7 @@ public class InfoDtoTest {
         String tobe_platformId = "tobe_testPlatformId";
         int tobe_queueId = 450;
         String tobe_tournamentCode = "testTournamentCode";
+        String tobe_queueType = "testQueueType";
 
         List<TeamDto> tobe_teamDtoList = new ArrayList<>();
         ParticipantDto tobe_summonerInfo = new ParticipantDto();
@@ -122,7 +124,7 @@ public class InfoDtoTest {
         infoDto.setGameDuration(tobe_convert_gameDuration);
         infoDto.setGameEndTimestamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp),TimeZone.getDefault().toZoneId()));
         infoDto.setGameId(tobe_gameId);
-        infoDto.setGameMode(JsonParserForLOL.getKRGameModeByQueueId(tobe_queueId));
+        infoDto.setQueueType(tobe_queueType);
         infoDto.setGameName(tobe_gameName);
         infoDto.setGameStartTimeStamp(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameStartTimeStamp),TimeZone.getDefault().toZoneId()));
         infoDto.setGameType(tobe_gameType);
@@ -132,6 +134,7 @@ public class InfoDtoTest {
         infoDto.setGameAgoTime(tobe_convert_gameAgoTime);
         infoDto.setSummoner(tobe_summonerInfo);
         infoDto.setQueueId(String.valueOf(tobe_queueId));
+        infoDto.setQueueType(tobe_queueType);
         infoDto.setTeams(tobe_teamDtoList);
         infoDto.setTournamentCode(tobe_tournamentCode);
 
@@ -140,7 +143,7 @@ public class InfoDtoTest {
         assertThat(infoDto.getGameDuration()).isEqualTo(tobe_convert_gameDuration);
         assertThat(infoDto.getGameEndTimestamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp),TimeZone.getDefault().toZoneId()));
         assertThat(infoDto.getGameId()).isEqualTo(tobe_gameId);
-        assertThat(infoDto.getGameMode()).isEqualTo(JsonParserForLOL.getKRGameModeByQueueId(tobe_queueId));
+        assertThat(infoDto.getQueueType()).isEqualTo(tobe_queueType);
         assertThat(infoDto.getGameName()).isEqualTo(tobe_gameName);
         assertThat(infoDto.getGameStartTimeStamp()).isEqualTo(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameStartTimeStamp),TimeZone.getDefault().toZoneId()));
         assertThat(infoDto.getGameType()).isEqualTo(tobe_gameType);
@@ -150,6 +153,7 @@ public class InfoDtoTest {
         assertThat(infoDto.getGameAgoTime()).isEqualTo(tobe_convert_gameAgoTime);
         assertThat(infoDto.getSummoner()).isEqualTo(tobe_summonerInfo);
         assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(tobe_queueId));
+        assertThat(infoDto.getQueueType()).isEqualTo(tobe_queueType);
         assertThat(infoDto.getTeams()).isEqualTo(tobe_teamDtoList);
         assertThat(infoDto.getTournamentCode()).isEqualTo(tobe_tournamentCode);
     }
@@ -186,7 +190,8 @@ public class InfoDtoTest {
         int teamId2 = 200;
         String tournamentCode = "testTournamentCode";
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        String queueType = "testQueueType";
 
-        return new MatchMasterEntity(new MatchMasterId(dataVersion,matchId),gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2,tournamentCode,rrt);
+        return new MatchMasterEntity(new MatchMasterId(dataVersion,matchId),gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,queueType, teamId1,teamId2,tournamentCode,rrt);
     }
 }

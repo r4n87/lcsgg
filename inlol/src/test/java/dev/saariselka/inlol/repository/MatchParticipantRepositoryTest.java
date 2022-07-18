@@ -51,6 +51,10 @@ public class MatchParticipantRepositoryTest {
                 matchParticipantEntity.getChampionId());
         assertThat(matchParticipantEntityForTest.getChampionName()).isEqualTo(
                 matchParticipantEntity.getChampionName());
+        assertThat(matchParticipantEntityForTest.getChampionNameKR()).isEqualTo(
+                matchParticipantEntity.getChampionNameKR());
+        assertThat(matchParticipantEntityForTest.getChampionImg()).isEqualTo(
+                matchParticipantEntity.getChampionImg());
         assertThat(matchParticipantEntityForTest.getChampionTransform()).isEqualTo(
                 matchParticipantEntity.getChampionTransform());
         assertThat(matchParticipantEntityForTest.getConsumablesPurchased()).isEqualTo(
@@ -283,6 +287,10 @@ public class MatchParticipantRepositoryTest {
                 matchParticipantEntityAForTest.getChampionId());
         assertThat(matchParticipantEntityForFindTest.getChampionName()).isEqualTo(
                 matchParticipantEntityAForTest.getChampionName());
+        assertThat(matchParticipantEntityForFindTest.getChampionNameKR()).isEqualTo(
+                matchParticipantEntityAForTest.getChampionNameKR());
+        assertThat(matchParticipantEntityForFindTest.getChampionImg()).isEqualTo(
+                matchParticipantEntityAForTest.getChampionImg());
         assertThat(matchParticipantEntityForFindTest.getChampionTransform()).isEqualTo(
                 matchParticipantEntityAForTest.getChampionTransform());
         assertThat(matchParticipantEntityForFindTest.getConsumablesPurchased()).isEqualTo(
@@ -509,6 +517,10 @@ public class MatchParticipantRepositoryTest {
                 matchParticipantEntityAForTest.getChampionId());
         assertThat(matchParticipantEntityForFindTest.getChampionName()).isEqualTo(
                 matchParticipantEntityAForTest.getChampionName());
+        assertThat(matchParticipantEntityForFindTest.getChampionNameKR()).isEqualTo(
+                matchParticipantEntityAForTest.getChampionNameKR());
+        assertThat(matchParticipantEntityForFindTest.getChampionImg()).isEqualTo(
+                matchParticipantEntityAForTest.getChampionImg());
         assertThat(matchParticipantEntityForFindTest.getChampionTransform()).isEqualTo(
                 matchParticipantEntityAForTest.getChampionTransform());
         assertThat(matchParticipantEntityForFindTest.getConsumablesPurchased()).isEqualTo(
@@ -736,6 +748,10 @@ public class MatchParticipantRepositoryTest {
                 matchParticipantEntityAForTest.getChampionId());
         assertThat(matchParticipantEntityForFindTest.getChampionName()).isEqualTo(
                 matchParticipantEntityAForTest.getChampionName());
+        assertThat(matchParticipantEntityForFindTest.getChampionNameKR()).isEqualTo(
+                matchParticipantEntityAForTest.getChampionNameKR());
+        assertThat(matchParticipantEntityForFindTest.getChampionImg()).isEqualTo(
+                matchParticipantEntityAForTest.getChampionImg());
         assertThat(matchParticipantEntityForFindTest.getChampionTransform()).isEqualTo(
                 matchParticipantEntityAForTest.getChampionTransform());
         assertThat(matchParticipantEntityForFindTest.getConsumablesPurchased()).isEqualTo(
@@ -937,6 +953,8 @@ public class MatchParticipantRepositoryTest {
         int champLevel = 10;
         int championId = 32;
         String championName = "Ezreal";
+        String championNameKR = "이즈리얼";
+        String championImg = "Ezreal.png";
         int championTransform = 0;
         int consumablesPurchased = 0;
         int damageDealtToBuildings = 562;
@@ -1043,6 +1061,8 @@ public class MatchParticipantRepositoryTest {
                 champLevel,
                 championId,
                 championName,
+                championNameKR,
+                championImg,
                 championTransform,
                 consumablesPurchased,
                 damageDealtToBuildings,
@@ -1155,6 +1175,8 @@ public class MatchParticipantRepositoryTest {
         int champLevel = 5;
         int championId = 4;
         String championName = "Ari";
+        String championNameKR = "아리";
+        String championImg = "Ahri.png";
         int championTransform = 3;
         int consumablesPurchased = 2;
         int damageDealtToBuildings = 1;
@@ -1261,6 +1283,8 @@ public class MatchParticipantRepositoryTest {
                 champLevel,
                 championId,
                 championName,
+                championNameKR,
+                championImg,
                 championTransform,
                 consumablesPurchased,
                 damageDealtToBuildings,

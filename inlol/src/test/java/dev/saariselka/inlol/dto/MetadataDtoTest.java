@@ -72,6 +72,7 @@ public class MetadataDtoTest {
         int mapId = 11;
         String platformId = "KR";
         int queueId = 420;
+        String queueType = "솔랭";
         int teamId1 = 100;
         int teamId2 = 200;
         String tournamentCode = "";
@@ -90,6 +91,7 @@ public class MetadataDtoTest {
                 mapId,
                 platformId,
                 queueId,
+                queueType,
                 teamId1,
                 teamId2,
                 tournamentCode,

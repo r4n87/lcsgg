@@ -21,6 +21,8 @@ public class MatchParticipantEntity {
     private int champLevel;
     private int championId;
     private String championName;
+    private String championNameKR;
+    private String championImg;
     private int championTransform;
     private int consumablesPurchased;
     private int damageDealtToBuildings;

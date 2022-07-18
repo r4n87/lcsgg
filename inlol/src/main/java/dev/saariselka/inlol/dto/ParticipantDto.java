@@ -30,6 +30,7 @@ public class ParticipantDto {
     private String championId;
     private String championNameENG;
     private String championNameKR;
+    private String championImg;
     private String championTransform;
     private String consumablesPurchased;
     private String damageDealtToBuildings;
@@ -149,6 +150,8 @@ public class ParticipantDto {
         this.champLevel = String.valueOf(matchParticipantEntity.getChampLevel());
         this.championId = String.valueOf(matchParticipantEntity.getChampionId());
         this.championNameENG = matchParticipantEntity.getChampionName();
+        this.championNameKR = matchParticipantEntity.getChampionNameKR();
+        this.championImg = matchParticipantEntity.getChampionImg();
         this.championTransform = String.valueOf(matchParticipantEntity.getChampionTransform());
         this.consumablesPurchased = String.valueOf(matchParticipantEntity.getConsumablesPurchased());
         this.damageDealtToBuildings = String.valueOf(matchParticipantEntity.getDamageDealtToBuildings());
