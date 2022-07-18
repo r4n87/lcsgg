@@ -45,6 +45,8 @@ public class DBFacade {
     SummonerSpellController summonerSpellController;
     @Autowired
     SummonerPerkController summonerPerkController;
+    @Autowired
+    ChampionController championController;
 
     public SummonerDto getSummonerDtoBySummonerName(String name) {
         String puuid = summonerController.getSummoner_Puuid_ByName(name);
@@ -524,5 +526,9 @@ public class DBFacade {
         for(SummonerSpellEntity summonerSpellEntity : summonerSpellEntities) {
             summonerSpellController.insertSummonerSpell(summonerSpellEntity.getName(),summonerSpellEntity.getDescription(),summonerSpellEntity.getSpellKey(),summonerSpellEntity.getImage());
         }
+    }
+
+    public void setChampions(List<ChampionEntity> championEntities) {
+        championController.insertAll(championEntities);
     }
 }
