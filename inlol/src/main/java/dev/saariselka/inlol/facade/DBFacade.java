@@ -510,15 +510,6 @@ public class DBFacade {
         return getSummonerDtoBySummonerPuuid(puuid).getLastRefreshTime();
     }
 
-    public void setSummoner(HashMap<String, String> result) {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
-        // DB Insert
-        summonerController.insertSummoner(result.get("accountId"),Integer.parseInt(String.valueOf(result.get("profileIconId"))),
-                Long.parseLong(String.valueOf(result.get("revisionDate"))),result.get("name"),result.get("id"),
-                Long.parseLong(String.valueOf(result.get("summonerLevel"))),result.get("puuid"), timestamp);
-    }
-
     public String getCurrentDdragonVersion() {
         return ddragonVersionController.getCurrentDdragonVersion();
     }

@@ -74,7 +74,7 @@ public class Facade_refactoring {
             startTime = dbFacade.getLastRefreshTimeBySummonerName(puuid);
 
         //Step 1. Get Summoner Info By Name via API
-        dbFacade.setSummoner((LinkedHashMap<String, String>) apiFacade.getSummonerBySummonerName(name).get("body"));
+        dbFacade.setSummonerInfo((LinkedHashMap<String, String>) apiFacade.getSummonerBySummonerName(name).get("body"));
         SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerName(name);
 
         //Step 2. Get League info by encryptedSummonerId via API
