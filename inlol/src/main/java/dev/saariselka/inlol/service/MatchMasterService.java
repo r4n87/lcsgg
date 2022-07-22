@@ -27,10 +27,10 @@ public class MatchMasterService {
 
     public void insert(String dataVersion, String matchId, long gameCreation, long gameDuration, long gameEndTimeStamp, long gameId,
                        String gameMode, String gameName, long gameStartTimeStamp, String gameType, String gameVersion, int mapId,
-                       String platformId, int queueId, String tournamentCode, int teamId1, int teamId2, Timestamp rrt) {
+                       String platformId, int queueId, String queueType, String tournamentCode, int teamId1, int teamId2, Timestamp rrt) {
         matchMasterRepository.save( new MatchMasterEntity(new MatchMasterId(dataVersion, matchId),gameCreation,gameDuration,
-                gameEndTimeStamp,gameId,gameMode,
-                gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,teamId1,teamId2, tournamentCode, rrt));
+                gameEndTimeStamp,gameId, gameMode,
+                gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId, queueType, teamId1,teamId2, tournamentCode, rrt));
     }
 
 }

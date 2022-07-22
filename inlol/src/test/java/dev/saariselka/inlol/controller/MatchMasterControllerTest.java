@@ -43,12 +43,13 @@ public class MatchMasterControllerTest {
         int mapId = 12;
         String platformId = "KR";
         int queueId = 0;
+        String queueType = "일반";
         int teamId1 = 100;
         int teamId2 = 200;
         String tournamentCode = null;
 
         // when
-        matchMasterController.insertMatchMaster(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,tournamentCode,teamId1,teamId2,rrt);
+        matchMasterController.insertMatchMaster(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,queueType, tournamentCode,teamId1,teamId2,rrt);
 
         // then
         MatchMasterEntity matchMasterEntitySaved = matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)).get(0);
@@ -91,6 +92,8 @@ public class MatchMasterControllerTest {
         String platformIdSecond = "KR";
         int queueIdFirst = 0;
         int queueIdSecond = 0;
+        String queueTypeFirst = "일반";
+        String queueTypeSecond = "일반";
         int teamId1First = 100;
         int teamId1Second = 100;
         int teamId2First = 200;
@@ -98,8 +101,8 @@ public class MatchMasterControllerTest {
         String tournamentCodeFirst = null;
         String tournamentCodeSecond = null;
 
-        matchMasterService.insert(dataVersionFirst,matchIdFirst,gameCreationFirst,gameDurationFirst,gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,tournamentCodeFirst,teamId1First,teamId2First,rrt);
-        matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
+        matchMasterService.insert(dataVersionFirst,matchIdFirst,gameCreationFirst,gameDurationFirst,gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,queueTypeFirst, tournamentCodeFirst,teamId1First,teamId2First,rrt);
+        matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,queueTypeSecond, tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
 
         // when
         MatchMasterEntity matchMasterEntityFindFirst = matchMasterController.getMatchMasterByMatchMasterId(dataVersionFirst,matchIdFirst).get(0);
@@ -146,6 +149,8 @@ public class MatchMasterControllerTest {
         String platformIdSecond = "KR";
         int queueIdFirst = 0;
         int queueIdSecond = 0;
+        String queueTypeFirst = "일반";
+        String queueTypeSecond = "일반";
         int teamId1First = 100;
         int teamId1Second = 100;
         int teamId2First = 200;
@@ -153,8 +158,8 @@ public class MatchMasterControllerTest {
         String tournamentCodeFirst = null;
         String tournamentCodeSecond = null;
 
-        matchMasterService.insert(dataVersionFirst,matchIdFirst,gameCreationFirst,gameDurationFirst,gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,tournamentCodeFirst,teamId1First,teamId2First,rrt);
-        matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
+        matchMasterService.insert(dataVersionFirst,matchIdFirst,gameCreationFirst,gameDurationFirst,gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,queueTypeFirst,tournamentCodeFirst,teamId1First,teamId2First,rrt);
+        matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,queueTypeSecond,tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
 
         // when
         MatchMasterEntity matchMasterEntityFindFirst = matchMasterController.getMatchMasterByMatchId(matchIdFirst).get(0);

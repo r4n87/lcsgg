@@ -29,6 +29,7 @@ public class MatchMasterEntity {
     private int mapId;
     private String platformId;
     private int queueId;
+    private String queueType;
     private int teamId1;
     private int teamId2;
     private String tournamentCode;

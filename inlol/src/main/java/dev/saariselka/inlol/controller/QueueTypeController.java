@@ -14,7 +14,7 @@ public class QueueTypeController {
     @Autowired
     QueueTypeService queueTypeService;
 
-    public QueueTypeEntity getQueueTypeByQueueId(int queueId) {
-        return queueTypeService.findByQueueId(queueId).get(0);
+    public String getQueueTypeByQueueId(int queueId) {
+        return queueTypeService.findByQueueId(queueId).get(0).getDescription();
     }
 }

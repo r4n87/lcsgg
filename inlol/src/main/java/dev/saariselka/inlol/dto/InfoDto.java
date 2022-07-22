@@ -22,7 +22,7 @@ public class InfoDto {
     private String gameDuration;
     private LocalDateTime gameEndTimestamp;
     private long gameId;
-    private String gameMode;
+    private String queueType;
     private String gameName;
     private LocalDateTime gameStartTimeStamp;
     private String gameType;
@@ -62,7 +62,8 @@ public class InfoDto {
         this.gameDuration = gameDuration;
         this.gameEndTimestamp = LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameEndTimeStamp()),TimeZone.getDefault().toZoneId());
         this.gameId = matchMasterEntity.getGameId();
-        this.gameMode = JsonParserForLOL.getKRGameModeByQueueId(matchMasterEntity.getQueueId());
+        //this.queueType = JsonParserForLOL.getKRGameModeByQueueId(matchMasterEntity.getQueueId());
+        this.queueType = matchMasterEntity.getQueueType();
         this.gameName = matchMasterEntity.getGameName();
         this.gameStartTimeStamp = LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterEntity.getGameStartTimeStamp()),TimeZone.getDefault().toZoneId());
         this.gameType = matchMasterEntity.getGameType();

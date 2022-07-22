@@ -52,6 +52,10 @@ public class ParticipantDtoTest {
                 String.valueOf(matchParticipantEntity.getChampionId()));
         assertThat(participantDto.getChampionNameENG()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionName()));
+        assertThat(participantDto.getChampionNameKR()).isEqualTo(
+                String.valueOf(matchParticipantEntity.getChampionNameKR()));
+        assertThat(participantDto.getChampionImg()).isEqualTo(
+                String.valueOf(matchParticipantEntity.getChampionImg()));
         assertThat(participantDto.getChampionTransform()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionTransform()));
         assertThat(participantDto.getConsumablesPurchased()).isEqualTo(
@@ -289,6 +293,10 @@ public class ParticipantDtoTest {
                 String.valueOf(matchParticipantEntity.getChampionId()));
         participantDto.setChampionNameENG(
                 String.valueOf(matchParticipantEntity.getChampionName()));
+        participantDto.setChampionNameKR(
+                String.valueOf(matchParticipantEntity.getChampionNameKR()));
+        participantDto.setChampionImg(
+                String.valueOf(matchParticipantEntity.getChampionImg()));
         participantDto.setChampionTransform(
                 String.valueOf(matchParticipantEntity.getChampionTransform()));
         participantDto.setConsumablesPurchased(
@@ -516,6 +524,10 @@ public class ParticipantDtoTest {
                 String.valueOf(matchParticipantEntity.getChampionId()));
         assertThat(participantDto.getChampionNameENG()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionName()));
+        assertThat(participantDto.getChampionNameKR()).isEqualTo(
+                String.valueOf(matchParticipantEntity.getChampionNameKR()));
+        assertThat(participantDto.getChampionImg()).isEqualTo(
+                String.valueOf(matchParticipantEntity.getChampionImg()));
         assertThat(participantDto.getChampionTransform()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionTransform()));
         assertThat(participantDto.getConsumablesPurchased()).isEqualTo(
@@ -737,6 +749,8 @@ public class ParticipantDtoTest {
         int champLevel = 10;
         int championId = 32;
         String championName = "Ezreal";
+        String championNameKR = "이즈리얼";
+        String championImg = "Ezreal.png";
         int championTransform = 0;
         int consumablesPurchased = 0;
         int damageDealtToBuildings = 562;
@@ -843,6 +857,8 @@ public class ParticipantDtoTest {
                 champLevel,
                 championId,
                 championName,
+                championNameKR,
+                championImg,
                 championTransform,
                 consumablesPurchased,
                 damageDealtToBuildings,
@@ -955,6 +971,8 @@ public class ParticipantDtoTest {
         int champLevel = 5;
         int championId = 4;
         String championName = "Ari";
+        String championNameKR = "아리";
+        String championImg = "Ahri.png";
         int championTransform = 3;
         int consumablesPurchased = 2;
         int damageDealtToBuildings = 1;
@@ -1061,6 +1079,8 @@ public class ParticipantDtoTest {
                 champLevel,
                 championId,
                 championName,
+                championNameKR,
+                championImg,
                 championTransform,
                 consumablesPurchased,
                 damageDealtToBuildings,

@@ -64,6 +64,7 @@ public class MatchDtoTest {
         int mapId = 12;
         String platformId = "KR";
         int queueId = 500;
+        String queueType = "칼바람바람";
         int teamId1 = 100;
         int teamId2 = 200;
         String tournamentCode = "";
@@ -71,7 +72,7 @@ public class MatchDtoTest {
         MatchMasterEntity matchMasterEntityForSetTest = new MatchMasterEntity(
                 new MatchMasterId(dataVersion, matchId), gameCreation, gameDuration, gameEndTimeStamp,
                 gameId, gameMode, gameName, gameStartTimeStamp, gameType, gameVersion, mapId, platformId,
-                queueId, teamId1, teamId2, tournamentCode, null);
+                queueId, queueType, teamId1, teamId2, tournamentCode, null);
 
         InfoDto infoDtoForSetTest = new InfoDto(matchMasterEntityForSetTest, new ArrayList<TeamDto>(), new ParticipantDto());
         MetadataDto metadataDtoForSetTest = new MetadataDto("2", "5", new ArrayList<>());
@@ -100,6 +101,7 @@ public class MatchDtoTest {
         int mapId = 11;
         String platformId = "KR";
         int queueId = 420;
+        String queueType = "솔랭";
         int teamId1 = 100;
         int teamId2 = 200;
         String tournamentCode = "";
@@ -118,6 +120,7 @@ public class MatchDtoTest {
                 mapId,
                 platformId,
                 queueId,
+                queueType,
                 teamId1,
                 teamId2,
                 tournamentCode,

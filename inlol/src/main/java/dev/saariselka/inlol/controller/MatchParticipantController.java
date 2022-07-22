@@ -23,7 +23,8 @@ public class MatchParticipantController {
     MatchParticipantService matchParticipantService;
 
     public void insertParticipantInfo(String puuid, String dataVersion, String matchId, int assists, int baronKills, int bountyLevel, int champExperience,
-                                      int champLevel, int championId, String championName, int championTransform, int consumablesPurchased, int damageDealtToBuildings,
+                                      int champLevel, int championId, String championName, String championNameKR, String championImg,
+                                      int championTransform, int consumablesPurchased, int damageDealtToBuildings,
                                       int damageDealtToObjectives, int damageDealtToTurrets, int damageSelfMitigated, int deaths, int detectorWardsPlaced,
                                       int doubleKills, int dragonKills, boolean firstBloodAssist, boolean firstBloodKill, boolean firstTowerAssist, boolean firstTowerKill,
                                       boolean gameEndedInEarlySurrender, boolean gameEndedInSurrender, int goldEarned, int goldSpent, String individualPosition,
@@ -41,7 +42,7 @@ public class MatchParticipantController {
                                       int trueDamageTaken, int turretKills, int turretTakedowns, int turretsLost, int unrealKills, int visionScore, int visionWardsBoughtInGame,
                                       int wardsKilled, int wardsPlaced, boolean win, Timestamp rrt) {
         matchParticipantService.insert(puuid, dataVersion, matchId, assists, baronKills,
-                bountyLevel, champExperience, champLevel, championId, championName, championTransform, consumablesPurchased, damageDealtToBuildings,
+                bountyLevel, champExperience, champLevel, championId, championName, championNameKR, championImg, championTransform, consumablesPurchased, damageDealtToBuildings,
                 damageDealtToObjectives, damageDealtToTurrets, damageSelfMitigated, deaths, detectorWardsPlaced, doubleKills, dragonKills,
                 firstBloodAssist, firstBloodKill, firstTowerAssist, firstTowerKill, gameEndedInEarlySurrender, gameEndedInSurrender, goldEarned,
                 goldSpent, individualPosition, inhibitorKills, inhibitorTakedowns, inhibitorsLost, item0, item1, item2, item3, item4, item5, item6,

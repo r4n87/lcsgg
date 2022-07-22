@@ -44,12 +44,13 @@ public class MatchMasterServiceTest {
         int mapId = 12;
         String platformId = "KR";
         int queueId = 0;
+        String queueType = "일반";
         int teamId1 = 100;
         int teamId2 = 200;
         String tournamentCode = null;
 
         // when
-        matchMasterService.insert(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,tournamentCode,teamId1,teamId2,rrt);
+        matchMasterService.insert(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,queueType,tournamentCode,teamId1,teamId2,rrt);
 
         // then
         MatchMasterEntity matchMasterEntitySaved = matchMasterRepository.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)).get(0);
@@ -93,6 +94,8 @@ public class MatchMasterServiceTest {
         String platformIdSecond = "KR";
         int queueIdFirst = 0;
         int queueIdSecond = 0;
+        String queueTypeFirst = "일반";
+        String queueTypeSecond = "일반";
         int teamId1First = 100;
         int teamId1Second = 100;
         int teamId2First = 200;
@@ -102,11 +105,11 @@ public class MatchMasterServiceTest {
 
         MatchMasterEntity matchMasterEntityFirst = new MatchMasterEntity(new MatchMasterId(dataVersionFirst, matchIdFirst),gameCreationFirst,gameDurationFirst,
                 gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,
-                gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,teamId1First,teamId2First, tournamentCodeFirst, rrt);
+                gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,queueTypeFirst,teamId1First,teamId2First, tournamentCodeFirst, rrt);
 
         MatchMasterEntity matchMasterEntitySecond = new MatchMasterEntity(new MatchMasterId(dataVersionSecond, matchIdSecond),gameCreationSecond,gameDurationSecond,
                 gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,
-                gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,teamId1Second,teamId2Second, tournamentCodeSecond, rrt);
+                gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,queueTypeSecond,teamId1Second,teamId2Second, tournamentCodeSecond, rrt);
 
         MatchMasterEntity matchMasterEntitySavedFirst = matchMasterRepository.save(matchMasterEntityFirst);
         MatchMasterEntity matchMasterEntitySavedSecond = matchMasterRepository.save(matchMasterEntitySecond);
@@ -157,6 +160,8 @@ public class MatchMasterServiceTest {
         String platformIdSecond = "KR";
         int queueIdFirst = 0;
         int queueIdSecond = 0;
+        String queueTypeFirst = "일반";
+        String queueTypeSecond = "일반";
         int teamId1First = 100;
         int teamId1Second = 100;
         int teamId2First = 200;
@@ -166,11 +171,11 @@ public class MatchMasterServiceTest {
 
         MatchMasterEntity matchMasterEntityFirst = new MatchMasterEntity(new MatchMasterId(dataVersionFirst, matchIdFirst),gameCreationFirst,gameDurationFirst,
                 gameEndTimeStampFirst,gameIdFirst,gameModeFirst,gameNameFirst,gameStartTimeStampFirst,gameTypeFirst,
-                gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,teamId1First,teamId2First, tournamentCodeFirst, rrt);
+                gameVersionFirst,mapIdFirst,platformIdFirst,queueIdFirst,queueTypeFirst,teamId1First,teamId2First, tournamentCodeFirst, rrt);
 
         MatchMasterEntity matchMasterEntitySecond = new MatchMasterEntity(new MatchMasterId(dataVersionSecond, matchIdSecond),gameCreationSecond,gameDurationSecond,
                 gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,
-                gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,teamId1Second,teamId2Second, tournamentCodeSecond, rrt);
+                gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,queueTypeSecond,teamId1Second,teamId2Second, tournamentCodeSecond, rrt);
 
         MatchMasterEntity matchMasterEntitySavedFirst = matchMasterRepository.save(matchMasterEntityFirst);
         MatchMasterEntity matchMasterEntitySavedSecond = matchMasterRepository.save(matchMasterEntitySecond);
