@@ -532,4 +532,8 @@ public class DBFacade {
     public void setChampions(List<ChampionEntity> championEntities) {
         championController.insertAll(championEntities);
     }
+
+    public void setSummonerPerk(List<SummonerPerkEntity> summonerPerkEntities) {
+        summonerPerkController.insertAll(summonerPerkEntities);
+    }
 }

@@ -18,6 +18,10 @@ public class SummonerPerkService {
         summonerPerkRepository.save(new SummonerPerkEntity(id, nameEng, nameKor, icon, description));
     }
 
+    public void insertAll(List<SummonerPerkEntity> summonerPerkEntities) {
+        summonerPerkRepository.saveAll(summonerPerkEntities);
+    }
+
     public List<SummonerPerkEntity> findByPerkId(int perkId) {
         return summonerPerkRepository.findByPerkId(perkId);
     }

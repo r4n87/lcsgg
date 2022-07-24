@@ -29,49 +29,8 @@ public class SummonerPerkController {
     @Autowired
     private SummonerPerkService summonerPerkService;
 
-    @GetMapping("/insert")
-    public void insertSummonerPerk() {
-        int id;
-        String nameEng;
-        String nameKor;
-        String icon;
-        String desc;
-
-        ClassPathResource runeImages = new ClassPathResource("json/runes.json");
-        JsonArray runeJsonArray = null;
-
-        try {
-            runeJsonArray = JsonParser.parseReader(new InputStreamReader(runeImages.getInputStream(), StandardCharsets.UTF_8)).getAsJsonArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(Object obj : runeJsonArray) {
-            JsonObject runeObj = (JsonObject) obj;
-            id = runeObj.get("id").getAsInt();
-            nameEng = runeObj.get("key").getAsString();
-            nameKor = runeObj.get("name").getAsString();
-            icon = runeObj.get("icon").getAsString();
-
-            summonerPerkService.insert(id, nameEng, nameKor, icon, "");
-
-            JsonArray detailRuneJsonArray = runeObj.get("slots").getAsJsonArray();
-            for(Object detailObj : detailRuneJsonArray) {
-                JsonObject detailRuneObj = (JsonObject) detailObj;
-                JsonArray lastDepthRuneJsonArray = detailRuneObj.get("runes").getAsJsonArray();
-
-                for(Object lastDepthObj : lastDepthRuneJsonArray) {
-                    JsonObject lastDepthRuneObj = (JsonObject) lastDepthObj;
-                    id = lastDepthRuneObj.get("id").getAsInt();
-                    nameEng = lastDepthRuneObj.get("key").getAsString();
-                    nameKor = lastDepthRuneObj.get("name").getAsString();
-                    icon = lastDepthRuneObj.get("icon").getAsString();
-                    desc = lastDepthRuneObj.get("shortDesc").getAsString();
-
-                    summonerPerkService.insert(id, nameEng, nameKor, icon, desc);
-                }
-            }
-        }
+    public void insertAll(List<SummonerPerkEntity> summonerPerkEntities) {
+        summonerPerkService.insertAll(summonerPerkEntities);
     }
 
     public List<SummonerPerkEntity> getSummonerPerkByPerkId(int perkId) {

@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.SummonerSpellController;
 import dev.saariselka.inlol.entity.ChampionEntity;
+import dev.saariselka.inlol.entity.SummonerPerkEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -107,10 +108,16 @@ public class JsonParserForLOL {
         return summonerSpellEntities;
     }
 
-    public static String getRuneIconImageByPerkStyle(String type, int styleId, int perkId) {
+    public List<SummonerPerkEntity> getSummonerPerkEntities() {
+        int id;
+        String nameEng;
+        String nameKor;
+        String icon;
+        String desc;
+
         ClassPathResource runeImages = new ClassPathResource("json/runes.json");
         JsonArray runeJsonArray = null;
-        String iconPath = "";
+        List<SummonerPerkEntity> summonerPerkEntities = new ArrayList<>();
 
         try {
             runeJsonArray = JsonParser.parseReader(new InputStreamReader(runeImages.getInputStream(), StandardCharsets.UTF_8)).getAsJsonArray();
@@ -118,32 +125,33 @@ public class JsonParserForLOL {
             e.printStackTrace();
         }
 
-        if(runeJsonArray == null) return "";
-
         for(Object obj : runeJsonArray) {
             JsonObject runeObj = (JsonObject) obj;
-            if(runeObj.get("id").getAsInt() == styleId) {
-                if("sub".equals(type)) {
-                    iconPath = runeObj.get("icon").getAsString();
-                    break;
-                }
+            id = runeObj.get("id").getAsInt();
+            nameEng = runeObj.get("key").getAsString();
+            nameKor = runeObj.get("name").getAsString();
+            icon = runeObj.get("icon").getAsString();
 
-                JsonArray detailRuneJsonArray = runeObj.get("slots").getAsJsonArray();
-                for(Object detailObj : detailRuneJsonArray) {
-                    JsonObject detailRuneObj = (JsonObject) detailObj;
-                    JsonArray lastDepthRuneJsonArray = detailRuneObj.get("runes").getAsJsonArray();
+            summonerPerkEntities.add(new SummonerPerkEntity(id, nameEng, nameKor, icon, ""));
 
-                    for(Object lastDepthObj : lastDepthRuneJsonArray) {
-                        JsonObject lastDepthRuneObj = (JsonObject) lastDepthObj;
-                        if(lastDepthRuneObj.get("id").getAsInt() == perkId) {
-                            iconPath =  lastDepthRuneObj.get("icon").getAsString();
-                        }
-                    }
+            JsonArray detailRuneJsonArray = runeObj.get("slots").getAsJsonArray();
+            for(Object detailObj : detailRuneJsonArray) {
+                JsonObject detailRuneObj = (JsonObject) detailObj;
+                JsonArray lastDepthRuneJsonArray = detailRuneObj.get("runes").getAsJsonArray();
 
+                for(Object lastDepthObj : lastDepthRuneJsonArray) {
+                    JsonObject lastDepthRuneObj = (JsonObject) lastDepthObj;
+                    id = lastDepthRuneObj.get("id").getAsInt();
+                    nameEng = lastDepthRuneObj.get("key").getAsString();
+                    nameKor = lastDepthRuneObj.get("name").getAsString();
+                    icon = lastDepthRuneObj.get("icon").getAsString();
+                    desc = lastDepthRuneObj.get("shortDesc").getAsString();
+
+                    summonerPerkEntities.add(new SummonerPerkEntity(id, nameEng, nameKor, icon, desc));
                 }
             }
         }
 
-        return iconPath;
+        return summonerPerkEntities;
     }
 }
