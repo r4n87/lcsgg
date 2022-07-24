@@ -3,6 +3,7 @@ package dev.saariselka.inlol.facade;
 import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.entity.*;
+import dev.saariselka.inlol.service.MatchParticipantService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -33,6 +35,8 @@ public class DBFacadeTest {
     LeagueEntryController leagueEntryController;
     @Autowired
     LeagueMiniSeriesController leagueMiniSeriesController;
+    @Autowired
+    MatchParticipantService matchParticipantService;
 
     @Test
     @DisplayName("Find SummonerDto By SummonerName When SummonerName is Null")
@@ -382,6 +386,78 @@ public class DBFacadeTest {
         // then
         assertThat(find.isEmpty()).isTrue();
         assertThat(miniFind).isNull();
+    }
+
+    @Test
+    @DisplayName("Get MatchIdList By Summoner Puuid")
+    void getMatchIdListBySummonerPuuid() {
+        //given
+        String puuid1 = "AAAAA";
+        String puuid2 = "BBBBB";
+        String dataVersion1 = "dv1";
+        String dataVersion2 = "dv2";
+        String dataVersion3 = "dv3";
+        String matchId1 = "matchId1";
+        String matchId2 = "matchId2";
+        String matchId3 = "matchId3";
+        int participantId1 = 1;
+        int participantId2 = 2;
+        int participantId3 = 3;
+
+        matchParticipantService.insert(puuid1
+                , dataVersion1
+                , matchId1
+                , 0, 0, 0, 0, 0, 0, "", "", ""
+                , 0, 0,0, 0, 0, 0, 0,0, 0
+                , 0, true, true, true, true, true, true
+                , 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                , 0, 0, 0, "", 0, 0, 0, 0, 0, 0
+                , 0, 0, 0, 0, 0, 0, 0
+                , participantId1
+                , 0, 0, 0, 0, 0, 0
+                , "", "", "", 0, 0, 0, 0, 0, 0, ""
+                , 0, "", "", 0, "", true, 0, "", 0, 0, 0, 0
+                , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                , true, null);
+        matchParticipantService.insert(puuid2
+                , dataVersion2
+                , matchId2
+                , 0, 0, 0, 0, 0, 0, "", "", ""
+                , 0, 0,0, 0, 0, 0, 0,0, 0
+                , 0, true, true, true, true, true, true
+                , 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                , 0, 0, 0, "", 0, 0, 0, 0, 0, 0
+                , 0, 0, 0, 0, 0, 0, 0
+                , participantId2
+                , 0, 0, 0, 0, 0, 0
+                , "", "", "", 0, 0, 0, 0, 0, 0, ""
+                , 0, "", "", 0, "", true, 0, "", 0, 0, 0, 0
+                , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                , true, null);
+        matchParticipantService.insert(puuid1
+                , dataVersion3
+                , matchId3
+                , 0, 0, 0, 0, 0, 0, "", "", ""
+                , 0, 0,0, 0, 0, 0, 0,0, 0
+                , 0, true, true, true, true, true, true
+                , 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                , 0, 0, 0, "", 0, 0, 0, 0, 0, 0
+                , 0, 0, 0, 0, 0, 0, 0
+                , participantId3
+                , 0, 0, 0, 0, 0, 0
+                , "", "", "", 0, 0, 0, 0, 0, 0, ""
+                , 0, "", "", 0, "", true, 0, "", 0, 0, 0, 0
+                , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                , true, null);
+
+        //when
+        HashSet<String> matchIds = dbFacade.getMatchIdListBySummonerPuuid(puuid1);
+
+        //then
+        assertThat(matchIds.size()).isEqualTo(2);
+        for (String matchId : matchIds) {
+            assertThat(matchId).isNotEqualTo(matchId2);
+        }
     }
 
     private HashSet<Object> createSummonerInfoWithMiniSeries(String queueType) {
