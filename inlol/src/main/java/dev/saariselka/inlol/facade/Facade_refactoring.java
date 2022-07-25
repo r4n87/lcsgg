@@ -157,5 +157,6 @@ public class Facade_refactoring {
 
         dbFacade.setSummonerSpell(jsonParserForLOL.getSummonerSpellEntities());
         dbFacade.setChampions(jsonParserForLOL.getChampionEntities());
+        dbFacade.setSummonerPerk(jsonParserForLOL.getSummonerPerkEntities());
     }
 }
