@@ -746,7 +746,7 @@ public class DBFacadeTest {
         String icon = "TestIcon";
         String description = "TestPerk";
 
-        SummonerPerkEntity summonerPerkEntity = new SummonerPerkEntity(perkId,nameEng,nameKor,icon,description);
+        SummonerPerkEntity summonerPerkEntity = new SummonerPerkEntity(perkId, nameEng, nameKor, icon, description);
         List<SummonerPerkEntity> summonerPerkEntities = new ArrayList<>();
         summonerPerkEntities.add(summonerPerkEntity);
 
@@ -760,4 +760,5 @@ public class DBFacadeTest {
         assertThat(nameKor).isEqualTo(testPerkEntity.getNameKor());
         assertThat(icon).isEqualTo(testPerkEntity.getIcon());
         assertThat(description).isEqualTo(testPerkEntity.getDescription());
+    }
 }
