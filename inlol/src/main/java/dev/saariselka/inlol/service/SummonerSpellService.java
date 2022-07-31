@@ -21,4 +21,8 @@ public class SummonerSpellService {
     public List<SummonerSpellEntity> findByspellKey(int spellKey) {
         return summonerSpellRepository.findByspellKey(spellKey);
     }
+
+    public void insertAll(List<SummonerSpellEntity> summonerSpellEntities) {
+        summonerSpellRepository.saveAll(summonerSpellEntities);
+    }
 }
