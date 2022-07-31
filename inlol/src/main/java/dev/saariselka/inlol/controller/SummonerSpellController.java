@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.entity.SummonerPerkEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.service.SummonerSpellService;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,9 @@ public class SummonerSpellController {
 
     public List<SummonerSpellEntity> getSummonerSpellByKey(int summonerSpellKey) {
         return summonerSpellService.findByspellKey(summonerSpellKey);
+    }
+
+    public void insertAllSummonerSpell(List<SummonerSpellEntity> summonerSpellEntities) {
+        summonerSpellService.insertAll(summonerSpellEntities);
     }
 }

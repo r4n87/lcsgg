@@ -524,9 +524,7 @@ public class DBFacade {
     }
 
     public void setSummonerSpell(List<SummonerSpellEntity> summonerSpellEntities) {
-        for(SummonerSpellEntity summonerSpellEntity : summonerSpellEntities) {
-            summonerSpellController.insertSummonerSpell(summonerSpellEntity.getName(),summonerSpellEntity.getDescription(),summonerSpellEntity.getSpellKey(),summonerSpellEntity.getImage());
-        }
+        summonerSpellController.insertAllSummonerSpell(summonerSpellEntities);
     }
 
     public void setChampions(List<ChampionEntity> championEntities) {
