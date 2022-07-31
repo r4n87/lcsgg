@@ -9,6 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -32,6 +35,29 @@ public class SummonerSpellControllerTest {
 
         // when
         summonerSpellController.insertSummonerSpell(name, description, spellKey, image);
+
+        // then
+        SummonerSpellEntity summonerSpellEntitySaved = summonerSpellService.findByspellKey(spellKey).get(0);
+
+        assertThat(spellKey).isEqualTo(summonerSpellEntitySaved.getSpellKey());
+        assertThat(summonerSpellEntitySaved.getSpellKey()).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Insert Entities")
+    public void insertAllSummonerSpell() {
+        // given
+        String name = "testSummonerSpellName";
+        String description = "testSummonerSpellDesc";
+        int spellKey = 0;
+        String image = "testSummonerSpellImage";
+
+        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
+        SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(name,description,spellKey,image);
+        summonerSpellEntities.add(summonerSpellEntity);
+
+        // when
+        summonerSpellController.insertAllSummonerSpell(summonerSpellEntities);
 
         // then
         SummonerSpellEntity summonerSpellEntitySaved = summonerSpellService.findByspellKey(spellKey).get(0);
