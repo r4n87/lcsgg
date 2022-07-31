@@ -3,6 +3,7 @@ package dev.saariselka.inlol.facade;
 import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.entity.*;
+import dev.saariselka.inlol.repository.DdragonVersionRepository;
 import dev.saariselka.inlol.service.MatchParticipantService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,22 +38,20 @@ public class DBFacadeTest {
     LeagueMiniSeriesController leagueMiniSeriesController;
     @Autowired
     MatchParticipantService matchParticipantService;
+    @Autowired
+    DdragonVersionRepository ddragonVersionRepository;
+    @Autowired
+    SummonerPerkController summonerPerkController;
+
 
     @Test
     @DisplayName("Find SummonerDto By SummonerName When SummonerName is Null")
     public void getSummonerDtoBySummonerNameWhenSummonerNameIsNull() {
         //given
         String name = null;
-        SummonerEntity summonerEntity = null;
-        SummonerDto summonerDto = null;
 
         //when
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
-        if(puuid != null)
-        {
-            summonerEntity = summonerController.getSummoner(puuid).get(0);
-            summonerDto = new SummonerDto(summonerEntity);
-        }
+        SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerName(name);
 
         //then
         assertThat(summonerDto).isNull();
@@ -65,9 +64,7 @@ public class DBFacadeTest {
         String name = "Petaluma";
 
         //when
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
-        SummonerEntity summonerEntity = summonerController.getSummoner(puuid).get(0);
-        SummonerDto summonerDto = new SummonerDto(summonerEntity);
+        SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerName(name);
 
         //then
         assertThat(summonerDto).isNotNull();
@@ -78,16 +75,9 @@ public class DBFacadeTest {
     public void getSummonerDtoBySummonerNameWhenInvalidSummonerName() {
         //given
         String name = "A";
-        SummonerEntity summonerEntity = null;
-        SummonerDto summonerDto = null;
 
         //when
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
-        if(puuid != null)
-        {
-            summonerEntity = summonerController.getSummoner(puuid).get(0);
-            summonerDto = new SummonerDto(summonerEntity);
-        }
+        SummonerDto summonerDto = dbFacade.getSummonerDtoBySummonerName(name);
 
         //then
         assertThat(summonerDto).isNull();
@@ -101,7 +91,7 @@ public class DBFacadeTest {
         String name = null;
 
         //when
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        String puuid = dbFacade.getSummonerPuuidBySummonerName(name);
 
         //then
         assertThat(puuid).isNull();
@@ -115,7 +105,7 @@ public class DBFacadeTest {
         String name = "Petaluma";
 
         //when
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        String puuid = dbFacade.getSummonerPuuidBySummonerName(name);
 
         //then
         assertThat(puuid).isNotNull();
@@ -129,7 +119,7 @@ public class DBFacadeTest {
         String name = "A";
 
         //when
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        String puuid = dbFacade.getSummonerPuuidBySummonerName(name);
 
         //then
         assertThat(puuid).isNull();
@@ -507,5 +497,51 @@ public class DBFacadeTest {
         data.put("inactive", "false");
 
         return leagueInfos;
+    }
+
+    @Test
+    @DisplayName("Find Current DdragonVersion")
+    public void getCurrentDdragonVersion() {
+        //given
+        DdragonVersionEntity currentDdragonVersionEntity = ddragonVersionRepository.findByCurrent("Y").get(0);
+        currentDdragonVersionEntity.setCurrent("N");
+        ddragonVersionRepository.save(currentDdragonVersionEntity);
+
+        String testVersion = "TestVersion";
+        String testCurrent = "Y";
+
+        ddragonVersionRepository.save(new DdragonVersionEntity(testVersion, testCurrent));
+
+        //when
+        String currentDdrgonVersion = dbFacade.getCurrentDdragonVersion();
+
+        //then
+        assertThat(currentDdrgonVersion).isEqualTo(testVersion);
+    }
+
+    @Test
+    @DisplayName("Save Summoner Perk At DB")
+    public void setSummonerPerk() {
+        //given
+        int perkId = 0;
+        String nameEng = "TestPerk";
+        String nameKor = "테스트데이터";
+        String icon = "TestIcon";
+        String description = "TestPerk";
+
+        SummonerPerkEntity summonerPerkEntity = new SummonerPerkEntity(perkId,nameEng,nameKor,icon,description);
+        List<SummonerPerkEntity> summonerPerkEntities = new ArrayList<>();
+        summonerPerkEntities.add(summonerPerkEntity);
+
+        //when
+        dbFacade.setSummonerPerk(summonerPerkEntities);
+
+        //then
+        SummonerPerkEntity testPerkEntity = summonerPerkController.getSummonerPerkByPerkId(0).get(0);
+        assertThat(perkId).isEqualTo(testPerkEntity.getPerkId());
+        assertThat(nameEng).isEqualTo(testPerkEntity.getNameEng());
+        assertThat(nameKor).isEqualTo(testPerkEntity.getNameKor());
+        assertThat(icon).isEqualTo(testPerkEntity.getIcon());
+        assertThat(description).isEqualTo(testPerkEntity.getDescription());
     }
 }
