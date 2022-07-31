@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.facade;
 
 import dev.saariselka.inlol.controller.*;
+import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.service.MatchParticipantService;
@@ -18,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
 @SpringBootTest
 @Transactional
@@ -507,5 +509,221 @@ public class DBFacadeTest {
         data.put("inactive", "false");
 
         return leagueInfos;
+    }
+
+    @Test
+    @DisplayName("Get SummonerDto By SummonerPuuid")
+    void getSummonerDtoBySummonerPuuid() {
+        // given
+        String id = "TestId";
+        String accountId = "TestAccountId";
+        String puuid = "TestPuuid";
+        String name = "TestUser";
+        int profileIconId = 9999;
+        long revisionDate = 888888888L;
+        long summonerLevel = 999L;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+
+        // when
+        summonerController.insertSummoner(accountId, profileIconId, revisionDate, name, id, summonerLevel, puuid, rrt);
+        SummonerDto testDto = dbFacade.getSummonerDtoBySummonerPuuid(puuid);
+
+        // then
+        assertThat(testDto.getId()).isEqualTo("TestId");
+        assertThat(testDto.getAccountId()).isEqualTo("TestAccountId");
+        assertThat(testDto.getPuuid()).isEqualTo("TestPuuid");
+        assertThat(testDto.getName()).isEqualTo("TestUser");
+        assertThat(testDto.getProfileIconId()).isEqualTo("9999");
+        assertThat(testDto.getRevisionDate()).isEqualTo("888888888");
+        assertThat(testDto.getSummonerLevel()).isEqualTo("999");
+    }
+
+    @Test
+    @DisplayName("Get LeagueEntryDtoList By SummonerId When No MiniSeries")
+    void getLeagueEntryDtoListBySummonerIdWhenNoMiniSeries() {
+        // given
+        // 자유랭크 추가
+        String summonerId = "TestSummonerId";
+        String queueType = "RANKED_FLEX_SR";
+        String leagueId = "TestLeagueId";
+        String summonerName = "TestUser";
+        String tier = "TestTier";
+        String rank = "II";
+        int leaguePoints = 99;
+        int wins = 2;
+        int losses = 1;
+        boolean hotStreak = true;
+        boolean veteran = false;
+        boolean freshBlood = true;
+        boolean inactive = false;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        String progress = "ABCDE";
+        int target = 3;
+
+        leagueEntryController.insertLeagueEntryInfo(summonerId, queueType, leagueId, summonerName, tier, rank,
+                leaguePoints, wins, losses, hotStreak, veteran, freshBlood, inactive, rrt);
+
+        leagueMiniSeriesController.insertLeagueMiniSeriesInfo(summonerId, queueType, losses, progress, target, wins, rrt);
+
+        // 솔로랭크 추가
+        String soloQueueType = "RANKED_SOLO_5x5";
+        String soloLeagueId = "TestSoloLeagueId";
+        String soloTier = "TestSoloTier";
+        String soloRank = "III";
+        int soloLeaguePoints = 100;
+        int soloWins = 1;
+        int soloLosses = 2;
+        boolean soloHotStreak = false;
+        boolean soloVeteran = true;
+        boolean soloFreshBlood = false;
+        boolean soloInactive = true;
+        String soloProgress = "QWERT";
+
+        leagueEntryController.insertLeagueEntryInfo(summonerId, soloQueueType, soloLeagueId, summonerName, soloTier, soloRank,
+                soloLeaguePoints, soloWins, soloLosses, soloHotStreak, soloVeteran, soloFreshBlood, soloInactive, rrt);
+
+        leagueMiniSeriesController.insertLeagueMiniSeriesInfo(summonerId, soloQueueType, soloLosses, soloProgress, target, soloWins, rrt);
+
+
+        // when
+        ArrayList<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
+
+        // then
+        for(LeagueEntryDto dto : test) {
+            if(dto.getMiniSeries() == null)
+                fail("MiniSeries 에러 발생");
+
+            if(dto.getQueueType().equals("RANKED_FLEX_SR"))
+            {
+                assertThat(dto.getSummonerId()).isEqualTo(summonerId);
+                assertThat(dto.getQueueType()).isEqualTo(queueType);
+                assertThat(dto.getLeagueId()).isEqualTo(leagueId);
+                assertThat(dto.getSummonerName()).isEqualTo(summonerName);
+                assertThat(dto.getTier()).isEqualTo(tier);
+                assertThat(dto.getRank()).isEqualTo(rank);
+                assertThat(dto.getLeaguePoints()).isEqualTo(leaguePoints);
+                assertThat(dto.getWins()).isEqualTo(wins);
+                assertThat(dto.getLosses()).isEqualTo(losses);
+                assertThat(dto.isHotStreak()).isTrue();
+                assertThat(dto.isVeteran()).isFalse();
+                assertThat(dto.isFreshBlood()).isTrue();
+                assertThat(dto.isInactive()).isFalse();
+                assertThat(dto.getMiniSeries().getSummonerId()).isEqualTo(summonerId);
+                assertThat(dto.getMiniSeries().getQueueType()).isEqualTo(queueType);
+                assertThat(dto.getMiniSeries().getTarget()).isEqualTo(target);
+                assertThat(String.valueOf(dto.getMiniSeries().getProgress())).isEqualTo(progress);
+                assertThat(dto.getMiniSeries().getWins()).isEqualTo(wins);
+                assertThat(dto.getMiniSeries().getLosses()).isEqualTo(losses);
+            }
+            else if(dto.getQueueType().equals("RANKED_SOLO_5x5"))
+            {
+                assertThat(dto.getSummonerId()).isEqualTo(summonerId);
+                assertThat(dto.getQueueType()).isEqualTo(soloQueueType);
+                assertThat(dto.getLeagueId()).isEqualTo(soloLeagueId);
+                assertThat(dto.getSummonerName()).isEqualTo(summonerName);
+                assertThat(dto.getTier()).isEqualTo(soloTier);
+                assertThat(dto.getRank()).isEqualTo(soloRank);
+                assertThat(dto.getLeaguePoints()).isEqualTo(soloLeaguePoints);
+                assertThat(dto.getWins()).isEqualTo(soloWins);
+                assertThat(dto.getLosses()).isEqualTo(soloLosses);
+                assertThat(dto.isHotStreak()).isFalse();
+                assertThat(dto.isVeteran()).isTrue();
+                assertThat(dto.isFreshBlood()).isFalse();
+                assertThat(dto.isInactive()).isTrue();
+                assertThat(dto.getMiniSeries().getSummonerId()).isEqualTo(summonerId);
+                assertThat(dto.getMiniSeries().getQueueType()).isEqualTo(soloQueueType);
+                assertThat(dto.getMiniSeries().getTarget()).isEqualTo(target);
+                assertThat(String.valueOf(dto.getMiniSeries().getProgress())).isEqualTo(soloProgress);
+                assertThat(dto.getMiniSeries().getWins()).isEqualTo(soloWins);
+                assertThat(dto.getMiniSeries().getLosses()).isEqualTo(soloLosses);
+            }
+            else {
+                fail("허용되지 않은 queueType 발생");
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Get LeagueEntryDtoList By SummonerId When Yes MiniSeries")
+    void getLeagueEntryDtoListBySummonerIdWhenYesMiniSeries() {
+        // given
+        // 자유랭크 추가
+        String summonerId = "TestSummonerId";
+        String queueType = "RANKED_FLEX_SR";
+        String leagueId = "TestLeagueId";
+        String summonerName = "TestUser";
+        String tier = "TestTier";
+        String rank = "II";
+        int leaguePoints = 100;
+        int win = 0;
+        int losses = 0;
+        boolean hotStreak = true;
+        boolean veteran = false;
+        boolean freshBlood = true;
+        boolean inactive = false;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+
+        leagueEntryController.insertLeagueEntryInfo(summonerId, queueType, leagueId, summonerName, tier, rank,
+                leaguePoints, win, losses, hotStreak, veteran, freshBlood, inactive, rrt);
+
+        // 솔로랭크 추가
+        String soloQueueType = "RANKED_SOLO_5x5";
+        String soloLeagueId = "TestSoloLeagueId";
+        String soloTier = "TestSoloTier";
+        String soloRank = "III";
+        int soloLeaguePoints = 90;
+        win = 0;
+        losses = 0;
+        boolean soloHotStreak = false;
+        boolean soloVeteran = true;
+        boolean soloFreshBlood = false;
+        boolean soloInactive = true;
+
+        leagueEntryController.insertLeagueEntryInfo(summonerId, soloQueueType, soloLeagueId, summonerName, soloTier, soloRank,
+                soloLeaguePoints, win, losses, soloHotStreak, soloVeteran, soloFreshBlood, soloInactive, rrt);
+
+        // when
+        ArrayList<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
+
+        // then
+
+        for(LeagueEntryDto dto : test) {
+            if(dto.getQueueType().equals("RANKED_FLEX_SR"))
+            {
+                assertThat(dto.getSummonerId()).isEqualTo(summonerId);
+                assertThat(dto.getQueueType()).isEqualTo(queueType);
+                assertThat(dto.getLeagueId()).isEqualTo(leagueId);
+                assertThat(dto.getSummonerName()).isEqualTo(summonerName);
+                assertThat(dto.getTier()).isEqualTo(tier);
+                assertThat(dto.getRank()).isEqualTo(rank);
+                assertThat(dto.getLeaguePoints()).isEqualTo(leaguePoints);
+                assertThat(dto.getWins()).isEqualTo(win);
+                assertThat(dto.getLosses()).isEqualTo(losses);
+                assertThat(dto.isHotStreak()).isTrue();
+                assertThat(dto.isVeteran()).isFalse();
+                assertThat(dto.isFreshBlood()).isTrue();
+                assertThat(dto.isInactive()).isFalse();
+            }
+            else if(dto.getQueueType().equals("RANKED_SOLO_5x5"))
+            {
+                assertThat(dto.getSummonerId()).isEqualTo(summonerId);
+                assertThat(dto.getQueueType()).isEqualTo(soloQueueType);
+                assertThat(dto.getLeagueId()).isEqualTo(soloLeagueId);
+                assertThat(dto.getSummonerName()).isEqualTo(summonerName);
+                assertThat(dto.getTier()).isEqualTo(soloTier);
+                assertThat(dto.getRank()).isEqualTo(soloRank);
+                assertThat(dto.getLeaguePoints()).isEqualTo(soloLeaguePoints);
+                assertThat(dto.getWins()).isEqualTo(win);
+                assertThat(dto.getLosses()).isEqualTo(losses);
+                assertThat(dto.isHotStreak()).isFalse();
+                assertThat(dto.isVeteran()).isTrue();
+                assertThat(dto.isFreshBlood()).isFalse();
+                assertThat(dto.isInactive()).isTrue();
+            }
+            else {
+                fail("허용되지 않은 queueType 발생");
+            }
+        }
+
     }
 }
