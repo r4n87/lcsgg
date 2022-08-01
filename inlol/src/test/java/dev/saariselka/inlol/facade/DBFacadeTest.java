@@ -761,4 +761,33 @@ public class DBFacadeTest {
         assertThat(icon).isEqualTo(testPerkEntity.getIcon());
         assertThat(description).isEqualTo(testPerkEntity.getDescription());
     }
+
+    @Test
+    @DisplayName("Get Last Refresh Time By Summoner Name")
+    public void getLastRefreshTimeBySummonerName() {
+        //given
+        String puuid = "ABCDE";
+        String accountId = "FGHIJ";
+        String id = "KLMNO";
+        String name = "PQRST";
+        int profileIconId = 5678;
+        long revisionDate = 123456L;
+        long summonerLevel = 125L;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+
+        summonerController.insertSummoner(accountId
+                                        , profileIconId
+                                        , revisionDate
+                                        , name
+                                        , id
+                                        , summonerLevel
+                                        , puuid
+                                        , rrt);
+
+        //when
+        long lastRefreshTime = dbFacade.getLastRefreshTimeBySummonerName(puuid);
+
+        //then
+        assertThat(lastRefreshTime).isEqualTo(rrt.toInstant().getEpochSecond());
+    }
 }
