@@ -527,7 +527,7 @@ public class DBFacade {
         summonerSpellController.insertAllSummonerSpell(summonerSpellEntities);
     }
 
-    public void setChampions(List<ChampionEntity> championEntities) {
+    public void setChampions(List<ChampionDto> championEntities) {
         championController.insertAll(championEntities);
     }
 

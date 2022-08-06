@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.ChampionDto;
 import dev.saariselka.inlol.entity.ChampionEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,10 +21,10 @@ public class ChampionControllerTest {
 
     @BeforeEach
     void init() {
-        List<ChampionEntity> entities = new ArrayList<>();
-        entities.add(new ChampionEntity(9999, "Aatrox1", "아트록스", "Aatrox.png"));
-        entities.add(new ChampionEntity(9998, "Ahri1", "아리", "Ahri.png"));
-        championController.insertAll(entities);
+        List<ChampionDto> dtoList = new ArrayList<>();
+        dtoList.add(new ChampionDto(9999, "Aatrox1", "아트록스", "Aatrox.png"));
+        dtoList.add(new ChampionDto(9998, "Ahri1", "아리", "Ahri.png"));
+        championController.insertAll(dtoList);
     }
 
     @Test

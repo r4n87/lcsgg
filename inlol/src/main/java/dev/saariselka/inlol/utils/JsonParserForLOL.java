@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.SummonerSpellController;
+import dev.saariselka.inlol.dto.ChampionDto;
 import dev.saariselka.inlol.entity.ChampionEntity;
 import dev.saariselka.inlol.entity.SummonerPerkEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
@@ -21,7 +22,7 @@ public class JsonParserForLOL {
     @Autowired
     SummonerSpellController summonerSpellController;
 
-    public static List<ChampionEntity> getChampionEntities() {
+    public static List<ChampionDto> getChampionEntities() {
         ClassPathResource resource = new ClassPathResource("json/champions.json");
         JsonObject jsonObject = null;
 
@@ -31,7 +32,7 @@ public class JsonParserForLOL {
             e.printStackTrace();
         }
 
-        List<ChampionEntity> championEntities = new ArrayList<>();
+        List<ChampionDto> dtoList = new ArrayList<>();
 
         JsonObject jsonChampions = (JsonObject) jsonObject.get("data");
         Set<String> keys = jsonChampions.keySet();
@@ -46,10 +47,10 @@ public class JsonParserForLOL {
             JsonObject image = (JsonObject) champion.get("image");
             String imagePath = image.get("full").getAsString();
 
-            championEntities.add(new ChampionEntity(id, nameEng, nameKo, imagePath));
+            dtoList.add(new ChampionDto(id, nameEng, nameKo, imagePath));
         }
 
-        return championEntities;
+        return dtoList;
     }
 
     public static String getSpellImageBySpellId(int spellId) {

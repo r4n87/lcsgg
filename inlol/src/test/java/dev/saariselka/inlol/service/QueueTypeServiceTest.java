@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.QueueTypeEntity;
+import dev.saariselka.inlol.vo.QueueTypeVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,14 @@ public class QueueTypeServiceTest {
         // given
 
         // when
-        QueueTypeEntity solo = queueTypeService.findByQueueId(420).get(0);
-        QueueTypeEntity normal = queueTypeService.findByQueueId(430).get(0);
-        QueueTypeEntity free = queueTypeService.findByQueueId(440).get(0);
-        QueueTypeEntity wind = queueTypeService.findByQueueId(450).get(0);
-        QueueTypeEntity ai1 = queueTypeService.findByQueueId(830).get(0);
-        QueueTypeEntity ai2 = queueTypeService.findByQueueId(840).get(0);
-        QueueTypeEntity ai3 = queueTypeService.findByQueueId(850).get(0);
-        QueueTypeEntity urf = queueTypeService.findByQueueId(900).get(0);
+        QueueTypeVO solo = queueTypeService.findByQueueId(420).get(0);
+        QueueTypeVO normal = queueTypeService.findByQueueId(430).get(0);
+        QueueTypeVO free = queueTypeService.findByQueueId(440).get(0);
+        QueueTypeVO wind = queueTypeService.findByQueueId(450).get(0);
+        QueueTypeVO ai1 = queueTypeService.findByQueueId(830).get(0);
+        QueueTypeVO ai2 = queueTypeService.findByQueueId(840).get(0);
+        QueueTypeVO ai3 = queueTypeService.findByQueueId(850).get(0);
+        QueueTypeVO urf = queueTypeService.findByQueueId(900).get(0);
 
         // then
         assertThat(solo.getDescription()).isEqualTo("솔랭");

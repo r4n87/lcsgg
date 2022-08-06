@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.facade;
 
 import dev.saariselka.inlol.controller.*;
+import dev.saariselka.inlol.dto.ChampionDto;
 import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.entity.*;
@@ -183,14 +184,14 @@ public class DBFacadeTest {
     @DisplayName("Save Champions")
     public void setChampions() {
         // given
-        List<ChampionEntity> entities = new ArrayList<>();
-        ChampionEntity entity1 = new ChampionEntity(999, "champion1", "챔피언1", "Test1.png");
-        ChampionEntity entity2 = new ChampionEntity(998, "champion2", "챔피언2", "Test2.png");
-        entities.add(entity1);
-        entities.add(entity2);
+        List<ChampionDto> dtoList = new ArrayList<>();
+        ChampionDto dto1 = new ChampionDto(999, "champion1", "챔피언1", "Test1.png");
+        ChampionDto dto2 = new ChampionDto(998, "champion2", "챔피언2", "Test2.png");
+        dtoList.add(dto1);
+        dtoList.add(dto2);
 
         // when
-        dbFacade.setChampions(entities);
+        dbFacade.setChampions(dtoList);
         String findKo1 = championController.getNameKoByNameEng("champion1");
         String findImg1 = championController.getImagePathByNameEng("champion1");
         String findKo2 = championController.getNameKoByNameEng("champion2");

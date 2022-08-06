@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.service;
 
+import dev.saariselka.inlol.vo.QueueTypeVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import dev.saariselka.inlol.entity.QueueTypeEntity;
 import dev.saariselka.inlol.repository.QueueTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,11 @@ import java.util.List;
 public class QueueTypeService {
     @Autowired
     QueueTypeRepository queueTypeRepository;
+    @Autowired
+    VOMapper mapper;
 
-    public List<QueueTypeEntity> findByQueueId(int queueId) {
-        return queueTypeRepository.findByQueueId(queueId);
+    public List<QueueTypeVO> findByQueueId(int queueId) {
+        List<QueueTypeEntity> entityList = queueTypeRepository.findByQueueId(queueId);
+        return mapper.ToQueueTypeVOList(entityList);
     }
 }
