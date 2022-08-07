@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.DtoMapper;
+import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.service.SummonerSpellService;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +24,8 @@ public class SummonerSpellControllerTest {
     private SummonerSpellController summonerSpellController;
     @Autowired
     private SummonerSpellService summonerSpellService;
+    @Autowired
+    private DtoMapper dtoMapper;
 
 
     @Test
@@ -37,10 +41,10 @@ public class SummonerSpellControllerTest {
         summonerSpellController.insertSummonerSpell(name, description, spellKey, image);
 
         // then
-        SummonerSpellEntity summonerSpellEntitySaved = summonerSpellService.findByspellKey(spellKey).get(0);
+        SummonerSpellDto summonerSpellDtoSaved = dtoMapper.toSummonerSpellDtoList(summonerSpellService.findByspellKey(spellKey)).get(0);
 
-        assertThat(spellKey).isEqualTo(summonerSpellEntitySaved.getSpellKey());
-        assertThat(summonerSpellEntitySaved.getSpellKey()).isNotNull();
+        assertThat(spellKey).isEqualTo(summonerSpellDtoSaved.getSpellKey());
+        assertThat(summonerSpellDtoSaved.getSpellKey()).isNotNull();
     }
 
     @Test
@@ -52,18 +56,18 @@ public class SummonerSpellControllerTest {
         int spellKey = 0;
         String image = "testSummonerSpellImage";
 
-        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
-        SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(name,description,spellKey,image);
-        summonerSpellEntities.add(summonerSpellEntity);
+        List<SummonerSpellDto> summonerSpellDtos = new ArrayList<>();
+        SummonerSpellDto summonerSpellDto = new SummonerSpellDto(name,description,spellKey,image);
+        summonerSpellDtos.add(summonerSpellDto);
 
         // when
-        summonerSpellController.insertAllSummonerSpell(summonerSpellEntities);
+        summonerSpellController.insertAllSummonerSpell(summonerSpellDtos);
 
         // then
-        SummonerSpellEntity summonerSpellEntitySaved = summonerSpellService.findByspellKey(spellKey).get(0);
+        SummonerSpellDto summonerSpellDtoSaved = dtoMapper.toSummonerSpellDtoList(summonerSpellService.findByspellKey(spellKey)).get(0);
 
-        assertThat(spellKey).isEqualTo(summonerSpellEntitySaved.getSpellKey());
-        assertThat(summonerSpellEntitySaved.getSpellKey()).isNotNull();
+        assertThat(spellKey).isEqualTo(summonerSpellDtoSaved.getSpellKey());
+        assertThat(summonerSpellDtoSaved.getSpellKey()).isNotNull();
     }
 
     @Test
@@ -83,13 +87,13 @@ public class SummonerSpellControllerTest {
         summonerSpellService.insert(summonerSpellNameBooster, summonerSpellDescBooster, summonerSpellKeyBooster, summonerSpellImageBooster);
 
         // when
-        SummonerSpellEntity summonerSpellEntityBarrierFind = summonerSpellController.getSummonerSpellByKey(summonerSpellKeyBarrier).get(0);
-        SummonerSpellEntity summonerSpellEntityBoosterFind = summonerSpellController.getSummonerSpellByKey(summonerSpellKeyBooster).get(0);
+        SummonerSpellDto summonerSpellDtoBarrierFind = summonerSpellController.getSummonerSpellByKey(summonerSpellKeyBarrier).get(0);
+        SummonerSpellDto summonerSpellDtoBoosterFind = summonerSpellController.getSummonerSpellByKey(summonerSpellKeyBooster).get(0);
 
         // then
-        assertThat(summonerSpellEntityBarrierFind.getSpellKey()).isEqualTo(21);
-        assertThat(summonerSpellEntityBarrierFind.getImage()).isEqualTo("SummonerBarrier.png");
-        assertThat(summonerSpellEntityBoosterFind.getSpellKey()).isEqualTo(1);
-        assertThat(summonerSpellEntityBoosterFind.getImage()).isEqualTo("SummonerBoost.png");
+        assertThat(summonerSpellDtoBarrierFind.getSpellKey()).isEqualTo(21);
+        assertThat(summonerSpellDtoBarrierFind.getImage()).isEqualTo("SummonerBarrier.png");
+        assertThat(summonerSpellDtoBoosterFind.getSpellKey()).isEqualTo(1);
+        assertThat(summonerSpellDtoBoosterFind.getImage()).isEqualTo("SummonerBoost.png");
     }
 }

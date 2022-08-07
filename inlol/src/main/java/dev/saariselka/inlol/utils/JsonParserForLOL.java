@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.SummonerSpellController;
 import dev.saariselka.inlol.dto.ChampionDto;
+import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.ChampionEntity;
 import dev.saariselka.inlol.entity.SummonerPerkEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
@@ -53,9 +54,7 @@ public class JsonParserForLOL {
         return dtoList;
     }
 
-    public static String getSpellImageBySpellId(int spellId) {
-        if(spellId == 0) return "bot";
-
+    public List<SummonerSpellDto> getSummonerSpellDtoList() {
         ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
         JsonObject summonerJson = null;
 
@@ -68,30 +67,7 @@ public class JsonParserForLOL {
         JsonObject summonerJsonObject = (JsonObject) summonerJson.get("data");
         Set<String> keys = summonerJsonObject.keySet();
 
-        for(String key : keys) {
-            JsonObject summonerSpell = (JsonObject) summonerJsonObject.get(key);
-
-            if(spellId == summonerSpell.get("key").getAsInt()) {
-                return ((JsonObject) summonerSpell.get("image")).get("full").getAsString();
-            }
-        }
-
-        return null;
-    }
-    public List<SummonerSpellEntity> getSummonerSpellEntities() {
-        ClassPathResource summonerResource = new ClassPathResource("json/summoner.json");
-        JsonObject summonerJson = null;
-
-        try {
-            summonerJson = JsonParser.parseReader(new InputStreamReader(summonerResource.getInputStream(), StandardCharsets.UTF_8)).getAsJsonObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        JsonObject summonerJsonObject = (JsonObject) summonerJson.get("data");
-        Set<String> keys = summonerJsonObject.keySet();
-
-        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
+        List<SummonerSpellDto> summonerSpellDtoList = new ArrayList<>();
 
         for(String key : keys) {
             JsonObject summonerSpell = (JsonObject) summonerJsonObject.get(key);
@@ -101,12 +77,12 @@ public class JsonParserForLOL {
             int spellKey = summonerSpell.get("key").getAsInt();
             String image = ((JsonObject) summonerSpell.get("image")).get("full").getAsString();
 
-            SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(name, description, spellKey, image);
+            SummonerSpellDto summonerSpellDto = new SummonerSpellDto(name, description, spellKey, image);
 
-            summonerSpellEntities.add(summonerSpellEntity);
+            summonerSpellDtoList.add(summonerSpellDto);
         }
 
-        return summonerSpellEntities;
+        return summonerSpellDtoList;
     }
 
     public List<SummonerPerkEntity> getSummonerPerkEntities() {

@@ -4,6 +4,7 @@ import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.ChampionDto;
 import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.dto.SummonerDto;
+import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.repository.DdragonVersionRepository;
 import dev.saariselka.inlol.service.MatchParticipantService;
@@ -138,20 +139,20 @@ public class DBFacadeTest {
         int spellKey = 0;
         String image = "testSummonerSpellImage";
 
-        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
+        List<SummonerSpellDto> summonerSpellDtoList = new ArrayList<>();
 
-        SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(name, description, spellKey, image);
+        SummonerSpellDto summonerSpellDto = new SummonerSpellDto(name, description, spellKey, image);
 
-        summonerSpellEntities.add(summonerSpellEntity);
+        summonerSpellDtoList.add(summonerSpellDto);
 
         // when
-        dbFacade.setSummonerSpell(summonerSpellEntities);
+        dbFacade.setSummonerSpell(summonerSpellDtoList);
 
         // then
-        SummonerSpellEntity summonerSpellEntitySaved = summonerSpellController.getSummonerSpellByKey(spellKey).get(0);
+        SummonerSpellDto summonerSpellDtoSaved = summonerSpellController.getSummonerSpellByKey(spellKey).get(0);
 
-        assertThat(spellKey).isEqualTo(summonerSpellEntitySaved.getSpellKey());
-        assertThat(summonerSpellEntitySaved.getSpellKey()).isNotNull();
+        assertThat(spellKey).isEqualTo(summonerSpellDtoSaved.getSpellKey());
+        assertThat(summonerSpellDtoSaved.getSpellKey()).isNotNull();
     }
 
     @Test

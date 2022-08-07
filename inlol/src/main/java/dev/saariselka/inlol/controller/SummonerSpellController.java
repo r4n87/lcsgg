@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.DtoMapper;
+import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.SummonerPerkEntity;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.service.SummonerSpellService;
@@ -20,16 +22,18 @@ public class SummonerSpellController {
 
     @Autowired
     SummonerSpellService summonerSpellService;
+    @Autowired
+    DtoMapper dtoMapper;
 
     public void insertSummonerSpell(String name, String description, int spellKey, String image) {
         summonerSpellService.insert(name, description, spellKey, image);
     }
 
-    public List<SummonerSpellEntity> getSummonerSpellByKey(int summonerSpellKey) {
-        return summonerSpellService.findByspellKey(summonerSpellKey);
+    public List<SummonerSpellDto> getSummonerSpellByKey(int summonerSpellKey) {
+        return dtoMapper.toSummonerSpellDtoList(summonerSpellService.findByspellKey(summonerSpellKey));
     }
 
-    public void insertAllSummonerSpell(List<SummonerSpellEntity> summonerSpellEntities) {
-        summonerSpellService.insertAll(summonerSpellEntities);
+    public void insertAllSummonerSpell(List<SummonerSpellDto> summonerSpellDtos) {
+        summonerSpellService.insertAll(dtoMapper.toSummonerSpellVOList(summonerSpellDtos));
     }
 }

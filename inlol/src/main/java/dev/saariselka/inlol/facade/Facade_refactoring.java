@@ -155,7 +155,7 @@ public class Facade_refactoring {
     private void initJsonResource() {
         JsonParserForLOL jsonParserForLOL = new JsonParserForLOL();
 
-        dbFacade.setSummonerSpell(jsonParserForLOL.getSummonerSpellEntities());
+        dbFacade.setSummonerSpell(jsonParserForLOL.getSummonerSpellDtoList());
         dbFacade.setChampions(jsonParserForLOL.getChampionEntities());
         dbFacade.setSummonerPerk(jsonParserForLOL.getSummonerPerkEntities());
     }
