@@ -523,8 +523,8 @@ public class DBFacade {
         }
     }
 
-    public void setSummonerSpell(List<SummonerSpellEntity> summonerSpellEntities) {
-        summonerSpellController.insertAllSummonerSpell(summonerSpellEntities);
+    public void setSummonerSpell(List<SummonerSpellDto> summonerSpellDtos) {
+        summonerSpellController.insertAllSummonerSpell(summonerSpellDtos);
     }
 
     public void setChampions(List<ChampionDto> championEntities) {

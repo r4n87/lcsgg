@@ -4,6 +4,7 @@ import java.util.List;
 
 import dev.saariselka.inlol.entity.ChampionEntity;
 import dev.saariselka.inlol.entity.QueueTypeEntity;
+import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,5 +47,23 @@ public class VOMapper {
             entityList.add(entity);
         }
         return entityList;
+    }
+
+    public List<SummonerSpellVO> toSummonerSpellVOList(List<SummonerSpellEntity> summonerSpellEntities) {
+        List<SummonerSpellVO> summonerSpellVOList = new ArrayList<>();
+        for(SummonerSpellEntity summonerSpellEntity : summonerSpellEntities) {
+            SummonerSpellVO summonerSpellVO = new SummonerSpellVO(summonerSpellEntity.getName(), summonerSpellEntity.getDescription(), summonerSpellEntity.getSpellKey(), summonerSpellEntity.getImage());
+            summonerSpellVOList.add(summonerSpellVO);
+        }
+        return  summonerSpellVOList;
+    }
+
+    public List<SummonerSpellEntity> toSummonerSpellEntityList(List<SummonerSpellVO> summonerSpellVOList) {
+        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
+        for(SummonerSpellVO summonerSpellVO : summonerSpellVOList) {
+            SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(summonerSpellVO.getName(), summonerSpellVO.getDescription(), summonerSpellVO.getSpellKey(), summonerSpellVO.getImage());
+            summonerSpellEntities.add(summonerSpellEntity);
+        }
+        return  summonerSpellEntities;
     }
 }

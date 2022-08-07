@@ -2,6 +2,8 @@ package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.repository.SummonerSpellRepository;
+import dev.saariselka.inlol.vo.SummonerSpellVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class SummonerSpellServiceTest {
     private SummonerSpellService summonerSpellService;
     @Autowired
     private SummonerSpellRepository summonerSpellRepository;
+    @Autowired
+    private VOMapper voMapper;
 
     @Test
     @DisplayName("Insert Entity")
@@ -36,10 +40,10 @@ public class SummonerSpellServiceTest {
         summonerSpellService.insert(name, description, spellKey, image);
 
         // then
-        SummonerSpellEntity summonerSpellEntitySaved = summonerSpellRepository.findByspellKey(spellKey).get(0);
+        SummonerSpellVO summonerSpellVOSaved = voMapper.toSummonerSpellVOList(summonerSpellRepository.findByspellKey(spellKey)).get(0);
 
-        assertThat(spellKey).isEqualTo(summonerSpellEntitySaved.getSpellKey());
-        assertThat(summonerSpellEntitySaved.getSpellKey()).isNotNull();
+        assertThat(spellKey).isEqualTo(summonerSpellVOSaved.getSpellKey());
+        assertThat(summonerSpellVOSaved.getSpellKey()).isNotNull();
         assertThat(summonerSpellRepository.count()).isGreaterThan(0);
     }
 
@@ -52,18 +56,18 @@ public class SummonerSpellServiceTest {
         int spellKey = 0;
         String image = "testSummonerSpellImage";
 
-        List<SummonerSpellEntity> summonerSpellEntities = new ArrayList<>();
-        SummonerSpellEntity summonerSpellEntity = new SummonerSpellEntity(name,description,spellKey,image);
-        summonerSpellEntities.add(summonerSpellEntity);
+        List<SummonerSpellVO> summonerSpellVOList = new ArrayList<>();
+        SummonerSpellVO summonerSpellVO = new SummonerSpellVO(name,description,spellKey,image);
+        summonerSpellVOList.add(summonerSpellVO);
 
         // when
-        summonerSpellService.insertAll(summonerSpellEntities);
+        summonerSpellService.insertAll(summonerSpellVOList);
 
         // then
-        SummonerSpellEntity summonerSpellEntitySaved = summonerSpellRepository.findByspellKey(spellKey).get(0);
+        SummonerSpellVO summonerSpellVOSaved = voMapper.toSummonerSpellVOList(summonerSpellRepository.findByspellKey(spellKey)).get(0);
 
-        assertThat(spellKey).isEqualTo(summonerSpellEntitySaved.getSpellKey());
-        assertThat(summonerSpellEntitySaved.getSpellKey()).isNotNull();
+        assertThat(spellKey).isEqualTo(summonerSpellVOSaved.getSpellKey());
+        assertThat(summonerSpellVOSaved.getSpellKey()).isNotNull();
         assertThat(summonerSpellRepository.count()).isGreaterThan(0);
     }
 
@@ -87,14 +91,14 @@ public class SummonerSpellServiceTest {
         SummonerSpellEntity summonerSpellEntityBoosterSave = summonerSpellRepository.save(summonerSpellEntityBooster);
 
         // when
-        SummonerSpellEntity summonerSpellEntityBarrierFind = summonerSpellService.findByspellKey(summonerSpellEntityBarrierSave.getSpellKey()).get(0);
-        SummonerSpellEntity summonerSpellEntityBoosterFind = summonerSpellService.findByspellKey(summonerSpellEntityBoosterSave.getSpellKey()).get(0);
+        SummonerSpellVO summonerSpellVOBarrierFind = summonerSpellService.findByspellKey(summonerSpellEntityBarrierSave.getSpellKey()).get(0);
+        SummonerSpellVO summonerSpellVOBoosterFind = summonerSpellService.findByspellKey(summonerSpellEntityBoosterSave.getSpellKey()).get(0);
 
         // then
         assertThat(summonerSpellRepository.count()).isGreaterThan(0);
-        assertThat(summonerSpellEntityBarrierFind.getSpellKey()).isEqualTo(21);
-        assertThat(summonerSpellEntityBarrierFind.getImage()).isEqualTo("SummonerBarrier.png");
-        assertThat(summonerSpellEntityBoosterFind.getSpellKey()).isEqualTo(1);
-        assertThat(summonerSpellEntityBoosterFind.getImage()).isEqualTo("SummonerBoost.png");
+        assertThat(summonerSpellVOBarrierFind.getSpellKey()).isEqualTo(21);
+        assertThat(summonerSpellVOBarrierFind.getImage()).isEqualTo("SummonerBarrier.png");
+        assertThat(summonerSpellVOBoosterFind.getSpellKey()).isEqualTo(1);
+        assertThat(summonerSpellVOBoosterFind.getImage()).isEqualTo("SummonerBoost.png");
     }
 }

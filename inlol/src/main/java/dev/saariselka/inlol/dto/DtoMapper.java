@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.vo.ChampionVO;
+import dev.saariselka.inlol.vo.SummonerSpellVO;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -22,5 +23,27 @@ public class DtoMapper {
             voList.add(vo);
         }
         return voList;
+    }
+
+    public List<SummonerSpellVO> toSummonerSpellVOList(List<SummonerSpellDto> summonerSpellDtoList) {
+        List<SummonerSpellVO> summonerSpellVOList = new ArrayList<>();
+
+        for(SummonerSpellDto summonerSpell : summonerSpellDtoList) {
+            SummonerSpellVO summonerSpellVO = new SummonerSpellVO(summonerSpell.getName(),summonerSpell.getDescription(),summonerSpell.getSpellKey(),summonerSpell.getImage());
+            summonerSpellVOList.add(summonerSpellVO);
+        }
+
+        return summonerSpellVOList;
+    }
+
+    public List<SummonerSpellDto> toSummonerSpellDtoList(List<SummonerSpellVO> summonerSpellVOList) {
+        List<SummonerSpellDto> summonerSpellDtoList = new ArrayList<>();
+
+        for(SummonerSpellVO summonerSpell : summonerSpellVOList) {
+            SummonerSpellDto summonerSpellDto = new SummonerSpellDto(summonerSpell.getName(),summonerSpell.getDescription(),summonerSpell.getSpellKey(),summonerSpell.getImage());
+            summonerSpellDtoList.add(summonerSpellDto);
+        }
+
+        return summonerSpellDtoList;
     }
 }
