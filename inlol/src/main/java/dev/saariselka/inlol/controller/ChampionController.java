@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.entity.ChampionEntity;
+import dev.saariselka.inlol.dto.ChampionDto;
+import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.service.ChampionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,11 @@ public class ChampionController {
 
     @Autowired
     ChampionService championService;
+    @Autowired
+    DtoMapper mapper;
 
-    public void insertAll(List<ChampionEntity> entities) {
-        championService.insertAll(entities);
+    public void insertAll(List<ChampionDto> entities) {
+        championService.insertAll(mapper.ToChampionVO(entities));
     }
 
     public String getImagePathByNameEng(String nameEng) {
