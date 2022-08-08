@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TeamDtoTest {
     TeamEntity entity;
-    List<BanDto> banDtoList;
+    List<MatchBanDto> matchBanDtoList;
     ObjectivesDto objectivesDto;
 
     @BeforeEach
     void init() {
         entity = createTestTeamEntity();
-        banDtoList = createTestBanDtoList();
+        matchBanDtoList = createTestMatchBanDtoList();
         objectivesDto = createTestObjectivesDto();
     }
 
@@ -32,19 +32,19 @@ public class TeamDtoTest {
         //ObjectivesDto objectivesDto = createTestObjectivesDto();
 
         //when
-        TeamDto dto = new TeamDto(entity, banDtoList, objectivesDto);
+        TeamDto dto = new TeamDto(entity, matchBanDtoList, objectivesDto);
 
         //then
-        assertThat(dto.getBans().get(0).getChampionId()).isEqualTo("221");
-        assertThat(dto.getBans().get(0).getPickTurn()).isEqualTo("1");
-        assertThat(dto.getBans().get(1).getChampionId()).isEqualTo("-1");
-        assertThat(dto.getBans().get(1).getPickTurn()).isEqualTo("2");
-        assertThat(dto.getBans().get(2).getChampionId()).isEqualTo("200");
-        assertThat(dto.getBans().get(2).getPickTurn()).isEqualTo("3");
-        assertThat(dto.getBans().get(3).getChampionId()).isEqualTo("55");
-        assertThat(dto.getBans().get(3).getPickTurn()).isEqualTo("4");
-        assertThat(dto.getBans().get(4).getChampionId()).isEqualTo("10");
-        assertThat(dto.getBans().get(4).getPickTurn()).isEqualTo("5");
+        assertThat(dto.getBans().get(0).getChampionId()).isEqualTo(221);
+        assertThat(dto.getBans().get(0).getPickTurn()).isEqualTo(1);
+        assertThat(dto.getBans().get(1).getChampionId()).isEqualTo(-1);
+        assertThat(dto.getBans().get(1).getPickTurn()).isEqualTo(2);
+        assertThat(dto.getBans().get(2).getChampionId()).isEqualTo(200);
+        assertThat(dto.getBans().get(2).getPickTurn()).isEqualTo(3);
+        assertThat(dto.getBans().get(3).getChampionId()).isEqualTo(55);
+        assertThat(dto.getBans().get(3).getPickTurn()).isEqualTo(4);
+        assertThat(dto.getBans().get(4).getChampionId()).isEqualTo(10);
+        assertThat(dto.getBans().get(4).getPickTurn()).isEqualTo(5);
 
         assertThat(dto.getObjectives().getBaron().isFirst()).isTrue();
         assertThat(dto.getObjectives().getBaron().getKills()).isEqualTo(2);
@@ -67,19 +67,19 @@ public class TeamDtoTest {
     @DisplayName("Setter")
     void setter() {
         // given
-        TeamDto dto = new TeamDto(entity, banDtoList, objectivesDto);
+        TeamDto dto = new TeamDto(entity, matchBanDtoList, objectivesDto);
 
         // when
-        dto.getBans().get(0).setChampionId("220");
-        dto.getBans().get(0).setPickTurn("2");
-        dto.getBans().get(1).setChampionId("2");
-        dto.getBans().get(1).setPickTurn("3");
-        dto.getBans().get(2).setChampionId("199");
-        dto.getBans().get(2).setPickTurn("4");
-        dto.getBans().get(3).setChampionId("50");
-        dto.getBans().get(3).setPickTurn("5");
-        dto.getBans().get(4).setChampionId("8");
-        dto.getBans().get(4).setPickTurn("1");
+        dto.getBans().get(0).setChampionId(220);
+        dto.getBans().get(0).setPickTurn(2);
+        dto.getBans().get(1).setChampionId(2);
+        dto.getBans().get(1).setPickTurn(3);
+        dto.getBans().get(2).setChampionId(199);
+        dto.getBans().get(2).setPickTurn(4);
+        dto.getBans().get(3).setChampionId(50);
+        dto.getBans().get(3).setPickTurn(5);
+        dto.getBans().get(4).setChampionId(8);
+        dto.getBans().get(4).setPickTurn(1);
 
         dto.getObjectives().getBaron().setFirst(false);
         dto.getObjectives().getBaron().setKills(3);
@@ -98,16 +98,16 @@ public class TeamDtoTest {
         dto.setWin("false");
 
         // then
-        assertThat(dto.getBans().get(0).getChampionId()).isEqualTo("220");
-        assertThat(dto.getBans().get(0).getPickTurn()).isEqualTo("2");
-        assertThat(dto.getBans().get(1).getChampionId()).isEqualTo("2");
-        assertThat(dto.getBans().get(1).getPickTurn()).isEqualTo("3");
-        assertThat(dto.getBans().get(2).getChampionId()).isEqualTo("199");
-        assertThat(dto.getBans().get(2).getPickTurn()).isEqualTo("4");
-        assertThat(dto.getBans().get(3).getChampionId()).isEqualTo("50");
-        assertThat(dto.getBans().get(3).getPickTurn()).isEqualTo("5");
-        assertThat(dto.getBans().get(4).getChampionId()).isEqualTo("8");
-        assertThat(dto.getBans().get(4).getPickTurn()).isEqualTo("1");
+        assertThat(dto.getBans().get(0).getChampionId()).isEqualTo(220);
+        assertThat(dto.getBans().get(0).getPickTurn()).isEqualTo(2);
+        assertThat(dto.getBans().get(1).getChampionId()).isEqualTo(2);
+        assertThat(dto.getBans().get(1).getPickTurn()).isEqualTo(3);
+        assertThat(dto.getBans().get(2).getChampionId()).isEqualTo(199);
+        assertThat(dto.getBans().get(2).getPickTurn()).isEqualTo(4);
+        assertThat(dto.getBans().get(3).getChampionId()).isEqualTo(50);
+        assertThat(dto.getBans().get(3).getPickTurn()).isEqualTo(5);
+        assertThat(dto.getBans().get(4).getChampionId()).isEqualTo(8);
+        assertThat(dto.getBans().get(4).getPickTurn()).isEqualTo(1);
 
         assertThat(dto.getObjectives().getBaron().isFirst()).isFalse();
         assertThat(dto.getObjectives().getBaron().getKills()).isEqualTo(3);
@@ -130,13 +130,13 @@ public class TeamDtoTest {
         return new TeamEntity(new TeamId("KR_5976412008", 100 ), true, new Timestamp(System.currentTimeMillis()));
     }
 
-    List<BanDto> createTestBanDtoList() {
-        List<BanDto> list = new ArrayList<>();
-        list.add(new BanDto(new MatchBanEntity(new MatchBanId("KR_5976412008", 1, 100), 221, new Timestamp(System.currentTimeMillis()))));
-        list.add(new BanDto(new MatchBanEntity(new MatchBanId("KR_5976412008", 2, 100), -1, new Timestamp(System.currentTimeMillis()))));
-        list.add(new BanDto(new MatchBanEntity(new MatchBanId("KR_5976412008", 3, 100), 200, new Timestamp(System.currentTimeMillis()))));
-        list.add(new BanDto(new MatchBanEntity(new MatchBanId("KR_5976412008", 4, 100), 55, new Timestamp(System.currentTimeMillis()))));
-        list.add(new BanDto(new MatchBanEntity(new MatchBanId("KR_5976412008", 5, 100), 10, new Timestamp(System.currentTimeMillis()))));
+    List<MatchBanDto> createTestMatchBanDtoList() {
+        List<MatchBanDto> list = new ArrayList<>();
+        list.add(new MatchBanDto("KR_5976412008", 1, 100, 221));
+        list.add(new MatchBanDto("KR_5976412008", 2, 100, -1));
+        list.add(new MatchBanDto("KR_5976412008", 3, 100, 200));
+        list.add(new MatchBanDto("KR_5976412008", 4, 100, 55));
+        list.add(new MatchBanDto("KR_5976412008", 5, 100, 10));
         return list;
     }
 

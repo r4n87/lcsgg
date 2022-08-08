@@ -3,6 +3,8 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.repository.MatchBanRepository;
+import dev.saariselka.inlol.vo.MatchBanVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +18,19 @@ import java.util.List;
 public class MatchBanService {
     @Autowired
     private final MatchBanRepository matchBanRepository;
+    @Autowired
+    VOMapper voMapper;
 
-    public List<MatchBanEntity> findByMatchId(String matchId) {
-        return matchBanRepository.findByMatchBanId_MatchId(matchId);
+    public List<MatchBanVO> findByMatchId(String matchId) {
+        return voMapper.toMatchBanVOList(matchBanRepository.findByMatchBanId_MatchId(matchId));
     }
 
-    public List<MatchBanEntity> findByMatchIdAndTeamId(String matchId, int teamId) {
-        return matchBanRepository.findByMatchBanId_MatchIdAndMatchBanId_TeamId(matchId, teamId);
+    public List<MatchBanVO> findByMatchIdAndTeamId(String matchId, int teamId) {
+        return voMapper.toMatchBanVOList(matchBanRepository.findByMatchBanId_MatchIdAndMatchBanId_TeamId(matchId, teamId));
     }
 
-    public List<MatchBanEntity> findByMatchBanId(MatchBanId matchBanId) {
-        return matchBanRepository.findByMatchBanId(matchBanId);
+    public List<MatchBanVO> findByMatchBanId(MatchBanId matchBanId) {
+        return voMapper.toMatchBanVOList(matchBanRepository.findByMatchBanId(matchBanId));
     }
 
     public void insert(String matchId, int pickTurn, int teamId, int championId, Timestamp rrt) {

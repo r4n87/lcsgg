@@ -102,22 +102,15 @@ public class Facade_Get {
             List<TeamDto> teamDtoList = new ArrayList<>();
 
             for(TeamEntity teamEntity : teamEntityList) {
-                List<MatchBanEntity> matchBanEntityList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
+                List<MatchBanDto> matchBanDtoList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
 
                 MatchObjectivesEntity matchObjectivesEntity = matchObjectivesController
                         .getMatchObjectivesByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
                         .get(0);
 
-                List<BanDto> banDtoList = new ArrayList<>();
-
-                for(MatchBanEntity matchBanEntity : matchBanEntityList) {
-                    BanDto banDto = new BanDto(matchBanEntity);
-                    banDtoList.add(banDto);
-                }
-
                 ObjectivesDto objectivesDto = new ObjectivesDto(matchObjectivesEntity);
 
-                TeamDto teamDto = new TeamDto(teamEntity,banDtoList,objectivesDto);
+                TeamDto teamDto = new TeamDto(teamEntity,matchBanDtoList,objectivesDto);
                 teamDtoList.add(teamDto);
             }
 
