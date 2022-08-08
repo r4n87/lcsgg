@@ -20,7 +20,7 @@ public class ChampionController {
     DtoMapper mapper;
 
     public void insertAll(List<ChampionDto> entities) {
-        championService.insertAll(mapper.ToChampionVO(entities));
+        championService.insertAll(mapper.toChampionVOList(entities));
     }
 
     public String getImagePathByNameEng(String nameEng) {

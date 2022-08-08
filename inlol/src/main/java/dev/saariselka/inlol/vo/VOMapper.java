@@ -17,7 +17,7 @@ import java.util.ArrayList;
 @Component
 public class VOMapper {
 
-    public List<QueueTypeVO> ToQueueTypeVOList(List<QueueTypeEntity> entityList)
+    public List<QueueTypeVO> toQueueTypeVOList(List<QueueTypeEntity> entityList)
     {
         List<QueueTypeVO> voList = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class VOMapper {
         return voList;
     }
 
-    public List<ChampionEntity> ToChampionEntityList(List<ChampionVO> voList)
+    public List<ChampionEntity> toChampionEntityList(List<ChampionVO> voList)
     {
         List<ChampionEntity> entityList = new ArrayList<>();
         for(ChampionVO vo : voList)

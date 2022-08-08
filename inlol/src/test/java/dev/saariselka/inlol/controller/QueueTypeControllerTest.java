@@ -16,7 +16,7 @@ public class QueueTypeControllerTest {
     QueueTypeController queueTypeController;
 
     @Test
-    @DisplayName("Get Entity By QueueId")
+    @DisplayName("Get QueueType By QueueId")
     void getQueueTypeByQueueId() {
         // given
 
