@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.DtoMapper;
+import dev.saariselka.inlol.dto.ParticipantDto;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.service.MatchParticipantService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,8 @@ public class MatchParticipantController {
 
     @Autowired
     MatchParticipantService matchParticipantService;
+    @Autowired
+    DtoMapper dtoMapper;
 
     public void insertParticipantInfo(String puuid, String dataVersion, String matchId, int assists, int baronKills, int bountyLevel, int champExperience,
                                       int champLevel, int championId, String championName, String championNameKR, String championImg,
@@ -57,13 +61,13 @@ public class MatchParticipantController {
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
     }
 
-    public List<MatchParticipantEntity> getMatchParticipantListByDataVersionAndMatchId(
+    public List<ParticipantDto> getMatchParticipantListByDataVersionAndMatchId(
             String dataVersion
             , String matchId) {
-        return matchParticipantService.findByDataVersionAndMatchId(dataVersion, matchId);
+        return dtoMapper.toParticipantDtoList(matchParticipantService.findByDataVersionAndMatchId(dataVersion, matchId));
     }
 
-    public List<MatchParticipantEntity> getMatchParticipantListByPuuid(String puuid) {
-        return matchParticipantService.findByPuuid(puuid);
+    public List<ParticipantDto> getMatchParticipantListByPuuid(String puuid) {
+        return dtoMapper.toParticipantDtoList(matchParticipantService.findByPuuid(puuid));
     }
 }

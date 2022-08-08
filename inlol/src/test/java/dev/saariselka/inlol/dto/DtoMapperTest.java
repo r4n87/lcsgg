@@ -7,6 +7,7 @@ import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.vo.ChampionVO;
+import dev.saariselka.inlol.vo.DdragonVersionVO;
 import dev.saariselka.inlol.vo.MatchBanVO;
 import dev.saariselka.inlol.vo.SummonerSpellVO;
 import org.junit.jupiter.api.DisplayName;
@@ -138,5 +139,22 @@ public class DtoMapperTest {
         assertThat(voList.get(0).getNameEng()).isEqualTo("Test");
         assertThat(voList.get(0).getNameKo()).isEqualTo("테스트");
         assertThat(voList.get(0).getImagePath()).isEqualTo("/testimage.png");
+    }
+
+    @Test
+    @DisplayName("Convert DdragonVersionVOList To DdragonVersionDtoList")
+    public void toDdragonVersionDtoList() {
+        //given
+        List<DdragonVersionVO> ddragonVersionVOList = new ArrayList<>();
+        DdragonVersionVO ddragonVersionVO = new DdragonVersionVO(12345L, "33333", "Y");
+        ddragonVersionVOList.add(ddragonVersionVO);
+
+        //when
+        List<DdragonVersionDto> ddragonVersionDtoList = dtoMapper.toDdragonVersionDtoList(ddragonVersionVOList);
+
+        //then
+        assertThat(ddragonVersionDtoList.get(0).getId()).isEqualTo(ddragonVersionVO.getId());
+        assertThat(ddragonVersionDtoList.get(0).getVersion()).isEqualTo(ddragonVersionVO.getVersion());
+        assertThat(ddragonVersionDtoList.get(0).getCurrent()).isEqualTo(ddragonVersionVO.getCurrent());
     }
 }

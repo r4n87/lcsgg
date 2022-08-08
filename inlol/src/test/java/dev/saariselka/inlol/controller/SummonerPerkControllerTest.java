@@ -18,8 +18,9 @@ public class SummonerPerkControllerTest {
     private SummonerPerkService summonerPerkService;
 
     @Test
-    @DisplayName("Insert Entities By Json")
-    public void insertsummonerPerk() {
+    @DisplayName("Insert Entities")
+    public void insertAll() {
+        
     }
 
     @Test
