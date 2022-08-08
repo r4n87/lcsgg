@@ -1,10 +1,9 @@
 package dev.saariselka.inlol.vo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-import dev.saariselka.inlol.entity.ChampionEntity;
-import dev.saariselka.inlol.entity.QueueTypeEntity;
-import dev.saariselka.inlol.entity.SummonerSpellEntity;
+import dev.saariselka.inlol.entity.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -65,5 +64,24 @@ public class VOMapper {
             summonerSpellEntities.add(summonerSpellEntity);
         }
         return  summonerSpellEntities;
+    }
+
+    public List<MatchBanVO> toMatchBanVOList(List<MatchBanEntity> matchBanEntityList) {
+        List<MatchBanVO> matchBanVOList = new ArrayList<>();
+        for(MatchBanEntity matchBanEntity : matchBanEntityList) {
+            MatchBanVO matchBanVO = new MatchBanVO(matchBanEntity.getMatchBanId().getMatchId(),matchBanEntity.getMatchBanId().getPickTurn(),matchBanEntity.getMatchBanId().getTeamId(),matchBanEntity.getChampionId());
+            matchBanVOList.add(matchBanVO);
+        }
+        return  matchBanVOList;
+    }
+
+    public List<MatchBanEntity> toMatchBanEntityList(List<MatchBanVO> matchBanVOList) {
+        List<MatchBanEntity> matchBanEntityList = new ArrayList<>();
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        for(MatchBanVO matchBanVO : matchBanVOList) {
+            MatchBanEntity matchBanEntity = new MatchBanEntity(new MatchBanId(matchBanVO.getMatchId(),matchBanVO.getPickTurn(),matchBanVO.getTeamId()),matchBanVO.getChampionId(),rrt);
+            matchBanEntityList.add(matchBanEntity);
+        }
+        return  matchBanEntityList;
     }
 }

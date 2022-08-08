@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.DtoMapper;
+import dev.saariselka.inlol.dto.MatchBanDto;
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.service.MatchBanService;
@@ -24,17 +26,19 @@ public class MatchBanController {
 
     @Autowired
     MatchBanService matchBanService;
+    @Autowired
+    DtoMapper dtoMapper;
 
-    public List<MatchBanEntity> getBansByMatchId(String matchId) {
-        return matchBanService.findByMatchId(matchId);
+    public List<MatchBanDto> getBansByMatchId(String matchId) {
+        return dtoMapper.toMatchBanDtoList(matchBanService.findByMatchId(matchId));
     }
 
-    public List<MatchBanEntity> getBansByMatchBanId(String matchId, int pickTurn, int teamId) {
-        return matchBanService.findByMatchBanId(new MatchBanId(matchId, pickTurn, teamId));
+    public List<MatchBanDto> getBansByMatchBanId(String matchId, int pickTurn, int teamId) {
+        return dtoMapper.toMatchBanDtoList(matchBanService.findByMatchBanId(new MatchBanId(matchId, pickTurn, teamId)));
     }
 
-    public List<MatchBanEntity> getBansByMatchBanIdAndTeamId(String matchId, int teamId) {
-        return matchBanService.findByMatchIdAndTeamId(matchId, teamId);
+    public List<MatchBanDto> getBansByMatchBanIdAndTeamId(String matchId, int teamId) {
+        return dtoMapper.toMatchBanDtoList(matchBanService.findByMatchIdAndTeamId(matchId, teamId));
     }
 
     public void insertBanInfo(String matchId, int pickTurn, int teamId, int championId, Timestamp rrt) {

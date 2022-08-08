@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.vo.ChampionVO;
+import dev.saariselka.inlol.vo.MatchBanVO;
 import dev.saariselka.inlol.vo.SummonerSpellVO;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -45,5 +46,27 @@ public class DtoMapper {
         }
 
         return summonerSpellDtoList;
+    }
+
+    public List<MatchBanDto> toMatchBanDtoList(List<MatchBanVO> matchBanVOList) {
+        List<MatchBanDto> matchBanDtoList = new ArrayList<>();
+
+        for(MatchBanVO matchBanVO : matchBanVOList) {
+            MatchBanDto matchBanDto = new MatchBanDto(matchBanVO.getMatchId(),matchBanVO.getPickTurn(),matchBanVO.getTeamId(),matchBanVO.getChampionId());
+            matchBanDtoList.add(matchBanDto);
+        }
+
+        return matchBanDtoList;
+    }
+
+    public List<MatchBanVO> toMatchBanVOList(List<MatchBanDto> matchBanDtoList) {
+        List<MatchBanVO> matchBanVOList = new ArrayList<>();
+
+        for(MatchBanDto matchBanDto : matchBanDtoList) {
+            MatchBanVO matchBanVO = new MatchBanVO(matchBanDto.getMatchId(),matchBanDto.getPickTurn(),matchBanDto.getTeamId(),matchBanDto.getChampionId());
+            matchBanVOList.add(matchBanVO);
+        }
+
+        return matchBanVOList;
     }
 }

@@ -11,17 +11,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class TeamDto {
-    private List<BanDto> bans;
+    private List<MatchBanDto> bans;
     private ObjectivesDto objectives;
     private String teamId;
     private String win;
     private int teamKills;
     private List<ParticipantDto> participants;
 
-    public TeamDto (TeamEntity teamEntity, List<BanDto> banDtoList, ObjectivesDto objectivesDto) {
+    public TeamDto (TeamEntity teamEntity, List<MatchBanDto> matchBanDtoList, ObjectivesDto objectivesDto) {
         this.teamId = String.valueOf(teamEntity.getTeamId().getTeamId());
         this.win = String.valueOf(teamEntity.isWin());
-        this.bans = banDtoList;
+        this.bans = matchBanDtoList;
         this.objectives = objectivesDto;
     }
 }
