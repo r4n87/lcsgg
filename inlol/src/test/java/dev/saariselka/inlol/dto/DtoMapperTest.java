@@ -1,4 +1,4 @@
-package dev.saariselka.inlol.controller;
+package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.dto.MatchBanDto;
@@ -6,6 +6,7 @@ import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
+import dev.saariselka.inlol.vo.ChampionVO;
 import dev.saariselka.inlol.vo.MatchBanVO;
 import dev.saariselka.inlol.vo.SummonerSpellVO;
 import org.junit.jupiter.api.DisplayName;
@@ -119,5 +120,23 @@ public class DtoMapperTest {
         assertThat(matchBanDtoList.get(0).getPickTurn()).isEqualTo(pickTurn);
         assertThat(matchBanDtoList.get(0).getTeamId()).isEqualTo(teamId);
         assertThat(matchBanDtoList.get(0).getChampionId()).isEqualTo(championId);
+    }
+
+    @Test
+    @DisplayName("Convert ChampionDtoList To ChampionVOList")
+    public void toChampionVOList() {
+        // given
+        List<ChampionDto> dtoList = new ArrayList<>();
+        ChampionDto dto = new ChampionDto(999, "Test", "테스트", "/testimage.png");
+        dtoList.add(dto);
+
+        // when
+        List<ChampionVO> voList = dtoMapper.toChampionVOList(dtoList);
+
+        // then
+        assertThat(voList.get(0).getId()).isEqualTo(999);
+        assertThat(voList.get(0).getNameEng()).isEqualTo("Test");
+        assertThat(voList.get(0).getNameKo()).isEqualTo("테스트");
+        assertThat(voList.get(0).getImagePath()).isEqualTo("/testimage.png");
     }
 }

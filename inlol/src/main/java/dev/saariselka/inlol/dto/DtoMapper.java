@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class DtoMapper {
 
-    public List<ChampionVO> ToChampionVO(List<ChampionDto> dtoList) {
+    public List<ChampionVO> toChampionVOList(List<ChampionDto> dtoList) {
         List<ChampionVO> voList = new ArrayList<>();
         for(ChampionDto dto : dtoList) {
             ChampionVO vo = new ChampionVO();

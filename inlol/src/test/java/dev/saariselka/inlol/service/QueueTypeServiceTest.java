@@ -18,7 +18,7 @@ public class QueueTypeServiceTest {
     QueueTypeService queueTypeService;
 
     @Test
-    @DisplayName("Find Entity By QueueId")
+    @DisplayName("Find QueueTypeVO By QueueId")
     void findByQueueId() {
         // given
 

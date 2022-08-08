@@ -16,7 +16,7 @@ public class ChampionService {
     VOMapper mapper;
 
     public void insertAll(List<ChampionVO> entities) {
-        championRepository.saveAll(mapper.ToChampionEntityList(entities));
+        championRepository.saveAll(mapper.toChampionEntityList(entities));
     }
 
     public String findImagePathByNameEng(String nameEng) {

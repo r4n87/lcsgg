@@ -1,9 +1,7 @@
 package dev.saariselka.inlol.vo;
 
 import dev.saariselka.inlol.dto.SummonerSpellDto;
-import dev.saariselka.inlol.entity.MatchBanEntity;
-import dev.saariselka.inlol.entity.MatchBanId;
-import dev.saariselka.inlol.entity.SummonerSpellEntity;
+import dev.saariselka.inlol.entity.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,5 +114,41 @@ public class VOMapperTest {
         assertThat(matchBanVOList.get(0).getPickTurn()).isEqualTo(pickTurn);
         assertThat(matchBanVOList.get(0).getTeamId()).isEqualTo(teamId);
         assertThat(matchBanVOList.get(0).getChampionId()).isEqualTo(championId);
+    }
+
+    @Test
+    @DisplayName("Convert QueueTypeEntityList To QueueTypeVOList")
+    public void toQueueTypeVOList() {
+        // given
+        List<QueueTypeEntity> entityList = new ArrayList<>();
+        QueueTypeEntity entity = new QueueTypeEntity(999, "TestMap", "TestDes");
+        entityList.add(entity);
+
+        // when
+        List<QueueTypeVO> voList = voMapper.toQueueTypeVOList(entityList);
+
+        // then
+        assertThat(voList.get(0).getQueueId()).isEqualTo(999);
+        assertThat(voList.get(0).getMap()).isEqualTo("TestMap");
+        assertThat(voList.get(0).getDescription()).isEqualTo("TestDes");
+    }
+
+    @Test
+    @DisplayName("Convert ChampionEntityList To ChampionVOList")
+    public void toChampionEntityList() {
+        // given
+        List<ChampionVO> voList = new ArrayList<>();
+        ChampionVO vo = new ChampionVO(999, "Test", "테스트", "/testimage.png");
+        voList.add(vo);
+
+        // when
+        List<ChampionEntity> entityList = voMapper.toChampionEntityList(voList);
+
+        // then
+        assertThat(entityList.get(0).getId()).isEqualTo(999);
+        assertThat(entityList.get(0).getNameEng()).isEqualTo("Test");
+        assertThat(entityList.get(0).getNameKo()).isEqualTo("테스트");
+        assertThat(entityList.get(0).getImagePath()).isEqualTo("/testimage.png");
+
     }
 }

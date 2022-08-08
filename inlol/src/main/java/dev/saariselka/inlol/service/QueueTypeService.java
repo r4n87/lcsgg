@@ -18,6 +18,6 @@ public class QueueTypeService {
 
     public List<QueueTypeVO> findByQueueId(int queueId) {
         List<QueueTypeEntity> entityList = queueTypeRepository.findByQueueId(queueId);
-        return mapper.ToQueueTypeVOList(entityList);
+        return mapper.toQueueTypeVOList(entityList);
     }
 }
