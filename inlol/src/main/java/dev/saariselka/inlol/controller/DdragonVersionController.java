@@ -1,5 +1,7 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.DdragonVersionDto;
+import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.entity.DdragonVersionEntity;
 import dev.saariselka.inlol.service.DdragonVersionService;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +22,14 @@ public class DdragonVersionController {
 
     @Autowired
     DdragonVersionService ddragonVersionService;
+    @Autowired
+    DtoMapper dtoMapper;
 
     public String getCurrentDdragonVersion() {
-        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionService.getCurrentDdragonVersion();
+        List<DdragonVersionDto> ddragonVersionDtoList = dtoMapper.toDdragonVersionDtoList(ddragonVersionService.getCurrentDdragonVersion());
 
-        if(!ddragonVersionEntities.isEmpty()) {
-            return ddragonVersionEntities.get(0).getVersion();
+        if(!ddragonVersionDtoList.isEmpty()) {
+            return ddragonVersionDtoList.get(0).getVersion();
         } else {
             return null;
         }

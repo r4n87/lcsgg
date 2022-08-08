@@ -3,6 +3,8 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.repository.MatchParticipantRepository;
+import dev.saariselka.inlol.vo.MatchParticipantVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class MatchParticipantServiceTest {
     private MatchParticipantService matchParticipantService;
     @Autowired
     private MatchParticipantRepository matchParticipantRepository;
+    @Autowired
+    private VOMapper voMapper;
 
     @Test
     @DisplayName("Insert Entity")
@@ -155,112 +159,112 @@ public class MatchParticipantServiceTest {
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
 
         //then
-        MatchParticipantEntity matchParticipantEntity = matchParticipantService.findById(new MatchParticipantId(puuid, dataVersion, matchId, participantId)).get(0);
+        MatchParticipantVO matchParticipantVO = matchParticipantService.findById(new MatchParticipantId(puuid, dataVersion, matchId, participantId)).get(0);
 
-        assertThat(matchParticipantEntity.getMatchParticipantId().getPuuid()).isEqualTo(puuid);
-        assertThat(matchParticipantEntity.getMatchParticipantId().getDataVersion()).isEqualTo(dataVersion);
-        assertThat(matchParticipantEntity.getMatchParticipantId().getMatchId()).isEqualTo(matchId);
-        assertThat(matchParticipantEntity.getMatchParticipantId().getParticipantId()).isEqualTo(participantId);
-        assertThat(matchParticipantEntity.getAssists()).isEqualTo(assists);
-        assertThat(matchParticipantEntity.getBaronKills()).isEqualTo(baronKills);
-        assertThat(matchParticipantEntity.getBountyLevel()).isEqualTo(bountyLevel);
-        assertThat(matchParticipantEntity.getChampExperience()).isEqualTo(champExperience);
-        assertThat(matchParticipantEntity.getChampLevel()).isEqualTo(champLevel);
-        assertThat(matchParticipantEntity.getChampionId()).isEqualTo(championId);
-        assertThat(matchParticipantEntity.getChampionName()).isEqualTo(championName);
-        assertThat(matchParticipantEntity.getChampionTransform()).isEqualTo(championTransform);
-        assertThat(matchParticipantEntity.getConsumablesPurchased()).isEqualTo(consumablesPurchased);
-        assertThat(matchParticipantEntity.getDamageDealtToBuildings()).isEqualTo(damageDealtToBuildings);
-        assertThat(matchParticipantEntity.getDamageDealtToObjectives()).isEqualTo(damageDealtToObjectives);
-        assertThat(matchParticipantEntity.getDamageSelfMitigated()).isEqualTo(damageSelfMitigated);
-        assertThat(matchParticipantEntity.getDeaths()).isEqualTo(deaths);
-        assertThat(matchParticipantEntity.getDetectorWardsPlaced()).isEqualTo(detectorWardsPlaced);
-        assertThat(matchParticipantEntity.getDoubleKills()).isEqualTo(doubleKills);
-        assertThat(matchParticipantEntity.getDragonKills()).isEqualTo(dragonKills);
-        assertThat(matchParticipantEntity.isFirstBloodAssist()).isEqualTo(firstBloodAssist);
-        assertThat(matchParticipantEntity.isFirstBloodKill()).isEqualTo(firstBloodKill);
-        assertThat(matchParticipantEntity.isFirstTowerAssist()).isEqualTo(firstTowerAssist);
-        assertThat(matchParticipantEntity.isFirstTowerKill()).isEqualTo(firstTowerKill);
-        assertThat(matchParticipantEntity.isGameEndedInEarlySurrender()).isEqualTo(gameEndedInEarlySurrender);
-        assertThat(matchParticipantEntity.isGameEndedInSurrender()).isEqualTo(gameEndedInSurrender);
-        assertThat(matchParticipantEntity.getGoldEarned()).isEqualTo(goldEarned);
-        assertThat(matchParticipantEntity.getGoldSpent()).isEqualTo(goldSpent);
-        assertThat(matchParticipantEntity.getIndividualPosition()).isEqualTo(individualPosition);
-        assertThat(matchParticipantEntity.getInhibitorKills()).isEqualTo(inhibitorKills);
-        assertThat(matchParticipantEntity.getInhibitorTakedowns()).isEqualTo(inhibitorTakedowns);
-        assertThat(matchParticipantEntity.getInhibitorsLost()).isEqualTo(inhibitorsLost);
-        assertThat(matchParticipantEntity.getItem0()).isEqualTo(item0);
-        assertThat(matchParticipantEntity.getItem1()).isEqualTo(item1);
-        assertThat(matchParticipantEntity.getItem2()).isEqualTo(item2);
-        assertThat(matchParticipantEntity.getItem3()).isEqualTo(item3);
-        assertThat(matchParticipantEntity.getItem4()).isEqualTo(item4);
-        assertThat(matchParticipantEntity.getItem5()).isEqualTo(item5);
-        assertThat(matchParticipantEntity.getItem6()).isEqualTo(item6);
-        assertThat(matchParticipantEntity.getItemsPurchased()).isEqualTo(itemsPurchased);
-        assertThat(matchParticipantEntity.getKillingSprees()).isEqualTo(killingSprees);
-        assertThat(matchParticipantEntity.getKills()).isEqualTo(kills);
-        assertThat(matchParticipantEntity.getLane()).isEqualTo(lane);
-        assertThat(matchParticipantEntity.getLargestCriticalStrike()).isEqualTo(largestCriticalStrike);
-        assertThat(matchParticipantEntity.getLargestKillingSpree()).isEqualTo(largestKillingSpree);
-        assertThat(matchParticipantEntity.getLongestTimeSpentLiving()).isEqualTo(longestTimeSpentLiving);
-        assertThat(matchParticipantEntity.getMagicDamageDealt()).isEqualTo(magicDamageDealt);
-        assertThat(matchParticipantEntity.getMagicDamageDealtToChampions()).isEqualTo(magicDamageDealtToChampions);
-        assertThat(matchParticipantEntity.getMagicDamageTaken()).isEqualTo(magicDamageTaken);
-        assertThat(matchParticipantEntity.getNeutralMinionsKilled()).isEqualTo(neutralMinionsKilled);
-        assertThat(matchParticipantEntity.getNexusKills()).isEqualTo(nexusKills);
-        assertThat(matchParticipantEntity.getNexusLost()).isEqualTo(nexusLost);
-        assertThat(matchParticipantEntity.getNexusTakedowns()).isEqualTo(nexusTakedowns);
-        assertThat(matchParticipantEntity.getObjectivesStolen()).isEqualTo(objectivesStolen);
-        assertThat(matchParticipantEntity.getObjectivesStolenAssists()).isEqualTo(objectivesStolenAssists);
-        assertThat(matchParticipantEntity.getPentaKills()).isEqualTo(pentaKills);
-        assertThat(matchParticipantEntity.getPhysicalDamageDealt()).isEqualTo(physicalDamageDealt);
-        assertThat(matchParticipantEntity.getPhysicalDamageDealtToChampions()).isEqualTo(physicalDamageDealtToChampions);
-        assertThat(matchParticipantEntity.getPhysicalDamageTaken()).isEqualTo(physicalDamageTaken);
-        assertThat(matchParticipantEntity.getProfileIcon()).isEqualTo(profileIcon);
-        assertThat(matchParticipantEntity.getQuadraKills()).isEqualTo(quadraKills);
-        assertThat(matchParticipantEntity.getRiotIdName()).isEqualTo(riotIdName);
-        assertThat(matchParticipantEntity.getRiotIdTagline()).isEqualTo(riotIdTagline);
-        assertThat(matchParticipantEntity.getRole()).isEqualTo(role);
-        assertThat(matchParticipantEntity.getSightWardsBoughtInGame()).isEqualTo(sightWardsBoughtInGame);
-        assertThat(matchParticipantEntity.getSpell1Casts()).isEqualTo(spell1Casts);
-        assertThat(matchParticipantEntity.getSpell2Casts()).isEqualTo(spell2Casts);
-        assertThat(matchParticipantEntity.getSpell3Casts()).isEqualTo(spell3Casts);
-        assertThat(matchParticipantEntity.getSpell4Casts()).isEqualTo(spell4Casts);
-        assertThat(matchParticipantEntity.getSummoner1Casts()).isEqualTo(summoner1Casts);
-        assertThat(matchParticipantEntity.getSummoner1Id()).isEqualTo(summoner1Id);
-        assertThat(matchParticipantEntity.getSummoner2Casts()).isEqualTo(summoner2Casts);
-        assertThat(matchParticipantEntity.getSummoner2Id()).isEqualTo(summoner2Id);
-        assertThat(matchParticipantEntity.getSummonerId()).isEqualTo(summonerId);
-        assertThat(matchParticipantEntity.getSummonerLevel()).isEqualTo(summonerLevel);
-        assertThat(matchParticipantEntity.getSummonerName()).isEqualTo(summonerName);
-        assertThat(matchParticipantEntity.isTeamEarlySurrendered()).isEqualTo(teamEarlySurrendered);
-        assertThat(matchParticipantEntity.getTeamId()).isEqualTo(teamId);
-        assertThat(matchParticipantEntity.getTeamPosition()).isEqualTo(teamPosition);
-        assertThat(matchParticipantEntity.getTimeCCingOthers()).isEqualTo(timeCCingOthers);
-        assertThat(matchParticipantEntity.getTimePlayed()).isEqualTo(timePlayed);
-        assertThat(matchParticipantEntity.getTotalDamageDealt()).isEqualTo(totalDamageDealt);
-        assertThat(matchParticipantEntity.getTotalDamageDealtToChampions()).isEqualTo(totalDamageDealtToChampions);
-        assertThat(matchParticipantEntity.getTotalDamageTaken()).isEqualTo(totalDamageTaken);
-        assertThat(matchParticipantEntity.getTotalHeal()).isEqualTo(totalHeal);
-        assertThat(matchParticipantEntity.getTotalHealsOnTeammates()).isEqualTo(totalHealsOnTeammates);
-        assertThat(matchParticipantEntity.getTotalMinionsKilled()).isEqualTo(totalMinionsKilled);
-        assertThat(matchParticipantEntity.getTotalTimeCCDealt()).isEqualTo(totalTimeCCDealt);
-        assertThat(matchParticipantEntity.getTotalTimeSpentDead()).isEqualTo(totalTimeSpentDead);
-        assertThat(matchParticipantEntity.getTotalUnitsHealed()).isEqualTo(totalUnitsHealed);
-        assertThat(matchParticipantEntity.getTripleKills()).isEqualTo(tripleKills);
-        assertThat(matchParticipantEntity.getTrueDamageDealt()).isEqualTo(trueDamageDealt);
-        assertThat(matchParticipantEntity.getTrueDamageDealtToChampions()).isEqualTo(trueDamageDealtToChampions);
-        assertThat(matchParticipantEntity.getTrueDamageTaken()).isEqualTo(trueDamageTaken);
-        assertThat(matchParticipantEntity.getTurretKills()).isEqualTo(turretKills);
-        assertThat(matchParticipantEntity.getTurretTakedowns()).isEqualTo(turretTakedowns);
-        assertThat(matchParticipantEntity.getTurretsLost()).isEqualTo(turretsLost);
-        assertThat(matchParticipantEntity.getUnrealKills()).isEqualTo(unrealKills);
-        assertThat(matchParticipantEntity.getVisionScore()).isEqualTo(visionScore);
-        assertThat(matchParticipantEntity.getVisionWardsBoughtInGame()).isEqualTo(visionWardsBoughtInGame);
-        assertThat(matchParticipantEntity.getWardsKilled()).isEqualTo(wardsKilled);
-        assertThat(matchParticipantEntity.getWardsPlaced()).isEqualTo(wardsPlaced);
-        assertThat(matchParticipantEntity.isWin()).isEqualTo(win);
-        assertThat(matchParticipantEntity.getRrt()).isEqualTo(rrt);
+        assertThat(matchParticipantVO.getPuuid()).isEqualTo(puuid);
+        assertThat(matchParticipantVO.getDataVersion()).isEqualTo(dataVersion);
+        assertThat(matchParticipantVO.getMatchId()).isEqualTo(matchId);
+        assertThat(matchParticipantVO.getParticipantId()).isEqualTo(participantId);
+        assertThat(matchParticipantVO.getAssists()).isEqualTo(assists);
+        assertThat(matchParticipantVO.getBaronKills()).isEqualTo(baronKills);
+        assertThat(matchParticipantVO.getBountyLevel()).isEqualTo(bountyLevel);
+        assertThat(matchParticipantVO.getChampExperience()).isEqualTo(champExperience);
+        assertThat(matchParticipantVO.getChampLevel()).isEqualTo(champLevel);
+        assertThat(matchParticipantVO.getChampionId()).isEqualTo(championId);
+        assertThat(matchParticipantVO.getChampionName()).isEqualTo(championName);
+        assertThat(matchParticipantVO.getChampionTransform()).isEqualTo(championTransform);
+        assertThat(matchParticipantVO.getConsumablesPurchased()).isEqualTo(consumablesPurchased);
+        assertThat(matchParticipantVO.getDamageDealtToBuildings()).isEqualTo(damageDealtToBuildings);
+        assertThat(matchParticipantVO.getDamageDealtToObjectives()).isEqualTo(damageDealtToObjectives);
+        assertThat(matchParticipantVO.getDamageSelfMitigated()).isEqualTo(damageSelfMitigated);
+        assertThat(matchParticipantVO.getDeaths()).isEqualTo(deaths);
+        assertThat(matchParticipantVO.getDetectorWardsPlaced()).isEqualTo(detectorWardsPlaced);
+        assertThat(matchParticipantVO.getDoubleKills()).isEqualTo(doubleKills);
+        assertThat(matchParticipantVO.getDragonKills()).isEqualTo(dragonKills);
+        assertThat(matchParticipantVO.isFirstBloodAssist()).isEqualTo(firstBloodAssist);
+        assertThat(matchParticipantVO.isFirstBloodKill()).isEqualTo(firstBloodKill);
+        assertThat(matchParticipantVO.isFirstTowerAssist()).isEqualTo(firstTowerAssist);
+        assertThat(matchParticipantVO.isFirstTowerKill()).isEqualTo(firstTowerKill);
+        assertThat(matchParticipantVO.isGameEndedInEarlySurrender()).isEqualTo(gameEndedInEarlySurrender);
+        assertThat(matchParticipantVO.isGameEndedInSurrender()).isEqualTo(gameEndedInSurrender);
+        assertThat(matchParticipantVO.getGoldEarned()).isEqualTo(goldEarned);
+        assertThat(matchParticipantVO.getGoldSpent()).isEqualTo(goldSpent);
+        assertThat(matchParticipantVO.getIndividualPosition()).isEqualTo(individualPosition);
+        assertThat(matchParticipantVO.getInhibitorKills()).isEqualTo(inhibitorKills);
+        assertThat(matchParticipantVO.getInhibitorTakedowns()).isEqualTo(inhibitorTakedowns);
+        assertThat(matchParticipantVO.getInhibitorsLost()).isEqualTo(inhibitorsLost);
+        assertThat(matchParticipantVO.getItem0()).isEqualTo(item0);
+        assertThat(matchParticipantVO.getItem1()).isEqualTo(item1);
+        assertThat(matchParticipantVO.getItem2()).isEqualTo(item2);
+        assertThat(matchParticipantVO.getItem3()).isEqualTo(item3);
+        assertThat(matchParticipantVO.getItem4()).isEqualTo(item4);
+        assertThat(matchParticipantVO.getItem5()).isEqualTo(item5);
+        assertThat(matchParticipantVO.getItem6()).isEqualTo(item6);
+        assertThat(matchParticipantVO.getItemsPurchased()).isEqualTo(itemsPurchased);
+        assertThat(matchParticipantVO.getKillingSprees()).isEqualTo(killingSprees);
+        assertThat(matchParticipantVO.getKills()).isEqualTo(kills);
+        assertThat(matchParticipantVO.getLane()).isEqualTo(lane);
+        assertThat(matchParticipantVO.getLargestCriticalStrike()).isEqualTo(largestCriticalStrike);
+        assertThat(matchParticipantVO.getLargestKillingSpree()).isEqualTo(largestKillingSpree);
+        assertThat(matchParticipantVO.getLongestTimeSpentLiving()).isEqualTo(longestTimeSpentLiving);
+        assertThat(matchParticipantVO.getMagicDamageDealt()).isEqualTo(magicDamageDealt);
+        assertThat(matchParticipantVO.getMagicDamageDealtToChampions()).isEqualTo(magicDamageDealtToChampions);
+        assertThat(matchParticipantVO.getMagicDamageTaken()).isEqualTo(magicDamageTaken);
+        assertThat(matchParticipantVO.getNeutralMinionsKilled()).isEqualTo(neutralMinionsKilled);
+        assertThat(matchParticipantVO.getNexusKills()).isEqualTo(nexusKills);
+        assertThat(matchParticipantVO.getNexusLost()).isEqualTo(nexusLost);
+        assertThat(matchParticipantVO.getNexusTakedowns()).isEqualTo(nexusTakedowns);
+        assertThat(matchParticipantVO.getObjectivesStolen()).isEqualTo(objectivesStolen);
+        assertThat(matchParticipantVO.getObjectivesStolenAssists()).isEqualTo(objectivesStolenAssists);
+        assertThat(matchParticipantVO.getPentaKills()).isEqualTo(pentaKills);
+        assertThat(matchParticipantVO.getPhysicalDamageDealt()).isEqualTo(physicalDamageDealt);
+        assertThat(matchParticipantVO.getPhysicalDamageDealtToChampions()).isEqualTo(physicalDamageDealtToChampions);
+        assertThat(matchParticipantVO.getPhysicalDamageTaken()).isEqualTo(physicalDamageTaken);
+        assertThat(matchParticipantVO.getProfileIcon()).isEqualTo(profileIcon);
+        assertThat(matchParticipantVO.getQuadraKills()).isEqualTo(quadraKills);
+        assertThat(matchParticipantVO.getRiotIdName()).isEqualTo(riotIdName);
+        assertThat(matchParticipantVO.getRiotIdTagline()).isEqualTo(riotIdTagline);
+        assertThat(matchParticipantVO.getRole()).isEqualTo(role);
+        assertThat(matchParticipantVO.getSightWardsBoughtInGame()).isEqualTo(sightWardsBoughtInGame);
+        assertThat(matchParticipantVO.getSpell1Casts()).isEqualTo(spell1Casts);
+        assertThat(matchParticipantVO.getSpell2Casts()).isEqualTo(spell2Casts);
+        assertThat(matchParticipantVO.getSpell3Casts()).isEqualTo(spell3Casts);
+        assertThat(matchParticipantVO.getSpell4Casts()).isEqualTo(spell4Casts);
+        assertThat(matchParticipantVO.getSummoner1Casts()).isEqualTo(summoner1Casts);
+        assertThat(matchParticipantVO.getSummoner1Id()).isEqualTo(summoner1Id);
+        assertThat(matchParticipantVO.getSummoner2Casts()).isEqualTo(summoner2Casts);
+        assertThat(matchParticipantVO.getSummoner2Id()).isEqualTo(summoner2Id);
+        assertThat(matchParticipantVO.getSummonerId()).isEqualTo(summonerId);
+        assertThat(matchParticipantVO.getSummonerLevel()).isEqualTo(summonerLevel);
+        assertThat(matchParticipantVO.getSummonerName()).isEqualTo(summonerName);
+        assertThat(matchParticipantVO.isTeamEarlySurrendered()).isEqualTo(teamEarlySurrendered);
+        assertThat(matchParticipantVO.getTeamId()).isEqualTo(teamId);
+        assertThat(matchParticipantVO.getTeamPosition()).isEqualTo(teamPosition);
+        assertThat(matchParticipantVO.getTimeCCingOthers()).isEqualTo(timeCCingOthers);
+        assertThat(matchParticipantVO.getTimePlayed()).isEqualTo(timePlayed);
+        assertThat(matchParticipantVO.getTotalDamageDealt()).isEqualTo(totalDamageDealt);
+        assertThat(matchParticipantVO.getTotalDamageDealtToChampions()).isEqualTo(totalDamageDealtToChampions);
+        assertThat(matchParticipantVO.getTotalDamageTaken()).isEqualTo(totalDamageTaken);
+        assertThat(matchParticipantVO.getTotalHeal()).isEqualTo(totalHeal);
+        assertThat(matchParticipantVO.getTotalHealsOnTeammates()).isEqualTo(totalHealsOnTeammates);
+        assertThat(matchParticipantVO.getTotalMinionsKilled()).isEqualTo(totalMinionsKilled);
+        assertThat(matchParticipantVO.getTotalTimeCCDealt()).isEqualTo(totalTimeCCDealt);
+        assertThat(matchParticipantVO.getTotalTimeSpentDead()).isEqualTo(totalTimeSpentDead);
+        assertThat(matchParticipantVO.getTotalUnitsHealed()).isEqualTo(totalUnitsHealed);
+        assertThat(matchParticipantVO.getTripleKills()).isEqualTo(tripleKills);
+        assertThat(matchParticipantVO.getTrueDamageDealt()).isEqualTo(trueDamageDealt);
+        assertThat(matchParticipantVO.getTrueDamageDealtToChampions()).isEqualTo(trueDamageDealtToChampions);
+        assertThat(matchParticipantVO.getTrueDamageTaken()).isEqualTo(trueDamageTaken);
+        assertThat(matchParticipantVO.getTurretKills()).isEqualTo(turretKills);
+        assertThat(matchParticipantVO.getTurretTakedowns()).isEqualTo(turretTakedowns);
+        assertThat(matchParticipantVO.getTurretsLost()).isEqualTo(turretsLost);
+        assertThat(matchParticipantVO.getUnrealKills()).isEqualTo(unrealKills);
+        assertThat(matchParticipantVO.getVisionScore()).isEqualTo(visionScore);
+        assertThat(matchParticipantVO.getVisionWardsBoughtInGame()).isEqualTo(visionWardsBoughtInGame);
+        assertThat(matchParticipantVO.getWardsKilled()).isEqualTo(wardsKilled);
+        assertThat(matchParticipantVO.getWardsPlaced()).isEqualTo(wardsPlaced);
+        assertThat(matchParticipantVO.isWin()).isEqualTo(win);
+        assertThat(matchParticipantVO.getRrt()).isEqualTo(rrt);
     }
 
     @Test
@@ -271,11 +275,11 @@ public class MatchParticipantServiceTest {
         MatchParticipantEntity matchParticipantEntityForTest = matchParticipantRepository.save(matchParticipantEntity);
 
         //when
-        MatchParticipantEntity matchParticipantEntityFindById
+        MatchParticipantVO matchParticipantVOFindById
                 = matchParticipantService.findById(matchParticipantEntityForTest.getMatchParticipantId()).get(0);
 
         //then
-        assertFunction(matchParticipantEntityFindById, matchParticipantEntityForTest);
+        assertFunction(matchParticipantVOFindById, matchParticipantEntityForTest);
     }
 
     @Test
@@ -290,22 +294,22 @@ public class MatchParticipantServiceTest {
                 = matchParticipantRepository.save(matchParticipantEntityB);
 
         //when
-        List<MatchParticipantEntity> matchParticipantEntityList
+        List<MatchParticipantVO> matchParticipantVOList
                 = matchParticipantService.findByDataVersionAndMatchId(
                 matchParticipantEntityAForTest.getMatchParticipantId().getDataVersion(),
                 matchParticipantEntityAForTest.getMatchParticipantId().getMatchId());
 
         //then
-        assertThat(matchParticipantEntityList.size()).isEqualTo(2);
-        for(MatchParticipantEntity matchParticipantEntity : matchParticipantEntityList) {
-            String puuid = matchParticipantEntity.getMatchParticipantId().getPuuid();
+        assertThat(matchParticipantVOList.size()).isEqualTo(2);
+        for(MatchParticipantVO matchParticipantVO : matchParticipantVOList) {
+            String puuid = matchParticipantVO.getPuuid();
             String puuidA = matchParticipantEntityAForTest.getMatchParticipantId().getPuuid();
             String puuidB = matchParticipantEntityBForTest.getMatchParticipantId().getPuuid();
 
             if(puuid.equals(puuidA)) {
-                assertFunction(matchParticipantEntity, matchParticipantEntityAForTest);
+                assertFunction(matchParticipantVO, matchParticipantEntityAForTest);
             } else if (puuid.equals(puuidB)) {
-                assertFunction(matchParticipantEntity, matchParticipantEntityBForTest);
+                assertFunction(matchParticipantVO, matchParticipantEntityBForTest);
             }
         }
     }
@@ -322,14 +326,14 @@ public class MatchParticipantServiceTest {
                 = matchParticipantRepository.save(matchParticipantEntityB);
 
         //when
-        MatchParticipantEntity matchParticipantEntityAFindByPuuid
+        MatchParticipantVO matchParticipantVOAFindByPuuid
                 = matchParticipantService.findByPuuid(matchParticipantEntityAForTest.getMatchParticipantId().getPuuid()).get(0);
-        MatchParticipantEntity matchParticipantEntityBFindByPuuid
+        MatchParticipantVO matchParticipantVOBFindByPuuid
                 = matchParticipantService.findByPuuid(matchParticipantEntityBForTest.getMatchParticipantId().getPuuid()).get(0);
 
         //then
-        assertFunction(matchParticipantEntityAFindByPuuid, matchParticipantEntityAForTest);
-        assertFunction(matchParticipantEntityBFindByPuuid, matchParticipantEntityBForTest);
+        assertFunction(matchParticipantVOAFindByPuuid, matchParticipantEntityAForTest);
+        assertFunction(matchParticipantVOBFindByPuuid, matchParticipantEntityBForTest);
     }
 
     private MatchParticipantEntity createMatchParticipantEntityA() {
@@ -776,214 +780,214 @@ public class MatchParticipantServiceTest {
         );
     }
 
-    private void assertFunction(MatchParticipantEntity matchParticipantEntity, MatchParticipantEntity matchParticipantEntityForTest) {
-        assertThat(matchParticipantEntity.getMatchParticipantId().getPuuid()).isEqualTo(
+    private void assertFunction(MatchParticipantVO matchParticipantVO, MatchParticipantEntity matchParticipantEntityForTest) {
+        assertThat(matchParticipantVO.getPuuid()).isEqualTo(
                 matchParticipantEntityForTest.getMatchParticipantId().getPuuid());
-        assertThat(matchParticipantEntity.getMatchParticipantId().getDataVersion()).isEqualTo(
+        assertThat(matchParticipantVO.getDataVersion()).isEqualTo(
                 matchParticipantEntityForTest.getMatchParticipantId().getDataVersion());
-        assertThat(matchParticipantEntity.getMatchParticipantId().getMatchId()).isEqualTo(
+        assertThat(matchParticipantVO.getMatchId()).isEqualTo(
                 matchParticipantEntityForTest.getMatchParticipantId().getMatchId());
-        assertThat(matchParticipantEntity.getMatchParticipantId().getParticipantId()).isEqualTo(
+        assertThat(matchParticipantVO.getParticipantId()).isEqualTo(
                 matchParticipantEntityForTest.getMatchParticipantId().getParticipantId());
-        assertThat(matchParticipantEntity.getAssists()).isEqualTo(
+        assertThat(matchParticipantVO.getAssists()).isEqualTo(
                 matchParticipantEntityForTest.getAssists());
-        assertThat(matchParticipantEntity.getBaronKills()).isEqualTo(
+        assertThat(matchParticipantVO.getBaronKills()).isEqualTo(
                 matchParticipantEntityForTest.getBaronKills());
-        assertThat(matchParticipantEntity.getBountyLevel()).isEqualTo(
+        assertThat(matchParticipantVO.getBountyLevel()).isEqualTo(
                 matchParticipantEntityForTest.getBountyLevel());
-        assertThat(matchParticipantEntity.getChampExperience()).isEqualTo(
+        assertThat(matchParticipantVO.getChampExperience()).isEqualTo(
                 matchParticipantEntityForTest.getChampExperience());
-        assertThat(matchParticipantEntity.getChampLevel()).isEqualTo(
+        assertThat(matchParticipantVO.getChampLevel()).isEqualTo(
                 matchParticipantEntityForTest.getChampLevel());
-        assertThat(matchParticipantEntity.getChampionId()).isEqualTo(
+        assertThat(matchParticipantVO.getChampionId()).isEqualTo(
                 matchParticipantEntityForTest.getChampionId());
-        assertThat(matchParticipantEntity.getChampionName()).isEqualTo(
+        assertThat(matchParticipantVO.getChampionName()).isEqualTo(
                 matchParticipantEntityForTest.getChampionName());
-        assertThat(matchParticipantEntity.getChampionTransform()).isEqualTo(
+        assertThat(matchParticipantVO.getChampionTransform()).isEqualTo(
                 matchParticipantEntityForTest.getChampionTransform());
-        assertThat(matchParticipantEntity.getConsumablesPurchased()).isEqualTo(
+        assertThat(matchParticipantVO.getConsumablesPurchased()).isEqualTo(
                 matchParticipantEntityForTest.getConsumablesPurchased());
-        assertThat(matchParticipantEntity.getDamageDealtToBuildings()).isEqualTo(
+        assertThat(matchParticipantVO.getDamageDealtToBuildings()).isEqualTo(
                 matchParticipantEntityForTest.getDamageDealtToBuildings());
-        assertThat(matchParticipantEntity.getDamageDealtToObjectives()).isEqualTo(
+        assertThat(matchParticipantVO.getDamageDealtToObjectives()).isEqualTo(
                 matchParticipantEntityForTest.getDamageDealtToObjectives());
-        assertThat(matchParticipantEntity.getDamageSelfMitigated()).isEqualTo(
+        assertThat(matchParticipantVO.getDamageSelfMitigated()).isEqualTo(
                 matchParticipantEntityForTest.getDamageSelfMitigated());
-        assertThat(matchParticipantEntity.getDeaths()).isEqualTo(
+        assertThat(matchParticipantVO.getDeaths()).isEqualTo(
                 matchParticipantEntityForTest.getDeaths());
-        assertThat(matchParticipantEntity.getDetectorWardsPlaced()).isEqualTo(
+        assertThat(matchParticipantVO.getDetectorWardsPlaced()).isEqualTo(
                 matchParticipantEntityForTest.getDetectorWardsPlaced());
-        assertThat(matchParticipantEntity.getDoubleKills()).isEqualTo(
+        assertThat(matchParticipantVO.getDoubleKills()).isEqualTo(
                 matchParticipantEntityForTest.getDoubleKills());
-        assertThat(matchParticipantEntity.getDragonKills()).isEqualTo(
+        assertThat(matchParticipantVO.getDragonKills()).isEqualTo(
                 matchParticipantEntityForTest.getDragonKills());
-        assertThat(matchParticipantEntity.isFirstBloodAssist()).isEqualTo(
+        assertThat(matchParticipantVO.isFirstBloodAssist()).isEqualTo(
                 matchParticipantEntityForTest.isFirstBloodAssist());
-        assertThat(matchParticipantEntity.isFirstBloodKill()).isEqualTo(
+        assertThat(matchParticipantVO.isFirstBloodKill()).isEqualTo(
                 matchParticipantEntityForTest.isFirstBloodKill());
-        assertThat(matchParticipantEntity.isFirstTowerAssist()).isEqualTo(
+        assertThat(matchParticipantVO.isFirstTowerAssist()).isEqualTo(
                 matchParticipantEntityForTest.isFirstTowerAssist());
-        assertThat(matchParticipantEntity.isFirstTowerKill()).isEqualTo(
+        assertThat(matchParticipantVO.isFirstTowerKill()).isEqualTo(
                 matchParticipantEntityForTest.isFirstTowerKill());
-        assertThat(matchParticipantEntity.isGameEndedInEarlySurrender()).isEqualTo(
+        assertThat(matchParticipantVO.isGameEndedInEarlySurrender()).isEqualTo(
                 matchParticipantEntityForTest.isGameEndedInEarlySurrender());
-        assertThat(matchParticipantEntity.isGameEndedInSurrender()).isEqualTo(
+        assertThat(matchParticipantVO.isGameEndedInSurrender()).isEqualTo(
                 matchParticipantEntityForTest.isGameEndedInSurrender());
-        assertThat(matchParticipantEntity.getGoldEarned()).isEqualTo(
+        assertThat(matchParticipantVO.getGoldEarned()).isEqualTo(
                 matchParticipantEntityForTest.getGoldEarned());
-        assertThat(matchParticipantEntity.getGoldSpent()).isEqualTo(
+        assertThat(matchParticipantVO.getGoldSpent()).isEqualTo(
                 matchParticipantEntityForTest.getGoldSpent());
-        assertThat(matchParticipantEntity.getIndividualPosition()).isEqualTo(
+        assertThat(matchParticipantVO.getIndividualPosition()).isEqualTo(
                 matchParticipantEntityForTest.getIndividualPosition());
-        assertThat(matchParticipantEntity.getInhibitorKills()).isEqualTo(
+        assertThat(matchParticipantVO.getInhibitorKills()).isEqualTo(
                 matchParticipantEntityForTest.getInhibitorKills());
-        assertThat(matchParticipantEntity.getInhibitorTakedowns()).isEqualTo(
+        assertThat(matchParticipantVO.getInhibitorTakedowns()).isEqualTo(
                 matchParticipantEntityForTest.getInhibitorTakedowns());
-        assertThat(matchParticipantEntity.getInhibitorsLost()).isEqualTo(
+        assertThat(matchParticipantVO.getInhibitorsLost()).isEqualTo(
                 matchParticipantEntityForTest.getInhibitorsLost());
-        assertThat(matchParticipantEntity.getItem0()).isEqualTo(
+        assertThat(matchParticipantVO.getItem0()).isEqualTo(
                 matchParticipantEntityForTest.getItem0());
-        assertThat(matchParticipantEntity.getItem1()).isEqualTo(
+        assertThat(matchParticipantVO.getItem1()).isEqualTo(
                 matchParticipantEntityForTest.getItem1());
-        assertThat(matchParticipantEntity.getItem2()).isEqualTo(
+        assertThat(matchParticipantVO.getItem2()).isEqualTo(
                 matchParticipantEntityForTest.getItem2());
-        assertThat(matchParticipantEntity.getItem3()).isEqualTo(
+        assertThat(matchParticipantVO.getItem3()).isEqualTo(
                 matchParticipantEntityForTest.getItem3());
-        assertThat(matchParticipantEntity.getItem4()).isEqualTo(
+        assertThat(matchParticipantVO.getItem4()).isEqualTo(
                 matchParticipantEntityForTest.getItem4());
-        assertThat(matchParticipantEntity.getItem5()).isEqualTo(
+        assertThat(matchParticipantVO.getItem5()).isEqualTo(
                 matchParticipantEntityForTest.getItem5());
-        assertThat(matchParticipantEntity.getItem6()).isEqualTo(
+        assertThat(matchParticipantVO.getItem6()).isEqualTo(
                 matchParticipantEntityForTest.getItem6());
-        assertThat(matchParticipantEntity.getItemsPurchased()).isEqualTo(
+        assertThat(matchParticipantVO.getItemsPurchased()).isEqualTo(
                 matchParticipantEntityForTest.getItemsPurchased());
-        assertThat(matchParticipantEntity.getKillingSprees()).isEqualTo(
+        assertThat(matchParticipantVO.getKillingSprees()).isEqualTo(
                 matchParticipantEntityForTest.getKillingSprees());
-        assertThat(matchParticipantEntity.getKills()).isEqualTo(
+        assertThat(matchParticipantVO.getKills()).isEqualTo(
                 matchParticipantEntityForTest.getKills());
-        assertThat(matchParticipantEntity.getLane()).isEqualTo(
+        assertThat(matchParticipantVO.getLane()).isEqualTo(
                 matchParticipantEntityForTest.getLane());
-        assertThat(matchParticipantEntity.getLargestCriticalStrike()).isEqualTo(
+        assertThat(matchParticipantVO.getLargestCriticalStrike()).isEqualTo(
                 matchParticipantEntityForTest.getLargestCriticalStrike());
-        assertThat(matchParticipantEntity.getLargestKillingSpree()).isEqualTo(
+        assertThat(matchParticipantVO.getLargestKillingSpree()).isEqualTo(
                 matchParticipantEntityForTest.getLargestKillingSpree());
-        assertThat(matchParticipantEntity.getLongestTimeSpentLiving()).isEqualTo(
+        assertThat(matchParticipantVO.getLongestTimeSpentLiving()).isEqualTo(
                 matchParticipantEntityForTest.getLongestTimeSpentLiving());
-        assertThat(matchParticipantEntity.getMagicDamageDealt()).isEqualTo(
+        assertThat(matchParticipantVO.getMagicDamageDealt()).isEqualTo(
                 matchParticipantEntityForTest.getMagicDamageDealt());
-        assertThat(matchParticipantEntity.getMagicDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantVO.getMagicDamageDealtToChampions()).isEqualTo(
                 matchParticipantEntityForTest.getMagicDamageDealtToChampions());
-        assertThat(matchParticipantEntity.getMagicDamageTaken()).isEqualTo(
+        assertThat(matchParticipantVO.getMagicDamageTaken()).isEqualTo(
                 matchParticipantEntityForTest.getMagicDamageTaken());
-        assertThat(matchParticipantEntity.getNeutralMinionsKilled()).isEqualTo(
+        assertThat(matchParticipantVO.getNeutralMinionsKilled()).isEqualTo(
                 matchParticipantEntityForTest.getNeutralMinionsKilled());
-        assertThat(matchParticipantEntity.getNexusKills()).isEqualTo(
+        assertThat(matchParticipantVO.getNexusKills()).isEqualTo(
                 matchParticipantEntityForTest.getNexusKills());
-        assertThat(matchParticipantEntity.getNexusLost()).isEqualTo(
+        assertThat(matchParticipantVO.getNexusLost()).isEqualTo(
                 matchParticipantEntityForTest.getNexusLost());
-        assertThat(matchParticipantEntity.getNexusTakedowns()).isEqualTo(
+        assertThat(matchParticipantVO.getNexusTakedowns()).isEqualTo(
                 matchParticipantEntityForTest.getNexusTakedowns());
-        assertThat(matchParticipantEntity.getObjectivesStolen()).isEqualTo(
+        assertThat(matchParticipantVO.getObjectivesStolen()).isEqualTo(
                 matchParticipantEntityForTest.getObjectivesStolen());
-        assertThat(matchParticipantEntity.getObjectivesStolenAssists()).isEqualTo(
+        assertThat(matchParticipantVO.getObjectivesStolenAssists()).isEqualTo(
                 matchParticipantEntityForTest.getObjectivesStolenAssists());
-        assertThat(matchParticipantEntity.getPentaKills()).isEqualTo(
+        assertThat(matchParticipantVO.getPentaKills()).isEqualTo(
                 matchParticipantEntityForTest.getPentaKills());
-        assertThat(matchParticipantEntity.getPhysicalDamageDealt()).isEqualTo(
+        assertThat(matchParticipantVO.getPhysicalDamageDealt()).isEqualTo(
                 matchParticipantEntityForTest.getPhysicalDamageDealt());
-        assertThat(matchParticipantEntity.getPhysicalDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantVO.getPhysicalDamageDealtToChampions()).isEqualTo(
                 matchParticipantEntityForTest.getPhysicalDamageDealtToChampions());
-        assertThat(matchParticipantEntity.getPhysicalDamageTaken()).isEqualTo(
+        assertThat(matchParticipantVO.getPhysicalDamageTaken()).isEqualTo(
                 matchParticipantEntityForTest.getPhysicalDamageTaken());
-        assertThat(matchParticipantEntity.getProfileIcon()).isEqualTo(
+        assertThat(matchParticipantVO.getProfileIcon()).isEqualTo(
                 matchParticipantEntityForTest.getProfileIcon());
-        assertThat(matchParticipantEntity.getQuadraKills()).isEqualTo(
+        assertThat(matchParticipantVO.getQuadraKills()).isEqualTo(
                 matchParticipantEntityForTest.getQuadraKills());
-        assertThat(matchParticipantEntity.getRiotIdName()).isEqualTo(
+        assertThat(matchParticipantVO.getRiotIdName()).isEqualTo(
                 matchParticipantEntityForTest.getRiotIdName());
-        assertThat(matchParticipantEntity.getRiotIdTagline()).isEqualTo(
+        assertThat(matchParticipantVO.getRiotIdTagline()).isEqualTo(
                 matchParticipantEntityForTest.getRiotIdTagline());
-        assertThat(matchParticipantEntity.getRole()).isEqualTo(
+        assertThat(matchParticipantVO.getRole()).isEqualTo(
                 matchParticipantEntityForTest.getRole());
-        assertThat(matchParticipantEntity.getSightWardsBoughtInGame()).isEqualTo(
+        assertThat(matchParticipantVO.getSightWardsBoughtInGame()).isEqualTo(
                 matchParticipantEntityForTest.getSightWardsBoughtInGame());
-        assertThat(matchParticipantEntity.getSpell1Casts()).isEqualTo(
+        assertThat(matchParticipantVO.getSpell1Casts()).isEqualTo(
                 matchParticipantEntityForTest.getSpell1Casts());
-        assertThat(matchParticipantEntity.getSpell2Casts()).isEqualTo(
+        assertThat(matchParticipantVO.getSpell2Casts()).isEqualTo(
                 matchParticipantEntityForTest.getSpell2Casts());
-        assertThat(matchParticipantEntity.getSpell3Casts()).isEqualTo(
+        assertThat(matchParticipantVO.getSpell3Casts()).isEqualTo(
                 matchParticipantEntityForTest.getSpell3Casts());
-        assertThat(matchParticipantEntity.getSpell4Casts()).isEqualTo(
+        assertThat(matchParticipantVO.getSpell4Casts()).isEqualTo(
                 matchParticipantEntityForTest.getSpell4Casts());
-        assertThat(matchParticipantEntity.getSummoner1Casts()).isEqualTo(
+        assertThat(matchParticipantVO.getSummoner1Casts()).isEqualTo(
                 matchParticipantEntityForTest.getSummoner1Casts());
-        assertThat(matchParticipantEntity.getSummoner1Id()).isEqualTo(
+        assertThat(matchParticipantVO.getSummoner1Id()).isEqualTo(
                 matchParticipantEntityForTest.getSummoner1Id());
-        assertThat(matchParticipantEntity.getSummoner2Casts()).isEqualTo(
+        assertThat(matchParticipantVO.getSummoner2Casts()).isEqualTo(
                 matchParticipantEntityForTest.getSummoner2Casts());
-        assertThat(matchParticipantEntity.getSummoner2Id()).isEqualTo(
+        assertThat(matchParticipantVO.getSummoner2Id()).isEqualTo(
                 matchParticipantEntityForTest.getSummoner2Id());
-        assertThat(matchParticipantEntity.getSummonerId()).isEqualTo(
+        assertThat(matchParticipantVO.getSummonerId()).isEqualTo(
                 matchParticipantEntityForTest.getSummonerId());
-        assertThat(matchParticipantEntity.getSummonerLevel()).isEqualTo(
+        assertThat(matchParticipantVO.getSummonerLevel()).isEqualTo(
                 matchParticipantEntityForTest.getSummonerLevel());
-        assertThat(matchParticipantEntity.getSummonerName()).isEqualTo(
+        assertThat(matchParticipantVO.getSummonerName()).isEqualTo(
                 matchParticipantEntityForTest.getSummonerName());
-        assertThat(matchParticipantEntity.isTeamEarlySurrendered()).isEqualTo(
+        assertThat(matchParticipantVO.isTeamEarlySurrendered()).isEqualTo(
                 matchParticipantEntityForTest.isTeamEarlySurrendered());
-        assertThat(matchParticipantEntity.getTeamId()).isEqualTo(
+        assertThat(matchParticipantVO.getTeamId()).isEqualTo(
                 matchParticipantEntityForTest.getTeamId());
-        assertThat(matchParticipantEntity.getTeamPosition()).isEqualTo(
+        assertThat(matchParticipantVO.getTeamPosition()).isEqualTo(
                 matchParticipantEntityForTest.getTeamPosition());
-        assertThat(matchParticipantEntity.getTimeCCingOthers()).isEqualTo(
+        assertThat(matchParticipantVO.getTimeCCingOthers()).isEqualTo(
                 matchParticipantEntityForTest.getTimeCCingOthers());
-        assertThat(matchParticipantEntity.getTimePlayed()).isEqualTo(
+        assertThat(matchParticipantVO.getTimePlayed()).isEqualTo(
                 matchParticipantEntityForTest.getTimePlayed());
-        assertThat(matchParticipantEntity.getTotalDamageDealt()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalDamageDealt()).isEqualTo(
                 matchParticipantEntityForTest.getTotalDamageDealt());
-        assertThat(matchParticipantEntity.getTotalDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalDamageDealtToChampions()).isEqualTo(
                 matchParticipantEntityForTest.getTotalDamageDealtToChampions());
-        assertThat(matchParticipantEntity.getTotalDamageTaken()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalDamageTaken()).isEqualTo(
                 matchParticipantEntityForTest.getTotalDamageTaken());
-        assertThat(matchParticipantEntity.getTotalHeal()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalHeal()).isEqualTo(
                 matchParticipantEntityForTest.getTotalHeal());
-        assertThat(matchParticipantEntity.getTotalHealsOnTeammates()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalHealsOnTeammates()).isEqualTo(
                 matchParticipantEntityForTest.getTotalHealsOnTeammates());
-        assertThat(matchParticipantEntity.getTotalMinionsKilled()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalMinionsKilled()).isEqualTo(
                 matchParticipantEntityForTest.getTotalMinionsKilled());
-        assertThat(matchParticipantEntity.getTotalTimeCCDealt()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalTimeCCDealt()).isEqualTo(
                 matchParticipantEntityForTest.getTotalTimeCCDealt());
-        assertThat(matchParticipantEntity.getTotalTimeSpentDead()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalTimeSpentDead()).isEqualTo(
                 matchParticipantEntityForTest.getTotalTimeSpentDead());
-        assertThat(matchParticipantEntity.getTotalUnitsHealed()).isEqualTo(
+        assertThat(matchParticipantVO.getTotalUnitsHealed()).isEqualTo(
                 matchParticipantEntityForTest.getTotalUnitsHealed());
-        assertThat(matchParticipantEntity.getTripleKills()).isEqualTo(
+        assertThat(matchParticipantVO.getTripleKills()).isEqualTo(
                 matchParticipantEntityForTest.getTripleKills());
-        assertThat(matchParticipantEntity.getTrueDamageDealt()).isEqualTo(
+        assertThat(matchParticipantVO.getTrueDamageDealt()).isEqualTo(
                 matchParticipantEntityForTest.getTrueDamageDealt());
-        assertThat(matchParticipantEntity.getTrueDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantVO.getTrueDamageDealtToChampions()).isEqualTo(
                 matchParticipantEntityForTest.getTrueDamageDealtToChampions());
-        assertThat(matchParticipantEntity.getTrueDamageTaken()).isEqualTo(
+        assertThat(matchParticipantVO.getTrueDamageTaken()).isEqualTo(
                 matchParticipantEntityForTest.getTrueDamageTaken());
-        assertThat(matchParticipantEntity.getTurretKills()).isEqualTo(
+        assertThat(matchParticipantVO.getTurretKills()).isEqualTo(
                 matchParticipantEntityForTest.getTurretKills());
-        assertThat(matchParticipantEntity.getTurretTakedowns()).isEqualTo(
+        assertThat(matchParticipantVO.getTurretTakedowns()).isEqualTo(
                 matchParticipantEntityForTest.getTurretTakedowns());
-        assertThat(matchParticipantEntity.getTurretsLost()).isEqualTo(
+        assertThat(matchParticipantVO.getTurretsLost()).isEqualTo(
                 matchParticipantEntityForTest.getTurretsLost());
-        assertThat(matchParticipantEntity.getUnrealKills()).isEqualTo(
+        assertThat(matchParticipantVO.getUnrealKills()).isEqualTo(
                 matchParticipantEntityForTest.getUnrealKills());
-        assertThat(matchParticipantEntity.getVisionScore()).isEqualTo(
+        assertThat(matchParticipantVO.getVisionScore()).isEqualTo(
                 matchParticipantEntityForTest.getVisionScore());
-        assertThat(matchParticipantEntity.getVisionWardsBoughtInGame()).isEqualTo(
+        assertThat(matchParticipantVO.getVisionWardsBoughtInGame()).isEqualTo(
                 matchParticipantEntityForTest.getVisionWardsBoughtInGame());
-        assertThat(matchParticipantEntity.getWardsKilled()).isEqualTo(
+        assertThat(matchParticipantVO.getWardsKilled()).isEqualTo(
                 matchParticipantEntityForTest.getWardsKilled());
-        assertThat(matchParticipantEntity.getWardsPlaced()).isEqualTo(
+        assertThat(matchParticipantVO.getWardsPlaced()).isEqualTo(
                 matchParticipantEntityForTest.getWardsPlaced());
-        assertThat(matchParticipantEntity.isWin()).isEqualTo(
+        assertThat(matchParticipantVO.isWin()).isEqualTo(
                 matchParticipantEntityForTest.isWin());
-        assertThat(matchParticipantEntity.getRrt()).isEqualTo(
+        assertThat(matchParticipantVO.getRrt()).isEqualTo(
                 matchParticipantEntityForTest.getRrt());
     }
 }

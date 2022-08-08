@@ -37,7 +37,7 @@ public class APIFacadeTest {
 
     @Test
     @DisplayName("[API] Get League By Summoner Id")
-    void getLeagueBySummonerId() {
+    void  getLeagueBySummonerId() {
         // given
         String encryptedSummonerId = "qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA";
 

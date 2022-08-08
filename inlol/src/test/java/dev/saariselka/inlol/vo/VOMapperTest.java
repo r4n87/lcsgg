@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -150,5 +151,37 @@ public class VOMapperTest {
         assertThat(entityList.get(0).getNameKo()).isEqualTo("테스트");
         assertThat(entityList.get(0).getImagePath()).isEqualTo("/testimage.png");
 
+    }
+
+    @Test
+    @DisplayName("Convert DdrgonVersionEntityList To DdragonVersionVOList")
+    public void toDdragonVersionVOList() {
+        //given
+        List<DdragonVersionEntity> ddragonVersionEntityList = new ArrayList<>();
+        DdragonVersionEntity ddragonVersionEntity = new DdragonVersionEntity(12345L, "12345", "Y");
+        ddragonVersionEntityList.add(ddragonVersionEntity);
+
+        //when
+        List<DdragonVersionVO> ddragonVersionVOList = voMapper.toDdragonVersionVOList(ddragonVersionEntityList);
+
+        //then
+        assertThat(ddragonVersionVOList.get(0).getId()).isEqualTo(ddragonVersionEntity.getId());
+        assertThat(ddragonVersionVOList.get(0).getVersion()).isEqualTo(ddragonVersionEntity.getVersion());
+        assertThat(ddragonVersionVOList.get(0).getCurrent()).isEqualTo(ddragonVersionEntity.getCurrent());
+    }
+
+    @Test
+    @DisplayName("Convert DdrgonVersionEntity To DdragonVersionVO")
+    public void toDdragonVersionVO() {
+        //given
+        Optional<DdragonVersionEntity> ddragonVersionEntity = Optional.of(new DdragonVersionEntity(12345L, "12345", "Y"));
+
+        //when
+        Optional<DdragonVersionVO> ddragonVersionVO = voMapper.toDdragonVersionVO(ddragonVersionEntity);
+
+        //then
+        assertThat(ddragonVersionVO.get().getId()).isEqualTo(ddragonVersionEntity.get().getId());
+        assertThat(ddragonVersionVO.get().getVersion()).isEqualTo(ddragonVersionEntity.get().getVersion());
+        assertThat(ddragonVersionVO.get().getCurrent()).isEqualTo(ddragonVersionEntity.get().getCurrent());
     }
 }

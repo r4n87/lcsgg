@@ -160,15 +160,15 @@ public class DBFacade {
     public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
-        List<MatchParticipantEntity> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
+        List<ParticipantDto> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
 
         String matchId;
         String dataVersion;
 
-        for(MatchParticipantEntity match : matchList) {
-            MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMasterByMatchId(match.getMatchParticipantId().getMatchId()).get(0);
+        for(ParticipantDto match : matchList) {
+            MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMasterByMatchId(match.getMatchId()).get(0);
             matchId = matchMasterEntity.getMatchMasterId().getMatchId();
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
 
@@ -190,23 +190,23 @@ public class DBFacade {
             }
 
             //5. Match Participants 정보 생성
-            List<MatchParticipantEntity> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
+            List<ParticipantDto> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
             List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
             List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
             ParticipantDto summonerInfo = new ParticipantDto();
             int blueTeamKills = 0;
             int redTeamKills = 0;
 
-            for(MatchParticipantEntity participantEntity : participantsList) {
-                List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participantEntity.getMatchParticipantId().getPuuid());
+            for(ParticipantDto participant : participantsList) {
+                List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participant.getPuuid());
                 MatchPerksEntity perksEntity = (0 == perksList.size())
                         ? new MatchPerksEntity() : perksList.get(0);
                 String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getPrimaryPerk1()).get(0).getIcon();
                 String subIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getSubStyle()).get(0).getIcon();
                 PerksDto perksDto = new PerksDto(perksEntity, primaryIconPath, subIconPath);
-                ParticipantDto participantDto = new ParticipantDto(participantEntity, perksDto, matchMasterEntity.getGameDuration());
+                ParticipantDto participantDto = new ParticipantDto(participant, perksDto, matchMasterEntity.getGameDuration());
 
-                if(puuid.equals(participantEntity.getMatchParticipantId().getPuuid())) {
+                if(puuid.equals(participant.getPuuid())) {
                     summonerInfo = participantDto;
                     //summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
                 }
@@ -489,11 +489,11 @@ public class DBFacade {
     }
 
     public HashSet<String> getMatchIdListBySummonerPuuid(String puuid) {
-        List<MatchParticipantEntity> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
+        List<ParticipantDto> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
         HashSet<String> matchList = new HashSet<>();
 
-        for(MatchParticipantEntity entity : list) {
-            matchList.add(entity.getMatchParticipantId().getMatchId());
+        for(ParticipantDto participantDto : list) {
+            matchList.add(participantDto.getMatchId());
         }
 
         return matchList;

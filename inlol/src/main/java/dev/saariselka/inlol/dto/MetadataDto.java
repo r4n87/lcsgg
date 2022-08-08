@@ -20,14 +20,14 @@ public class MetadataDto {
     private String matchId;
     private List<String> participants;
 
-    public MetadataDto(MatchMasterEntity matchMasterEntity, List<MatchParticipantEntity> participantsList) {
+    public MetadataDto(MatchMasterEntity matchMasterEntity, List<ParticipantDto> participantsList) {
         List<String> participantsPuuidList = new ArrayList<>();
 
         this.dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
         this.matchId = matchMasterEntity.getMatchMasterId().getMatchId();
 
-        for(MatchParticipantEntity participantEntity : participantsList) {
-            participantsPuuidList.add(participantEntity.getMatchParticipantId().getPuuid());
+        for(ParticipantDto participantDto : participantsList) {
+            participantsPuuidList.add(participantDto.getPuuid());
         }
 
         this.participants = participantsPuuidList;

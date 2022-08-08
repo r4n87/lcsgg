@@ -3,6 +3,8 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.repository.MatchParticipantRepository;
+import dev.saariselka.inlol.vo.MatchParticipantVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,17 +18,22 @@ public class MatchParticipantService {
 
     @Autowired
     private final MatchParticipantRepository matchParticipantRepository;
+    @Autowired
+    private VOMapper voMapper;
 
-    public List<MatchParticipantEntity> findById(MatchParticipantId matchParticipantId) {
-        return matchParticipantRepository.findByMatchParticipantId(matchParticipantId);
+    public List<MatchParticipantVO> findById(MatchParticipantId matchParticipantId) {
+        return voMapper.toMatchParticipantVOList(
+                matchParticipantRepository.findByMatchParticipantId(matchParticipantId));
     }
 
-    public List<MatchParticipantEntity> findByDataVersionAndMatchId(String dataVersion, String matchId) {
-        return matchParticipantRepository.findByMatchParticipantId_DataVersionAndMatchParticipantId_MatchId(dataVersion, matchId);
+    public List<MatchParticipantVO> findByDataVersionAndMatchId(String dataVersion, String matchId) {
+        return voMapper.toMatchParticipantVOList(
+                matchParticipantRepository.findByMatchParticipantId_DataVersionAndMatchParticipantId_MatchId(dataVersion, matchId));
     }
 
-    public List<MatchParticipantEntity> findByPuuid(String puuid) {
-        return matchParticipantRepository.findByMatchParticipantId_PuuidOrderByMatchParticipantId_MatchIdDesc(puuid);
+    public List<MatchParticipantVO> findByPuuid(String puuid) {
+        return voMapper.toMatchParticipantVOList(
+                matchParticipantRepository.findByMatchParticipantId_PuuidOrderByMatchParticipantId_MatchIdDesc(puuid));
     }
 
     public void insert(String puuid, String dataVersion, String matchId, int assists, int baronKills, int bountyLevel, int champExperience,

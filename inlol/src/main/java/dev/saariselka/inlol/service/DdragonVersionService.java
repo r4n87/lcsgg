@@ -3,6 +3,8 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.APIEntity;
 import dev.saariselka.inlol.entity.DdragonVersionEntity;
 import dev.saariselka.inlol.repository.DdragonVersionRepository;
+import dev.saariselka.inlol.vo.DdragonVersionVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,26 +19,22 @@ public class DdragonVersionService {
 
     @Autowired
     private final DdragonVersionRepository ddragonVersionRepository;
+    @Autowired
+    private VOMapper voMapper;
 
-    public List<DdragonVersionEntity> findAll() {
-        List<DdragonVersionEntity> ddragonVersionEntities = new ArrayList<>();
-        ddragonVersionRepository.findAll().forEach(e -> ddragonVersionEntities.add(e));
-
-        return ddragonVersionEntities;
+    public List<DdragonVersionVO> findAll() {
+        return voMapper.toDdragonVersionVOList(ddragonVersionRepository.findAll());
     }
 
-    public Optional<DdragonVersionEntity> findById(Long id) {
-        Optional<DdragonVersionEntity> ddragonVersionEntity = ddragonVersionRepository.findById(id);
-        return ddragonVersionEntity;
+    public Optional<DdragonVersionVO> findById(Long id) {
+        return voMapper.toDdragonVersionVO(ddragonVersionRepository.findById(id));
     }
 
-    public List<DdragonVersionEntity> findByCurrent(String current) {
-        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionRepository.findByCurrent(current);
-        return ddragonVersionEntities;
+    public List<DdragonVersionVO> findByCurrent(String current) {
+        return voMapper.toDdragonVersionVOList(ddragonVersionRepository.findByCurrent(current));
     }
 
-    public List<DdragonVersionEntity> getCurrentDdragonVersion() {
-        List<DdragonVersionEntity> ddragonVersionEntities = ddragonVersionRepository.getCurrentDdragonVersion();
-        return ddragonVersionEntities;
+    public List<DdragonVersionVO> getCurrentDdragonVersion() {
+        return voMapper.toDdragonVersionVOList(ddragonVersionRepository.getCurrentDdragonVersion());
     }
 }

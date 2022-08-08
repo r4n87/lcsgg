@@ -3,6 +3,8 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.APIKeyEntity;
 import dev.saariselka.inlol.entity.DdragonVersionEntity;
 import dev.saariselka.inlol.repository.DdragonVersionRepository;
+import dev.saariselka.inlol.vo.DdragonVersionVO;
+import dev.saariselka.inlol.vo.VOMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +23,21 @@ public class DdragonVersionServiceTest {
     private DdragonVersionService ddragonVersionService;
     @Autowired
     private DdragonVersionRepository ddragonVersionRepository;
+    @Autowired
+    private VOMapper voMapper;
 
     @Test
     @DisplayName("Find All Entities")
     public void findAll() {
         //given
-        List<DdragonVersionEntity> ddragonVersionEntityListA = ddragonVersionService.findAll();
+        List<DdragonVersionVO> ddragonVersionVOListA = ddragonVersionService.findAll();
         ddragonVersionRepository.save(new DdragonVersionEntity("versionA", "currentA"));
 
         //when
-        List<DdragonVersionEntity> ddragonVersionEntityListB = ddragonVersionService.findAll();
+        List<DdragonVersionVO> ddragonVersionVOListB = ddragonVersionService.findAll();
 
         //then
-        assertThat(ddragonVersionEntityListB.size()).isEqualTo(ddragonVersionEntityListA.size() + 1);
+        assertThat(ddragonVersionVOListB.size()).isEqualTo(ddragonVersionVOListA.size() + 1);
     }
 
     @Test
@@ -47,13 +51,13 @@ public class DdragonVersionServiceTest {
         DdragonVersionEntity ddragonVersionEntityForTest = ddragonVersionRepository.save(ddragonVersionEntity);
 
         //when
-        DdragonVersionEntity ddragonVersionEntityFindById
+        DdragonVersionVO ddragonVersionVOFindById
                 = ddragonVersionService.findById(ddragonVersionEntityForTest.getId()).get();
 
         //then
-        assertThat(ddragonVersionEntityFindById.getId()).isEqualTo(ddragonVersionEntityForTest.getId());
-        assertThat(ddragonVersionEntityFindById.getVersion()).isEqualTo(ddragonVersionEntityForTest.getVersion());
-        assertThat(ddragonVersionEntityFindById.getCurrent()).isEqualTo(ddragonVersionEntityForTest.getCurrent());
+        assertThat(ddragonVersionVOFindById.getId()).isEqualTo(ddragonVersionEntityForTest.getId());
+        assertThat(ddragonVersionVOFindById.getVersion()).isEqualTo(ddragonVersionEntityForTest.getVersion());
+        assertThat(ddragonVersionVOFindById.getCurrent()).isEqualTo(ddragonVersionEntityForTest.getCurrent());
     }
 
     @Test
@@ -67,13 +71,13 @@ public class DdragonVersionServiceTest {
         DdragonVersionEntity ddragonVersionEntityForTest = ddragonVersionRepository.save(ddragonVersionEntity);
 
         //when
-        DdragonVersionEntity ddragonVersionEntityFindByCurrent
+        DdragonVersionVO ddragonVersionVOFindByCurrent
                 = ddragonVersionService.findByCurrent(ddragonVersionEntityForTest.getCurrent()).get(0);
 
         //then
-        assertThat(ddragonVersionEntityFindByCurrent.getId()).isEqualTo(ddragonVersionEntityForTest.getId());
-        assertThat(ddragonVersionEntityFindByCurrent.getVersion()).isEqualTo(ddragonVersionEntityForTest.getVersion());
-        assertThat(ddragonVersionEntityFindByCurrent.getCurrent()).isEqualTo(ddragonVersionEntityForTest.getCurrent());
+        assertThat(ddragonVersionVOFindByCurrent.getId()).isEqualTo(ddragonVersionEntityForTest.getId());
+        assertThat(ddragonVersionVOFindByCurrent.getVersion()).isEqualTo(ddragonVersionEntityForTest.getVersion());
+        assertThat(ddragonVersionVOFindByCurrent.getCurrent()).isEqualTo(ddragonVersionEntityForTest.getCurrent());
     }
 
     @Test
@@ -81,7 +85,7 @@ public class DdragonVersionServiceTest {
     public void getCurrentDdragonVersion() {
         //given
         //when
-        DdragonVersionEntity currentDdragonVersion
+        DdragonVersionVO currentDdragonVersion
                 = ddragonVersionService.getCurrentDdragonVersion().get(0);
 
         //then

@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -83,5 +85,141 @@ public class VOMapper {
             matchBanEntityList.add(matchBanEntity);
         }
         return  matchBanEntityList;
+    }
+
+    public List<DdragonVersionVO> toDdragonVersionVOList(List<DdragonVersionEntity> ddragonVersionEntityList) {
+        List<DdragonVersionVO> ddragonVersionVOList = new ArrayList<>();
+        for(DdragonVersionEntity ddragonVersionEntity : ddragonVersionEntityList) {
+            DdragonVersionVO ddragonVersionVO = new DdragonVersionVO(ddragonVersionEntity.getId(), ddragonVersionEntity.getVersion(), ddragonVersionEntity.getCurrent());
+            ddragonVersionVOList.add(ddragonVersionVO);
+        }
+
+        return ddragonVersionVOList;
+    }
+
+    public Optional<DdragonVersionVO> toDdragonVersionVO(Optional<DdragonVersionEntity> ddragonVersionEntity) {
+        Optional<DdragonVersionVO> ddragonVersionVO = Optional.of(new DdragonVersionVO(ddragonVersionEntity.get().getId(), ddragonVersionEntity.get().getVersion(), ddragonVersionEntity.get().getCurrent()));
+
+        return ddragonVersionVO;
+    }
+
+    public List<MatchParticipantVO> toMatchParticipantVOList(List<MatchParticipantEntity> matchParticipantEntityList) {
+        List<MatchParticipantVO> matchParticipantVOList = new ArrayList<>();
+        for(MatchParticipantEntity matchParticipantEntity : matchParticipantEntityList) {
+            MatchParticipantVO matchParticipantVO = new MatchParticipantVO(
+                    matchParticipantEntity.getMatchParticipantId().getPuuid(),
+                    matchParticipantEntity.getMatchParticipantId().getDataVersion(),
+                    matchParticipantEntity.getMatchParticipantId().getMatchId(),
+                    matchParticipantEntity.getMatchParticipantId().getParticipantId(),
+                    matchParticipantEntity.getAssists(),
+                    matchParticipantEntity.getBaronKills(),
+                    matchParticipantEntity.getBountyLevel(),
+                    matchParticipantEntity.getChampExperience(),
+                    matchParticipantEntity.getChampLevel(),
+                    matchParticipantEntity.getChampionId(),
+                    matchParticipantEntity.getChampionName(),
+                    matchParticipantEntity.getChampionNameKR(),
+                    matchParticipantEntity.getChampionImg(),
+                    matchParticipantEntity.getChampionTransform(),
+                    matchParticipantEntity.getConsumablesPurchased(),
+                    matchParticipantEntity.getDamageDealtToBuildings(),
+                    matchParticipantEntity.getDamageDealtToObjectives(),
+                    matchParticipantEntity.getDamageDealtToTurrets(),
+                    matchParticipantEntity.getDamageSelfMitigated(),
+                    matchParticipantEntity.getDeaths(),
+                    matchParticipantEntity.getDetectorWardsPlaced(),
+                    matchParticipantEntity.getDoubleKills(),
+                    matchParticipantEntity.getDragonKills(),
+                    matchParticipantEntity.isFirstBloodAssist(),
+                    matchParticipantEntity.isFirstBloodKill(),
+                    matchParticipantEntity.isFirstTowerAssist(),
+                    matchParticipantEntity.isFirstTowerKill(),
+                    matchParticipantEntity.isGameEndedInEarlySurrender(),
+                    matchParticipantEntity.isGameEndedInSurrender(),
+                    matchParticipantEntity.getGoldEarned(),
+                    matchParticipantEntity.getGoldSpent(),
+                    matchParticipantEntity.getIndividualPosition(),
+                    matchParticipantEntity.getInhibitorKills(),
+                    matchParticipantEntity.getInhibitorTakedowns(),
+                    matchParticipantEntity.getInhibitorsLost(),
+                    matchParticipantEntity.getItem0(),
+                    matchParticipantEntity.getItem1(),
+                    matchParticipantEntity.getItem2(),
+                    matchParticipantEntity.getItem3(),
+                    matchParticipantEntity.getItem4(),
+                    matchParticipantEntity.getItem5(),
+                    matchParticipantEntity.getItem6(),
+                    matchParticipantEntity.getItemsPurchased(),
+                    matchParticipantEntity.getKillingSprees(),
+                    matchParticipantEntity.getKills(),
+                    matchParticipantEntity.getLane(),
+                    matchParticipantEntity.getLargestCriticalStrike(),
+                    matchParticipantEntity.getLargestKillingSpree(),
+                    matchParticipantEntity.getLargestMultiKill(),
+                    matchParticipantEntity.getLongestTimeSpentLiving(),
+                    matchParticipantEntity.getMagicDamageDealt(),
+                    matchParticipantEntity.getMagicDamageDealtToChampions(),
+                    matchParticipantEntity.getMagicDamageTaken(),
+                    matchParticipantEntity.getNeutralMinionsKilled(),
+                    matchParticipantEntity.getNexusKills(),
+                    matchParticipantEntity.getNexusTakedowns(),
+                    matchParticipantEntity.getNexusLost(),
+                    matchParticipantEntity.getObjectivesStolen(),
+                    matchParticipantEntity.getObjectivesStolenAssists(),
+                    matchParticipantEntity.getPentaKills(),
+                    matchParticipantEntity.getPhysicalDamageDealt(),
+                    matchParticipantEntity.getPhysicalDamageDealtToChampions(),
+                    matchParticipantEntity.getPhysicalDamageTaken(),
+                    matchParticipantEntity.getProfileIcon(),
+                    matchParticipantEntity.getQuadraKills(),
+                    matchParticipantEntity.getRiotIdName(),
+                    matchParticipantEntity.getRiotIdTagline(),
+                    matchParticipantEntity.getRole(),
+                    matchParticipantEntity.getSightWardsBoughtInGame(),
+                    matchParticipantEntity.getSpell1Casts(),
+                    matchParticipantEntity.getSpell2Casts(),
+                    matchParticipantEntity.getSpell3Casts(),
+                    matchParticipantEntity.getSpell4Casts(),
+                    matchParticipantEntity.getSummoner1Casts(),
+                    matchParticipantEntity.getSummoner1Id(),
+                    matchParticipantEntity.getSummoner2Casts(),
+                    matchParticipantEntity.getSummoner2Id(),
+                    matchParticipantEntity.getSummonerId(),
+                    matchParticipantEntity.getSummonerLevel(),
+                    matchParticipantEntity.getSummonerName(),
+                    matchParticipantEntity.isTeamEarlySurrendered(),
+                    matchParticipantEntity.getTeamId(),
+                    matchParticipantEntity.getTeamPosition(),
+                    matchParticipantEntity.getTimeCCingOthers(),
+                    matchParticipantEntity.getTimePlayed(),
+                    matchParticipantEntity.getTotalDamageDealt(),
+                    matchParticipantEntity.getTotalDamageDealtToChampions(),
+                    matchParticipantEntity.getTotalDamageShieldedOnTeammates(),
+                    matchParticipantEntity.getTotalDamageTaken(),
+                    matchParticipantEntity.getTotalHeal(),
+                    matchParticipantEntity.getTotalHealsOnTeammates(),
+                    matchParticipantEntity.getTotalMinionsKilled(),
+                    matchParticipantEntity.getTotalTimeCCDealt(),
+                    matchParticipantEntity.getTotalTimeSpentDead(),
+                    matchParticipantEntity.getTotalUnitsHealed(),
+                    matchParticipantEntity.getTripleKills(),
+                    matchParticipantEntity.getTrueDamageDealt(),
+                    matchParticipantEntity.getTrueDamageDealtToChampions(),
+                    matchParticipantEntity.getTrueDamageTaken(),
+                    matchParticipantEntity.getTurretKills(),
+                    matchParticipantEntity.getTurretTakedowns(),
+                    matchParticipantEntity.getTurretsLost(),
+                    matchParticipantEntity.getUnrealKills(),
+                    matchParticipantEntity.getVisionScore(),
+                    matchParticipantEntity.getVisionWardsBoughtInGame(),
+                    matchParticipantEntity.getWardsKilled(),
+                    matchParticipantEntity.getWardsPlaced(),
+                    matchParticipantEntity.isWin(),
+                    matchParticipantEntity.getRrt()
+            );
+            matchParticipantVOList.add(matchParticipantVO);
+        }
+
+        return matchParticipantVOList;
     }
 }
