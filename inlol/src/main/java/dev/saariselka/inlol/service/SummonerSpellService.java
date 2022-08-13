@@ -3,7 +3,6 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.repository.SummonerSpellRepository;
 import dev.saariselka.inlol.vo.SummonerSpellVO;
-import dev.saariselka.inlol.vo.VOMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

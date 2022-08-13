@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.vo.QueueTypeVO;
-import dev.saariselka.inlol.vo.VOMapper;
 import dev.saariselka.inlol.entity.QueueTypeEntity;
 import dev.saariselka.inlol.repository.QueueTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

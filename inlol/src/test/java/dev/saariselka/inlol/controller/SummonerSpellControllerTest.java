@@ -1,8 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.dto.SummonerSpellDto;
-import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.service.SummonerSpellService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

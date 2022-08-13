@@ -1,9 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.dto.SummonerSpellDto;
-import dev.saariselka.inlol.entity.SummonerPerkEntity;
-import dev.saariselka.inlol.entity.SummonerSpellEntity;
 import dev.saariselka.inlol.service.SummonerSpellService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

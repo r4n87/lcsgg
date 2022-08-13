@@ -1,5 +1,6 @@
-package dev.saariselka.inlol.dto;
+package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.vo.*;
