@@ -4,7 +4,6 @@ import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.repository.MatchParticipantRepository;
 import dev.saariselka.inlol.vo.MatchParticipantVO;
-import dev.saariselka.inlol.vo.VOMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

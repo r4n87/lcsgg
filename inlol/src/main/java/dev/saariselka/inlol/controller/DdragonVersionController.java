@@ -1,8 +1,6 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.dto.DdragonVersionDto;
-import dev.saariselka.inlol.dto.DtoMapper;
-import dev.saariselka.inlol.entity.DdragonVersionEntity;
 import dev.saariselka.inlol.service.DdragonVersionService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

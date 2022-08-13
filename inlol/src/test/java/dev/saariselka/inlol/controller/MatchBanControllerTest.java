@@ -1,10 +1,7 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.dto.MatchBanDto;
-import dev.saariselka.inlol.entity.MatchBanEntity;
 import dev.saariselka.inlol.entity.MatchBanId;
-import dev.saariselka.inlol.repository.MatchBanRepository;
 import dev.saariselka.inlol.service.MatchBanService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

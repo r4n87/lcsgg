@@ -1,8 +1,9 @@
 package dev.saariselka.inlol.dto;
 
+import dev.saariselka.inlol.controller.DtoMapper;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.entity.MatchParticipantId;
-import dev.saariselka.inlol.vo.VOMapper;
+import dev.saariselka.inlol.service.VOMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

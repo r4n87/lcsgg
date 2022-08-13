@@ -1,11 +1,10 @@
-package dev.saariselka.inlol.dto;
+package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.DtoMapper;
+import dev.saariselka.inlol.controller.DtoMapper;
+import dev.saariselka.inlol.dto.ChampionDto;
+import dev.saariselka.inlol.dto.DdragonVersionDto;
 import dev.saariselka.inlol.dto.MatchBanDto;
-import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.dto.SummonerSpellDto;
-import dev.saariselka.inlol.entity.MatchBanEntity;
-import dev.saariselka.inlol.entity.MatchBanId;
 import dev.saariselka.inlol.vo.ChampionVO;
 import dev.saariselka.inlol.vo.DdragonVersionVO;
 import dev.saariselka.inlol.vo.MatchBanVO;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 

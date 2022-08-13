@@ -1,7 +1,8 @@
-package dev.saariselka.inlol.vo;
+package dev.saariselka.inlol.service;
 
-import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.*;
+import dev.saariselka.inlol.service.VOMapper;
+import dev.saariselka.inlol.vo.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

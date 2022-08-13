@@ -1,8 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.dto.ParticipantDto;
-import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.service.MatchParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

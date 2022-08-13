@@ -2,7 +2,6 @@ package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.repository.ChampionRepository;
 import dev.saariselka.inlol.vo.ChampionVO;
-import dev.saariselka.inlol.vo.VOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,10 @@
-package dev.saariselka.inlol.vo;
+package dev.saariselka.inlol.service;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 import dev.saariselka.inlol.entity.*;
+import dev.saariselka.inlol.vo.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

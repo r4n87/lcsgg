@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.dto.ChampionDto;
-import dev.saariselka.inlol.dto.DtoMapper;
 import dev.saariselka.inlol.service.ChampionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
