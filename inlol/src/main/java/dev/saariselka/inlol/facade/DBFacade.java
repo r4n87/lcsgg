@@ -8,7 +8,6 @@ import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.*;
 import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
-import dev.saariselka.inlol.utils.JsonParserForLOL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -167,20 +166,16 @@ public class DBFacade {
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
 
             //2. Team 정보 생성
-            List<TeamEntity> teamEntityList = teamController.getTeamsByMatchId(matchId);
-            List<TeamDto> teamDtoList = new ArrayList<>();
+            List<TeamDto> teamDtoList = teamController.getTeamsByMatchId(matchId);
 
-            for(TeamEntity teamEntity : teamEntityList) {
-                List<MatchBanDto> matchBanDtoList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId());
+            for(TeamDto teamDto : teamDtoList) {
+                List<MatchBanDto> matchBanDtoList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, Integer.parseInt(teamDto.getTeamId()));
 
-                MatchObjectivesEntity matchObjectivesEntity = matchObjectivesController
-                        .getMatchObjectivesByMatchIdAndTeamId(matchId, teamEntity.getTeamId().getTeamId())
-                        .get(0);
+                MatchObjectivesDto matchObjectivesDto = matchObjectivesController
+                        .getMatchObjectivesByMatchIdAndTeamId(matchId, Integer.parseInt(teamDto.getTeamId())).get(0);
 
-                ObjectivesDto objectivesDto = new ObjectivesDto(matchObjectivesEntity);
-
-                TeamDto teamDto = new TeamDto(teamEntity,matchBanDtoList,objectivesDto);
-                teamDtoList.add(teamDto);
+                teamDto.setBans(matchBanDtoList);
+                teamDto.setObjectives(matchObjectivesDto);
             }
 
             //5. Match Participants 정보 생성

@@ -2,6 +2,7 @@ package dev.saariselka.inlol.service;
 
 import dev.saariselka.inlol.entity.MatchObjectivesEntity;
 import dev.saariselka.inlol.entity.MatchObjectivesId;
+import dev.saariselka.inlol.vo.MatchObjectivesVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,41 +29,21 @@ public class MatchObjectivesServiceTest {
                 true, 1, false, 0, false, 11, rrt);
 
         // when
-        List<MatchObjectivesEntity> entity = matchObjectivesService.findByMatchObjectivesId(new MatchObjectivesId("KR_9999999999", 100));
-        MatchObjectivesEntity test = entity.get(0);
+        List<MatchObjectivesVO> vo = matchObjectivesService.findByMatchIdAndTeamId("KR_9999999999", 100);
+        MatchObjectivesVO test = vo.get(0);
 
         // then
-        assertThat(test.getMatchObjectivesId().getMatchId()).isEqualTo("KR_9999999999");
-        assertThat(test.getMatchObjectivesId().getTeamId()).isEqualTo(100);
-        assertThat(test.isBaron_first()).isTrue();
-        assertThat(test.getBaron_kills()).isEqualTo(2);
-        assertThat(test.isChampion_first()).isFalse();
-        assertThat(test.getChampion_kills()).isEqualTo(40);
-        assertThat(test.isDragon_first()).isFalse();
-        assertThat(test.getDragon_kills()).isEqualTo(1);
-        assertThat(test.isInhibitor_first()).isTrue();
-        assertThat(test.getInhibitor_kills()).isEqualTo(1);
-        assertThat(test.isRiftherald_first()).isFalse();
-        assertThat(test.getRiftherald_kills()).isEqualTo(0);
-        assertThat(test.isTower_first()).isFalse();
-        assertThat(test.getTower_kills()).isEqualTo(11);
-        assertThat(test.getRrt()).isEqualTo(rrt);
-    }
-
-    @Test
-    @DisplayName("Find All")
-    void findAll() {
-        // given
-        List<MatchObjectivesEntity> before = matchObjectivesService.findAll();
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        matchObjectivesService.insert("KR_9999999999", 100,
-                true, 2, false, 40, false, 1,
-                true, 1, false, 0, false, 11, rrt);
-
-        // when
-        List<MatchObjectivesEntity> entity = matchObjectivesService.findAll();
-
-        // then
-        assertThat(entity.size()).isEqualTo(before.size()+1);
+        assertThat(test.getBaron().isFirst()).isTrue();
+        assertThat(test.getBaron().getKills()).isEqualTo(2);
+        assertThat(test.getChampion().isFirst()).isFalse();
+        assertThat(test.getChampion().getKills()).isEqualTo(40);
+        assertThat(test.getDragon().isFirst()).isFalse();
+        assertThat(test.getDragon().getKills()).isEqualTo(1);
+        assertThat(test.getInhibitor().isFirst()).isTrue();
+        assertThat(test.getInhibitor().getKills()).isEqualTo(1);
+        assertThat(test.getRiftHeraId().isFirst()).isFalse();
+        assertThat(test.getRiftHeraId().getKills()).isEqualTo(0);
+        assertThat(test.getTower().isFirst()).isFalse();
+        assertThat(test.getTower().getKills()).isEqualTo(11);
     }
 }

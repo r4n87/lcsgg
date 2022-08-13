@@ -9,16 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
-public class ObjectivesDtoTest {
-
-    MatchObjectivesEntity entity;
-
-    @BeforeEach
-    void init() {
-        entity = createMatchObjectivesEntity();
-    }
+public class MatchObjectivesDtoTest {
 
     @Test
     @DisplayName("Constructor")
@@ -26,7 +18,14 @@ public class ObjectivesDtoTest {
         // given
 
         // when
-        ObjectivesDto dto = new ObjectivesDto(entity);
+        MatchObjectivesDto dto = new MatchObjectivesDto(
+                new MatchObjectiveDto(true, 2),
+                new MatchObjectiveDto(false, 40),
+                new MatchObjectiveDto(false, 1),
+                new MatchObjectiveDto(true, 1),
+                new MatchObjectiveDto( false, 0),
+                new MatchObjectiveDto(false, 11)
+        );
 
         // then
         assertThat(dto.getBaron().isFirst()).isTrue();
@@ -47,7 +46,14 @@ public class ObjectivesDtoTest {
     @DisplayName("Setter")
     void setter() {
         // given
-        ObjectivesDto dto = new ObjectivesDto(entity);
+        MatchObjectivesDto dto = new MatchObjectivesDto(
+                new MatchObjectiveDto(true, 2),
+                new MatchObjectiveDto(false, 40),
+                new MatchObjectiveDto(false, 1),
+                new MatchObjectiveDto(true, 1),
+                new MatchObjectiveDto( false, 0),
+                new MatchObjectiveDto(false, 11)
+        );
 
         // when
         dto.getBaron().setFirst(false);
@@ -76,12 +82,6 @@ public class ObjectivesDtoTest {
         assertThat(dto.getRiftHeraId().getKills()).isEqualTo(1);
         assertThat(dto.getTower().isFirst()).isTrue();
         assertThat(dto.getTower().getKills()).isEqualTo(0);
-    }
-
-    MatchObjectivesEntity createMatchObjectivesEntity() {
-        return new MatchObjectivesEntity(new MatchObjectivesId("KR_5976412008", 100),
-                true, 2, false, 40, false, 1,
-                true, 1, false, 0, false, 11, new Timestamp(System.currentTimeMillis()));
     }
 
 }

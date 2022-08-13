@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class ObjectiveDto {
+public class MatchObjectiveDto {
     private boolean first;
     private int kills;
 }

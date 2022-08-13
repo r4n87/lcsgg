@@ -3,6 +3,7 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchObjectivesEntity;
 import dev.saariselka.inlol.entity.MatchObjectivesId;
 import dev.saariselka.inlol.repository.MatchObjectivesRepository;
+import dev.saariselka.inlol.vo.MatchObjectivesVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,16 +18,11 @@ public class MatchObjectivesService {
     @Autowired
     private final MatchObjectivesRepository matchObjectivesRepository;
 
-    public List<MatchObjectivesEntity> findAll() {
-        List<MatchObjectivesEntity> objectives = new ArrayList<>();
-        matchObjectivesRepository.findAll().forEach(e -> objectives.add(e));
+    @Autowired
+    private VOMapper mapper;
 
-        return objectives;
-    }
-
-    public List<MatchObjectivesEntity> findByMatchObjectivesId(MatchObjectivesId matchObjectivesId) {
-        List<MatchObjectivesEntity> matchs = matchObjectivesRepository.findByMatchObjectivesId(matchObjectivesId);
-        return matchs;
+    public List<MatchObjectivesVO> findByMatchIdAndTeamId(String matchId, int teamId) {
+        return mapper.toMatchObjectivesVOList(matchObjectivesRepository.findByMatchObjectivesId(new MatchObjectivesId(matchId, teamId)));
     }
 
     public void insert(String matchId, int teamId, boolean baronFirst, int baronKills, boolean championFirst, int championKills,

@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.entity.MatchObjectivesEntity;
-import dev.saariselka.inlol.entity.MatchObjectivesId;
+import dev.saariselka.inlol.dto.MatchObjectivesDto;
 import dev.saariselka.inlol.service.MatchObjectivesService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -18,11 +17,13 @@ public class MatchObjectivesController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    MatchObjectivesService matchObjectivesService;
+    private MatchObjectivesService matchObjectivesService;
 
-    public List<MatchObjectivesEntity> getMatchObjectivesByMatchIdAndTeamId(String matchId, int teamId) {
-        List<MatchObjectivesEntity> objectives = matchObjectivesService.findByMatchObjectivesId(new MatchObjectivesId(matchId, teamId));
-        return objectives;
+    @Autowired
+    private DtoMapper dtoMapper;
+
+    public List<MatchObjectivesDto> getMatchObjectivesByMatchIdAndTeamId(String matchId, int teamId) {
+        return dtoMapper.toMatchObjectivesDtoList(matchObjectivesService.findByMatchIdAndTeamId(matchId, teamId));
     }
 
     public void insertObjectivesInfo(String matchId, int teamId, boolean baronFirst, int baronKills, boolean championFirst,  int championKills,
