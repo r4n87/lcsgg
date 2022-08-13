@@ -223,4 +223,14 @@ public class VOMapper {
 
         return matchParticipantVOList;
     }
+
+    public LeagueMiniSeriesVO toLeagueMiniseriesVO(LeagueMiniSeriesEntity leagueMiniSeriesEntity) {
+        if(leagueMiniSeriesEntity == null) {
+            return null;
+        }
+        else {
+            return new LeagueMiniSeriesVO(leagueMiniSeriesEntity.getLeagueMiniSeriesId().getSummonerId(),leagueMiniSeriesEntity.getLeagueMiniSeriesId().getQueueType(),
+                    leagueMiniSeriesEntity.getLosses(),leagueMiniSeriesEntity.getProgress(), leagueMiniSeriesEntity.getTarget(), leagueMiniSeriesEntity.getWins());
+        }
+    }
 }

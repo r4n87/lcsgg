@@ -207,4 +207,14 @@ public class DtoMapper {
         return participantDtoList;
     }
 
+    public LeagueMiniSeriesDto toLeagueMiniseriesDto(LeagueMiniSeriesVO leagueMiniSeriesVO) {
+        if(leagueMiniSeriesVO == null) {
+            return new LeagueMiniSeriesDto();
+        }
+        else {
+            return new LeagueMiniSeriesDto(leagueMiniSeriesVO.getSummonerId(),leagueMiniSeriesVO.getQueueType(), leagueMiniSeriesVO.getWins(),
+                    leagueMiniSeriesVO.getLosses(), leagueMiniSeriesVO.getTarget(),leagueMiniSeriesVO.getProgress().toCharArray());
+        }
+
+    }
 }

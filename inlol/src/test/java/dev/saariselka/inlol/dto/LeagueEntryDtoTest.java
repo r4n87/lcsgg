@@ -37,9 +37,8 @@ public class LeagueEntryDtoTest {
         boolean freshBlood = false;
         boolean inactive = false;
 
-        LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),leagueMiniSeries_losses,progress,target,leagueMiniSeries_wins,rrt);
         LeagueEntryEntity leagueEntryEntity = new LeagueEntryEntity(new LeagueEntryId(summonerId,queueType),leagueId,summonerName,tier,ranks,leaguePoints,leagueEntry_wins,leagueEntry_losses,hotStreak,veteran,freshBlood,inactive,rrt);
-        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
+        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(summonerId,queueType,leagueMiniSeries_wins,leagueMiniSeries_losses,target,progress.toCharArray());
 
         // When
         LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity,leagueMiniSeriesDto);
@@ -94,10 +93,8 @@ public class LeagueEntryDtoTest {
         boolean freshBlood = false;
         boolean inactive = false;
 
-        LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),leagueMiniSeries_losses,progress,target,leagueMiniSeries_wins,rrt);
-        LeagueMiniSeriesEntity tobe_leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(tobe_summonerId,tobe_queueType),tobe_leagueMiniSeries_losses,progress,target,tobe_leagueMiniSeries_wins,rrt);
-        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
-        LeagueMiniSeriesDto tobe_leagueMiniSeriesDto = new LeagueMiniSeriesDto(tobe_leagueMiniSeriesEntity);
+        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(summonerId,queueType,leagueMiniSeries_wins,leagueMiniSeries_losses,target,progress.toCharArray());
+        LeagueMiniSeriesDto tobe_leagueMiniSeriesDto = new LeagueMiniSeriesDto(tobe_summonerId,tobe_queueType,tobe_leagueMiniSeries_wins,tobe_leagueMiniSeries_losses,tobe_target,tobe_progress.toCharArray());
         LeagueEntryEntity leagueEntryEntity = new LeagueEntryEntity(new LeagueEntryId(summonerId,queueType),leagueId,summonerName,tier,ranks,leaguePoints,leagueEntry_wins,leagueEntry_losses,hotStreak,veteran,freshBlood,inactive,rrt);
         LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity,leagueMiniSeriesDto);
 
