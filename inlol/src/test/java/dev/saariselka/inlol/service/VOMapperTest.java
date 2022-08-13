@@ -185,4 +185,63 @@ public class VOMapperTest {
         assertThat(ddragonVersionVO.get().getVersion()).isEqualTo(ddragonVersionEntity.get().getVersion());
         assertThat(ddragonVersionVO.get().getCurrent()).isEqualTo(ddragonVersionEntity.get().getCurrent());
     }
+
+    @Test
+    @DisplayName("Convert LeagueMiniseriesEntity To LeagueMiniseriesVO")
+    public void toLeagueMiniseriesVO(){
+        // given
+        String summonerId = "testSummonerId";
+        String queueType = "RANKED_SOLO_5x5";
+        int target = 3;
+        int wins = 2;
+        int losses = 1;
+        String progress = "Test";
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),losses,progress,target,wins,rrt);
+
+        //when
+        LeagueMiniSeriesVO leagueMiniSeriesVO = voMapper.toLeagueMiniseriesVO(leagueMiniSeriesEntity);
+
+        //then
+        assertThat(leagueMiniSeriesVO.getSummonerId()).isEqualTo(summonerId);
+        assertThat(leagueMiniSeriesVO.getQueueType()).isEqualTo(queueType);
+        assertThat(leagueMiniSeriesVO.getTarget()).isEqualTo(target);
+        assertThat(leagueMiniSeriesVO.getWins()).isEqualTo(wins);
+        assertThat(leagueMiniSeriesVO.getLosses()).isEqualTo(losses);
+        assertThat(leagueMiniSeriesVO.getProgress()).isEqualTo(progress);
+    }
+
+    @Test
+    @DisplayName("Convert LeagueEntry Entity List To LeagueEntry VO List")
+    public void toLeagueEntryVOList() {
+
+        //given
+        String summonerId = "testSummonerId";
+        String queueType = "RANKED_SOLO_5x5";
+        String leagueId = "05fb99f4-e149-3133-a78e-821597582f9d";
+        String summonerName = "Hide on bush";
+        String tier = "CHALLENGER";
+        String ranks = "I";
+        int leaguePoints = 1008;
+        int wins = 358;
+        int losses = 309;
+        boolean hotStreak = false;
+        boolean veteran = true;
+        boolean freshBlood = false;
+        boolean inactive = false;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+
+        LeagueEntryEntity leagueEntryEntity = new LeagueEntryEntity(new LeagueEntryId(summonerId,queueType),leagueId,summonerName,tier,ranks,leaguePoints,wins,losses,hotStreak,
+                veteran,freshBlood,inactive,rrt);
+        List<LeagueEntryEntity> leagueEntryEntityList = new ArrayList<>();
+        leagueEntryEntityList.add(leagueEntryEntity);
+
+        //when
+        List<LeagueEntryVO> leagueEntryVOList = new ArrayList<>();
+        leagueEntryVOList = voMapper.toLeagueEntryVOList(leagueEntryEntityList);
+
+        //then
+        assertThat(leagueEntryVOList.get(0).getSummonerId()).isEqualTo(summonerId);
+        assertThat(leagueEntryVOList.get(0).getQueueType()).isEqualTo(queueType);
+    }
 }

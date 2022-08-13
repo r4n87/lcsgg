@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.entity.LeagueEntryEntity;
 import dev.saariselka.inlol.entity.LeagueEntryId;
 import dev.saariselka.inlol.repository.LeagueEntryRepository;
@@ -22,6 +23,8 @@ public class LeagueEntryControllerTest {
     private LeagueEntryController leagueEntryController;
     @Autowired
     private LeagueEntryService leagueEntryService;
+    @Autowired
+    private DtoMapper dtoMapper;
 
     @Test
     @DisplayName("Insert Entity")
@@ -46,10 +49,10 @@ public class LeagueEntryControllerTest {
         leagueEntryController.insertLeagueEntryInfo(summonerId,queueType,leagueId,summonerName,tier,ranks,leaguePoints,wins,losses,hotStreak,veteran,freshBlood,inactive,rrt);
 
         // then
-        LeagueEntryEntity leagueEntryEntitySaved = leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId,queueType)).get(0);
+        LeagueEntryDto leagueEntryDtoSaved = dtoMapper.toLeagueEntryDtoList(leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId,queueType))).get(0);
 
-        assertThat(new LeagueEntryId(summonerId,queueType)).isEqualTo(leagueEntryEntitySaved.getLeagueEntryId());
-        assertThat(leagueEntryEntitySaved.getLeagueEntryId()).isNotNull();
+        assertThat(leagueEntryDtoSaved.getSummonerId()).isEqualTo(summonerId);
+        assertThat(leagueEntryDtoSaved.getQueueType()).isEqualTo(queueType);
     }
 
     @Test
@@ -89,14 +92,14 @@ public class LeagueEntryControllerTest {
         leagueEntryService.insert(summonerIdKeria,queueTypeKeria,leagueIdKeria,summonerNameKeria,tierKeria,ranksKeria,leaguePointsKeria,winsKeria,lossesKeria,hotStreakKeria,veteranKeria,freshBloodKeria,inactiveKeria,rrt);
 
         // when
-        LeagueEntryEntity leagueEntryEntityFindFaker = leagueEntryController.getLeagueEntriesByLeagueEntryId(summonerIdFaker, queueTypeFaker).get(0);
-        LeagueEntryEntity leagueEntryEntityFindKeria = leagueEntryController.getLeagueEntriesByLeagueEntryId(summonerIdKeria, queueTypeKeria).get(0);
+        LeagueEntryDto leagueEntryDtoFindFaker = leagueEntryController.getLeagueEntriesByLeagueEntryId(summonerIdFaker, queueTypeFaker).get(0);
+        LeagueEntryDto leagueEntryDtoFindKeria = leagueEntryController.getLeagueEntriesByLeagueEntryId(summonerIdKeria, queueTypeKeria).get(0);
 
         // then
-        assertThat(leagueEntryEntityFindFaker.getSummonerName()).isEqualTo("Hide on bush");
-        assertThat(leagueEntryEntityFindFaker.getLeaguePoints()).isEqualTo(1008);
-        assertThat(leagueEntryEntityFindKeria.getSummonerName()).isEqualTo("역천괴");
-        assertThat(leagueEntryEntityFindKeria.getLeaguePoints()).isEqualTo(1002);
+        assertThat(leagueEntryDtoFindFaker.getSummonerName()).isEqualTo("Hide on bush");
+        assertThat(leagueEntryDtoFindFaker.getLeaguePoints()).isEqualTo(1008);
+        assertThat(leagueEntryDtoFindKeria.getSummonerName()).isEqualTo("역천괴");
+        assertThat(leagueEntryDtoFindKeria.getLeaguePoints()).isEqualTo(1002);
     }
 
     @Test
@@ -136,13 +139,13 @@ public class LeagueEntryControllerTest {
         leagueEntryService.insert(summonerIdKeria,queueTypeKeria,leagueIdKeria,summonerNameKeria,tierKeria,ranksKeria,leaguePointsKeria,winsKeria,lossesKeria,hotStreakKeria,veteranKeria,freshBloodKeria,inactiveKeria,rrt);
 
         // when
-        LeagueEntryEntity leagueEntryEntityFindFaker = leagueEntryController.getLeagueEntriesBySummonerId(summonerIdFaker).get(0);
-        LeagueEntryEntity leagueEntryEntityFindKeria = leagueEntryController.getLeagueEntriesBySummonerId(summonerIdKeria).get(0);
+        LeagueEntryDto leagueEntryDtoFindFaker = leagueEntryController.getLeagueEntriesByLeagueEntryId(summonerIdFaker, queueTypeFaker).get(0);
+        LeagueEntryDto leagueEntryDtoFindKeria = leagueEntryController.getLeagueEntriesByLeagueEntryId(summonerIdKeria, queueTypeKeria).get(0);
 
         // then
-        assertThat(leagueEntryEntityFindFaker.getSummonerName()).isEqualTo("Hide on bush");
-        assertThat(leagueEntryEntityFindFaker.getLeaguePoints()).isEqualTo(1008);
-        assertThat(leagueEntryEntityFindKeria.getSummonerName()).isEqualTo("역천괴");
-        assertThat(leagueEntryEntityFindKeria.getLeaguePoints()).isEqualTo(1002);
+        assertThat(leagueEntryDtoFindFaker.getSummonerName()).isEqualTo("Hide on bush");
+        assertThat(leagueEntryDtoFindFaker.getLeaguePoints()).isEqualTo(1008);
+        assertThat(leagueEntryDtoFindKeria.getSummonerName()).isEqualTo("역천괴");
+        assertThat(leagueEntryDtoFindKeria.getLeaguePoints()).isEqualTo(1002);
     }
 }
