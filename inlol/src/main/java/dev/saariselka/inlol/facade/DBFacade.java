@@ -142,13 +142,7 @@ public class DBFacade {
 
         for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
 
-            LeagueMiniSeriesEntity leagueMiniSeriesEntity = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(summonerId,leagueEntryEntity.getLeagueEntryId().getQueueType());
-            LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto();
-
-            if(leagueMiniSeriesEntity != null)
-            {
-                leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
-            }
+            LeagueMiniSeriesDto leagueMiniSeriesDto = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(summonerId,leagueEntryEntity.getLeagueEntryId().getQueueType());
 
             LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity, leagueMiniSeriesDto);
             result.add(leagueEntryDto);
