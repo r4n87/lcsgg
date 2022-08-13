@@ -233,4 +233,41 @@ public class VOMapper {
                     leagueMiniSeriesEntity.getLosses(),leagueMiniSeriesEntity.getProgress(), leagueMiniSeriesEntity.getTarget(), leagueMiniSeriesEntity.getWins());
         }
     }
+
+    public List<MatchObjectivesVO> toMatchObjectivesVOList(List<MatchObjectivesEntity> entityList)
+    {
+        List<MatchObjectivesVO> voList = new ArrayList<>();
+
+        for(MatchObjectivesEntity entity : entityList)
+        {
+            MatchObjectivesVO vo = new MatchObjectivesVO(
+                    new MatchObjectiveVO(entity.isBaron_first(), entity.getBaron_kills()),
+                    new MatchObjectiveVO(entity.isChampion_first(), entity.getChampion_kills()),
+                    new MatchObjectiveVO(entity.isDragon_first(), entity.getDragon_kills()),
+                    new MatchObjectiveVO(entity.isInhibitor_first(), entity.getInhibitor_kills()),
+                    new MatchObjectiveVO(entity.isRiftherald_first(), entity.getRiftherald_kills()),
+                    new MatchObjectiveVO(entity.isTower_first(), entity.getTower_kills())
+            );
+            voList.add(vo);
+        }
+
+        return voList;
+    }
+
+    public List<TeamVO> toTeamVOList(List<TeamEntity> entityList)
+    {
+        List<TeamVO> voList = new ArrayList<>();
+
+        for(TeamEntity entity : entityList)
+        {
+            TeamVO vo = new TeamVO();
+            vo.setTeamId(String.valueOf(entity.getTeamId().getTeamId()));
+            vo.setWin(String.valueOf(entity.isWin()));
+
+            voList.add(vo);
+        }
+
+        return voList;
+    }
+
 }

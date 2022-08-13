@@ -3,6 +3,7 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.TeamEntity;
 import dev.saariselka.inlol.entity.TeamId;
 import dev.saariselka.inlol.repository.TeamRepository;
+import dev.saariselka.inlol.vo.TeamVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,19 +19,15 @@ public class TeamService {
     @Autowired
     private final TeamRepository TeamRepository;
 
-    public List<TeamEntity> findAll() {
-        List<TeamEntity> teams = new ArrayList<>();
-        TeamRepository.findAll().forEach(e -> teams.add(e));
+    @Autowired
+    VOMapper mapper;
 
-        return teams;
+    public List<TeamVO> findByMatchIdAndTeamId(String matchId, int teamId) {
+        return mapper.toTeamVOList(TeamRepository.findByTeamId(new TeamId(matchId, teamId)));
     }
 
-    public List<TeamEntity> findByMatchIdAndTeamId(TeamId teamId) {
-        return TeamRepository.findByTeamId(teamId);
-    }
-
-    public List<TeamEntity> findByMatchId(String matchId) {
-        return TeamRepository.findByTeamId_MatchId(matchId);
+    public List<TeamVO> findByMatchId(String matchId) {
+        return mapper.toTeamVOList(TeamRepository.findByTeamId_MatchId(matchId));
     }
 
     public void insert(String matchId, int teamId, boolean win, Timestamp rrt) {

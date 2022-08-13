@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.TeamDto;
 import dev.saariselka.inlol.entity.TeamEntity;
 import dev.saariselka.inlol.entity.TeamId;
 import dev.saariselka.inlol.service.TeamService;
@@ -23,19 +24,15 @@ public class TeamController {
     @Autowired
     TeamService TeamService;
 
-    public ResponseEntity<List<TeamEntity>> getAllteams() {
-        List<TeamEntity> teams = TeamService.findAll();
-        return new ResponseEntity<List<TeamEntity>>(teams, HttpStatus.OK);
+    @Autowired
+    DtoMapper mapper;
+
+    public List<TeamDto> getTeamsByMatchId(String matchId) {
+        return mapper.toTeamDtoList(TeamService.findByMatchId(matchId));
     }
 
-    public List<TeamEntity> getTeamsByMatchId(String matchId) {
-        List<TeamEntity> teams = TeamService.findByMatchId(matchId);
-        return teams;
-    }
-
-    public List<TeamEntity> getTeamsByMatchIdAndTeamId(String matchId, int teamId) {
-        List<TeamEntity> teams = TeamService.findByMatchIdAndTeamId(new TeamId(matchId,teamId));
-        return teams;
+    public List<TeamDto> getTeamsByMatchIdAndTeamId(String matchId, int teamId) {
+        return mapper.toTeamDtoList(TeamService.findByMatchIdAndTeamId(matchId, teamId));
     }
 
     public void insertTeamInfo(String matchId, int teamId, boolean win, Timestamp rrt) {

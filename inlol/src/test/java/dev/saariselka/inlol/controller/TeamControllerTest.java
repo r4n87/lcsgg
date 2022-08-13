@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.TeamDto;
 import dev.saariselka.inlol.entity.TeamEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,14 +28,14 @@ public class TeamControllerTest {
         teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamEntity> entity = teamController.getTeamsByMatchIdAndTeamId("KR_9999999999",100);
-        TeamEntity test = entity.get(0);
+        List<TeamDto> dtoList = teamController.getTeamsByMatchIdAndTeamId("KR_9999999999",100);
+        TeamDto test = dtoList.get(0);
 
         // then
-        assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");
-        assertThat(test.getTeamId().getTeamId()).isEqualTo(100);
-        assertThat(test.isWin()).isTrue();
-        assertThat(test.getRrt()).isEqualTo(rrt);
+        //assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");
+        assertThat(test.getTeamId()).isEqualTo("100");
+        assertThat(test.getWin()).isEqualTo("true");
+
     }
 
     @Test
@@ -45,29 +46,13 @@ public class TeamControllerTest {
         teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamEntity> entity = teamController.getTeamsByMatchId("KR_9999999999");
-        TeamEntity test = entity.get(0);
+        List<TeamDto> dtoList = teamController.getTeamsByMatchId("KR_9999999999");
+        TeamDto test = dtoList.get(0);
 
         // then
-        assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");
-        assertThat(test.getTeamId().getTeamId()).isEqualTo(100);
-        assertThat(test.isWin()).isTrue();
-        assertThat(test.getRrt()).isEqualTo(rrt);
-    }
-
-    @Test
-    @DisplayName("Get All")
-    void getAllTeams() {
-        // given
-        List<TeamEntity> before = teamController.getAllteams().getBody();
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
-
-        // when
-        List<TeamEntity> entity = teamController.getAllteams().getBody();
-
-        // then
-        assertThat(entity.size()).isEqualTo(before.size()+1);
+        //assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");
+        assertThat(test.getTeamId()).isEqualTo("100");
+        assertThat(test.getWin()).isEqualTo("true");
     }
 
 }

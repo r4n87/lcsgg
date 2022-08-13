@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class QueueTypeVOTest {
     @Test
     @DisplayName("Constructor")
-    void Constructor() {
+    void constructor() {
         // given
 
         // when

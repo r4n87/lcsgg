@@ -52,6 +52,9 @@ public class DtoMapper {
     public List<MatchBanDto> toMatchBanDtoList(List<MatchBanVO> matchBanVOList) {
         List<MatchBanDto> matchBanDtoList = new ArrayList<>();
 
+        if(matchBanVOList == null)
+            return matchBanDtoList;
+
         for(MatchBanVO matchBanVO : matchBanVOList) {
             MatchBanDto matchBanDto = new MatchBanDto(matchBanVO.getMatchId(),matchBanVO.getPickTurn(),matchBanVO.getTeamId(),matchBanVO.getChampionId());
             matchBanDtoList.add(matchBanDto);
@@ -87,6 +90,10 @@ public class DtoMapper {
 
     public List<ParticipantDto> toParticipantDtoList(List<MatchParticipantVO> matchParticipantVOList) {
         List<ParticipantDto> participantDtoList = new ArrayList<>();
+
+        if(matchParticipantVOList == null)
+            return participantDtoList;
+
         for(MatchParticipantVO matchParticipantVO : matchParticipantVOList) {
             ParticipantDto participantDto = new ParticipantDto(
                     new MatchParticipantEntity(
@@ -216,5 +223,51 @@ public class DtoMapper {
                     leagueMiniSeriesVO.getLosses(), leagueMiniSeriesVO.getTarget(),leagueMiniSeriesVO.getProgress().toCharArray());
         }
 
+    }
+
+    public List<MatchObjectivesDto> toMatchObjectivesDtoList(List<MatchObjectivesVO> voList)
+    {
+        List<MatchObjectivesDto> dtoList = new ArrayList<>();
+
+        for(MatchObjectivesVO vo : voList) {
+            MatchObjectivesDto dto = toMatchObjectivesDto(vo);
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
+
+    public MatchObjectivesDto toMatchObjectivesDto(MatchObjectivesVO vo)
+    {
+        if(vo == null)
+            return new MatchObjectivesDto();
+
+        return new MatchObjectivesDto(
+                new MatchObjectiveDto(vo.getBaron().isFirst(), vo.getBaron().getKills()),
+                new MatchObjectiveDto(vo.getChampion().isFirst(), vo.getChampion().getKills()),
+                new MatchObjectiveDto(vo.getDragon().isFirst(), vo.getDragon().getKills()),
+                new MatchObjectiveDto(vo.getInhibitor().isFirst(), vo.getInhibitor().getKills()),
+                new MatchObjectiveDto(vo.getRiftHeraId().isFirst(), vo.getRiftHeraId().getKills()),
+                new MatchObjectiveDto(vo.getTower().isFirst(), vo.getTower().getKills())
+        );
+    }
+
+
+    public List<TeamDto> toTeamDtoList(List<TeamVO> voList)
+    {
+        List<TeamDto> dtoList = new ArrayList<>();
+
+        for(TeamVO vo : voList)
+        {
+            TeamDto dto = new TeamDto(
+                    toMatchBanDtoList(vo.getBans()),
+                    toMatchObjectivesDto(vo.getObjectives()),
+                    vo.getTeamId(),
+                    vo.getWin(),
+                    vo.getTeamKills(),
+                    toParticipantDtoList(vo.getParticipants())
+            );
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

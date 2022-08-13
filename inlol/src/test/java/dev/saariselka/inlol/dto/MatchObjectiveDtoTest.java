@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class ObjectiveDtoTest {
+public class MatchObjectiveDtoTest {
     boolean first;
     int kills;
 
@@ -21,7 +21,7 @@ public class ObjectiveDtoTest {
     public void testLombokGetFunction() {
         //given
         //when
-        ObjectiveDto objectiveDto = new ObjectiveDto(first, kills);
+        MatchObjectiveDto objectiveDto = new MatchObjectiveDto(first, kills);
 
         //then
         assertThat(objectiveDto.isFirst()).isEqualTo(first);
@@ -32,7 +32,7 @@ public class ObjectiveDtoTest {
     @DisplayName("ObjectiveDto Lombok Set Function Test")
     public void testLombokSetFunction() {
         //given
-        ObjectiveDto objectiveDto = new ObjectiveDto(first, kills);
+        MatchObjectiveDto objectiveDto = new MatchObjectiveDto(first, kills);
 
         //when
         objectiveDto.setFirst(false);
