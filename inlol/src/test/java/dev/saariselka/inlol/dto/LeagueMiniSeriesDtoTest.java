@@ -23,10 +23,8 @@ public class LeagueMiniSeriesDtoTest {
         int wins = 1;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),losses,progress,target,wins,rrt);
-
         // When
-        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
+        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(summonerId,queueType,wins,losses,target,progress.toCharArray());
 
         // Then
         assertThat(leagueMiniSeriesDto.getSummonerId()).isEqualTo(summonerId);
@@ -55,9 +53,7 @@ public class LeagueMiniSeriesDtoTest {
         int tobe_wins = 2;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        LeagueMiniSeriesEntity leagueMiniSeriesEntity = new LeagueMiniSeriesEntity(new LeagueMiniSeriesId(summonerId,queueType),losses,progress,target,wins,rrt);
-
-        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(leagueMiniSeriesEntity);
+        LeagueMiniSeriesDto leagueMiniSeriesDto = new LeagueMiniSeriesDto(summonerId,queueType,wins,losses,target,progress.toCharArray());
 
         // When
         leagueMiniSeriesDto.setSummonerId(tobe_summonerId);

@@ -1,10 +1,7 @@
 package dev.saariselka.inlol.facade;
 
 import dev.saariselka.inlol.controller.*;
-import dev.saariselka.inlol.dto.ChampionDto;
-import dev.saariselka.inlol.dto.LeagueEntryDto;
-import dev.saariselka.inlol.dto.SummonerDto;
-import dev.saariselka.inlol.dto.SummonerSpellDto;
+import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.repository.DdragonVersionRepository;
 import dev.saariselka.inlol.service.MatchParticipantService;
@@ -308,7 +305,7 @@ public class DBFacadeTest {
         // when
         dbFacade.setLeagueInfo(leagueInfos);
         LeagueEntryEntity find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
-        LeagueMiniSeriesEntity miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "RANKED_SOLO_5x5");
+        LeagueMiniSeriesDto miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "RANKED_SOLO_5x5");
 
         // then
         assertThat(find.getLeagueEntryId().getSummonerId()).isEqualTo("TestSummonerId");
@@ -324,12 +321,12 @@ public class DBFacadeTest {
         assertThat(find.isVeteran()).isFalse();
         assertThat(find.isFreshBlood()).isTrue();
         assertThat(find.isInactive()).isFalse();
-        assertThat(miniFind.getLeagueMiniSeriesId().getSummonerId()).isEqualTo("TestSummonerId");
-        assertThat(miniFind.getLeagueMiniSeriesId().getQueueType()).isEqualTo("RANKED_SOLO_5x5");
+        assertThat(miniFind.getSummonerId()).isEqualTo("TestSummonerId");
+        assertThat(miniFind.getQueueType()).isEqualTo("RANKED_SOLO_5x5");
         assertThat(miniFind.getWins()).isEqualTo(2);
         assertThat(miniFind.getLosses()).isEqualTo(1);
         assertThat(miniFind.getTarget()).isEqualTo(3);
-        assertThat(miniFind.getProgress()).isEqualTo("ABCDE");
+        assertThat(String.valueOf(miniFind.getProgress())).isEqualTo("ABCDE");
     }
 
     @Test
@@ -341,7 +338,7 @@ public class DBFacadeTest {
         // when
         dbFacade.setLeagueInfo(leagueInfos);
         LeagueEntryEntity find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
-        LeagueMiniSeriesEntity miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "RANKED_FLEX_SR");
+        LeagueMiniSeriesDto miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "RANKED_FLEX_SR");
 
         // then
         assertThat(find.getLeagueEntryId().getSummonerId()).isEqualTo("TestSummonerId");
@@ -357,12 +354,12 @@ public class DBFacadeTest {
         assertThat(find.isVeteran()).isFalse();
         assertThat(find.isFreshBlood()).isTrue();
         assertThat(find.isInactive()).isFalse();
-        assertThat(miniFind.getLeagueMiniSeriesId().getSummonerId()).isEqualTo("TestSummonerId");
-        assertThat(miniFind.getLeagueMiniSeriesId().getQueueType()).isEqualTo("RANKED_FLEX_SR");
+        assertThat(miniFind.getSummonerId()).isEqualTo("TestSummonerId");
+        assertThat(miniFind.getQueueType()).isEqualTo("RANKED_FLEX_SR");
         assertThat(miniFind.getWins()).isEqualTo(2);
         assertThat(miniFind.getLosses()).isEqualTo(1);
         assertThat(miniFind.getTarget()).isEqualTo(3);
-        assertThat(miniFind.getProgress()).isEqualTo("ABCDE");
+        assertThat(String.valueOf(miniFind.getProgress())).isEqualTo("ABCDE");
     }
 
     @Test
@@ -375,11 +372,11 @@ public class DBFacadeTest {
         // when
         dbFacade.setLeagueInfo(leagueInfos);
         List<LeagueEntryEntity> find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId");
-        LeagueMiniSeriesEntity miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "TestType");
+        LeagueMiniSeriesDto miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "TestType");
 
         // then
         assertThat(find.isEmpty()).isTrue();
-        assertThat(miniFind).isNull();
+        assertThat(miniFind.getSummonerId()).isNull();
     }
 
     @Test
@@ -678,7 +675,6 @@ public class DBFacadeTest {
         ArrayList<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
 
         // then
-
         for(LeagueEntryDto dto : test) {
             if(dto.getQueueType().equals("RANKED_FLEX_SR"))
             {

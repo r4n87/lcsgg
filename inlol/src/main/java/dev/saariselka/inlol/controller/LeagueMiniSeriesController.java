@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.LeagueMiniSeriesDto;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesEntity;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesId;
 import dev.saariselka.inlol.service.LeagueMiniSeriesService;
@@ -21,9 +22,11 @@ public class LeagueMiniSeriesController {
 
     @Autowired
     LeagueMiniSeriesService leagueMiniSeriesService;
+    @Autowired
+    DtoMapper dtoMapper;
 
-    public LeagueMiniSeriesEntity getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(String summonerId, String queueType) {
-        return leagueMiniSeriesService.findByLeagueMiniSeriesId(new LeagueMiniSeriesId(summonerId, queueType));
+    public LeagueMiniSeriesDto getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(String summonerId, String queueType) {
+        return dtoMapper.toLeagueMiniseriesDto(leagueMiniSeriesService.findByLeagueMiniSeriesId(new LeagueMiniSeriesId(summonerId, queueType)));
     }
 
     public void insertLeagueMiniSeriesInfo(String summonerId, String queueType, int losses, String progress, int target, int wins, Timestamp rrt) {

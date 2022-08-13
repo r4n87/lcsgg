@@ -3,6 +3,7 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesEntity;
 import dev.saariselka.inlol.entity.LeagueMiniSeriesId;
 import dev.saariselka.inlol.repository.LeagueMiniSeriesRepository;
+import dev.saariselka.inlol.vo.LeagueMiniSeriesVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class LeagueMiniSeriesServiceTest {
     private LeagueMiniSeriesService leagueMiniSeriesService;
     @Autowired
     private LeagueMiniSeriesRepository leagueMiniSeriesRepository;
+    @Autowired
+    private VOMapper voMapper;
 
     @Test
     @DisplayName("Insert Entity")
@@ -40,10 +43,10 @@ public class LeagueMiniSeriesServiceTest {
         leagueMiniSeriesService.insert(summonerId,queueType,losses,progress,target,wins,rrt);
 
         // then
-        LeagueMiniSeriesEntity leagueMiniSeriesEntitySaved = leagueMiniSeriesRepository.findByLeagueMiniSeriesId(new LeagueMiniSeriesId(summonerId, queueType));
+        LeagueMiniSeriesVO leagueMiniSeriesVOSaved = voMapper.toLeagueMiniseriesVO(leagueMiniSeriesRepository.findByLeagueMiniSeriesId(new LeagueMiniSeriesId(summonerId, queueType)));
 
-        assertThat(new LeagueMiniSeriesId(summonerId, queueType)).isEqualTo(leagueMiniSeriesEntitySaved.getLeagueMiniSeriesId());
-        assertThat(leagueMiniSeriesEntitySaved.getLeagueMiniSeriesId()).isNotNull();
+        assertThat(leagueMiniSeriesVOSaved.getSummonerId()).isEqualTo(summonerId);
+        assertThat(leagueMiniSeriesVOSaved.getQueueType()).isEqualTo(queueType);
         assertThat(leagueMiniSeriesRepository.count()).isGreaterThan(0);
     }
 
@@ -73,14 +76,14 @@ public class LeagueMiniSeriesServiceTest {
         LeagueMiniSeriesEntity leagueMiniSeriesEntitySavedKeria = leagueMiniSeriesRepository.save(leagueMiniSeriesEntityKeria);
 
         // when
-        LeagueMiniSeriesEntity leagueMiniSeriesEntityFindFaker = leagueMiniSeriesService.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedFaker.getLeagueMiniSeriesId());
-        LeagueMiniSeriesEntity leagueMiniSeriesEntityFindKeria = leagueMiniSeriesService.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedKeria.getLeagueMiniSeriesId());
+        LeagueMiniSeriesVO leagueMiniSeriesVOFindFaker = leagueMiniSeriesService.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedFaker.getLeagueMiniSeriesId());
+        LeagueMiniSeriesVO leagueMiniSeriesVOFindKeria = leagueMiniSeriesService.findByLeagueMiniSeriesId(leagueMiniSeriesEntitySavedKeria.getLeagueMiniSeriesId());
 
         // then
         assertThat(leagueMiniSeriesRepository.count()).isGreaterThan(0);
-        assertThat(leagueMiniSeriesEntityFindFaker.getLeagueMiniSeriesId().getSummonerId()).isEqualTo("qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA");
-        assertThat(leagueMiniSeriesEntityFindFaker.getWins()).isEqualTo(2);
-        assertThat(leagueMiniSeriesEntityFindKeria.getLeagueMiniSeriesId().getSummonerId()).isEqualTo("WZ5VlMpcG1fdbCMf2EKYRgcl6JPMljsZjaJrWeLqAAjoWVc");
-        assertThat(leagueMiniSeriesEntityFindKeria.getWins()).isEqualTo(1);
+        assertThat(leagueMiniSeriesVOFindFaker.getSummonerId()).isEqualTo("qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA");
+        assertThat(leagueMiniSeriesVOFindFaker.getWins()).isEqualTo(2);
+        assertThat(leagueMiniSeriesVOFindKeria.getSummonerId()).isEqualTo("WZ5VlMpcG1fdbCMf2EKYRgcl6JPMljsZjaJrWeLqAAjoWVc");
+        assertThat(leagueMiniSeriesVOFindKeria.getWins()).isEqualTo(1);
     }
 }
