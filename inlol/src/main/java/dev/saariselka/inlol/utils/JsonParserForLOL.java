@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dev.saariselka.inlol.controller.SummonerSpellController;
 import dev.saariselka.inlol.dto.ChampionDto;
+import dev.saariselka.inlol.dto.SummonerPerkDto;
 import dev.saariselka.inlol.dto.SummonerSpellDto;
 import dev.saariselka.inlol.entity.ChampionEntity;
 import dev.saariselka.inlol.entity.SummonerPerkEntity;
@@ -85,7 +86,7 @@ public class JsonParserForLOL {
         return summonerSpellDtoList;
     }
 
-    public List<SummonerPerkEntity> getSummonerPerkEntities() {
+    public List<SummonerPerkDto> getSummonerPerkDtoList() {
         int id;
         String nameEng;
         String nameKor;
@@ -94,7 +95,7 @@ public class JsonParserForLOL {
 
         ClassPathResource runeImages = new ClassPathResource("json/runes.json");
         JsonArray runeJsonArray = null;
-        List<SummonerPerkEntity> summonerPerkEntities = new ArrayList<>();
+        List<SummonerPerkDto> summonerPerkDtoList = new ArrayList<>();
 
         try {
             runeJsonArray = JsonParser.parseReader(new InputStreamReader(runeImages.getInputStream(), StandardCharsets.UTF_8)).getAsJsonArray();
@@ -109,7 +110,7 @@ public class JsonParserForLOL {
             nameKor = runeObj.get("name").getAsString();
             icon = runeObj.get("icon").getAsString();
 
-            summonerPerkEntities.add(new SummonerPerkEntity(id, nameEng, nameKor, icon, ""));
+            summonerPerkDtoList.add(new SummonerPerkDto(id, nameEng, nameKor, icon, ""));
 
             JsonArray detailRuneJsonArray = runeObj.get("slots").getAsJsonArray();
             for(Object detailObj : detailRuneJsonArray) {
@@ -124,11 +125,11 @@ public class JsonParserForLOL {
                     icon = lastDepthRuneObj.get("icon").getAsString();
                     desc = lastDepthRuneObj.get("shortDesc").getAsString();
 
-                    summonerPerkEntities.add(new SummonerPerkEntity(id, nameEng, nameKor, icon, desc));
+                    summonerPerkDtoList.add(new SummonerPerkDto(id, nameEng, nameKor, icon, desc));
                 }
             }
         }
 
-        return summonerPerkEntities;
+        return summonerPerkDtoList;
     }
 }

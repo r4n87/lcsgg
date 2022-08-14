@@ -3,6 +3,8 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchPerksEntity;
 import dev.saariselka.inlol.entity.MatchPerksId;
 import dev.saariselka.inlol.repository.MatchPerksRepository;
+import dev.saariselka.inlol.vo.MatchPerksVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -11,13 +13,15 @@ import java.util.List;
 @Service
 public class MatchPerksService {
     private final MatchPerksRepository matchPerksRepository;
+    @Autowired
+    private VOMapper voMapper;
 
     public MatchPerksService(MatchPerksRepository matchPerksRepository) {
         this.matchPerksRepository = matchPerksRepository;
     }
 
-    public List<MatchPerksEntity> findByMatchPerksId(MatchPerksId matchPerksId) {
-        return matchPerksRepository.findByMatchPerksId(matchPerksId);
+    public List<MatchPerksVO> findByMatchPerksId(MatchPerksId matchPerksId) {
+        return voMapper.toMatchPerksVOList(matchPerksRepository.findByMatchPerksId(matchPerksId));
     }
 
     public void insert(String matchId

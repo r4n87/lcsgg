@@ -5,6 +5,7 @@ import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.repository.DdragonVersionRepository;
 import dev.saariselka.inlol.service.MatchParticipantService;
+import dev.saariselka.inlol.vo.SummonerPerkVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -744,20 +745,20 @@ public class DBFacadeTest {
         String icon = "TestIcon";
         String description = "TestPerk";
 
-        SummonerPerkEntity summonerPerkEntity = new SummonerPerkEntity(perkId, nameEng, nameKor, icon, description);
-        List<SummonerPerkEntity> summonerPerkEntities = new ArrayList<>();
-        summonerPerkEntities.add(summonerPerkEntity);
+        SummonerPerkDto summonerPerkDto = new SummonerPerkDto(perkId, nameEng, nameKor, icon, description);
+        List<SummonerPerkDto> summonerPerkDtoList = new ArrayList<>();
+        summonerPerkDtoList.add(summonerPerkDto);
 
         //when
-        dbFacade.setSummonerPerk(summonerPerkEntities);
+        dbFacade.setSummonerPerk(summonerPerkDtoList);
 
         //then
-        SummonerPerkEntity testPerkEntity = summonerPerkController.getSummonerPerkByPerkId(0).get(0);
-        assertThat(perkId).isEqualTo(testPerkEntity.getPerkId());
-        assertThat(nameEng).isEqualTo(testPerkEntity.getNameEng());
-        assertThat(nameKor).isEqualTo(testPerkEntity.getNameKor());
-        assertThat(icon).isEqualTo(testPerkEntity.getIcon());
-        assertThat(description).isEqualTo(testPerkEntity.getDescription());
+        SummonerPerkDto testPerkDto = summonerPerkController.getSummonerPerkByPerkId(0).get(0);
+        assertThat(perkId).isEqualTo(testPerkDto.getPerkId());
+        assertThat(nameEng).isEqualTo(testPerkDto.getNameEng());
+        assertThat(nameKor).isEqualTo(testPerkDto.getNameKor());
+        assertThat(icon).isEqualTo(testPerkDto.getIcon());
+        assertThat(description).isEqualTo(testPerkDto.getDescription());
     }
 
     @Test

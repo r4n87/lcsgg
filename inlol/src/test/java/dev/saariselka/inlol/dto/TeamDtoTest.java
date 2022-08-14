@@ -18,18 +18,18 @@ public class TeamDtoTest {
     List<MatchBanDto> matchBanDtoList;
     MatchObjectivesDto matchObjectivesDto;
 
-    List<ParticipantDto> participantDtoList;
+    List<MatchParticipantDto> matchParticipantDtoList;
 
-    PerksDto perksDto;
+    MatchPerksDto matchPerksDto;
 
     long gameDuration;
 
     @BeforeEach
     void init() {
-        perksDto = createPerksDto();
+        matchPerksDto = createPerksDto();
         matchBanDtoList = createTestMatchBanDtoList();
         matchObjectivesDto = createTestObjectivesDto();
-        participantDtoList = createTestParticipantDtoList();
+        matchParticipantDtoList = createTestParticipantDtoList();
         gameDuration = 123456L;
     }
 
@@ -40,7 +40,7 @@ public class TeamDtoTest {
         //TeamEntity entity = createTestTeamEntity();
 
         //when
-        TeamDto dto = new TeamDto(matchBanDtoList, matchObjectivesDto, "100", "true", 10, participantDtoList);
+        TeamDto dto = new TeamDto(matchBanDtoList, matchObjectivesDto, "100", "true", 10, matchParticipantDtoList);
 
         //then
         assertThat(dto.getBans().get(0).getChampionId()).isEqualTo(221);
@@ -305,7 +305,7 @@ public class TeamDtoTest {
     @DisplayName("Setter")
     void setter() {
         // given
-        TeamDto dto = new TeamDto(matchBanDtoList, matchObjectivesDto, "100", "true", 10, participantDtoList);
+        TeamDto dto = new TeamDto(matchBanDtoList, matchObjectivesDto, "100", "true", 10, matchParticipantDtoList);
 
         // when
         dto.getBans().get(0).setChampionId(220);
@@ -385,8 +385,8 @@ public class TeamDtoTest {
                 );
     }
 
-    private List<ParticipantDto> createTestParticipantDtoList() {
-        List<ParticipantDto> participantDtos = new ArrayList<>();
+    private List<MatchParticipantDto> createTestParticipantDtoList() {
+        List<MatchParticipantDto> matchParticipantDtos = new ArrayList<>();
 
         String puuid = "A1B2C3D4";
         String dataVersion = "2";
@@ -498,7 +498,7 @@ public class TeamDtoTest {
         int wardsPlaced = 1;
         boolean win = true;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        ParticipantDto dto = new ParticipantDto(new MatchParticipantEntity(
+        MatchParticipantDto dto = new MatchParticipantDto(new MatchParticipantEntity(
                 new MatchParticipantId(puuid, dataVersion, matchId, participantId),
                 assists,
                 baronKills,
@@ -607,10 +607,10 @@ public class TeamDtoTest {
                 rrt
         ));
 
-        dto.setPerks(perksDto);
-        participantDtos.add(dto);
+        dto.setPerks(matchPerksDto);
+        matchParticipantDtos.add(dto);
 
-        return participantDtos;
+        return matchParticipantDtos;
     }
 
     private String getMultiKills(String doubleKills, String tripleKills, String quadraKills, String pentaKills) {
@@ -652,7 +652,7 @@ public class TeamDtoTest {
         return kda;
     }
 
-    private PerksDto createPerksDto() {
-        return new PerksDto();
+    private MatchPerksDto createPerksDto() {
+        return new MatchPerksDto();
     }
 }

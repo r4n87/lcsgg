@@ -99,9 +99,7 @@ public class VOMapper {
     }
 
     public Optional<DdragonVersionVO> toDdragonVersionVO(Optional<DdragonVersionEntity> ddragonVersionEntity) {
-        Optional<DdragonVersionVO> ddragonVersionVO = Optional.of(new DdragonVersionVO(ddragonVersionEntity.get().getId(), ddragonVersionEntity.get().getVersion(), ddragonVersionEntity.get().getCurrent()));
-
-        return ddragonVersionVO;
+        return Optional.of(new DdragonVersionVO(ddragonVersionEntity.get().getId(), ddragonVersionEntity.get().getVersion(), ddragonVersionEntity.get().getCurrent()));
     }
 
     public List<MatchParticipantVO> toMatchParticipantVOList(List<MatchParticipantEntity> matchParticipantEntityList) {
@@ -282,5 +280,67 @@ public class VOMapper {
         }
 
         return leagueEntryVOList;
+    }
+
+    public List<SummonerPerkVO> toSummonerPerkVOList(List<SummonerPerkEntity> summonerPerkEntityList) {
+        List<SummonerPerkVO> summonerPerkVOList = new ArrayList<>();
+
+        for(SummonerPerkEntity summonerPerkEntity : summonerPerkEntityList) {
+            SummonerPerkVO summonerPerkVO =
+                    new SummonerPerkVO(
+                            summonerPerkEntity.getPerkId()
+                            , summonerPerkEntity.getNameEng()
+                            , summonerPerkEntity.getNameKor()
+                            , summonerPerkEntity.getIcon()
+                            , summonerPerkEntity.getDescription());
+            summonerPerkVOList.add(summonerPerkVO);
+        }
+
+        return summonerPerkVOList;
+    }
+
+    public List<SummonerPerkEntity> toSummonerPerkEntityList(List<SummonerPerkVO> summonerPerkVOList) {
+        List<SummonerPerkEntity> summonerPerkEntityList = new ArrayList<>();
+
+        for(SummonerPerkVO summonerPerkVO : summonerPerkVOList) {
+            SummonerPerkEntity summonerPerkEntity =
+                    new SummonerPerkEntity(
+                            summonerPerkVO.getPerkId()
+                            , summonerPerkVO.getNameEng()
+                            , summonerPerkVO.getNameKor()
+                            , summonerPerkVO.getIcon()
+                            , summonerPerkVO.getDescription());
+            summonerPerkEntityList.add(summonerPerkEntity);
+        }
+
+        return summonerPerkEntityList;
+    }
+
+    public List<MatchPerksVO> toMatchPerksVOList(List<MatchPerksEntity> matchPerksEntityList) {
+        List<MatchPerksVO> matchPerksVOList = new ArrayList<>();
+
+        for(MatchPerksEntity matchPerksEntity : matchPerksEntityList) {
+            MatchPerksVO matchPerksVO =
+                    new MatchPerksVO(
+                            matchPerksEntity.getMatchPerksId().getMatchId()
+                            , matchPerksEntity.getMatchPerksId().getPuuid()
+                            , matchPerksEntity.getPrimaryStyle()
+                            , matchPerksEntity.getPrimaryPerk1()
+                            , matchPerksEntity.getPrimaryPerk2()
+                            , matchPerksEntity.getPrimaryPerk3()
+                            , matchPerksEntity.getPrimaryPerk4()
+                            , matchPerksEntity.getSubStyle()
+                            , matchPerksEntity.getSubPerk1()
+                            , matchPerksEntity.getSubPerk2()
+                            , matchPerksEntity.getStatPerkDefense()
+                            , matchPerksEntity.getStatPerkFlex()
+                            , matchPerksEntity.getStatPerkOffense()
+                            , matchPerksEntity.getRrt()
+                    );
+
+            matchPerksVOList.add(matchPerksVO);
+        }
+
+        return matchPerksVOList;
     }
 }

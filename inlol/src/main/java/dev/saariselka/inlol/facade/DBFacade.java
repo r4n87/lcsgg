@@ -68,7 +68,7 @@ public class DBFacade {
     }
 
     private void sortParticipants(TeamDto team) {
-        List<ParticipantDto> participants = team.getParticipants();
+        List<MatchParticipantDto> participants = team.getParticipants();
 
         participants.sort((o1, o2) -> {
             int score1 = getParticipantPositionScore(o1);
@@ -78,7 +78,7 @@ public class DBFacade {
         });
     }
 
-    private int getParticipantPositionScore(ParticipantDto participant) {
+    private int getParticipantPositionScore(MatchParticipantDto participant) {
         int score = 0;
 
         switch(participant.getTeamPosition()) {
@@ -150,14 +150,14 @@ public class DBFacade {
     public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) throws IOException {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
-        List<ParticipantDto> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
+        List<MatchParticipantDto> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
 
         if(0 == matchList.size()) return null;
 
         String matchId;
         String dataVersion;
 
-        for(ParticipantDto match : matchList) {
+        for(MatchParticipantDto match : matchList) {
             MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMasterByMatchId(match.getMatchId()).get(0);
             matchId = matchMasterEntity.getMatchMasterId().getMatchId();
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
@@ -176,37 +176,37 @@ public class DBFacade {
             }
 
             //5. Match Participants 정보 생성
-            List<ParticipantDto> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
-            List<ParticipantDto> blueParticipantDtoList = new ArrayList<>();
-            List<ParticipantDto> redParticipantDtoList = new ArrayList<>();
-            ParticipantDto summonerInfo = new ParticipantDto();
+            List<MatchParticipantDto> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
+            List<MatchParticipantDto> blueMatchParticipantDtoList = new ArrayList<>();
+            List<MatchParticipantDto> redMatchParticipantDtoList = new ArrayList<>();
+            MatchParticipantDto summonerInfo = new MatchParticipantDto();
             int blueTeamKills = 0;
             int redTeamKills = 0;
 
-            for(ParticipantDto participant : participantsList) {
-                List<MatchPerksEntity> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participant.getPuuid());
-                MatchPerksEntity perksEntity = (0 == perksList.size())
-                        ? new MatchPerksEntity() : perksList.get(0);
-                String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getPrimaryPerk1()).get(0).getIcon();
-                String subIconPath = summonerPerkController.getSummonerPerkByPerkId(perksEntity.getSubStyle()).get(0).getIcon();
-                PerksDto perksDto = new PerksDto(perksEntity, primaryIconPath, subIconPath);
-                ParticipantDto participantDto = new ParticipantDto(participant, perksDto, matchMasterEntity.getGameDuration());
+            for(MatchParticipantDto participant : participantsList) {
+                List<MatchPerksDto> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participant.getPuuid());
+                MatchPerksDto perksDto = (0 == perksList.size())
+                        ? new MatchPerksDto() : perksList.get(0);
+                String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(perksDto.getPrimaryPerk1()).get(0).getIcon();
+                String subIconPath = summonerPerkController.getSummonerPerkByPerkId(perksDto.getSubStyle()).get(0).getIcon();
+                MatchPerksDto matchPerksDto = new MatchPerksDto(perksDto, primaryIconPath, subIconPath);
+                MatchParticipantDto matchParticipantDto = new MatchParticipantDto(participant, matchPerksDto, matchMasterEntity.getGameDuration());
 
                 if(puuid.equals(participant.getPuuid())) {
-                    summonerInfo = participantDto;
+                    summonerInfo = matchParticipantDto;
                     //summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
                 }
 
-                if("100".equals(participantDto.getTeamId())) {
-                    blueTeamKills += Integer.parseInt(participantDto.getKills());
-                    blueParticipantDtoList.add(participantDto);
-                } else if("200".equals(participantDto.getTeamId())) {
-                    redTeamKills += Integer.parseInt(participantDto.getKills());
-                    redParticipantDtoList.add(participantDto);
+                if("100".equals(matchParticipantDto.getTeamId())) {
+                    blueTeamKills += Integer.parseInt(matchParticipantDto.getKills());
+                    blueMatchParticipantDtoList.add(matchParticipantDto);
+                } else if("200".equals(matchParticipantDto.getTeamId())) {
+                    redTeamKills += Integer.parseInt(matchParticipantDto.getKills());
+                    redMatchParticipantDtoList.add(matchParticipantDto);
                 }
             }
 
-            setTeamsInformation(teamDtoList, blueParticipantDtoList, redParticipantDtoList, blueTeamKills, redTeamKills);
+            setTeamsInformation(teamDtoList, blueMatchParticipantDtoList, redMatchParticipantDtoList, blueTeamKills, redTeamKills);
 
             MetadataDto metadataDto = new MetadataDto(matchMasterEntity, participantsList);
             InfoDto infoDto = new InfoDto(matchMasterEntity, teamDtoList, summonerInfo);
@@ -219,14 +219,14 @@ public class DBFacade {
         return matchDtos;
     }
 
-    private void setTeamsInformation(List<TeamDto> teamDtoList, List<ParticipantDto> blueParticipantDtoList, List<ParticipantDto> redParticipantDtoList, int blueTeamKills, int redTeamKills) {
+    private void setTeamsInformation(List<TeamDto> teamDtoList, List<MatchParticipantDto> blueMatchParticipantDtoList, List<MatchParticipantDto> redMatchParticipantDtoList, int blueTeamKills, int redTeamKills) {
         for(TeamDto team : teamDtoList) {
             if("100".equals(team.getTeamId())) {
                 team.setTeamKills(blueTeamKills);
-                team.setParticipants(blueParticipantDtoList);
+                team.setParticipants(blueMatchParticipantDtoList);
             } else if("200".equals(team.getTeamId())) {
                 team.setTeamKills(redTeamKills);
-                team.setParticipants(redParticipantDtoList);
+                team.setParticipants(redMatchParticipantDtoList);
             }
 
             getAndSetKillRatio(team);
@@ -235,7 +235,7 @@ public class DBFacade {
     }
 
     private void getAndSetKillRatio(TeamDto team) {
-        for(ParticipantDto participant : team.getParticipants()) {
+        for(MatchParticipantDto participant : team.getParticipants()) {
             BigDecimal killAndAssists = new BigDecimal(participant.getKills()).add(new BigDecimal(participant.getAssists()));
             BigDecimal killRatio;
 
@@ -475,11 +475,11 @@ public class DBFacade {
     }
 
     public HashSet<String> getMatchIdListBySummonerPuuid(String puuid) {
-        List<ParticipantDto> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
+        List<MatchParticipantDto> list = matchParticipantController.getMatchParticipantListByPuuid(puuid);
         HashSet<String> matchList = new HashSet<>();
 
-        for(ParticipantDto participantDto : list) {
-            matchList.add(participantDto.getMatchId());
+        for(MatchParticipantDto matchParticipantDto : list) {
+            matchList.add(matchParticipantDto.getMatchId());
         }
 
         return matchList;
@@ -510,7 +510,7 @@ public class DBFacade {
         championController.insertAll(championEntities);
     }
 
-    public void setSummonerPerk(List<SummonerPerkEntity> summonerPerkEntities) {
-        summonerPerkController.insertAll(summonerPerkEntities);
+    public void setSummonerPerk(List<SummonerPerkDto> summonerPerkDtoList) {
+        summonerPerkController.insertAll(summonerPerkDtoList);
     }
 }

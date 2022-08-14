@@ -88,14 +88,14 @@ public class DtoMapper {
         return ddragonVersionDtoList;
     }
 
-    public List<ParticipantDto> toParticipantDtoList(List<MatchParticipantVO> matchParticipantVOList) {
-        List<ParticipantDto> participantDtoList = new ArrayList<>();
+    public List<MatchParticipantDto> toParticipantDtoList(List<MatchParticipantVO> matchParticipantVOList) {
+        List<MatchParticipantDto> matchParticipantDtoList = new ArrayList<>();
 
         if(matchParticipantVOList == null)
-            return participantDtoList;
+            return matchParticipantDtoList;
 
         for(MatchParticipantVO matchParticipantVO : matchParticipantVOList) {
-            ParticipantDto participantDto = new ParticipantDto(
+            MatchParticipantDto matchParticipantDto = new MatchParticipantDto(
                     new MatchParticipantEntity(
                             new MatchParticipantId(matchParticipantVO.getPuuid(),
                                     matchParticipantVO.getDataVersion(),
@@ -208,10 +208,10 @@ public class DtoMapper {
                             matchParticipantVO.getRrt()
                     )
             );
-            participantDtoList.add(participantDto);
+            matchParticipantDtoList.add(matchParticipantDto);
         }
 
-        return participantDtoList;
+        return matchParticipantDtoList;
     }
 
     public LeagueMiniSeriesDto toLeagueMiniseriesDto(LeagueMiniSeriesVO leagueMiniSeriesVO) {
@@ -301,5 +301,70 @@ public class DtoMapper {
         }
 
         return leagueEntryDtoList;
+    }
+
+    public List<SummonerPerkVO> toSummonerPerkVOList(List<SummonerPerkDto> summonerPerkDtoList) {
+        List<SummonerPerkVO> summonerPerkVOList = new ArrayList<>();
+
+        for(SummonerPerkDto summonerPerkDto : summonerPerkDtoList) {
+            SummonerPerkVO summonerPerkVO =
+                    new SummonerPerkVO(
+                            summonerPerkDto.getPerkId()
+                            , summonerPerkDto.getNameEng()
+                            , summonerPerkDto.getNameKor()
+                            , summonerPerkDto.getIcon()
+                            , summonerPerkDto.getDescription()
+                    );
+
+            summonerPerkVOList.add(summonerPerkVO);
+        }
+
+        return summonerPerkVOList;
+    }
+
+    public List<SummonerPerkDto> toSummonerPerkDtoList(List<SummonerPerkVO> summonerPerkVOList) {
+        List<SummonerPerkDto> summonerPerkDtoList = new ArrayList<>();
+
+        for(SummonerPerkVO summonerPerkVO : summonerPerkVOList) {
+            SummonerPerkDto summonerPerkDto =
+                    new SummonerPerkDto(
+                            summonerPerkVO.getPerkId()
+                            , summonerPerkVO.getNameEng()
+                            , summonerPerkVO.getNameKor()
+                            , summonerPerkVO.getIcon()
+                            , summonerPerkVO.getDescription()
+                    );
+
+            summonerPerkDtoList.add(summonerPerkDto);
+        }
+
+        return summonerPerkDtoList;
+    }
+
+    public List<MatchPerksDto> toMatchPerksDtoList(List<MatchPerksVO> matchPerksVOList) {
+        List<MatchPerksDto> matchPerksDtoList = new ArrayList<>();
+
+        for(MatchPerksVO matchPerksVO : matchPerksVOList) {
+            MatchPerksDto matchPerksDto =
+                    new MatchPerksDto(
+                            matchPerksVO.getMatchId()
+                            , matchPerksVO.getPuuid()
+                            , matchPerksVO.getPrimaryStyle()
+                            , matchPerksVO.getPrimaryPerk1()
+                            , matchPerksVO.getPrimaryPerk2()
+                            , matchPerksVO.getPrimaryPerk3()
+                            , matchPerksVO.getPrimaryPerk4()
+                            , matchPerksVO.getSubStyle()
+                            , matchPerksVO.getSubPerk1()
+                            , matchPerksVO.getSubPerk2()
+                            , matchPerksVO.getStatPerkDefense()
+                            , matchPerksVO.getStatPerkFlex()
+                            , matchPerksVO.getStatPerkOffense()
+                    );
+
+            matchPerksDtoList.add(matchPerksDto);
+        }
+
+        return matchPerksDtoList;
     }
 }

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetadataDtoTest {
     MatchMasterEntity matchMasterEntity;
-    List<ParticipantDto> participantsList;
+    List<MatchParticipantDto> participantsList;
     DtoMapper dtoMapper;
     VOMapper voMapper;
 
@@ -100,7 +100,7 @@ public class MetadataDtoTest {
                 null);
     }
 
-    private List<ParticipantDto> createParticipantsList() {
+    private List<MatchParticipantDto> createParticipantsList() {
         List<MatchParticipantEntity> participantsList = new ArrayList<>();
 
         participantsList.add(new MatchParticipantEntity(
