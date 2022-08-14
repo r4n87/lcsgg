@@ -147,7 +147,7 @@ public class DBFacade {
         return leagueEntryDtoList;
     }
 
-    public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) throws IOException {
+    public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) {
         ArrayList<MatchDto> matchDtos = new ArrayList<>();
 
         List<MatchParticipantDto> matchList = matchParticipantController.getMatchParticipantListByPuuid(puuid);
@@ -156,11 +156,14 @@ public class DBFacade {
 
         String matchId;
         String dataVersion;
+        long gameDuration;
 
         for(MatchParticipantDto match : matchList) {
             MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMasterByMatchId(match.getMatchId()).get(0);
             matchId = matchMasterEntity.getMatchMasterId().getMatchId();
             dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
+            gameDuration = matchMasterEntity.getGameDuration();
+
 
             //2. Team 정보 생성
             List<TeamDto> teamDtoList = teamController.getTeamsByMatchId(matchId);
@@ -176,25 +179,25 @@ public class DBFacade {
             }
 
             //5. Match Participants 정보 생성
-            List<MatchParticipantDto> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
+            List<MatchParticipantDto> participantsList = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId, gameDuration);
             List<MatchParticipantDto> blueMatchParticipantDtoList = new ArrayList<>();
             List<MatchParticipantDto> redMatchParticipantDtoList = new ArrayList<>();
             MatchParticipantDto summonerInfo = new MatchParticipantDto();
             int blueTeamKills = 0;
             int redTeamKills = 0;
 
-            for(MatchParticipantDto participant : participantsList) {
-                List<MatchPerksDto> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, participant.getPuuid());
-                MatchPerksDto perksDto = (0 == perksList.size())
+            for(MatchParticipantDto matchParticipantDto : participantsList) {
+                List<MatchPerksDto> perksList = matchPerksController.getMatchPerksListByMatchIdAndPuuid(matchId, matchParticipantDto.getPuuid());
+                MatchPerksDto matchPerksDto = (0 == perksList.size())
                         ? new MatchPerksDto() : perksList.get(0);
-                String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(perksDto.getPrimaryPerk1()).get(0).getIcon();
-                String subIconPath = summonerPerkController.getSummonerPerkByPerkId(perksDto.getSubStyle()).get(0).getIcon();
-                MatchPerksDto matchPerksDto = new MatchPerksDto(perksDto, primaryIconPath, subIconPath);
-                MatchParticipantDto matchParticipantDto = new MatchParticipantDto(participant, matchPerksDto, matchMasterEntity.getGameDuration());
+                String primaryIconPath = summonerPerkController.getSummonerPerkByPerkId(matchPerksDto.getPrimaryPerk1()).get(0).getIcon();
+                String subIconPath = summonerPerkController.getSummonerPerkByPerkId(matchPerksDto.getSubStyle()).get(0).getIcon();
+                matchPerksDto.setPrimaryIconPath(primaryIconPath);
+                matchPerksDto.setSubIconPath(subIconPath);
+                matchParticipantDto.setPerks(matchPerksDto);
 
-                if(puuid.equals(participant.getPuuid())) {
+                if(puuid.equals(matchParticipantDto.getPuuid())) {
                     summonerInfo = matchParticipantDto;
-                    //summonerInfo.setChampionNameKR(JsonParserForLOL.getKRChampionNameByENGChampionName(summonerInfo.getChampionNameENG()));
                 }
 
                 if("100".equals(matchParticipantDto.getTeamId())) {
@@ -328,11 +331,11 @@ public class DBFacade {
             String championName = participantObj.get("championName").getAsString();
             String championNameKR = championController.getNameKoByNameEng(championName);
             String championImg = championController.getImagePathByNameEng(championName);
-
-            matchParticipantController.insertParticipantInfo(
+            MatchParticipantDto matchParticipantDto = new MatchParticipantDto(
                     participantObj.get("puuid").getAsString(),
                     jsonObjectForMetadata.get("dataVersion").getAsString(),
                     jsonObjectForMetadata.get("matchId").getAsString(),
+                    Integer.parseInt(participantObj.get("participantId").getAsString()),
                     Integer.parseInt(participantObj.get("assists").getAsString()),
                     Integer.parseInt(participantObj.get("baronKills").getAsString()),
                     Integer.parseInt(participantObj.get("bountyLevel").getAsString()),
@@ -386,7 +389,6 @@ public class DBFacade {
                     Integer.parseInt(participantObj.get("nexusTakedowns").getAsString()),
                     Integer.parseInt(participantObj.get("objectivesStolen").getAsString()),
                     Integer.parseInt(participantObj.get("objectivesStolenAssists").getAsString()),
-                    Integer.parseInt(participantObj.get("participantId").getAsString()),
                     Integer.parseInt(participantObj.get("pentaKills").getAsString()),
                     Integer.parseInt(participantObj.get("physicalDamageDealt").getAsString()),
                     Integer.parseInt(participantObj.get("physicalDamageDealtToChampions").getAsString()),
@@ -438,6 +440,8 @@ public class DBFacade {
                     Boolean.parseBoolean(participantObj.get("win").getAsString()),
                     timestamp
             );
+
+            matchParticipantController.insertParticipantInfo(matchParticipantDto);
 
             JsonObject perks = (JsonObject) participantObj.get("perks");
             JsonObject statPerks = (JsonObject) perks.get("statPerks");

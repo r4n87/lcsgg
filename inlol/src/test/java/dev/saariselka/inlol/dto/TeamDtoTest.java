@@ -498,8 +498,11 @@ public class TeamDtoTest {
         int wardsPlaced = 1;
         boolean win = true;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        MatchParticipantDto dto = new MatchParticipantDto(new MatchParticipantEntity(
-                new MatchParticipantId(puuid, dataVersion, matchId, participantId),
+        MatchParticipantDto dto = new MatchParticipantDto(
+                puuid,
+                dataVersion,
+                matchId,
+                participantId,
                 assists,
                 baronKills,
                 bountyLevel,
@@ -605,7 +608,7 @@ public class TeamDtoTest {
                 wardsPlaced,
                 win,
                 rrt
-        ));
+        );
 
         dto.setPerks(matchPerksDto);
         matchParticipantDtos.add(dto);

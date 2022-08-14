@@ -134,6 +134,6 @@ public class MetadataDtoTest {
                 new MatchParticipantId("UaX2DtUVIdsIuc-chtJJ-hUSgtL32HQPZZhfsqLt6bPzudr80EIbYwAgPQfV8b8eC4sKCkRjx4wrZg", "2", "KR_5804413147", 10))
         );
 
-        return dtoMapper.toParticipantDtoList(voMapper.toMatchParticipantVOList(participantsList));
+        return dtoMapper.toMatchParticipantDtoList(voMapper.toMatchParticipantVOList(participantsList));
     }
 }
