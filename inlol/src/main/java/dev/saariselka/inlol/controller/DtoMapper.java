@@ -270,4 +270,36 @@ public class DtoMapper {
         }
         return dtoList;
     }
+
+    public List<LeagueEntryDto> toLeagueEntryDtoList(List<LeagueEntryVO> leagueEntryVOList) {
+        List<LeagueEntryDto> leagueEntryDtoList = new ArrayList<>();
+
+        for(LeagueEntryVO leagueEntryVO : leagueEntryVOList) {
+            LeagueEntryDto leagueEntryDto = new LeagueEntryDto();
+
+            leagueEntryDto.setSummonerId(leagueEntryVO.getSummonerId());
+            leagueEntryDto.setQueueType(leagueEntryVO.getQueueType());
+            leagueEntryDto.setLeagueId(leagueEntryVO.getLeagueId());
+            leagueEntryDto.setSummonerName(leagueEntryVO.getSummonerName());
+            leagueEntryDto.setLeaguePoints(leagueEntryVO.getLeaguePoints());
+            leagueEntryDto.setTier(leagueEntryVO.getTier());
+            if(leagueEntryVO.getTier().equals("MASTER")||leagueEntryVO.getTier().equals("GRANDMASTER")||leagueEntryVO.getTier().equals("CHALLENGER"))
+            {
+                leagueEntryDto.setRank("");
+            }
+            else {
+                leagueEntryDto.setRank(leagueEntryVO.getRanks());
+            }
+            leagueEntryDto.setWins(leagueEntryVO.getWins());
+            leagueEntryDto.setLosses(leagueEntryVO.getLosses());
+            leagueEntryDto.setHotStreak(leagueEntryVO.isHotStreak());
+            leagueEntryDto.setVeteran(leagueEntryVO.isVeteran());
+            leagueEntryDto.setFreshBlood(leagueEntryVO.isFreshBlood());
+            leagueEntryDto.setInactive(leagueEntryVO.isInactive());
+
+            leagueEntryDtoList.add(leagueEntryDto);
+        }
+
+        return leagueEntryDtoList;
+    }
 }

@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.LeagueEntryDto;
 import dev.saariselka.inlol.entity.LeagueEntryEntity;
 import dev.saariselka.inlol.entity.LeagueEntryId;
 import dev.saariselka.inlol.service.LeagueEntryService;
@@ -21,13 +22,15 @@ public class LeagueEntryController {
 
     @Autowired
     LeagueEntryService leagueEntryService;
+    @Autowired
+    DtoMapper dtoMapper;
 
-    public List<LeagueEntryEntity> getLeagueEntriesByLeagueEntryId(String summonerId, String queueType) {
-        return leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId, queueType));
+    public List<LeagueEntryDto> getLeagueEntriesByLeagueEntryId(String summonerId, String queueType) {
+        return dtoMapper.toLeagueEntryDtoList(leagueEntryService.findByLeagueEntryId(new LeagueEntryId(summonerId, queueType)));
     }
 
-    public List<LeagueEntryEntity> getLeagueEntriesBySummonerId(String summonerId) {
-        return leagueEntryService.findByLeagueEntryId_SummonerId(summonerId);
+    public List<LeagueEntryDto> getLeagueEntriesBySummonerId(String summonerId) {
+        return dtoMapper.toLeagueEntryDtoList(leagueEntryService.findByLeagueEntryId_SummonerId(summonerId));
     }
 
     public void insertLeagueEntryInfo(String summonerId, String queueType, String leagueId, String summonerName, String tier, String rank, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, Timestamp rrt) {

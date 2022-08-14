@@ -270,4 +270,17 @@ public class VOMapper {
         return voList;
     }
 
+    public List<LeagueEntryVO> toLeagueEntryVOList(List<LeagueEntryEntity> leagueEntryEntityList) {
+        List<LeagueEntryVO> leagueEntryVOList = new ArrayList<>();
+
+        for(LeagueEntryEntity leagueEntryEntity  : leagueEntryEntityList) {
+            LeagueEntryVO leagueEntryVO = new LeagueEntryVO(leagueEntryEntity.getLeagueEntryId().getSummonerId(),leagueEntryEntity.getLeagueEntryId().getQueueType(),
+                    leagueEntryEntity.getLeagueId(),leagueEntryEntity.getSummonerName(),leagueEntryEntity.getTier(),leagueEntryEntity.getRanks(),leagueEntryEntity.getLeaguePoints(),
+                    leagueEntryEntity.getWins(),leagueEntryEntity.getLosses(), leagueEntryEntity.isHotStreak(),leagueEntryEntity.isVeteran(),leagueEntryEntity.isFreshBlood(),leagueEntryEntity.isInactive());
+
+            leagueEntryVOList.add(leagueEntryVO);
+        }
+
+        return leagueEntryVOList;
+    }
 }

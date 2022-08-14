@@ -1,23 +1,21 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.controller.DtoMapper;
-import dev.saariselka.inlol.dto.ChampionDto;
-import dev.saariselka.inlol.dto.DdragonVersionDto;
-import dev.saariselka.inlol.dto.MatchBanDto;
-import dev.saariselka.inlol.dto.SummonerSpellDto;
-import dev.saariselka.inlol.vo.ChampionVO;
-import dev.saariselka.inlol.vo.DdragonVersionVO;
-import dev.saariselka.inlol.vo.MatchBanVO;
-import dev.saariselka.inlol.vo.SummonerSpellVO;
+import dev.saariselka.inlol.dto.*;
+import dev.saariselka.inlol.entity.LeagueMiniSeriesEntity;
+import dev.saariselka.inlol.entity.LeagueMiniSeriesId;
+import dev.saariselka.inlol.vo.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.array;
 
 @SpringBootTest
 public class DtoMapperTest {
@@ -154,5 +152,58 @@ public class DtoMapperTest {
         assertThat(ddragonVersionDtoList.get(0).getId()).isEqualTo(ddragonVersionVO.getId());
         assertThat(ddragonVersionDtoList.get(0).getVersion()).isEqualTo(ddragonVersionVO.getVersion());
         assertThat(ddragonVersionDtoList.get(0).getCurrent()).isEqualTo(ddragonVersionVO.getCurrent());
+    }
+
+    @Test
+    @DisplayName("Convert LeagueMiniseriesVO To LeagueMiniseriesDto")
+    public void toLeagueMiniseriesDto(){
+        // given
+        String summonerId = "testSummonerId";
+        String queueType = "RANKED_SOLO_5x5";
+        int target = 3;
+        int wins = 2;
+        int losses = 1;
+        String progress = "Test";
+        LeagueMiniSeriesVO leagueMiniSeriesVO = new LeagueMiniSeriesVO(summonerId,queueType,losses,progress,target,wins);
+
+        //when
+        LeagueMiniSeriesDto leagueMiniSeriesDto = dtoMapper.toLeagueMiniseriesDto(leagueMiniSeriesVO);
+
+        //then
+        assertThat(leagueMiniSeriesDto.getSummonerId()).isEqualTo(summonerId);
+        assertThat(leagueMiniSeriesDto.getQueueType()).isEqualTo(queueType);
+        assertThat(leagueMiniSeriesDto.getTarget()).isEqualTo(target);
+        assertThat(leagueMiniSeriesDto.getWins()).isEqualTo(wins);
+        assertThat(leagueMiniSeriesDto.getLosses()).isEqualTo(losses);
+        assertThat(String.valueOf(leagueMiniSeriesDto.getProgress())).isEqualTo(progress);
+    }
+
+    @Test
+    @DisplayName("Convert LeagueEntryVO To LeagueEntryDto")
+    public void toLeagueEntryDtoList(){
+        // given
+        String summonerId = "testSummonerId";
+        String queueType = "RANKED_SOLO_5x5";
+        String leagueId = "05fb99f4-e149-3133-a78e-821597582f9d";
+        String summonerName = "Hide on bush";
+        String tier = "CHALLENGER";
+        String ranks = "I";
+        int leaguePoints = 1008;
+        int wins = 358;
+        int losses = 309;
+        boolean hotStreak = false;
+        boolean veteran = true;
+        boolean freshBlood = false;
+        boolean inactive = false;
+        LeagueEntryVO leagueEntryVO = new LeagueEntryVO(summonerId,queueType,leagueId,summonerName,tier,ranks,leaguePoints,wins,losses,hotStreak,veteran,freshBlood,inactive);
+        List<LeagueEntryVO> leagueEntryVOList = new ArrayList<>();
+        leagueEntryVOList.add(leagueEntryVO);
+
+        //when
+        LeagueEntryDto leagueEntryDto = dtoMapper.toLeagueEntryDtoList(leagueEntryVOList).get(0);
+
+        //then
+        assertThat(leagueEntryDto.getSummonerId()).isEqualTo(summonerId);
+        assertThat(leagueEntryDto.getQueueType()).isEqualTo(queueType);
     }
 }

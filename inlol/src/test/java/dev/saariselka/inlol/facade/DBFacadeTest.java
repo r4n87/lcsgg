@@ -237,15 +237,15 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setLeagueInfo(leagueInfos);
-        LeagueEntryEntity find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
+        LeagueEntryDto find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
 
         // then
-        assertThat(find.getLeagueEntryId().getSummonerId()).isEqualTo("TestSummonerId");
-        assertThat(find.getLeagueEntryId().getQueueType()).isEqualTo("RANKED_SOLO_5x5");
+        assertThat(find.getSummonerId()).isEqualTo("TestSummonerId");
+        assertThat(find.getQueueType()).isEqualTo("RANKED_SOLO_5x5");
         assertThat(find.getLeagueId()).isEqualTo("TestLeagueId");
         assertThat(find.getSummonerName()).isEqualTo("TestUser");
         assertThat(find.getTier()).isEqualTo("TestTier");
-        assertThat(find.getRanks()).isEqualTo("II");
+        assertThat(find.getRank()).isEqualTo("II");
         assertThat(find.getLeaguePoints()).isEqualTo(99);
         assertThat(find.getWins()).isEqualTo(0);
         assertThat(find.getLosses()).isEqualTo(0);
@@ -263,15 +263,15 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setLeagueInfo(leagueInfos);
-        LeagueEntryEntity find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
+        LeagueEntryDto find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
 
         // then
-        assertThat(find.getLeagueEntryId().getSummonerId()).isEqualTo("TestSummonerId");
-        assertThat(find.getLeagueEntryId().getQueueType()).isEqualTo("RANKED_FLEX_SR");
+        assertThat(find.getSummonerId()).isEqualTo("TestSummonerId");
+        assertThat(find.getQueueType()).isEqualTo("RANKED_FLEX_SR");
         assertThat(find.getLeagueId()).isEqualTo("TestLeagueId");
         assertThat(find.getSummonerName()).isEqualTo("TestUser");
         assertThat(find.getTier()).isEqualTo("TestTier");
-        assertThat(find.getRanks()).isEqualTo("II");
+        assertThat(find.getRank()).isEqualTo("II");
         assertThat(find.getLeaguePoints()).isEqualTo(99);
         assertThat(find.getWins()).isEqualTo(0);
         assertThat(find.getLosses()).isEqualTo(0);
@@ -290,7 +290,7 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setLeagueInfo(leagueInfos);
-        List<LeagueEntryEntity> find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId");
+        List<LeagueEntryDto> find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId");
 
         // then
         assertThat(find.isEmpty()).isTrue();
@@ -304,16 +304,16 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setLeagueInfo(leagueInfos);
-        LeagueEntryEntity find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
+        LeagueEntryDto find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
         LeagueMiniSeriesDto miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "RANKED_SOLO_5x5");
 
         // then
-        assertThat(find.getLeagueEntryId().getSummonerId()).isEqualTo("TestSummonerId");
-        assertThat(find.getLeagueEntryId().getQueueType()).isEqualTo("RANKED_SOLO_5x5");
+        assertThat(find.getSummonerId()).isEqualTo("TestSummonerId");
+        assertThat(find.getQueueType()).isEqualTo("RANKED_SOLO_5x5");
         assertThat(find.getLeagueId()).isEqualTo("TestLeagueId");
         assertThat(find.getSummonerName()).isEqualTo("TestUser");
         assertThat(find.getTier()).isEqualTo("TestTier");
-        assertThat(find.getRanks()).isEqualTo("I");
+        assertThat(find.getRank()).isEqualTo("I");
         assertThat(find.getLeaguePoints()).isEqualTo(100);
         assertThat(find.getWins()).isEqualTo(2);
         assertThat(find.getLosses()).isEqualTo(1);
@@ -337,16 +337,16 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setLeagueInfo(leagueInfos);
-        LeagueEntryEntity find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
+        LeagueEntryDto find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId").get(0);
         LeagueMiniSeriesDto miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "RANKED_FLEX_SR");
 
         // then
-        assertThat(find.getLeagueEntryId().getSummonerId()).isEqualTo("TestSummonerId");
-        assertThat(find.getLeagueEntryId().getQueueType()).isEqualTo("RANKED_FLEX_SR");
+        assertThat(find.getSummonerId()).isEqualTo("TestSummonerId");
+        assertThat(find.getQueueType()).isEqualTo("RANKED_FLEX_SR");
         assertThat(find.getLeagueId()).isEqualTo("TestLeagueId");
         assertThat(find.getSummonerName()).isEqualTo("TestUser");
         assertThat(find.getTier()).isEqualTo("TestTier");
-        assertThat(find.getRanks()).isEqualTo("I");
+        assertThat(find.getRank()).isEqualTo("I");
         assertThat(find.getLeaguePoints()).isEqualTo(100);
         assertThat(find.getWins()).isEqualTo(2);
         assertThat(find.getLosses()).isEqualTo(1);
@@ -371,7 +371,7 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setLeagueInfo(leagueInfos);
-        List<LeagueEntryEntity> find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId");
+        List<LeagueEntryDto> find = leagueEntryController.getLeagueEntriesBySummonerId("TestSummonerId");
         LeagueMiniSeriesDto miniFind = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId("TestSummonerId", "TestType");
 
         // then
@@ -575,7 +575,7 @@ public class DBFacadeTest {
 
 
         // when
-        ArrayList<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
+        List<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
 
         // then
         for(LeagueEntryDto dto : test) {
@@ -672,7 +672,7 @@ public class DBFacadeTest {
                 soloLeaguePoints, win, losses, soloHotStreak, soloVeteran, soloFreshBlood, soloInactive, rrt);
 
         // when
-        ArrayList<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
+        List<LeagueEntryDto> test = dbFacade.getLeagueEntryDtoListBySummonerId(summonerId);
 
         // then
         for(LeagueEntryDto dto : test) {

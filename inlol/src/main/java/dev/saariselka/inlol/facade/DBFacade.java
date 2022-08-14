@@ -134,20 +134,17 @@ public class DBFacade {
 
     }
 
-    public ArrayList<LeagueEntryDto> getLeagueEntryDtoListBySummonerId(String summonerId) {
-        ArrayList<LeagueEntryDto> result = new ArrayList<>();
+    public List<LeagueEntryDto> getLeagueEntryDtoListBySummonerId(String summonerId) {
+        List<LeagueEntryDto> leagueEntryDtoList = leagueEntryController.getLeagueEntriesBySummonerId(summonerId);
 
-        List<LeagueEntryEntity> leagueEntryEntityList = leagueEntryController.getLeagueEntriesBySummonerId(summonerId);
+        for(LeagueEntryDto leagueEntryDto : leagueEntryDtoList) {
 
-        for(LeagueEntryEntity leagueEntryEntity : leagueEntryEntityList) {
+            LeagueMiniSeriesDto leagueMiniSeriesDto = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(summonerId,leagueEntryDto.getQueueType());
 
-            LeagueMiniSeriesDto leagueMiniSeriesDto = leagueMiniSeriesController.getLeagueMiniSeriesEntries_ByLeagueMiniSeriesId(summonerId,leagueEntryEntity.getLeagueEntryId().getQueueType());
-
-            LeagueEntryDto leagueEntryDto = new LeagueEntryDto(leagueEntryEntity, leagueMiniSeriesDto);
-            result.add(leagueEntryDto);
+            leagueEntryDto.setMiniSeries(leagueMiniSeriesDto);
         }
 
-        return result;
+        return leagueEntryDtoList;
     }
 
     public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) throws IOException {
