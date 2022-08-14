@@ -1,6 +1,5 @@
 package dev.saariselka.inlol.dto;
 
-import dev.saariselka.inlol.entity.TeamEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,5 +17,5 @@ public class TeamDto {
     private String teamId;
     private String win;
     private int teamKills;
-    private List<ParticipantDto> participants;
+    private List<MatchParticipantDto> participants;
 }

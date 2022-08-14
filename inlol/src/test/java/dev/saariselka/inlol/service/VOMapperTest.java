@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.service;
 
+import dev.saariselka.inlol.dto.MatchPerksDto;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.service.VOMapper;
 import dev.saariselka.inlol.vo.*;
@@ -243,5 +244,115 @@ public class VOMapperTest {
         //then
         assertThat(leagueEntryVOList.get(0).getSummonerId()).isEqualTo(summonerId);
         assertThat(leagueEntryVOList.get(0).getQueueType()).isEqualTo(queueType);
+    }
+
+    @Test
+    @DisplayName("Convert SummonerPerk Entity List To SummonerPerk VO List")
+    public void toSummonerPerkVOList() {
+        //given
+        List<SummonerPerkEntity> summonerPerkEntityList = new ArrayList<>();
+        SummonerPerkEntity summonerPerkEntity =
+                new SummonerPerkEntity(
+                        12345
+                        , "nameEng"
+                        , "한글이름"
+                        , "iconpath"
+                        , "description"
+                );
+        summonerPerkEntityList.add(summonerPerkEntity);
+
+        //when
+        List<SummonerPerkVO> summonerPerkVOList = voMapper.toSummonerPerkVOList(summonerPerkEntityList);
+
+        //then
+        assertThat(summonerPerkVOList.get(0).getPerkId()).isEqualTo(summonerPerkEntity.getPerkId());
+        assertThat(summonerPerkVOList.get(0).getNameEng()).isEqualTo(summonerPerkEntity.getNameEng());
+        assertThat(summonerPerkVOList.get(0).getNameKor()).isEqualTo(summonerPerkEntity.getNameKor());
+        assertThat(summonerPerkVOList.get(0).getIcon()).isEqualTo(summonerPerkEntity.getIcon());
+        assertThat(summonerPerkVOList.get(0).getDescription()).isEqualTo(summonerPerkEntity.getDescription());
+    }
+
+    @Test
+    @DisplayName("Convert SummonerPerk VO List To SummonerPerk Entity List")
+    public void toSummonerPerkEntityList() {
+        //given
+        List<SummonerPerkVO> summonerPerkVOList = new ArrayList<>();
+        SummonerPerkVO summonerPerkVO =
+                new SummonerPerkVO(
+                        12345
+                        , "nameEng"
+                        , "한글이름"
+                        , "iconpath"
+                        , "description"
+                );
+        summonerPerkVOList.add(summonerPerkVO);
+
+        //when
+        List<SummonerPerkEntity> summonerPerkEntityList = voMapper.toSummonerPerkEntityList(summonerPerkVOList);
+
+        //then
+        assertThat(summonerPerkEntityList.get(0).getPerkId()).isEqualTo(summonerPerkVO.getPerkId());
+        assertThat(summonerPerkEntityList.get(0).getNameEng()).isEqualTo(summonerPerkVO.getNameEng());
+        assertThat(summonerPerkEntityList.get(0).getNameKor()).isEqualTo(summonerPerkVO.getNameKor());
+        assertThat(summonerPerkEntityList.get(0).getIcon()).isEqualTo(summonerPerkVO.getIcon());
+        assertThat(summonerPerkEntityList.get(0).getDescription()).isEqualTo(summonerPerkVO.getDescription());
+    }
+
+    @Test
+    @DisplayName("Convert MatchPerks Entity List To MatchPerks VO List")
+    public void toMatchPerksVOList() {
+        //given
+        String matchId = "KR12345";
+        String puuid = "FEFEFE";
+        int primaryStyle = 11111;
+        int primaryPerk1 = 22222;
+        int primaryPerk2 = 33333;
+        int primaryPerk3 = 44444;
+        int primaryPerk4 = 55555;
+        int subStyle = 66666;
+        int subPerk1 = 77777;
+        int subPerk2 = 88888;
+        int statPerkDefense = 4321;
+        int statPerkFlex = 1234;
+        int statPerkOffense = 8765;
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+
+        List<MatchPerksEntity> matchPerksEntityList = new ArrayList<>();
+        MatchPerksEntity matchPerksEntity =
+                new MatchPerksEntity(
+                        new MatchPerksId(matchId, puuid)
+                        , primaryStyle
+                        , primaryPerk1
+                        , primaryPerk2
+                        , primaryPerk3
+                        , primaryPerk4
+                        , subStyle
+                        , subPerk1
+                        , subPerk2
+                        , statPerkDefense
+                        , statPerkFlex
+                        , statPerkOffense
+                        , rrt
+                );
+        matchPerksEntityList.add(matchPerksEntity);
+
+        //when
+        List<MatchPerksVO> matchPerksVOList = voMapper.toMatchPerksVOList(matchPerksEntityList);
+
+        //then
+        assertThat(matchPerksVOList.get(0).getMatchId()).isEqualTo(matchPerksEntity.getMatchPerksId().getMatchId());
+        assertThat(matchPerksVOList.get(0).getPuuid()).isEqualTo(matchPerksEntity.getMatchPerksId().getPuuid());
+        assertThat(matchPerksVOList.get(0).getPrimaryStyle()).isEqualTo(matchPerksEntity.getPrimaryStyle());
+        assertThat(matchPerksVOList.get(0).getPrimaryPerk1()).isEqualTo(matchPerksEntity.getPrimaryPerk1());
+        assertThat(matchPerksVOList.get(0).getPrimaryPerk2()).isEqualTo(matchPerksEntity.getPrimaryPerk2());
+        assertThat(matchPerksVOList.get(0).getPrimaryPerk3()).isEqualTo(matchPerksEntity.getPrimaryPerk3());
+        assertThat(matchPerksVOList.get(0).getPrimaryPerk4()).isEqualTo(matchPerksEntity.getPrimaryPerk4());
+        assertThat(matchPerksVOList.get(0).getSubStyle()).isEqualTo(matchPerksEntity.getSubStyle());
+        assertThat(matchPerksVOList.get(0).getSubPerk1()).isEqualTo(matchPerksEntity.getSubPerk1());
+        assertThat(matchPerksVOList.get(0).getSubPerk2()).isEqualTo(matchPerksEntity.getSubPerk2());
+        assertThat(matchPerksVOList.get(0).getStatPerkDefense()).isEqualTo(matchPerksEntity.getStatPerkDefense());
+        assertThat(matchPerksVOList.get(0).getStatPerkFlex()).isEqualTo(matchPerksEntity.getStatPerkFlex());
+        assertThat(matchPerksVOList.get(0).getStatPerkOffense()).isEqualTo(matchPerksEntity.getStatPerkOffense());
+        assertThat(matchPerksVOList.get(0).getRrt()).isEqualTo(matchPerksEntity.getRrt());
     }
 }

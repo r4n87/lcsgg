@@ -1,6 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.ParticipantDto;
+import dev.saariselka.inlol.dto.MatchParticipantDto;
 import dev.saariselka.inlol.service.MatchParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -59,13 +59,13 @@ public class MatchParticipantController {
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
     }
 
-    public List<ParticipantDto> getMatchParticipantListByDataVersionAndMatchId(
+    public List<MatchParticipantDto> getMatchParticipantListByDataVersionAndMatchId(
             String dataVersion
             , String matchId) {
         return dtoMapper.toParticipantDtoList(matchParticipantService.findByDataVersionAndMatchId(dataVersion, matchId));
     }
 
-    public List<ParticipantDto> getMatchParticipantListByPuuid(String puuid) {
+    public List<MatchParticipantDto> getMatchParticipantListByPuuid(String puuid) {
         return dtoMapper.toParticipantDtoList(matchParticipantService.findByPuuid(puuid));
     }
 }

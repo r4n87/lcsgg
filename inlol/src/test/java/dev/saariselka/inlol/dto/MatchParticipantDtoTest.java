@@ -14,9 +14,9 @@ import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ParticipantDtoTest {
-    ParticipantDto matchParticipantDto;
-    PerksDto perksDto;
+public class MatchParticipantDtoTest {
+    MatchParticipantDto matchParticipantDto;
+    MatchPerksDto matchPerksDto;
     long gameDuration;
     VOMapper voMapper;
     DtoMapper dtoMapper;
@@ -24,7 +24,7 @@ public class ParticipantDtoTest {
     @BeforeEach
     void init() {
         matchParticipantDto = createMatchParticipantDto();
-        perksDto = createPerksDto();
+        matchPerksDto = createPerksDto();
         gameDuration = 123456L;
     }
 
@@ -33,236 +33,236 @@ public class ParticipantDtoTest {
     public void testLombokGetFunction() {
         //Given
         //When
-        ParticipantDto participantDto = new ParticipantDto(matchParticipantDto, perksDto, gameDuration);
+        MatchParticipantDto matchParticipantDto = new MatchParticipantDto(this.matchParticipantDto, matchPerksDto, gameDuration);
 
         //Then
-        assertThat(participantDto.getPuuid()).isEqualTo(matchParticipantDto.getPuuid());
-        assertThat(participantDto.getDataVersion()).isEqualTo(matchParticipantDto.getDataVersion());
-        assertThat(participantDto.getMatchId()).isEqualTo(matchParticipantDto.getMatchId());
-        assertThat(participantDto.getParticipantId()).isEqualTo(
-                String.valueOf(matchParticipantDto.getParticipantId()));
-        assertThat(participantDto.getAssists()).isEqualTo(
-                String.valueOf(matchParticipantDto.getAssists()));
-        assertThat(participantDto.getBaronKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getBaronKills()));
-        assertThat(participantDto.getBountyLevel()).isEqualTo(
-                String.valueOf(matchParticipantDto.getBountyLevel()));
-        assertThat(participantDto.getChampExperience()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampExperience()));
-        assertThat(participantDto.getChampLevel()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampLevel()));
-        assertThat(participantDto.getChampionId()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampionId()));
-        assertThat(participantDto.getChampionNameENG()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampionNameENG()));
-        assertThat(participantDto.getChampionNameKR()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampionNameKR()));
-        assertThat(participantDto.getChampionImg()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampionImg()));
-        assertThat(participantDto.getChampionTransform()).isEqualTo(
-                String.valueOf(matchParticipantDto.getChampionTransform()));
-        assertThat(participantDto.getConsumablesPurchased()).isEqualTo(
-                String.valueOf(matchParticipantDto.getConsumablesPurchased()));
-        assertThat(participantDto.getDamageDealtToBuildings()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDamageDealtToBuildings()));
-        assertThat(participantDto.getDamageDealtToObjectives()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDamageDealtToObjectives()));
-        assertThat(participantDto.getDamageSelfMitigated()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDamageSelfMitigated()));
-        assertThat(participantDto.getDeaths()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDeaths()));
-        assertThat(participantDto.getDetectorWardsPlaced()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDetectorWardsPlaced()));
-        assertThat(participantDto.getDoubleKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDoubleKills()));
-        assertThat(participantDto.getDragonKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getDragonKills()));
-        assertThat(participantDto.getFirstBloodAssist()).isEqualTo(
-                String.valueOf(matchParticipantDto.getFirstBloodAssist()));
-        assertThat(participantDto.getFirstBloodKill()).isEqualTo(
-                String.valueOf(matchParticipantDto.getFirstBloodKill()));
-        assertThat(participantDto.getFirstTowerAssist()).isEqualTo(
-                String.valueOf(matchParticipantDto.getFirstTowerAssist()));
-        assertThat(participantDto.getFirstTowerKill()).isEqualTo(
-                String.valueOf(matchParticipantDto.getFirstTowerKill()));
-        assertThat(participantDto.getGameEndedInEarlySurrender()).isEqualTo(
-                String.valueOf(matchParticipantDto.getGameEndedInEarlySurrender()));
-        assertThat(participantDto.getGameEndedInSurrender()).isEqualTo(
-                String.valueOf(matchParticipantDto.getGameEndedInSurrender()));
-        assertThat(participantDto.getGoldEarned()).isEqualTo(
-                String.valueOf(matchParticipantDto.getGoldEarned()));
-        assertThat(participantDto.getGoldSpent()).isEqualTo(
-                String.valueOf(matchParticipantDto.getGoldSpent()));
-        assertThat(participantDto.getIndividualPosition()).isEqualTo(
-                matchParticipantDto.getIndividualPosition());
-        assertThat(participantDto.getInhibitorKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getInhibitorKills()));
-        assertThat(participantDto.getInhibitorTakedowns()).isEqualTo(
-                String.valueOf(matchParticipantDto.getInhibitorTakedowns()));
-        assertThat(participantDto.getInhibitorsLost()).isEqualTo(
-                String.valueOf(matchParticipantDto.getInhibitorsLost()));
-        assertThat(participantDto.getItem0()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem0()));
-        assertThat(participantDto.getItem1()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem1()));
-        assertThat(participantDto.getItem2()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem2()));
-        assertThat(participantDto.getItem3()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem3()));
-        assertThat(participantDto.getItem4()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem4()));
-        assertThat(participantDto.getItem5()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem5()));
-        assertThat(participantDto.getItem6()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItem6()));
-        assertThat(participantDto.getItemsPurchased()).isEqualTo(
-                String.valueOf(matchParticipantDto.getItemsPurchased()));
-        assertThat(participantDto.getKillingSprees()).isEqualTo(
-                String.valueOf(matchParticipantDto.getKillingSprees()));
-        assertThat(participantDto.getKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getKills()));
-        assertThat(participantDto.getLane()).isEqualTo(
-                matchParticipantDto.getLane());
-        assertThat(participantDto.getLargestCriticalStrike()).isEqualTo(
-                String.valueOf(matchParticipantDto.getLargestCriticalStrike()));
-        assertThat(participantDto.getLargestKillingSpree()).isEqualTo(
-                String.valueOf(matchParticipantDto.getLargestKillingSpree()));
-        assertThat(participantDto.getLongestTimeSpentLiving()).isEqualTo(
-                String.valueOf(matchParticipantDto.getLongestTimeSpentLiving()));
-        assertThat(participantDto.getMagicDamageDealt()).isEqualTo(
-                String.valueOf(matchParticipantDto.getMagicDamageDealt()));
-        assertThat(participantDto.getMagicDamageDealtToChampions()).isEqualTo(
-                String.valueOf(matchParticipantDto.getMagicDamageDealtToChampions()));
-        assertThat(participantDto.getMagicDamageTaken()).isEqualTo(
-                String.valueOf(matchParticipantDto.getMagicDamageTaken()));
-        assertThat(participantDto.getNeutralMinionsKilled()).isEqualTo(
-                String.valueOf(matchParticipantDto.getNeutralMinionsKilled()));
-        assertThat(participantDto.getNexusKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getNexusKills()));
-        assertThat(participantDto.getNexusLost()).isEqualTo(
-                String.valueOf(matchParticipantDto.getNexusLost()));
-        assertThat(participantDto.getNexusTakedowns()).isEqualTo(
-                String.valueOf(matchParticipantDto.getNexusTakedowns()));
-        assertThat(participantDto.getObjectivesStolen()).isEqualTo(
-                String.valueOf(matchParticipantDto.getObjectivesStolen()));
-        assertThat(participantDto.getObjectivesStolenAssists()).isEqualTo(
-                String.valueOf(matchParticipantDto.getObjectivesStolenAssists()));
-        assertThat(participantDto.getPentaKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getPentaKills()));
-        assertThat(participantDto.getPhysicalDamageDealt()).isEqualTo(
-                String.valueOf(matchParticipantDto.getPhysicalDamageDealt()));
-        assertThat(participantDto.getPhysicalDamageDealtToChampions()).isEqualTo(
-                String.valueOf(matchParticipantDto.getPhysicalDamageDealtToChampions()));
-        assertThat(participantDto.getPhysicalDamageTaken()).isEqualTo(
-                String.valueOf(matchParticipantDto.getPhysicalDamageTaken()));
-        assertThat(participantDto.getProfileIcon()).isEqualTo(
-                String.valueOf(matchParticipantDto.getProfileIcon()));
-        assertThat(participantDto.getQuadraKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getQuadraKills()));
-        assertThat(participantDto.getRiotIdName()).isEqualTo(
-                matchParticipantDto.getRiotIdName());
-        assertThat(participantDto.getRiotIdTagline()).isEqualTo(
-                matchParticipantDto.getRiotIdTagline());
-        assertThat(participantDto.getRole()).isEqualTo(
-                matchParticipantDto.getRole());
-        assertThat(participantDto.getSightWardsBoughtInGame()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSightWardsBoughtInGame()));
-        assertThat(participantDto.getSpell1Casts()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSpell1Casts()));
-        assertThat(participantDto.getSpell2Casts()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSpell2Casts()));
-        assertThat(participantDto.getSpell3Casts()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSpell3Casts()));
-        assertThat(participantDto.getSpell4Casts()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSpell4Casts()));
-        assertThat(participantDto.getSummoner1Casts()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSummoner1Casts()));
-        assertThat(participantDto.getSummoner1Id()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSummoner1Id()));
-        assertThat(participantDto.getSummoner2Casts()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSummoner2Casts()));
-        assertThat(participantDto.getSummoner2Id()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSummoner2Id()));
-        assertThat(participantDto.getSummonerId()).isEqualTo(
-                matchParticipantDto.getSummonerId());
-        assertThat(participantDto.getSummonerLevel()).isEqualTo(
-                String.valueOf(matchParticipantDto.getSummonerLevel()));
-        assertThat(participantDto.getSummonerName()).isEqualTo(
-                matchParticipantDto.getPuuid().equals("BOT")
-                        ? "(봇)" : matchParticipantDto.getSummonerName());
-        assertThat(participantDto.getTeamEarlySurrendered()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTeamEarlySurrendered()));
-        assertThat(participantDto.getTeamId()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTeamId()));
-        assertThat(participantDto.getTeamPosition()).isEqualTo(
-                matchParticipantDto.getTeamPosition());
-        assertThat(participantDto.getTimeCCingOthers()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTimeCCingOthers()));
-        assertThat(participantDto.getTimePlayed()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTimePlayed()));
-        assertThat(participantDto.getTotalDamageDealt()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalDamageDealt()));
-        assertThat(participantDto.getTotalDamageDealtToChampions()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalDamageDealtToChampions()));
-        assertThat(participantDto.getTotalDamageTaken()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalDamageTaken()));
-        assertThat(participantDto.getTotalHeal()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalHeal()));
-        assertThat(participantDto.getTotalHealsOnTeammates()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalHealsOnTeammates()));
-        assertThat(participantDto.getTotalMinionsKilled()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalMinionsKilled()));
-        assertThat(participantDto.getTotalTimeCCDealt()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalTimeCCDealt()));
-        assertThat(participantDto.getTotalTimeSpentDead()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalTimeSpentDead()));
-        assertThat(participantDto.getTotalUnitsHealed()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTotalUnitsHealed()));
-        assertThat(participantDto.getTripleKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTripleKills()));
-        assertThat(participantDto.getTrueDamageDealt()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTrueDamageDealt()));
-        assertThat(participantDto.getTrueDamageDealtToChampions()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTrueDamageDealtToChampions()));
-        assertThat(participantDto.getTrueDamageTaken()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTrueDamageTaken()));
-        assertThat(participantDto.getTurretKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTurretKills()));
-        assertThat(participantDto.getTurretTakedowns()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTurretTakedowns()));
-        assertThat(participantDto.getTurretsLost()).isEqualTo(
-                String.valueOf(matchParticipantDto.getTurretsLost()));
-        assertThat(participantDto.getUnrealKills()).isEqualTo(
-                String.valueOf(matchParticipantDto.getUnrealKills()));
-        assertThat(participantDto.getVisionScore()).isEqualTo(
-                String.valueOf(matchParticipantDto.getVisionScore()));
-        assertThat(participantDto.getVisionWardsBoughtInGame()).isEqualTo(
-                String.valueOf(matchParticipantDto.getVisionWardsBoughtInGame()));
-        assertThat(participantDto.getWardsKilled()).isEqualTo(
-                String.valueOf(matchParticipantDto.getWardsKilled()));
-        assertThat(participantDto.getWardsPlaced()).isEqualTo(
-                String.valueOf(matchParticipantDto.getWardsPlaced()));
-        assertThat(participantDto.getWin()).isEqualTo(
-                String.valueOf(matchParticipantDto.getWin()));
-        assertThat(participantDto.getRrt()).isEqualTo(
-                matchParticipantDto.getRrt());
-        assertThat(participantDto.getPerks()).isEqualTo(perksDto);
-        assertThat(participantDto.getMultiKills()).isEqualTo(
+        assertThat(matchParticipantDto.getPuuid()).isEqualTo(this.matchParticipantDto.getPuuid());
+        assertThat(matchParticipantDto.getDataVersion()).isEqualTo(this.matchParticipantDto.getDataVersion());
+        assertThat(matchParticipantDto.getMatchId()).isEqualTo(this.matchParticipantDto.getMatchId());
+        assertThat(matchParticipantDto.getParticipantId()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getParticipantId()));
+        assertThat(matchParticipantDto.getAssists()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getAssists()));
+        assertThat(matchParticipantDto.getBaronKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getBaronKills()));
+        assertThat(matchParticipantDto.getBountyLevel()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getBountyLevel()));
+        assertThat(matchParticipantDto.getChampExperience()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampExperience()));
+        assertThat(matchParticipantDto.getChampLevel()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampLevel()));
+        assertThat(matchParticipantDto.getChampionId()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampionId()));
+        assertThat(matchParticipantDto.getChampionNameENG()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampionNameENG()));
+        assertThat(matchParticipantDto.getChampionNameKR()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampionNameKR()));
+        assertThat(matchParticipantDto.getChampionImg()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampionImg()));
+        assertThat(matchParticipantDto.getChampionTransform()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getChampionTransform()));
+        assertThat(matchParticipantDto.getConsumablesPurchased()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getConsumablesPurchased()));
+        assertThat(matchParticipantDto.getDamageDealtToBuildings()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDamageDealtToBuildings()));
+        assertThat(matchParticipantDto.getDamageDealtToObjectives()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDamageDealtToObjectives()));
+        assertThat(matchParticipantDto.getDamageSelfMitigated()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDamageSelfMitigated()));
+        assertThat(matchParticipantDto.getDeaths()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDeaths()));
+        assertThat(matchParticipantDto.getDetectorWardsPlaced()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDetectorWardsPlaced()));
+        assertThat(matchParticipantDto.getDoubleKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDoubleKills()));
+        assertThat(matchParticipantDto.getDragonKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getDragonKills()));
+        assertThat(matchParticipantDto.getFirstBloodAssist()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getFirstBloodAssist()));
+        assertThat(matchParticipantDto.getFirstBloodKill()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getFirstBloodKill()));
+        assertThat(matchParticipantDto.getFirstTowerAssist()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getFirstTowerAssist()));
+        assertThat(matchParticipantDto.getFirstTowerKill()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getFirstTowerKill()));
+        assertThat(matchParticipantDto.getGameEndedInEarlySurrender()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getGameEndedInEarlySurrender()));
+        assertThat(matchParticipantDto.getGameEndedInSurrender()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getGameEndedInSurrender()));
+        assertThat(matchParticipantDto.getGoldEarned()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getGoldEarned()));
+        assertThat(matchParticipantDto.getGoldSpent()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getGoldSpent()));
+        assertThat(matchParticipantDto.getIndividualPosition()).isEqualTo(
+                this.matchParticipantDto.getIndividualPosition());
+        assertThat(matchParticipantDto.getInhibitorKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getInhibitorKills()));
+        assertThat(matchParticipantDto.getInhibitorTakedowns()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getInhibitorTakedowns()));
+        assertThat(matchParticipantDto.getInhibitorsLost()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getInhibitorsLost()));
+        assertThat(matchParticipantDto.getItem0()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem0()));
+        assertThat(matchParticipantDto.getItem1()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem1()));
+        assertThat(matchParticipantDto.getItem2()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem2()));
+        assertThat(matchParticipantDto.getItem3()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem3()));
+        assertThat(matchParticipantDto.getItem4()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem4()));
+        assertThat(matchParticipantDto.getItem5()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem5()));
+        assertThat(matchParticipantDto.getItem6()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItem6()));
+        assertThat(matchParticipantDto.getItemsPurchased()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getItemsPurchased()));
+        assertThat(matchParticipantDto.getKillingSprees()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getKillingSprees()));
+        assertThat(matchParticipantDto.getKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getKills()));
+        assertThat(matchParticipantDto.getLane()).isEqualTo(
+                this.matchParticipantDto.getLane());
+        assertThat(matchParticipantDto.getLargestCriticalStrike()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getLargestCriticalStrike()));
+        assertThat(matchParticipantDto.getLargestKillingSpree()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getLargestKillingSpree()));
+        assertThat(matchParticipantDto.getLongestTimeSpentLiving()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getLongestTimeSpentLiving()));
+        assertThat(matchParticipantDto.getMagicDamageDealt()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getMagicDamageDealt()));
+        assertThat(matchParticipantDto.getMagicDamageDealtToChampions()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getMagicDamageDealtToChampions()));
+        assertThat(matchParticipantDto.getMagicDamageTaken()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getMagicDamageTaken()));
+        assertThat(matchParticipantDto.getNeutralMinionsKilled()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getNeutralMinionsKilled()));
+        assertThat(matchParticipantDto.getNexusKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getNexusKills()));
+        assertThat(matchParticipantDto.getNexusLost()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getNexusLost()));
+        assertThat(matchParticipantDto.getNexusTakedowns()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getNexusTakedowns()));
+        assertThat(matchParticipantDto.getObjectivesStolen()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getObjectivesStolen()));
+        assertThat(matchParticipantDto.getObjectivesStolenAssists()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getObjectivesStolenAssists()));
+        assertThat(matchParticipantDto.getPentaKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getPentaKills()));
+        assertThat(matchParticipantDto.getPhysicalDamageDealt()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getPhysicalDamageDealt()));
+        assertThat(matchParticipantDto.getPhysicalDamageDealtToChampions()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getPhysicalDamageDealtToChampions()));
+        assertThat(matchParticipantDto.getPhysicalDamageTaken()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getPhysicalDamageTaken()));
+        assertThat(matchParticipantDto.getProfileIcon()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getProfileIcon()));
+        assertThat(matchParticipantDto.getQuadraKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getQuadraKills()));
+        assertThat(matchParticipantDto.getRiotIdName()).isEqualTo(
+                this.matchParticipantDto.getRiotIdName());
+        assertThat(matchParticipantDto.getRiotIdTagline()).isEqualTo(
+                this.matchParticipantDto.getRiotIdTagline());
+        assertThat(matchParticipantDto.getRole()).isEqualTo(
+                this.matchParticipantDto.getRole());
+        assertThat(matchParticipantDto.getSightWardsBoughtInGame()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSightWardsBoughtInGame()));
+        assertThat(matchParticipantDto.getSpell1Casts()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSpell1Casts()));
+        assertThat(matchParticipantDto.getSpell2Casts()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSpell2Casts()));
+        assertThat(matchParticipantDto.getSpell3Casts()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSpell3Casts()));
+        assertThat(matchParticipantDto.getSpell4Casts()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSpell4Casts()));
+        assertThat(matchParticipantDto.getSummoner1Casts()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSummoner1Casts()));
+        assertThat(matchParticipantDto.getSummoner1Id()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSummoner1Id()));
+        assertThat(matchParticipantDto.getSummoner2Casts()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSummoner2Casts()));
+        assertThat(matchParticipantDto.getSummoner2Id()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSummoner2Id()));
+        assertThat(matchParticipantDto.getSummonerId()).isEqualTo(
+                this.matchParticipantDto.getSummonerId());
+        assertThat(matchParticipantDto.getSummonerLevel()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getSummonerLevel()));
+        assertThat(matchParticipantDto.getSummonerName()).isEqualTo(
+                this.matchParticipantDto.getPuuid().equals("BOT")
+                        ? "(봇)" : this.matchParticipantDto.getSummonerName());
+        assertThat(matchParticipantDto.getTeamEarlySurrendered()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTeamEarlySurrendered()));
+        assertThat(matchParticipantDto.getTeamId()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTeamId()));
+        assertThat(matchParticipantDto.getTeamPosition()).isEqualTo(
+                this.matchParticipantDto.getTeamPosition());
+        assertThat(matchParticipantDto.getTimeCCingOthers()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTimeCCingOthers()));
+        assertThat(matchParticipantDto.getTimePlayed()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTimePlayed()));
+        assertThat(matchParticipantDto.getTotalDamageDealt()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalDamageDealt()));
+        assertThat(matchParticipantDto.getTotalDamageDealtToChampions()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalDamageDealtToChampions()));
+        assertThat(matchParticipantDto.getTotalDamageTaken()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalDamageTaken()));
+        assertThat(matchParticipantDto.getTotalHeal()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalHeal()));
+        assertThat(matchParticipantDto.getTotalHealsOnTeammates()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalHealsOnTeammates()));
+        assertThat(matchParticipantDto.getTotalMinionsKilled()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalMinionsKilled()));
+        assertThat(matchParticipantDto.getTotalTimeCCDealt()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalTimeCCDealt()));
+        assertThat(matchParticipantDto.getTotalTimeSpentDead()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalTimeSpentDead()));
+        assertThat(matchParticipantDto.getTotalUnitsHealed()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTotalUnitsHealed()));
+        assertThat(matchParticipantDto.getTripleKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTripleKills()));
+        assertThat(matchParticipantDto.getTrueDamageDealt()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTrueDamageDealt()));
+        assertThat(matchParticipantDto.getTrueDamageDealtToChampions()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTrueDamageDealtToChampions()));
+        assertThat(matchParticipantDto.getTrueDamageTaken()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTrueDamageTaken()));
+        assertThat(matchParticipantDto.getTurretKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTurretKills()));
+        assertThat(matchParticipantDto.getTurretTakedowns()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTurretTakedowns()));
+        assertThat(matchParticipantDto.getTurretsLost()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getTurretsLost()));
+        assertThat(matchParticipantDto.getUnrealKills()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getUnrealKills()));
+        assertThat(matchParticipantDto.getVisionScore()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getVisionScore()));
+        assertThat(matchParticipantDto.getVisionWardsBoughtInGame()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getVisionWardsBoughtInGame()));
+        assertThat(matchParticipantDto.getWardsKilled()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getWardsKilled()));
+        assertThat(matchParticipantDto.getWardsPlaced()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getWardsPlaced()));
+        assertThat(matchParticipantDto.getWin()).isEqualTo(
+                String.valueOf(this.matchParticipantDto.getWin()));
+        assertThat(matchParticipantDto.getRrt()).isEqualTo(
+                this.matchParticipantDto.getRrt());
+        assertThat(matchParticipantDto.getPerks()).isEqualTo(matchPerksDto);
+        assertThat(matchParticipantDto.getMultiKills()).isEqualTo(
                 getMultiKills(
-                        String.valueOf(matchParticipantDto.getDoubleKills()),
-                        String.valueOf(matchParticipantDto.getTripleKills()),
-                        String.valueOf(matchParticipantDto.getQuadraKills()),
-                        String.valueOf(matchParticipantDto.getPentaKills())
+                        String.valueOf(this.matchParticipantDto.getDoubleKills()),
+                        String.valueOf(this.matchParticipantDto.getTripleKills()),
+                        String.valueOf(this.matchParticipantDto.getQuadraKills()),
+                        String.valueOf(this.matchParticipantDto.getPentaKills())
                 ));
-        assertThat(participantDto.getKda()).isEqualTo(
+        assertThat(matchParticipantDto.getKda()).isEqualTo(
                 getKda(
-                        String.valueOf(matchParticipantDto.getKills()),
-                        String.valueOf(matchParticipantDto.getDeaths()),
-                        String.valueOf(matchParticipantDto.getAssists())
+                        String.valueOf(this.matchParticipantDto.getKills()),
+                        String.valueOf(this.matchParticipantDto.getDeaths()),
+                        String.valueOf(this.matchParticipantDto.getAssists())
                 ));
-        assertThat(participantDto.getMinionsKilledPerMin()).isEqualTo(
+        assertThat(matchParticipantDto.getMinionsKilledPerMin()).isEqualTo(
                 getMinionsKilledPerMin(
-                        String.valueOf(matchParticipantDto.getTotalMinionsKilled()),
+                        String.valueOf(this.matchParticipantDto.getTotalMinionsKilled()),
                         gameDuration
                 ));
     }
@@ -271,475 +271,475 @@ public class ParticipantDtoTest {
     @DisplayName("ParticipantDto Lombok Set Function Test")
     public void testLombokSetFunction() {
         //Given
-        ParticipantDto participantDto = new ParticipantDto(matchParticipantDto, perksDto, gameDuration);
+        MatchParticipantDto matchParticipantDto = new MatchParticipantDto(this.matchParticipantDto, this.matchPerksDto, gameDuration);
         MatchParticipantEntity matchParticipantEntity = createMatchParticipantEntityForSetTest();
-        PerksDto perksDto = new PerksDto();
+        MatchPerksDto matchPerksDto = new MatchPerksDto();
         long gameDuration = 79797L;
 
         //When
-        participantDto.setPuuid(matchParticipantEntity.getMatchParticipantId().getPuuid());
-        participantDto.setDataVersion(matchParticipantEntity.getMatchParticipantId().getDataVersion());
-        participantDto.setMatchId(matchParticipantEntity.getMatchParticipantId().getMatchId());
-        participantDto.setParticipantId(
+        matchParticipantDto.setPuuid(matchParticipantEntity.getMatchParticipantId().getPuuid());
+        matchParticipantDto.setDataVersion(matchParticipantEntity.getMatchParticipantId().getDataVersion());
+        matchParticipantDto.setMatchId(matchParticipantEntity.getMatchParticipantId().getMatchId());
+        matchParticipantDto.setParticipantId(
                 String.valueOf(matchParticipantEntity.getMatchParticipantId().getParticipantId()));
-        participantDto.setAssists(
+        matchParticipantDto.setAssists(
                 String.valueOf(matchParticipantEntity.getAssists()));
-        participantDto.setBaronKills(
+        matchParticipantDto.setBaronKills(
                 String.valueOf(matchParticipantEntity.getBaronKills()));
-        participantDto.setBountyLevel(
+        matchParticipantDto.setBountyLevel(
                 String.valueOf(matchParticipantEntity.getBountyLevel()));
-        participantDto.setChampExperience(
+        matchParticipantDto.setChampExperience(
                 String.valueOf(matchParticipantEntity.getChampExperience()));
-        participantDto.setChampLevel(
+        matchParticipantDto.setChampLevel(
                 String.valueOf(matchParticipantEntity.getChampLevel()));
-        participantDto.setChampionId(
+        matchParticipantDto.setChampionId(
                 String.valueOf(matchParticipantEntity.getChampionId()));
-        participantDto.setChampionNameENG(
+        matchParticipantDto.setChampionNameENG(
                 String.valueOf(matchParticipantEntity.getChampionName()));
-        participantDto.setChampionNameKR(
+        matchParticipantDto.setChampionNameKR(
                 String.valueOf(matchParticipantEntity.getChampionNameKR()));
-        participantDto.setChampionImg(
+        matchParticipantDto.setChampionImg(
                 String.valueOf(matchParticipantEntity.getChampionImg()));
-        participantDto.setChampionTransform(
+        matchParticipantDto.setChampionTransform(
                 String.valueOf(matchParticipantEntity.getChampionTransform()));
-        participantDto.setConsumablesPurchased(
+        matchParticipantDto.setConsumablesPurchased(
                 String.valueOf(matchParticipantEntity.getConsumablesPurchased()));
-        participantDto.setDamageDealtToBuildings(
+        matchParticipantDto.setDamageDealtToBuildings(
                 String.valueOf(matchParticipantEntity.getDamageDealtToBuildings()));
-        participantDto.setDamageDealtToObjectives(
+        matchParticipantDto.setDamageDealtToObjectives(
                 String.valueOf(matchParticipantEntity.getDamageDealtToObjectives()));
-        participantDto.setDamageSelfMitigated(
+        matchParticipantDto.setDamageSelfMitigated(
                 String.valueOf(matchParticipantEntity.getDamageSelfMitigated()));
-        participantDto.setDeaths(
+        matchParticipantDto.setDeaths(
                 String.valueOf(matchParticipantEntity.getDeaths()));
-        participantDto.setDetectorWardsPlaced(
+        matchParticipantDto.setDetectorWardsPlaced(
                 String.valueOf(matchParticipantEntity.getDetectorWardsPlaced()));
-        participantDto.setDoubleKills(
+        matchParticipantDto.setDoubleKills(
                 String.valueOf(matchParticipantEntity.getDoubleKills()));
-        participantDto.setDragonKills(
+        matchParticipantDto.setDragonKills(
                 String.valueOf(matchParticipantEntity.getDragonKills()));
-        participantDto.setFirstBloodAssist(
+        matchParticipantDto.setFirstBloodAssist(
                 String.valueOf(matchParticipantEntity.isFirstBloodAssist()));
-        participantDto.setFirstBloodKill(
+        matchParticipantDto.setFirstBloodKill(
                 String.valueOf(matchParticipantEntity.isFirstBloodKill()));
-        participantDto.setFirstTowerAssist(
+        matchParticipantDto.setFirstTowerAssist(
                 String.valueOf(matchParticipantEntity.isFirstTowerAssist()));
-        participantDto.setFirstTowerKill(
+        matchParticipantDto.setFirstTowerKill(
                 String.valueOf(matchParticipantEntity.isFirstTowerKill()));
-        participantDto.setGameEndedInEarlySurrender(
+        matchParticipantDto.setGameEndedInEarlySurrender(
                 String.valueOf(matchParticipantEntity.isGameEndedInEarlySurrender()));
-        participantDto.setGameEndedInSurrender(
+        matchParticipantDto.setGameEndedInSurrender(
                 String.valueOf(matchParticipantEntity.isGameEndedInSurrender()));
-        participantDto.setGoldEarned(
+        matchParticipantDto.setGoldEarned(
                 String.valueOf(matchParticipantEntity.getGoldEarned()));
-        participantDto.setGoldSpent(
+        matchParticipantDto.setGoldSpent(
                 String.valueOf(matchParticipantEntity.getGoldSpent()));
-        participantDto.setIndividualPosition(
+        matchParticipantDto.setIndividualPosition(
                 matchParticipantEntity.getIndividualPosition());
-        participantDto.setInhibitorKills(
+        matchParticipantDto.setInhibitorKills(
                 String.valueOf(matchParticipantEntity.getInhibitorKills()));
-        participantDto.setInhibitorTakedowns(
+        matchParticipantDto.setInhibitorTakedowns(
                 String.valueOf(matchParticipantEntity.getInhibitorTakedowns()));
-        participantDto.setInhibitorsLost(
+        matchParticipantDto.setInhibitorsLost(
                 String.valueOf(matchParticipantEntity.getInhibitorsLost()));
-        participantDto.setItem0(
+        matchParticipantDto.setItem0(
                 String.valueOf(matchParticipantEntity.getItem0()));
-        participantDto.setItem1(
+        matchParticipantDto.setItem1(
                 String.valueOf(matchParticipantEntity.getItem1()));
-        participantDto.setItem2(
+        matchParticipantDto.setItem2(
                 String.valueOf(matchParticipantEntity.getItem2()));
-        participantDto.setItem3(
+        matchParticipantDto.setItem3(
                 String.valueOf(matchParticipantEntity.getItem3()));
-        participantDto.setItem4(
+        matchParticipantDto.setItem4(
                 String.valueOf(matchParticipantEntity.getItem4()));
-        participantDto.setItem5(
+        matchParticipantDto.setItem5(
                 String.valueOf(matchParticipantEntity.getItem5()));
-        participantDto.setItem6(
+        matchParticipantDto.setItem6(
                 String.valueOf(matchParticipantEntity.getItem6()));
-        participantDto.setItemsPurchased(
+        matchParticipantDto.setItemsPurchased(
                 String.valueOf(matchParticipantEntity.getItemsPurchased()));
-        participantDto.setKillingSprees(
+        matchParticipantDto.setKillingSprees(
                 String.valueOf(matchParticipantEntity.getKillingSprees()));
-        participantDto.setKills(
+        matchParticipantDto.setKills(
                 String.valueOf(matchParticipantEntity.getKills()));
-        participantDto.setLane(
+        matchParticipantDto.setLane(
                 matchParticipantEntity.getLane());
-        participantDto.setLargestCriticalStrike(
+        matchParticipantDto.setLargestCriticalStrike(
                 String.valueOf(matchParticipantEntity.getLargestCriticalStrike()));
-        participantDto.setLargestKillingSpree(
+        matchParticipantDto.setLargestKillingSpree(
                 String.valueOf(matchParticipantEntity.getLargestKillingSpree()));
-        participantDto.setLongestTimeSpentLiving(
+        matchParticipantDto.setLongestTimeSpentLiving(
                 String.valueOf(matchParticipantEntity.getLongestTimeSpentLiving()));
-        participantDto.setMagicDamageDealt(
+        matchParticipantDto.setMagicDamageDealt(
                 String.valueOf(matchParticipantEntity.getMagicDamageDealt()));
-        participantDto.setMagicDamageDealtToChampions(
+        matchParticipantDto.setMagicDamageDealtToChampions(
                 String.valueOf(matchParticipantEntity.getMagicDamageDealtToChampions()));
-        participantDto.setMagicDamageTaken(
+        matchParticipantDto.setMagicDamageTaken(
                 String.valueOf(matchParticipantEntity.getMagicDamageTaken()));
-        participantDto.setNeutralMinionsKilled(
+        matchParticipantDto.setNeutralMinionsKilled(
                 String.valueOf(matchParticipantEntity.getNeutralMinionsKilled()));
-        participantDto.setNexusKills(
+        matchParticipantDto.setNexusKills(
                 String.valueOf(matchParticipantEntity.getNexusKills()));
-        participantDto.setNexusLost(
+        matchParticipantDto.setNexusLost(
                 String.valueOf(matchParticipantEntity.getNexusLost()));
-        participantDto.setNexusTakedowns(
+        matchParticipantDto.setNexusTakedowns(
                 String.valueOf(matchParticipantEntity.getNexusTakedowns()));
-        participantDto.setObjectivesStolen(
+        matchParticipantDto.setObjectivesStolen(
                 String.valueOf(matchParticipantEntity.getObjectivesStolen()));
-        participantDto.setObjectivesStolenAssists(
+        matchParticipantDto.setObjectivesStolenAssists(
                 String.valueOf(matchParticipantEntity.getObjectivesStolenAssists()));
-        participantDto.setPentaKills(
+        matchParticipantDto.setPentaKills(
                 String.valueOf(matchParticipantEntity.getPentaKills()));
-        participantDto.setPhysicalDamageDealt(
+        matchParticipantDto.setPhysicalDamageDealt(
                 String.valueOf(matchParticipantEntity.getPhysicalDamageDealt()));
-        participantDto.setPhysicalDamageDealtToChampions(
+        matchParticipantDto.setPhysicalDamageDealtToChampions(
                 String.valueOf(matchParticipantEntity.getPhysicalDamageDealtToChampions()));
-        participantDto.setPhysicalDamageTaken(
+        matchParticipantDto.setPhysicalDamageTaken(
                 String.valueOf(matchParticipantEntity.getPhysicalDamageTaken()));
-        participantDto.setProfileIcon(
+        matchParticipantDto.setProfileIcon(
                 String.valueOf(matchParticipantEntity.getProfileIcon()));
-        participantDto.setQuadraKills(
+        matchParticipantDto.setQuadraKills(
                 String.valueOf(matchParticipantEntity.getQuadraKills()));
-        participantDto.setRiotIdName(
+        matchParticipantDto.setRiotIdName(
                 matchParticipantEntity.getRiotIdName());
-        participantDto.setRiotIdTagline(
+        matchParticipantDto.setRiotIdTagline(
                 matchParticipantEntity.getRiotIdTagline());
-        participantDto.setRole(
+        matchParticipantDto.setRole(
                 matchParticipantEntity.getRole());
-        participantDto.setSightWardsBoughtInGame(
+        matchParticipantDto.setSightWardsBoughtInGame(
                 String.valueOf(matchParticipantEntity.getSightWardsBoughtInGame()));
-        participantDto.setSpell1Casts(
+        matchParticipantDto.setSpell1Casts(
                 String.valueOf(matchParticipantEntity.getSpell1Casts()));
-        participantDto.setSpell2Casts(
+        matchParticipantDto.setSpell2Casts(
                 String.valueOf(matchParticipantEntity.getSpell2Casts()));
-        participantDto.setSpell3Casts(
+        matchParticipantDto.setSpell3Casts(
                 String.valueOf(matchParticipantEntity.getSpell3Casts()));
-        participantDto.setSpell4Casts(
+        matchParticipantDto.setSpell4Casts(
                 String.valueOf(matchParticipantEntity.getSpell4Casts()));
-        participantDto.setSummoner1Casts(
+        matchParticipantDto.setSummoner1Casts(
                 String.valueOf(matchParticipantEntity.getSummoner1Casts()));
-        participantDto.setSummoner1Id(
+        matchParticipantDto.setSummoner1Id(
                 String.valueOf(matchParticipantEntity.getSummoner1Id()));
-        participantDto.setSummoner2Casts(
+        matchParticipantDto.setSummoner2Casts(
                 String.valueOf(matchParticipantEntity.getSummoner2Casts()));
-        participantDto.setSummoner2Id(
+        matchParticipantDto.setSummoner2Id(
                 String.valueOf(matchParticipantEntity.getSummoner2Id()));
-        participantDto.setSummonerId(
+        matchParticipantDto.setSummonerId(
                 matchParticipantEntity.getSummonerId());
-        participantDto.setSummonerLevel(
+        matchParticipantDto.setSummonerLevel(
                 String.valueOf(matchParticipantEntity.getSummonerLevel()));
-        participantDto.setSummonerName(
+        matchParticipantDto.setSummonerName(
                 matchParticipantEntity.getMatchParticipantId().getPuuid().equals("BOT")
                         ? "(봇)" : matchParticipantEntity.getSummonerName());
-        participantDto.setTeamEarlySurrendered(
+        matchParticipantDto.setTeamEarlySurrendered(
                 String.valueOf(matchParticipantEntity.isTeamEarlySurrendered()));
-        participantDto.setTeamId(
+        matchParticipantDto.setTeamId(
                 String.valueOf(matchParticipantEntity.getTeamId()));
-        participantDto.setTeamPosition(
+        matchParticipantDto.setTeamPosition(
                 matchParticipantEntity.getTeamPosition());
-        participantDto.setTimeCCingOthers(
+        matchParticipantDto.setTimeCCingOthers(
                 String.valueOf(matchParticipantEntity.getTimeCCingOthers()));
-        participantDto.setTimePlayed(
+        matchParticipantDto.setTimePlayed(
                 String.valueOf(matchParticipantEntity.getTimePlayed()));
-        participantDto.setTotalDamageDealt(
+        matchParticipantDto.setTotalDamageDealt(
                 String.valueOf(matchParticipantEntity.getTotalDamageDealt()));
-        participantDto.setTotalDamageDealtToChampions(
+        matchParticipantDto.setTotalDamageDealtToChampions(
                 String.valueOf(matchParticipantEntity.getTotalDamageDealtToChampions()));
-        participantDto.setTotalDamageTaken(
+        matchParticipantDto.setTotalDamageTaken(
                 String.valueOf(matchParticipantEntity.getTotalDamageTaken()));
-        participantDto.setTotalHeal(
+        matchParticipantDto.setTotalHeal(
                 String.valueOf(matchParticipantEntity.getTotalHeal()));
-        participantDto.setTotalHealsOnTeammates(
+        matchParticipantDto.setTotalHealsOnTeammates(
                 String.valueOf(matchParticipantEntity.getTotalHealsOnTeammates()));
-        participantDto.setTotalMinionsKilled(
+        matchParticipantDto.setTotalMinionsKilled(
                 String.valueOf(matchParticipantEntity.getTotalMinionsKilled()));
-        participantDto.setTotalTimeCCDealt(
+        matchParticipantDto.setTotalTimeCCDealt(
                 String.valueOf(matchParticipantEntity.getTotalTimeCCDealt()));
-        participantDto.setTotalTimeSpentDead(
+        matchParticipantDto.setTotalTimeSpentDead(
                 String.valueOf(matchParticipantEntity.getTotalTimeSpentDead()));
-        participantDto.setTotalUnitsHealed(
+        matchParticipantDto.setTotalUnitsHealed(
                 String.valueOf(matchParticipantEntity.getTotalUnitsHealed()));
-        participantDto.setTripleKills(
+        matchParticipantDto.setTripleKills(
                 String.valueOf(matchParticipantEntity.getTripleKills()));
-        participantDto.setTrueDamageDealt(
+        matchParticipantDto.setTrueDamageDealt(
                 String.valueOf(matchParticipantEntity.getTrueDamageDealt()));
-        participantDto.setTrueDamageDealtToChampions(
+        matchParticipantDto.setTrueDamageDealtToChampions(
                 String.valueOf(matchParticipantEntity.getTrueDamageDealtToChampions()));
-        participantDto.setTrueDamageTaken(
+        matchParticipantDto.setTrueDamageTaken(
                 String.valueOf(matchParticipantEntity.getTrueDamageTaken()));
-        participantDto.setTurretKills(
+        matchParticipantDto.setTurretKills(
                 String.valueOf(matchParticipantEntity.getTurretKills()));
-        participantDto.setTurretTakedowns(
+        matchParticipantDto.setTurretTakedowns(
                 String.valueOf(matchParticipantEntity.getTurretTakedowns()));
-        participantDto.setTurretsLost(
+        matchParticipantDto.setTurretsLost(
                 String.valueOf(matchParticipantEntity.getTurretsLost()));
-        participantDto.setUnrealKills(
+        matchParticipantDto.setUnrealKills(
                 String.valueOf(matchParticipantEntity.getUnrealKills()));
-        participantDto.setVisionScore(
+        matchParticipantDto.setVisionScore(
                 String.valueOf(matchParticipantEntity.getVisionScore()));
-        participantDto.setVisionWardsBoughtInGame(
+        matchParticipantDto.setVisionWardsBoughtInGame(
                 String.valueOf(matchParticipantEntity.getVisionWardsBoughtInGame()));
-        participantDto.setWardsKilled(
+        matchParticipantDto.setWardsKilled(
                 String.valueOf(matchParticipantEntity.getWardsKilled()));
-        participantDto.setWardsPlaced(
+        matchParticipantDto.setWardsPlaced(
                 String.valueOf(matchParticipantEntity.getWardsPlaced()));
-        participantDto.setWin(
+        matchParticipantDto.setWin(
                 String.valueOf(matchParticipantEntity.isWin()));
-        participantDto.setRrt(
+        matchParticipantDto.setRrt(
                 matchParticipantEntity.getRrt());
-        participantDto.setPerks(perksDto);
-        participantDto.setMultiKills(
+        matchParticipantDto.setPerks(matchPerksDto);
+        matchParticipantDto.setMultiKills(
                 getMultiKills(
                         String.valueOf(matchParticipantEntity.getDoubleKills()),
                         String.valueOf(matchParticipantEntity.getTripleKills()),
                         String.valueOf(matchParticipantEntity.getQuadraKills()),
                         String.valueOf(matchParticipantEntity.getPentaKills())
                 ));
-        participantDto.setKda(
+        matchParticipantDto.setKda(
                 getKda(
                         String.valueOf(matchParticipantEntity.getKills()),
                         String.valueOf(matchParticipantEntity.getDeaths()),
                         String.valueOf(matchParticipantEntity.getAssists())
                 ));
-        participantDto.setMinionsKilledPerMin(
+        matchParticipantDto.setMinionsKilledPerMin(
                 getMinionsKilledPerMin(
                         String.valueOf(matchParticipantEntity.getTotalMinionsKilled()),
                         gameDuration
                 ));
 
         //Then
-        assertThat(participantDto.getPuuid()).isEqualTo(matchParticipantEntity.getMatchParticipantId().getPuuid());
-        assertThat(participantDto.getDataVersion()).isEqualTo(matchParticipantEntity.getMatchParticipantId().getDataVersion());
-        assertThat(participantDto.getMatchId()).isEqualTo(matchParticipantEntity.getMatchParticipantId().getMatchId());
-        assertThat(participantDto.getParticipantId()).isEqualTo(
+        assertThat(matchParticipantDto.getPuuid()).isEqualTo(matchParticipantEntity.getMatchParticipantId().getPuuid());
+        assertThat(matchParticipantDto.getDataVersion()).isEqualTo(matchParticipantEntity.getMatchParticipantId().getDataVersion());
+        assertThat(matchParticipantDto.getMatchId()).isEqualTo(matchParticipantEntity.getMatchParticipantId().getMatchId());
+        assertThat(matchParticipantDto.getParticipantId()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getMatchParticipantId().getParticipantId()));
-        assertThat(participantDto.getAssists()).isEqualTo(
+        assertThat(matchParticipantDto.getAssists()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getAssists()));
-        assertThat(participantDto.getBaronKills()).isEqualTo(
+        assertThat(matchParticipantDto.getBaronKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getBaronKills()));
-        assertThat(participantDto.getBountyLevel()).isEqualTo(
+        assertThat(matchParticipantDto.getBountyLevel()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getBountyLevel()));
-        assertThat(participantDto.getChampExperience()).isEqualTo(
+        assertThat(matchParticipantDto.getChampExperience()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampExperience()));
-        assertThat(participantDto.getChampLevel()).isEqualTo(
+        assertThat(matchParticipantDto.getChampLevel()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampLevel()));
-        assertThat(participantDto.getChampionId()).isEqualTo(
+        assertThat(matchParticipantDto.getChampionId()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionId()));
-        assertThat(participantDto.getChampionNameENG()).isEqualTo(
+        assertThat(matchParticipantDto.getChampionNameENG()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionName()));
-        assertThat(participantDto.getChampionNameKR()).isEqualTo(
+        assertThat(matchParticipantDto.getChampionNameKR()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionNameKR()));
-        assertThat(participantDto.getChampionImg()).isEqualTo(
+        assertThat(matchParticipantDto.getChampionImg()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionImg()));
-        assertThat(participantDto.getChampionTransform()).isEqualTo(
+        assertThat(matchParticipantDto.getChampionTransform()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getChampionTransform()));
-        assertThat(participantDto.getConsumablesPurchased()).isEqualTo(
+        assertThat(matchParticipantDto.getConsumablesPurchased()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getConsumablesPurchased()));
-        assertThat(participantDto.getDamageDealtToBuildings()).isEqualTo(
+        assertThat(matchParticipantDto.getDamageDealtToBuildings()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDamageDealtToBuildings()));
-        assertThat(participantDto.getDamageDealtToObjectives()).isEqualTo(
+        assertThat(matchParticipantDto.getDamageDealtToObjectives()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDamageDealtToObjectives()));
-        assertThat(participantDto.getDamageSelfMitigated()).isEqualTo(
+        assertThat(matchParticipantDto.getDamageSelfMitigated()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDamageSelfMitigated()));
-        assertThat(participantDto.getDeaths()).isEqualTo(
+        assertThat(matchParticipantDto.getDeaths()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDeaths()));
-        assertThat(participantDto.getDetectorWardsPlaced()).isEqualTo(
+        assertThat(matchParticipantDto.getDetectorWardsPlaced()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDetectorWardsPlaced()));
-        assertThat(participantDto.getDoubleKills()).isEqualTo(
+        assertThat(matchParticipantDto.getDoubleKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDoubleKills()));
-        assertThat(participantDto.getDragonKills()).isEqualTo(
+        assertThat(matchParticipantDto.getDragonKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getDragonKills()));
-        assertThat(participantDto.getFirstBloodAssist()).isEqualTo(
+        assertThat(matchParticipantDto.getFirstBloodAssist()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isFirstBloodAssist()));
-        assertThat(participantDto.getFirstBloodKill()).isEqualTo(
+        assertThat(matchParticipantDto.getFirstBloodKill()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isFirstBloodKill()));
-        assertThat(participantDto.getFirstTowerAssist()).isEqualTo(
+        assertThat(matchParticipantDto.getFirstTowerAssist()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isFirstTowerAssist()));
-        assertThat(participantDto.getFirstTowerKill()).isEqualTo(
+        assertThat(matchParticipantDto.getFirstTowerKill()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isFirstTowerKill()));
-        assertThat(participantDto.getGameEndedInEarlySurrender()).isEqualTo(
+        assertThat(matchParticipantDto.getGameEndedInEarlySurrender()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isGameEndedInEarlySurrender()));
-        assertThat(participantDto.getGameEndedInSurrender()).isEqualTo(
+        assertThat(matchParticipantDto.getGameEndedInSurrender()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isGameEndedInSurrender()));
-        assertThat(participantDto.getGoldEarned()).isEqualTo(
+        assertThat(matchParticipantDto.getGoldEarned()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getGoldEarned()));
-        assertThat(participantDto.getGoldSpent()).isEqualTo(
+        assertThat(matchParticipantDto.getGoldSpent()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getGoldSpent()));
-        assertThat(participantDto.getIndividualPosition()).isEqualTo(
+        assertThat(matchParticipantDto.getIndividualPosition()).isEqualTo(
                 matchParticipantEntity.getIndividualPosition());
-        assertThat(participantDto.getInhibitorKills()).isEqualTo(
+        assertThat(matchParticipantDto.getInhibitorKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getInhibitorKills()));
-        assertThat(participantDto.getInhibitorTakedowns()).isEqualTo(
+        assertThat(matchParticipantDto.getInhibitorTakedowns()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getInhibitorTakedowns()));
-        assertThat(participantDto.getInhibitorsLost()).isEqualTo(
+        assertThat(matchParticipantDto.getInhibitorsLost()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getInhibitorsLost()));
-        assertThat(participantDto.getItem0()).isEqualTo(
+        assertThat(matchParticipantDto.getItem0()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem0()));
-        assertThat(participantDto.getItem1()).isEqualTo(
+        assertThat(matchParticipantDto.getItem1()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem1()));
-        assertThat(participantDto.getItem2()).isEqualTo(
+        assertThat(matchParticipantDto.getItem2()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem2()));
-        assertThat(participantDto.getItem3()).isEqualTo(
+        assertThat(matchParticipantDto.getItem3()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem3()));
-        assertThat(participantDto.getItem4()).isEqualTo(
+        assertThat(matchParticipantDto.getItem4()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem4()));
-        assertThat(participantDto.getItem5()).isEqualTo(
+        assertThat(matchParticipantDto.getItem5()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem5()));
-        assertThat(participantDto.getItem6()).isEqualTo(
+        assertThat(matchParticipantDto.getItem6()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItem6()));
-        assertThat(participantDto.getItemsPurchased()).isEqualTo(
+        assertThat(matchParticipantDto.getItemsPurchased()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getItemsPurchased()));
-        assertThat(participantDto.getKillingSprees()).isEqualTo(
+        assertThat(matchParticipantDto.getKillingSprees()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getKillingSprees()));
-        assertThat(participantDto.getKills()).isEqualTo(
+        assertThat(matchParticipantDto.getKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getKills()));
-        assertThat(participantDto.getLane()).isEqualTo(
+        assertThat(matchParticipantDto.getLane()).isEqualTo(
                 matchParticipantEntity.getLane());
-        assertThat(participantDto.getLargestCriticalStrike()).isEqualTo(
+        assertThat(matchParticipantDto.getLargestCriticalStrike()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getLargestCriticalStrike()));
-        assertThat(participantDto.getLargestKillingSpree()).isEqualTo(
+        assertThat(matchParticipantDto.getLargestKillingSpree()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getLargestKillingSpree()));
-        assertThat(participantDto.getLongestTimeSpentLiving()).isEqualTo(
+        assertThat(matchParticipantDto.getLongestTimeSpentLiving()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getLongestTimeSpentLiving()));
-        assertThat(participantDto.getMagicDamageDealt()).isEqualTo(
+        assertThat(matchParticipantDto.getMagicDamageDealt()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getMagicDamageDealt()));
-        assertThat(participantDto.getMagicDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantDto.getMagicDamageDealtToChampions()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getMagicDamageDealtToChampions()));
-        assertThat(participantDto.getMagicDamageTaken()).isEqualTo(
+        assertThat(matchParticipantDto.getMagicDamageTaken()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getMagicDamageTaken()));
-        assertThat(participantDto.getNeutralMinionsKilled()).isEqualTo(
+        assertThat(matchParticipantDto.getNeutralMinionsKilled()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getNeutralMinionsKilled()));
-        assertThat(participantDto.getNexusKills()).isEqualTo(
+        assertThat(matchParticipantDto.getNexusKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getNexusKills()));
-        assertThat(participantDto.getNexusLost()).isEqualTo(
+        assertThat(matchParticipantDto.getNexusLost()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getNexusLost()));
-        assertThat(participantDto.getNexusTakedowns()).isEqualTo(
+        assertThat(matchParticipantDto.getNexusTakedowns()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getNexusTakedowns()));
-        assertThat(participantDto.getObjectivesStolen()).isEqualTo(
+        assertThat(matchParticipantDto.getObjectivesStolen()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getObjectivesStolen()));
-        assertThat(participantDto.getObjectivesStolenAssists()).isEqualTo(
+        assertThat(matchParticipantDto.getObjectivesStolenAssists()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getObjectivesStolenAssists()));
-        assertThat(participantDto.getPentaKills()).isEqualTo(
+        assertThat(matchParticipantDto.getPentaKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getPentaKills()));
-        assertThat(participantDto.getPhysicalDamageDealt()).isEqualTo(
+        assertThat(matchParticipantDto.getPhysicalDamageDealt()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getPhysicalDamageDealt()));
-        assertThat(participantDto.getPhysicalDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantDto.getPhysicalDamageDealtToChampions()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getPhysicalDamageDealtToChampions()));
-        assertThat(participantDto.getPhysicalDamageTaken()).isEqualTo(
+        assertThat(matchParticipantDto.getPhysicalDamageTaken()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getPhysicalDamageTaken()));
-        assertThat(participantDto.getProfileIcon()).isEqualTo(
+        assertThat(matchParticipantDto.getProfileIcon()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getProfileIcon()));
-        assertThat(participantDto.getQuadraKills()).isEqualTo(
+        assertThat(matchParticipantDto.getQuadraKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getQuadraKills()));
-        assertThat(participantDto.getRiotIdName()).isEqualTo(
+        assertThat(matchParticipantDto.getRiotIdName()).isEqualTo(
                 matchParticipantEntity.getRiotIdName());
-        assertThat(participantDto.getRiotIdTagline()).isEqualTo(
+        assertThat(matchParticipantDto.getRiotIdTagline()).isEqualTo(
                 matchParticipantEntity.getRiotIdTagline());
-        assertThat(participantDto.getRole()).isEqualTo(
+        assertThat(matchParticipantDto.getRole()).isEqualTo(
                 matchParticipantEntity.getRole());
-        assertThat(participantDto.getSightWardsBoughtInGame()).isEqualTo(
+        assertThat(matchParticipantDto.getSightWardsBoughtInGame()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSightWardsBoughtInGame()));
-        assertThat(participantDto.getSpell1Casts()).isEqualTo(
+        assertThat(matchParticipantDto.getSpell1Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSpell1Casts()));
-        assertThat(participantDto.getSpell2Casts()).isEqualTo(
+        assertThat(matchParticipantDto.getSpell2Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSpell2Casts()));
-        assertThat(participantDto.getSpell3Casts()).isEqualTo(
+        assertThat(matchParticipantDto.getSpell3Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSpell3Casts()));
-        assertThat(participantDto.getSpell4Casts()).isEqualTo(
+        assertThat(matchParticipantDto.getSpell4Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSpell4Casts()));
-        assertThat(participantDto.getSummoner1Casts()).isEqualTo(
+        assertThat(matchParticipantDto.getSummoner1Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner1Casts()));
-        assertThat(participantDto.getSummoner1Id()).isEqualTo(
+        assertThat(matchParticipantDto.getSummoner1Id()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner1Id()));
-        assertThat(participantDto.getSummoner2Casts()).isEqualTo(
+        assertThat(matchParticipantDto.getSummoner2Casts()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner2Casts()));
-        assertThat(participantDto.getSummoner2Id()).isEqualTo(
+        assertThat(matchParticipantDto.getSummoner2Id()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummoner2Id()));
-        assertThat(participantDto.getSummonerId()).isEqualTo(
+        assertThat(matchParticipantDto.getSummonerId()).isEqualTo(
                 matchParticipantEntity.getSummonerId());
-        assertThat(participantDto.getSummonerLevel()).isEqualTo(
+        assertThat(matchParticipantDto.getSummonerLevel()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getSummonerLevel()));
-        assertThat(participantDto.getSummonerName()).isEqualTo(
+        assertThat(matchParticipantDto.getSummonerName()).isEqualTo(
                 matchParticipantEntity.getMatchParticipantId().getPuuid().equals("BOT")
                         ? "(봇)" : matchParticipantEntity.getSummonerName());
-        assertThat(participantDto.getTeamEarlySurrendered()).isEqualTo(
+        assertThat(matchParticipantDto.getTeamEarlySurrendered()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isTeamEarlySurrendered()));
-        assertThat(participantDto.getTeamId()).isEqualTo(
+        assertThat(matchParticipantDto.getTeamId()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTeamId()));
-        assertThat(participantDto.getTeamPosition()).isEqualTo(
+        assertThat(matchParticipantDto.getTeamPosition()).isEqualTo(
                 matchParticipantEntity.getTeamPosition());
-        assertThat(participantDto.getTimeCCingOthers()).isEqualTo(
+        assertThat(matchParticipantDto.getTimeCCingOthers()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTimeCCingOthers()));
-        assertThat(participantDto.getTimePlayed()).isEqualTo(
+        assertThat(matchParticipantDto.getTimePlayed()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTimePlayed()));
-        assertThat(participantDto.getTotalDamageDealt()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalDamageDealt()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalDamageDealt()));
-        assertThat(participantDto.getTotalDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalDamageDealtToChampions()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalDamageDealtToChampions()));
-        assertThat(participantDto.getTotalDamageTaken()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalDamageTaken()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalDamageTaken()));
-        assertThat(participantDto.getTotalHeal()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalHeal()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalHeal()));
-        assertThat(participantDto.getTotalHealsOnTeammates()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalHealsOnTeammates()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalHealsOnTeammates()));
-        assertThat(participantDto.getTotalMinionsKilled()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalMinionsKilled()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalMinionsKilled()));
-        assertThat(participantDto.getTotalTimeCCDealt()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalTimeCCDealt()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalTimeCCDealt()));
-        assertThat(participantDto.getTotalTimeSpentDead()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalTimeSpentDead()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalTimeSpentDead()));
-        assertThat(participantDto.getTotalUnitsHealed()).isEqualTo(
+        assertThat(matchParticipantDto.getTotalUnitsHealed()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTotalUnitsHealed()));
-        assertThat(participantDto.getTripleKills()).isEqualTo(
+        assertThat(matchParticipantDto.getTripleKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTripleKills()));
-        assertThat(participantDto.getTrueDamageDealt()).isEqualTo(
+        assertThat(matchParticipantDto.getTrueDamageDealt()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTrueDamageDealt()));
-        assertThat(participantDto.getTrueDamageDealtToChampions()).isEqualTo(
+        assertThat(matchParticipantDto.getTrueDamageDealtToChampions()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTrueDamageDealtToChampions()));
-        assertThat(participantDto.getTrueDamageTaken()).isEqualTo(
+        assertThat(matchParticipantDto.getTrueDamageTaken()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTrueDamageTaken()));
-        assertThat(participantDto.getTurretKills()).isEqualTo(
+        assertThat(matchParticipantDto.getTurretKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTurretKills()));
-        assertThat(participantDto.getTurretTakedowns()).isEqualTo(
+        assertThat(matchParticipantDto.getTurretTakedowns()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTurretTakedowns()));
-        assertThat(participantDto.getTurretsLost()).isEqualTo(
+        assertThat(matchParticipantDto.getTurretsLost()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getTurretsLost()));
-        assertThat(participantDto.getUnrealKills()).isEqualTo(
+        assertThat(matchParticipantDto.getUnrealKills()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getUnrealKills()));
-        assertThat(participantDto.getVisionScore()).isEqualTo(
+        assertThat(matchParticipantDto.getVisionScore()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getVisionScore()));
-        assertThat(participantDto.getVisionWardsBoughtInGame()).isEqualTo(
+        assertThat(matchParticipantDto.getVisionWardsBoughtInGame()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getVisionWardsBoughtInGame()));
-        assertThat(participantDto.getWardsKilled()).isEqualTo(
+        assertThat(matchParticipantDto.getWardsKilled()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getWardsKilled()));
-        assertThat(participantDto.getWardsPlaced()).isEqualTo(
+        assertThat(matchParticipantDto.getWardsPlaced()).isEqualTo(
                 String.valueOf(matchParticipantEntity.getWardsPlaced()));
-        assertThat(participantDto.getWin()).isEqualTo(
+        assertThat(matchParticipantDto.getWin()).isEqualTo(
                 String.valueOf(matchParticipantEntity.isWin()));
-        assertThat(participantDto.getRrt()).isEqualTo(
+        assertThat(matchParticipantDto.getRrt()).isEqualTo(
                 matchParticipantEntity.getRrt());
-        assertThat(participantDto.getPerks()).isEqualTo(perksDto);
-        assertThat(participantDto.getMultiKills()).isEqualTo(
+        assertThat(matchParticipantDto.getPerks()).isEqualTo(matchPerksDto);
+        assertThat(matchParticipantDto.getMultiKills()).isEqualTo(
                 getMultiKills(
                         String.valueOf(matchParticipantEntity.getDoubleKills()),
                         String.valueOf(matchParticipantEntity.getTripleKills()),
                         String.valueOf(matchParticipantEntity.getQuadraKills()),
                         String.valueOf(matchParticipantEntity.getPentaKills())
                 ));
-        assertThat(participantDto.getKda()).isEqualTo(
+        assertThat(matchParticipantDto.getKda()).isEqualTo(
                 getKda(
                         String.valueOf(matchParticipantEntity.getKills()),
                         String.valueOf(matchParticipantEntity.getDeaths()),
                         String.valueOf(matchParticipantEntity.getAssists())
                 ));
-        assertThat(participantDto.getMinionsKilledPerMin()).isEqualTo(
+        assertThat(matchParticipantDto.getMinionsKilledPerMin()).isEqualTo(
                 getMinionsKilledPerMin(
                         String.valueOf(matchParticipantEntity.getTotalMinionsKilled()),
                         gameDuration
                 ));
     }
 
-    private ParticipantDto createMatchParticipantDto() {
+    private MatchParticipantDto createMatchParticipantDto() {
         String puuid = "A1B2C3D4";
         String dataVersion = "2";
         String matchId = "AAAAAA";
@@ -851,7 +851,7 @@ public class ParticipantDtoTest {
         boolean win = true;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        return new ParticipantDto(new MatchParticipantEntity(
+        return new MatchParticipantDto(new MatchParticipantEntity(
                 new MatchParticipantId(puuid, dataVersion, matchId, participantId),
                 assists,
                 baronKills,
@@ -1183,8 +1183,8 @@ public class ParticipantDtoTest {
         );
     }
 
-    private PerksDto createPerksDto() {
-        return new PerksDto();
+    private MatchPerksDto createPerksDto() {
+        return new MatchPerksDto();
     }
 
     private String getMultiKills(String doubleKills, String tripleKills, String quadraKills, String pentaKills) {

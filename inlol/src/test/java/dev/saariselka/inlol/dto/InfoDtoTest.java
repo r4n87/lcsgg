@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.dto;
 
 import dev.saariselka.inlol.entity.*;
-import dev.saariselka.inlol.utils.JsonParserForLOL;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +19,7 @@ public class InfoDtoTest {
 
     MatchMasterEntity matchMasterEntity;
     List<TeamDto> teamDtoList;
-    ParticipantDto summonerInfo;
+    MatchParticipantDto summonerInfo;
 
     @BeforeEach
     public void init() {
@@ -96,7 +95,7 @@ public class InfoDtoTest {
         String tobe_queueType = "testQueueType";
 
         List<TeamDto> tobe_teamDtoList = new ArrayList<>();
-        ParticipantDto tobe_summonerInfo = new ParticipantDto();
+        MatchParticipantDto tobe_summonerInfo = new MatchParticipantDto();
 
         //시간 차이 계산
         String tobe_convert_gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameStartTimeStamp), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(tobe_gameEndTimeStamp), TimeZone.getDefault().toZoneId())))
@@ -159,8 +158,8 @@ public class InfoDtoTest {
     }
 
 
-    private ParticipantDto createTestSummonerInfo() {
-        ParticipantDto summoner = new ParticipantDto();
+    private MatchParticipantDto createTestSummonerInfo() {
+        MatchParticipantDto summoner = new MatchParticipantDto();
         return summoner;
 
     }

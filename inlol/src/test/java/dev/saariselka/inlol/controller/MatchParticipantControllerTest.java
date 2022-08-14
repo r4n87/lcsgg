@@ -1,6 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.ParticipantDto;
+import dev.saariselka.inlol.dto.MatchParticipantDto;
 import dev.saariselka.inlol.entity.MatchParticipantEntity;
 import dev.saariselka.inlol.entity.MatchParticipantId;
 import dev.saariselka.inlol.repository.MatchParticipantRepository;
@@ -140,7 +140,7 @@ public class MatchParticipantControllerTest {
         boolean win = true;
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
 
-        List<ParticipantDto> listBeforeAdd = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
+        List<MatchParticipantDto> listBeforeAdd = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
 
         //when
         matchParticipantController.insertParticipantInfo(puuid, dataVersion, matchId, assists, baronKills,
@@ -160,7 +160,7 @@ public class MatchParticipantControllerTest {
                 turretTakedowns, turretsLost, unrealKills, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win, rrt);
 
         //then
-        List<ParticipantDto> listAfterAdd = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
+        List<MatchParticipantDto> listAfterAdd = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(dataVersion, matchId);
         assertThat(listAfterAdd.size()).isEqualTo(listBeforeAdd.size() + 1);
     }
 
@@ -176,14 +176,14 @@ public class MatchParticipantControllerTest {
                 = matchParticipantRepository.save(matchParticipantEntityB);
 
         //when
-        List<ParticipantDto> matchParticipantDtoList
+        List<MatchParticipantDto> matchMatchParticipantDtoList
                 = matchParticipantController.getMatchParticipantListByDataVersionAndMatchId(
                 matchParticipantEntityAForTest.getMatchParticipantId().getDataVersion(),
                 matchParticipantEntityAForTest.getMatchParticipantId().getMatchId());
 
         //then
-        assertThat(matchParticipantDtoList.size()).isGreaterThanOrEqualTo(2);
-        for(ParticipantDto matchParticipantDto : matchParticipantDtoList) {
+        assertThat(matchMatchParticipantDtoList.size()).isGreaterThanOrEqualTo(2);
+        for(MatchParticipantDto matchParticipantDto : matchMatchParticipantDtoList) {
             String puuid = matchParticipantDto.getPuuid();
             String puuidA = matchParticipantEntityAForTest.getMatchParticipantId().getPuuid();
             String puuidB = matchParticipantEntityBForTest.getMatchParticipantId().getPuuid();
@@ -208,13 +208,13 @@ public class MatchParticipantControllerTest {
                 = matchParticipantRepository.save(matchParticipantEntityC);
 
         //when
-        List<ParticipantDto> matchParticipantDtoList
+        List<MatchParticipantDto> matchMatchParticipantDtoList
                 = matchParticipantController.getMatchParticipantListByPuuid(
                 matchParticipantEntityAForTest.getMatchParticipantId().getPuuid());
 
         //then
-        assertThat(matchParticipantDtoList.size()).isGreaterThanOrEqualTo(2);
-        for(ParticipantDto matchParticipantDto : matchParticipantDtoList) {
+        assertThat(matchMatchParticipantDtoList.size()).isGreaterThanOrEqualTo(2);
+        for(MatchParticipantDto matchParticipantDto : matchMatchParticipantDtoList) {
             String puuid = matchParticipantDto.getPuuid();
             String puuidA = matchParticipantEntityAForTest.getMatchParticipantId().getPuuid();
             String puuidC = matchParticipantEntityCForTest.getMatchParticipantId().getPuuid();
@@ -890,7 +890,7 @@ public class MatchParticipantControllerTest {
         );
     }
 
-    private void assertFunction(ParticipantDto matchParticipantDto, MatchParticipantEntity matchParticipantEntityForTest) {
+    private void assertFunction(MatchParticipantDto matchParticipantDto, MatchParticipantEntity matchParticipantEntityForTest) {
             assertThat(matchParticipantDto.getPuuid()).isEqualTo(
                     String.valueOf(matchParticipantEntityForTest.getMatchParticipantId().getPuuid()));
             assertThat(matchParticipantDto.getDataVersion()).isEqualTo(
@@ -900,7 +900,7 @@ public class MatchParticipantControllerTest {
             assertThat(matchParticipantDto.getParticipantId()).isEqualTo(
                     String.valueOf(matchParticipantEntityForTest.getMatchParticipantId().getParticipantId()));
             assertThat(matchParticipantDto.getAssists()).isEqualTo(
-                    String.valueOf(String.valueOf(matchParticipantEntityForTest.getAssists())));
+                    String.valueOf(matchParticipantEntityForTest.getAssists()));
             assertThat(matchParticipantDto.getBaronKills()).isEqualTo(
                     String.valueOf(matchParticipantEntityForTest.getBaronKills()));
             assertThat(matchParticipantDto.getBountyLevel()).isEqualTo(

@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.MatchPerksDto;
 import dev.saariselka.inlol.entity.MatchPerksEntity;
 import dev.saariselka.inlol.entity.MatchPerksId;
 import dev.saariselka.inlol.service.MatchPerksService;
@@ -20,6 +21,8 @@ public class MatchPerksController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     MatchPerksService matchPerksService;
+    @Autowired
+    private DtoMapper dtoMapper;
 
     @Autowired
     public MatchPerksController(MatchPerksService matchPerksService) {
@@ -56,7 +59,7 @@ public class MatchPerksController {
                                 , rrt);
     }
 
-    public List<MatchPerksEntity> getMatchPerksListByMatchIdAndPuuid(String matchId, String puuid) {
-        return matchPerksService.findByMatchPerksId(new MatchPerksId(matchId, puuid));
+    public List<MatchPerksDto> getMatchPerksListByMatchIdAndPuuid(String matchId, String puuid) {
+        return dtoMapper.toMatchPerksDtoList(matchPerksService.findByMatchPerksId(new MatchPerksId(matchId, puuid)));
     }
 }
