@@ -5,7 +5,6 @@ import dev.saariselka.inlol.dto.*;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.repository.DdragonVersionRepository;
 import dev.saariselka.inlol.service.MatchParticipantService;
-import dev.saariselka.inlol.vo.SummonerPerkVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +39,8 @@ public class DBFacadeTest {
     LeagueMiniSeriesController leagueMiniSeriesController;
     @Autowired
     MatchParticipantService matchParticipantService;
+    @Autowired
+    MatchParticipantController matchParticipantController;
     @Autowired
     DdragonVersionRepository ddragonVersionRepository;
     @Autowired
@@ -396,51 +397,50 @@ public class DBFacadeTest {
         int participantId2 = 2;
         int participantId3 = 3;
 
-        matchParticipantService.insert(puuid1
-                , dataVersion1
-                , matchId1
+        matchParticipantController.insertParticipantInfo(
+                new MatchParticipantDto(puuid1, dataVersion1, matchId1, participantId1
                 , 0, 0, 0, 0, 0, 0, "", "", ""
                 , 0, 0,0, 0, 0, 0, 0,0, 0
                 , 0, true, true, true, true, true, true
                 , 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 , 0, 0, 0, "", 0, 0, 0, 0, 0, 0
                 , 0, 0, 0, 0, 0, 0, 0
-                , participantId1
                 , 0, 0, 0, 0, 0, 0
                 , "", "", "", 0, 0, 0, 0, 0, 0, ""
                 , 0, "", "", 0, "", true, 0, "", 0, 0, 0, 0
                 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                , true, null);
-        matchParticipantService.insert(puuid2
-                , dataVersion2
-                , matchId2
+                , true, null)
+        );
+
+        matchParticipantController.insertParticipantInfo(
+                new MatchParticipantDto(puuid2, dataVersion2, matchId2, participantId2
                 , 0, 0, 0, 0, 0, 0, "", "", ""
                 , 0, 0,0, 0, 0, 0, 0,0, 0
                 , 0, true, true, true, true, true, true
                 , 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 , 0, 0, 0, "", 0, 0, 0, 0, 0, 0
                 , 0, 0, 0, 0, 0, 0, 0
-                , participantId2
                 , 0, 0, 0, 0, 0, 0
                 , "", "", "", 0, 0, 0, 0, 0, 0, ""
                 , 0, "", "", 0, "", true, 0, "", 0, 0, 0, 0
                 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                , true, null);
-        matchParticipantService.insert(puuid1
-                , dataVersion3
-                , matchId3
+                , true, null)
+        );
+
+        matchParticipantController.insertParticipantInfo(
+                new MatchParticipantDto(puuid1, dataVersion3, matchId3, participantId3
                 , 0, 0, 0, 0, 0, 0, "", "", ""
                 , 0, 0,0, 0, 0, 0, 0,0, 0
                 , 0, true, true, true, true, true, true
                 , 0, 0, "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
                 , 0, 0, 0, "", 0, 0, 0, 0, 0, 0
                 , 0, 0, 0, 0, 0, 0, 0
-                , participantId3
                 , 0, 0, 0, 0, 0, 0
                 , "", "", "", 0, 0, 0, 0, 0, 0, ""
                 , 0, "", "", 0, "", true, 0, "", 0, 0, 0, 0
                 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                , true, null);
+                , true, null)
+        );
 
         //when
         HashSet<String> matchIds = dbFacade.getMatchIdListBySummonerPuuid(puuid1);
