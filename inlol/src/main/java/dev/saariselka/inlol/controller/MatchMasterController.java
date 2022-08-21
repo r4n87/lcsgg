@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.MatchMasterDto;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
 import dev.saariselka.inlol.service.MatchMasterService;
@@ -21,14 +22,16 @@ public class MatchMasterController {
 
     @Autowired
     MatchMasterService matchMasterService;
+    @Autowired
+    DtoMapper dtoMapper;
 
-    public List<MatchMasterEntity> getMatchMasterByMatchId(String matchId) {
-        List<MatchMasterEntity> match = matchMasterService.findByMatchId(matchId);
+    public List<MatchMasterDto> getMatchMasterByMatchId(String matchId) {
+        List<MatchMasterDto> match = dtoMapper.toMatchMasterDtoList(matchMasterService.findByMatchId(matchId));
         return match;
     }
 
-    public List<MatchMasterEntity> getMatchMasterByMatchMasterId(String dataVersion, String matchId) {
-        List<MatchMasterEntity> match = matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId));
+    public List<MatchMasterDto> getMatchMasterByMatchMasterId(String dataVersion, String matchId) {
+        List<MatchMasterDto> match = dtoMapper.toMatchMasterDtoList(matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)));
         return match;
     }
 

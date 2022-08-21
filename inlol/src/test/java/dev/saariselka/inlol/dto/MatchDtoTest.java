@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchDtoTest {
 
-    MatchMasterEntity matchMasterEntity;
+    MatchMasterDto matchMasterDto;
     List<MatchParticipantDto> participantsList;
     MetadataDto metadataDto;
     List<TeamDto> teamsList;
@@ -24,7 +24,7 @@ public class MatchDtoTest {
 
     @BeforeEach
     public void init() {
-        matchMasterEntity = createMatchMasterEntity();
+        matchMasterDto = createMatchMasterDto();
         participantsList = createParticipantsList();
         metadataDto = createMetadataDto();
         teamsList = createTeamsList();
@@ -69,12 +69,12 @@ public class MatchDtoTest {
         int teamId2 = 200;
         String tournamentCode = "";
 
-        MatchMasterEntity matchMasterEntityForSetTest = new MatchMasterEntity(
-                new MatchMasterId(dataVersion, matchId), gameCreation, gameDuration, gameEndTimeStamp,
+        MatchMasterDto matchMasterDtoForSetTest = new MatchMasterDto(
+                dataVersion, matchId, gameCreation, gameDuration, gameEndTimeStamp,
                 gameId, gameMode, gameName, gameStartTimeStamp, gameType, gameVersion, mapId, platformId,
-                queueId, queueType, teamId1, teamId2, tournamentCode, null);
+                queueId, queueType, teamId1, teamId2, tournamentCode);
 
-        InfoDto infoDtoForSetTest = new InfoDto(matchMasterEntityForSetTest, new ArrayList<>(), new MatchParticipantDto());
+        InfoDto infoDtoForSetTest = new InfoDto(matchMasterDtoForSetTest, new ArrayList<>(), new MatchParticipantDto());
         MetadataDto metadataDtoForSetTest = new MetadataDto("2", "5", new ArrayList<>());
 
         //When
@@ -86,7 +86,7 @@ public class MatchDtoTest {
         assertThat(matchDto.getInfo()).isEqualTo(infoDtoForSetTest);
     }
 
-    private MatchMasterEntity createMatchMasterEntity() {
+    private MatchMasterDto createMatchMasterDto() {
         String dataVersion = "2";
         String matchId = "KR_5804413147";
         long gameCreation = 1646757704000L;
@@ -106,8 +106,8 @@ public class MatchDtoTest {
         int teamId2 = 200;
         String tournamentCode = "";
 
-        return new MatchMasterEntity(
-                new MatchMasterId(dataVersion, matchId),
+        return new MatchMasterDto(
+                dataVersion, matchId,
                 gameCreation,
                 gameDuration,
                 gameEndTimeStamp,
@@ -123,8 +123,7 @@ public class MatchDtoTest {
                 queueType,
                 teamId1,
                 teamId2,
-                tournamentCode,
-                null);
+                tournamentCode);
     }
 
     private List<MatchParticipantDto> createParticipantsList() {
@@ -166,7 +165,7 @@ public class MatchDtoTest {
     }
 
     private MetadataDto createMetadataDto() {
-        return new MetadataDto(matchMasterEntity, participantsList);
+        return new MetadataDto(matchMasterDto, participantsList);
     }
 
     private List<TeamDto> createTeamsList() {
@@ -178,6 +177,6 @@ public class MatchDtoTest {
     }
 
     private InfoDto createInfoDto() {
-        return new InfoDto(matchMasterEntity, teamsList, matchParticipantDto);
+        return new InfoDto(matchMasterDto, teamsList, matchParticipantDto);
     }
 }

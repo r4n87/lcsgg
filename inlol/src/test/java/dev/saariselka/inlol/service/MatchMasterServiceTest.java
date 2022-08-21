@@ -3,6 +3,7 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
 import dev.saariselka.inlol.repository.MatchMasterRepository;
+import dev.saariselka.inlol.vo.MatchMasterVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class MatchMasterServiceTest {
     private MatchMasterService matchMasterService;
     @Autowired
     private MatchMasterRepository matchMasterRepository;
+    @Autowired
+    private VOMapper voMapper;
 
     @Test
     @DisplayName("Insert Entity")
@@ -53,10 +56,10 @@ public class MatchMasterServiceTest {
         matchMasterService.insert(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,queueType,tournamentCode,teamId1,teamId2,rrt);
 
         // then
-        MatchMasterEntity matchMasterEntitySaved = matchMasterRepository.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)).get(0);
+        MatchMasterVO matchMasterVOSaved = voMapper.toMatchMasterVOList(matchMasterRepository.findByMatchMasterId(new MatchMasterId(dataVersion, matchId))).get(0);
 
-        assertThat(new MatchMasterId(dataVersion, matchId)).isEqualTo(matchMasterEntitySaved.getMatchMasterId());
-        assertThat(matchMasterEntitySaved.getMatchMasterId()).isNotNull();
+        assertThat(matchMasterVOSaved.getDataVersion()).isEqualTo(dataVersion);
+        assertThat(matchMasterVOSaved.getMatchId()).isEqualTo(matchId);
         assertThat(matchMasterRepository.count()).isGreaterThan(0);
     }
 
@@ -115,15 +118,15 @@ public class MatchMasterServiceTest {
         MatchMasterEntity matchMasterEntitySavedSecond = matchMasterRepository.save(matchMasterEntitySecond);
 
         // when
-        MatchMasterEntity matchMasterEntityFindFirst = matchMasterService.findByMatchMasterId(matchMasterEntitySavedFirst.getMatchMasterId()).get(0);
-        MatchMasterEntity matchMasterEntityFindSecond = matchMasterService.findByMatchMasterId(matchMasterEntitySavedSecond.getMatchMasterId()).get(0);
+        MatchMasterVO matchMasterVOFindFirst = matchMasterService.findByMatchMasterId(matchMasterEntitySavedFirst.getMatchMasterId()).get(0);
+        MatchMasterVO matchMasterVOFindSecond = matchMasterService.findByMatchMasterId(matchMasterEntitySavedSecond.getMatchMasterId()).get(0);
 
         // then
         assertThat(matchMasterRepository.count()).isGreaterThan(0);
-        assertThat(matchMasterEntityFindFirst.getMatchMasterId().getMatchId()).isEqualTo("KR_5804413147");
-        assertThat(matchMasterEntityFindFirst.getGameId()).isEqualTo(5803564866L);
-        assertThat(matchMasterEntityFindSecond.getMatchMasterId().getMatchId()).isEqualTo("KR_5803565065");
-        assertThat(matchMasterEntityFindSecond.getGameId()).isEqualTo(5803565065L);
+        assertThat(matchMasterVOFindFirst.getMatchId()).isEqualTo("KR_5804413147");
+        assertThat(matchMasterVOFindFirst.getGameId()).isEqualTo(5803564866L);
+        assertThat(matchMasterVOFindSecond.getMatchId()).isEqualTo("KR_5803565065");
+        assertThat(matchMasterVOFindSecond.getGameId()).isEqualTo(5803565065L);
     }
 
     @Test
@@ -181,15 +184,15 @@ public class MatchMasterServiceTest {
         MatchMasterEntity matchMasterEntitySavedSecond = matchMasterRepository.save(matchMasterEntitySecond);
 
         // when
-        MatchMasterEntity matchMasterEntityFindFirst = matchMasterService.findByMatchId(matchMasterEntitySavedFirst.getMatchMasterId().getMatchId()).get(0);
-        MatchMasterEntity matchMasterEntityFindSecond = matchMasterService.findByMatchId(matchMasterEntitySavedSecond.getMatchMasterId().getMatchId()).get(0);
+        MatchMasterVO matchMasterVOFindFirst = matchMasterService.findByMatchId(matchMasterEntitySavedFirst.getMatchMasterId().getMatchId()).get(0);
+        MatchMasterVO matchMasterVOFindSecond = matchMasterService.findByMatchId(matchMasterEntitySavedSecond.getMatchMasterId().getMatchId()).get(0);
 
         // then
         assertThat(matchMasterRepository.count()).isGreaterThan(0);
-        assertThat(matchMasterEntityFindFirst.getMatchMasterId().getMatchId()).isEqualTo("KR_5804413147");
-        assertThat(matchMasterEntityFindFirst.getGameId()).isEqualTo(5803564866L);
-        assertThat(matchMasterEntityFindSecond.getMatchMasterId().getMatchId()).isEqualTo("KR_5803565065");
-        assertThat(matchMasterEntityFindSecond.getGameId()).isEqualTo(5803565065L);
+        assertThat(matchMasterVOFindFirst.getMatchId()).isEqualTo("KR_5804413147");
+        assertThat(matchMasterVOFindFirst.getGameId()).isEqualTo(5803564866L);
+        assertThat(matchMasterVOFindSecond.getMatchId()).isEqualTo("KR_5803565065");
+        assertThat(matchMasterVOFindSecond.getGameId()).isEqualTo(5803565065L);
     }
 }
 

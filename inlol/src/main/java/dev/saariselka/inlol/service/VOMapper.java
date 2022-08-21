@@ -458,4 +458,19 @@ public class VOMapper {
 
         return matchPerksVOList;
     }
+
+    public List<MatchMasterVO> toMatchMasterVOList(List<MatchMasterEntity> matchMasterEntityList) {
+        List<MatchMasterVO> matchMasterVOList = new ArrayList<>();
+
+        for(MatchMasterEntity matchMasterEntity : matchMasterEntityList) {
+            MatchMasterVO matchMasterVO = new MatchMasterVO(matchMasterEntity.getMatchMasterId().getDataVersion(), matchMasterEntity.getMatchMasterId().getMatchId(),
+                    matchMasterEntity.getGameCreation(), matchMasterEntity.getGameDuration(), matchMasterEntity.getGameEndTimeStamp(), matchMasterEntity.getGameId(),
+                    matchMasterEntity.getGameMode(), matchMasterEntity.getGameName(), matchMasterEntity.getGameStartTimeStamp(), matchMasterEntity.getGameType(),
+                    matchMasterEntity.getGameVersion(), matchMasterEntity.getMapId(), matchMasterEntity.getPlatformId(), matchMasterEntity.getQueueId(), matchMasterEntity.getQueueType(),
+                    matchMasterEntity.getTeamId1(), matchMasterEntity.getTeamId2(), matchMasterEntity.getTournamentCode());
+            matchMasterVOList.add(matchMasterVO);
+        }
+
+        return matchMasterVOList;
+    }
 }

@@ -1,6 +1,7 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.dto.*;
+import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.vo.*;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -670,5 +671,20 @@ public class DtoMapper {
         }
 
         return matchPerksDtoList;
+    }
+
+    public List<MatchMasterDto> toMatchMasterDtoList(List<MatchMasterVO> matchMasterVOList) {
+        List<MatchMasterDto> matchMasterDtoList = new ArrayList<>();
+
+        for(MatchMasterVO matchMasterVO : matchMasterVOList) {
+            MatchMasterDto matchMasterDto = new MatchMasterDto(matchMasterVO.getDataVersion(), matchMasterVO.getMatchId(),
+                    matchMasterVO.getGameCreation(), matchMasterVO.getGameDuration(), matchMasterVO.getGameEndTimeStamp(), matchMasterVO.getGameId(),
+                    matchMasterVO.getGameMode(), matchMasterVO.getGameName(), matchMasterVO.getGameStartTimeStamp(), matchMasterVO.getGameType(),
+                    matchMasterVO.getGameVersion(), matchMasterVO.getMapId(), matchMasterVO.getPlatformId(), matchMasterVO.getQueueId(), matchMasterVO.getQueueType(),
+                    matchMasterVO.getTeamId1(), matchMasterVO.getTeamId2(), matchMasterVO.getTournamentCode());
+            matchMasterDtoList.add(matchMasterDto);
+        }
+
+        return matchMasterDtoList;
     }
 }

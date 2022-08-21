@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.MatchMasterDto;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
 import dev.saariselka.inlol.service.MatchMasterService;
@@ -21,6 +22,8 @@ public class MatchMasterControllerTest {
     private MatchMasterController matchMasterController;
     @Autowired
     private MatchMasterService matchMasterService;
+    @Autowired
+    private DtoMapper dtoMapper;
 
 
     @Test
@@ -52,10 +55,10 @@ public class MatchMasterControllerTest {
         matchMasterController.insertMatchMaster(dataVersion,matchId,gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,queueType, tournamentCode,teamId1,teamId2,rrt);
 
         // then
-        MatchMasterEntity matchMasterEntitySaved = matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId)).get(0);
+        MatchMasterDto matchMasterDtoSaved = dtoMapper.toMatchMasterDtoList(matchMasterService.findByMatchMasterId(new MatchMasterId(dataVersion, matchId))).get(0);
 
-        assertThat(new MatchMasterId(dataVersion, matchId)).isEqualTo(matchMasterEntitySaved.getMatchMasterId());
-        assertThat(matchMasterEntitySaved.getMatchMasterId()).isNotNull();
+        assertThat(matchMasterDtoSaved.getDataVersion()).isEqualTo(dataVersion);
+        assertThat(matchMasterDtoSaved.getMatchId()).isEqualTo(matchId);
     }
 
     @Test
@@ -105,14 +108,14 @@ public class MatchMasterControllerTest {
         matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,queueTypeSecond, tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
 
         // when
-        MatchMasterEntity matchMasterEntityFindFirst = matchMasterController.getMatchMasterByMatchMasterId(dataVersionFirst,matchIdFirst).get(0);
-        MatchMasterEntity matchMasterEntityFindSecond = matchMasterController.getMatchMasterByMatchMasterId(dataVersionSecond,matchIdSecond).get(0);
+        MatchMasterDto matchMasterDtoFindFirst = matchMasterController.getMatchMasterByMatchMasterId(dataVersionFirst,matchIdFirst).get(0);
+        MatchMasterDto matchMasterDtoFindSecond = matchMasterController.getMatchMasterByMatchMasterId(dataVersionSecond,matchIdSecond).get(0);
 
         // then
-        assertThat(matchMasterEntityFindFirst.getMatchMasterId().getMatchId()).isEqualTo("KR_5804413147");
-        assertThat(matchMasterEntityFindFirst.getGameId()).isEqualTo(5803564866L);
-        assertThat(matchMasterEntityFindSecond.getMatchMasterId().getMatchId()).isEqualTo("KR_5803565065");
-        assertThat(matchMasterEntityFindSecond.getGameId()).isEqualTo(5803565065L);
+        assertThat(matchMasterDtoFindFirst.getMatchId()).isEqualTo("KR_5804413147");
+        assertThat(matchMasterDtoFindFirst.getGameId()).isEqualTo(5803564866L);
+        assertThat(matchMasterDtoFindSecond.getMatchId()).isEqualTo("KR_5803565065");
+        assertThat(matchMasterDtoFindSecond.getGameId()).isEqualTo(5803565065L);
     }
 
     @Test
@@ -162,14 +165,14 @@ public class MatchMasterControllerTest {
         matchMasterService.insert(dataVersionSecond,matchIdSecond,gameCreationSecond,gameDurationSecond,gameEndTimeStampSecond,gameIdSecond,gameModeSecond,gameNameSecond,gameStartTimeStampSecond,gameTypeSecond,gameVersionSecond,mapIdSecond,platformIdSecond,queueIdSecond,queueTypeSecond,tournamentCodeSecond,teamId1Second,teamId2Second,rrt);
 
         // when
-        MatchMasterEntity matchMasterEntityFindFirst = matchMasterController.getMatchMasterByMatchId(matchIdFirst).get(0);
-        MatchMasterEntity matchMasterEntityFindSecond = matchMasterController.getMatchMasterByMatchId(matchIdSecond).get(0);
+        MatchMasterDto matchMasterDtoFindFirst = matchMasterController.getMatchMasterByMatchId(matchIdFirst).get(0);
+        MatchMasterDto matchMasterDtoFindSecond = matchMasterController.getMatchMasterByMatchId(matchIdSecond).get(0);
 
         // then
-        assertThat(matchMasterEntityFindFirst.getMatchMasterId().getMatchId()).isEqualTo("KR_5804413147");
-        assertThat(matchMasterEntityFindFirst.getGameId()).isEqualTo(5803564866L);
-        assertThat(matchMasterEntityFindSecond.getMatchMasterId().getMatchId()).isEqualTo("KR_5803565065");
-        assertThat(matchMasterEntityFindSecond.getGameId()).isEqualTo(5803565065L);
+        assertThat(matchMasterDtoFindFirst.getMatchId()).isEqualTo("KR_5804413147");
+        assertThat(matchMasterDtoFindFirst.getGameId()).isEqualTo(5803564866L);
+        assertThat(matchMasterDtoFindSecond.getMatchId()).isEqualTo("KR_5803565065");
+        assertThat(matchMasterDtoFindSecond.getGameId()).isEqualTo(5803565065L);
     }
 }
 
