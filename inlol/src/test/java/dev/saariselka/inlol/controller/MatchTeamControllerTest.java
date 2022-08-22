@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.controller;
 
-import dev.saariselka.inlol.dto.TeamDto;
-import dev.saariselka.inlol.entity.TeamEntity;
+import dev.saariselka.inlol.dto.MatchTeamDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +14,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-public class TeamControllerTest {
+public class MatchTeamControllerTest {
 
     @Autowired
-    TeamController teamController;
+    MatchTeamController matchTeamController;
 
     @Test
     @DisplayName("Get Entity By MatchId, TeamId")
     void getEntityByMatchIdAndTeamId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
+        matchTeamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamDto> dtoList = teamController.getTeamsByMatchIdAndTeamId("KR_9999999999",100);
-        TeamDto test = dtoList.get(0);
+        List<MatchTeamDto> dtoList = matchTeamController.getTeamsByMatchIdAndTeamId("KR_9999999999",100);
+        MatchTeamDto test = dtoList.get(0);
 
         // then
         //assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");
@@ -43,11 +42,11 @@ public class TeamControllerTest {
     void getEntityByMatchId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        teamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
+        matchTeamController.insertTeamInfo("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamDto> dtoList = teamController.getTeamsByMatchId("KR_9999999999");
-        TeamDto test = dtoList.get(0);
+        List<MatchTeamDto> dtoList = matchTeamController.getTeamsByMatchId("KR_9999999999");
+        MatchTeamDto test = dtoList.get(0);
 
         // then
         //assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");

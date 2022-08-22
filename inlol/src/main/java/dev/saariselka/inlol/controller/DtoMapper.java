@@ -1,7 +1,6 @@
 package dev.saariselka.inlol.controller;
 
 import dev.saariselka.inlol.dto.*;
-import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.vo.*;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -557,13 +556,13 @@ public class DtoMapper {
     }
 
 
-    public List<TeamDto> toTeamDtoList(List<TeamVO> voList)
+    public List<MatchTeamDto> toMatchTeamDtoList(List<MatchTeamVO> voList)
     {
-        List<TeamDto> dtoList = new ArrayList<>();
+        List<MatchTeamDto> dtoList = new ArrayList<>();
 
-        for(TeamVO vo : voList)
+        for(MatchTeamVO vo : voList)
         {
-            TeamDto dto = new TeamDto(
+            MatchTeamDto dto = new MatchTeamDto(
                     toMatchBanDtoList(vo.getBans()),
                     toMatchObjectivesDto(vo.getObjectives()),
                     vo.getTeamId(),
@@ -686,5 +685,19 @@ public class DtoMapper {
         }
 
         return matchMasterDtoList;
+    }
+
+    public List<SummonerDto> toSummonerDtoList(List<SummonerVO> summonerVOList) {
+        List<SummonerDto> summonerDtoList = new ArrayList<>();
+
+        for(SummonerVO summonerVO : summonerVOList) {
+            SummonerDto summonerDto = new SummonerDto(summonerVO.getPuuid(), summonerVO.getAccountId(),
+                    summonerVO.getId(), summonerVO.getName(), summonerVO.getProfileIconId(), summonerVO.getRevisionDate(),
+                    summonerVO.getSummonerLevel(), summonerVO.getLastRefreshTimeForUI(), summonerVO.getLastRefreshTimeForAPI());
+
+            summonerDtoList.add(summonerDto);
+        }
+
+        return summonerDtoList;
     }
 }

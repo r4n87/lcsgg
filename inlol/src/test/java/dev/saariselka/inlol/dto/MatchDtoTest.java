@@ -1,9 +1,5 @@
 package dev.saariselka.inlol.dto;
 
-import dev.saariselka.inlol.controller.DtoMapper;
-import dev.saariselka.inlol.entity.MatchMasterEntity;
-import dev.saariselka.inlol.entity.MatchMasterId;
-import dev.saariselka.inlol.service.VOMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +14,7 @@ public class MatchDtoTest {
     MatchMasterDto matchMasterDto;
     List<MatchParticipantDto> participantsList;
     MetadataDto metadataDto;
-    List<TeamDto> teamsList;
+    List<MatchTeamDto> teamsList;
     MatchParticipantDto matchParticipantDto;
     InfoDto infoDto;
 
@@ -168,7 +164,7 @@ public class MatchDtoTest {
         return new MetadataDto(matchMasterDto, participantsList);
     }
 
-    private List<TeamDto> createTeamsList() {
+    private List<MatchTeamDto> createTeamsList() {
         return new ArrayList<>();
     }
 

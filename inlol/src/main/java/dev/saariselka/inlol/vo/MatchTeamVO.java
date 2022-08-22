@@ -1,4 +1,4 @@
-package dev.saariselka.inlol.dto;
+package dev.saariselka.inlol.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,11 +11,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TeamDto {
-    private List<MatchBanDto> bans;
-    private MatchObjectivesDto objectives;
+public class MatchTeamVO {
+    private List<MatchBanVO> bans;
+    private MatchObjectivesVO objectives;
     private String teamId;
     private String win;
     private int teamKills;
-    private List<MatchParticipantDto> participants;
+    private List<MatchParticipantVO> participants;
 }

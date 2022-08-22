@@ -1,8 +1,6 @@
 package dev.saariselka.inlol.service;
 
-import dev.saariselka.inlol.entity.TeamEntity;
-import dev.saariselka.inlol.entity.TeamId;
-import dev.saariselka.inlol.vo.TeamVO;
+import dev.saariselka.inlol.vo.MatchTeamVO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +14,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-public class TeamServiceTest {
+public class MatchTeamServiceTest {
 
     @Autowired
-    TeamService teamService;
+    MatchTeamService matchTeamService;
 
     @Test
     @DisplayName("Find Entity By TeamId")
     void findEntityByTeamId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        teamService.insert("KR_9999999999", 100, true, rrt);
+        matchTeamService.insert("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamVO> voList = teamService.findByMatchIdAndTeamId("KR_9999999999", 100);
-        TeamVO test = voList.get(0);
+        List<MatchTeamVO> voList = matchTeamService.findByMatchIdAndTeamId("KR_9999999999", 100);
+        MatchTeamVO test = voList.get(0);
 
         // then
         //assertThat(test.getTeamId()).isEqualTo("KR_9999999999");
@@ -44,11 +42,11 @@ public class TeamServiceTest {
     void findEntityByMatchId() {
         // given
         Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        teamService.insert("KR_9999999999", 100, true, rrt);
+        matchTeamService.insert("KR_9999999999", 100, true, rrt);
 
         // when
-        List<TeamVO> voList = teamService.findByMatchId("KR_9999999999");
-        TeamVO test = voList.get(0);
+        List<MatchTeamVO> voList = matchTeamService.findByMatchId("KR_9999999999");
+        MatchTeamVO test = voList.get(0);
 
         // then
         //assertThat(test.getTeamId().getMatchId()).isEqualTo("KR_9999999999");
