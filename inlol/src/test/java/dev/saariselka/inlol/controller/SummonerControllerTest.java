@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.controller;
 
+import dev.saariselka.inlol.dto.SummonerDto;
 import dev.saariselka.inlol.entity.SummonerEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,7 +31,7 @@ public class SummonerControllerTest {
                 "test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g", rrt);
 
         // when
-        String puuid = summonerController.getSummoner_Puuid_ByName("Test on bush");
+        String puuid = summonerController.getSummonerPuuidByName("Test on bush");
 
         // then
         assertThat(puuid).isEqualTo("test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g");
@@ -44,34 +47,41 @@ public class SummonerControllerTest {
                 "test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g", rrt);
 
         // when
-        List<SummonerEntity> entity = summonerController.getSummoner("test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g");
-        SummonerEntity test = entity.get(0);
+        List<SummonerDto> dto = summonerController.getSummoner("test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g");
+        SummonerDto test = dto.get(0);
 
         // then
-        assertThat(test.getAccountid()).isEqualTo("dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy");
-        assertThat(test.getProfileiconid()).isEqualTo(6);
-        assertThat(test.getRevisiondate()).isEqualTo(1655406735000L);
+        assertThat(test.getAccountId()).isEqualTo("dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy");
+        assertThat(test.getProfileIconId()).isEqualTo("6");
+        assertThat(test.getRevisionDate()).isEqualTo("1655406735000");
         assertThat(test.getName()).isEqualTo("Test on bush");
         assertThat(test.getId()).isEqualTo("qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA");
-        assertThat(test.getSummonerlevel()).isEqualTo(576L);
+        assertThat(test.getSummonerLevel()).isEqualTo("576");
         assertThat(test.getPuuid()).isEqualTo("test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g");
-        assertThat(test.getRrt()).isEqualTo(rrt);
+        assertThat(test.getLastRefreshTimeForUI()).isEqualTo(getLastRefreshTimeForUI(rrt));
+        assertThat(test.getLastRefreshTimeForAPI()).isEqualTo(rrt.toInstant().getEpochSecond());
     }
 
-    @Test
-    @DisplayName("Get All")
-    void getAllSummoner() {
-        // given
-        List<SummonerEntity> before = summonerController.getAllSummoners().getBody();
-        Timestamp rrt = new Timestamp(System.currentTimeMillis());
-        summonerController.insertSummoner("dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy", 6, 1655406735000L,
-                "Test on bush", "qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA", 576L,
-                "test_4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g", rrt);
+    private String getLastRefreshTimeForUI(Timestamp rrt)
+    {
+        String refreshAgoTime = null;
 
-        // when
-        List<SummonerEntity> entity = summonerController.getAllSummoners().getBody();
+        if (ChronoUnit.HOURS.between(rrt.toLocalDateTime(), LocalDateTime.now()) >= 24)
+        {
+            refreshAgoTime = String.valueOf(ChronoUnit.DAYS.between(rrt.toLocalDateTime(), LocalDateTime.now()))
+                    + "일 전";
+        }
+        else if (ChronoUnit.MINUTES.between(rrt.toLocalDateTime(), LocalDateTime.now()) >= 60)
+        {
+            refreshAgoTime = String.valueOf(ChronoUnit.HOURS.between(rrt.toLocalDateTime(), LocalDateTime.now()))
+                    + "시간 전";
+        }
+        else
+        {
+            refreshAgoTime = String.valueOf(ChronoUnit.MINUTES.between(rrt.toLocalDateTime(), LocalDateTime.now()))
+                    + "분 전";
+        }
 
-        // then
-        assertThat(entity.size()).isEqualTo(before.size()+1);
+        return refreshAgoTime;
     }
 }

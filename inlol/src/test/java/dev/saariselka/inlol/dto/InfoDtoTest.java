@@ -1,11 +1,9 @@
 package dev.saariselka.inlol.dto;
 
-import dev.saariselka.inlol.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -18,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InfoDtoTest {
 
     MatchMasterDto matchMasterDto;
-    List<TeamDto> teamDtoList;
+    List<MatchTeamDto> matchTeamDtoList;
     MatchParticipantDto summonerInfo;
 
     @BeforeEach
     public void init() {
         matchMasterDto = createTestMatchMasterDto();
-        teamDtoList = createTestTeamDtoList();
+        matchTeamDtoList = createTestTeamDtoList();
         summonerInfo = createTestSummonerInfo();
     }
 
@@ -53,7 +51,7 @@ public class InfoDtoTest {
         }
 
         // When
-        InfoDto infoDto = new InfoDto(matchMasterDto,teamDtoList,summonerInfo);
+        InfoDto infoDto = new InfoDto(matchMasterDto, matchTeamDtoList,summonerInfo);
 
         // Then
         assertThat(infoDto.getGameCreation()).isEqualTo(matchMasterDto.getGameCreation());
@@ -71,7 +69,7 @@ public class InfoDtoTest {
         assertThat(infoDto.getSummoner()).isEqualTo(summonerInfo);
         assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(matchMasterDto.getQueueId()));
         assertThat(infoDto.getQueueType()).isEqualTo(String.valueOf(matchMasterDto.getQueueType()));
-        assertThat(infoDto.getTeams()).isEqualTo(teamDtoList);
+        assertThat(infoDto.getTeams()).isEqualTo(matchTeamDtoList);
         assertThat(infoDto.getTournamentCode()).isEqualTo(matchMasterDto.getTournamentCode());
     }
 
@@ -94,7 +92,7 @@ public class InfoDtoTest {
         String tobe_tournamentCode = "testTournamentCode";
         String tobe_queueType = "testQueueType";
 
-        List<TeamDto> tobe_teamDtoList = new ArrayList<>();
+        List<MatchTeamDto> tobe_Match_teamDtoList = new ArrayList<>();
         MatchParticipantDto tobe_summonerInfo = new MatchParticipantDto();
 
         //시간 차이 계산
@@ -116,7 +114,7 @@ public class InfoDtoTest {
                     + "시간 전";
         }
 
-        InfoDto infoDto = new InfoDto(matchMasterDto,teamDtoList,summonerInfo);
+        InfoDto infoDto = new InfoDto(matchMasterDto, matchTeamDtoList,summonerInfo);
 
         // When
         infoDto.setGameCreation(tobe_gameCreation);
@@ -134,7 +132,7 @@ public class InfoDtoTest {
         infoDto.setSummoner(tobe_summonerInfo);
         infoDto.setQueueId(String.valueOf(tobe_queueId));
         infoDto.setQueueType(tobe_queueType);
-        infoDto.setTeams(tobe_teamDtoList);
+        infoDto.setTeams(tobe_Match_teamDtoList);
         infoDto.setTournamentCode(tobe_tournamentCode);
 
         // Then
@@ -153,7 +151,7 @@ public class InfoDtoTest {
         assertThat(infoDto.getSummoner()).isEqualTo(tobe_summonerInfo);
         assertThat(infoDto.getQueueId()).isEqualTo(String.valueOf(tobe_queueId));
         assertThat(infoDto.getQueueType()).isEqualTo(tobe_queueType);
-        assertThat(infoDto.getTeams()).isEqualTo(tobe_teamDtoList);
+        assertThat(infoDto.getTeams()).isEqualTo(tobe_Match_teamDtoList);
         assertThat(infoDto.getTournamentCode()).isEqualTo(tobe_tournamentCode);
     }
 
@@ -164,8 +162,8 @@ public class InfoDtoTest {
 
     }
 
-    private List<TeamDto> createTestTeamDtoList() {
-        List<TeamDto> teamlist = new ArrayList<>();
+    private List<MatchTeamDto> createTestTeamDtoList() {
+        List<MatchTeamDto> teamlist = new ArrayList<>();
         return teamlist;
     }
 

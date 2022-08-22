@@ -1,6 +1,8 @@
 package dev.saariselka.inlol.service;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import dev.saariselka.inlol.entity.*;
@@ -367,13 +369,13 @@ public class VOMapper {
         return voList;
     }
 
-    public List<TeamVO> toTeamVOList(List<TeamEntity> entityList)
+    public List<MatchTeamVO> toMatchTeamVOList(List<TeamEntity> entityList)
     {
-        List<TeamVO> voList = new ArrayList<>();
+        List<MatchTeamVO> voList = new ArrayList<>();
 
         for(TeamEntity entity : entityList)
         {
-            TeamVO vo = new TeamVO();
+            MatchTeamVO vo = new MatchTeamVO();
             vo.setTeamId(String.valueOf(entity.getTeamId().getTeamId()));
             vo.setWin(String.valueOf(entity.isWin()));
 
@@ -472,5 +474,38 @@ public class VOMapper {
         }
 
         return matchMasterVOList;
+    }
+
+    public List<SummonerVO> toSummonerVOList(List<SummonerEntity> summonerEntityList) {
+        List<SummonerVO> summonerVOList = new ArrayList<>();
+
+        for(SummonerEntity summonerEntity : summonerEntityList) {
+            String lastRefreshTimeForUI = null;
+
+            if (ChronoUnit.HOURS.between(summonerEntity.getRrt().toLocalDateTime(), LocalDateTime.now()) >= 24)
+            {
+                lastRefreshTimeForUI =ChronoUnit.DAYS.between(summonerEntity.getRrt().toLocalDateTime(), LocalDateTime.now())
+                        + "일 전";
+            }
+            else if (ChronoUnit.MINUTES.between(summonerEntity.getRrt().toLocalDateTime(), LocalDateTime.now()) >= 60)
+            {
+                lastRefreshTimeForUI = ChronoUnit.HOURS.between(summonerEntity.getRrt().toLocalDateTime(), LocalDateTime.now())
+                        + "시간 전";
+            }
+            else
+            {
+                lastRefreshTimeForUI = ChronoUnit.MINUTES.between(summonerEntity.getRrt().toLocalDateTime(), LocalDateTime.now())
+                        + "분 전";
+            }
+
+            SummonerVO summonerVO = new SummonerVO(summonerEntity.getPuuid(), summonerEntity.getAccountid(), summonerEntity.getId(),
+                    summonerEntity.getName(), String.valueOf(summonerEntity.getProfileiconid()), String.valueOf(summonerEntity.getRevisiondate()),
+                    String.valueOf(summonerEntity.getSummonerlevel()), lastRefreshTimeForUI, summonerEntity.getRrt().toInstant().getEpochSecond());
+
+            summonerVOList.add(summonerVO);
+
+        }
+
+        return summonerVOList;
     }
 }

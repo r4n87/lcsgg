@@ -219,16 +219,16 @@ public class DBFacadeTest {
 
         // when
         dbFacade.setSummonerInfo(map);
-        SummonerEntity entity = summonerController.getSummoner("TestPuuid").get(0);
+        SummonerDto dto = summonerController.getSummoner("TestPuuid").get(0);
 
         // then
-        assertThat(entity.getId()).isEqualTo("TestId");
-        assertThat(entity.getAccountid()).isEqualTo("TestAccountId");
-        assertThat(entity.getPuuid()).isEqualTo("TestPuuid");
-        assertThat(entity.getName()).isEqualTo("TestUser");
-        assertThat(entity.getProfileiconid()).isEqualTo(9999);
-        assertThat(entity.getRevisiondate()).isEqualTo(888888888L);
-        assertThat(entity.getSummonerlevel()).isEqualTo(999L);
+        assertThat(dto.getId()).isEqualTo("TestId");
+        assertThat(dto.getAccountId()).isEqualTo("TestAccountId");
+        assertThat(dto.getPuuid()).isEqualTo("TestPuuid");
+        assertThat(dto.getName()).isEqualTo("TestUser");
+        assertThat(dto.getProfileIconId()).isEqualTo("9999");
+        assertThat(dto.getRevisionDate()).isEqualTo("888888888");
+        assertThat(dto.getSummonerLevel()).isEqualTo("999");
     }
 
     @Test

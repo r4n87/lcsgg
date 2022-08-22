@@ -11,7 +11,6 @@ import dev.saariselka.inlol.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
@@ -25,7 +24,7 @@ public class DBFacade {
     @Autowired
     MatchMasterController matchMasterController;
     @Autowired
-    TeamController teamController;
+    MatchTeamController matchTeamController;
     @Autowired
     MatchParticipantController matchParticipantController;
     @Autowired
@@ -50,24 +49,22 @@ public class DBFacade {
     QueueTypeController queueTypeController;
 
     public SummonerDto getSummonerDtoBySummonerName(String name) {
-        String puuid = summonerController.getSummoner_Puuid_ByName(name);
+        String puuid = summonerController.getSummonerPuuidByName(name);
 
         if(null == puuid) return null;
 
-        SummonerEntity summonerEntity = summonerController.getSummoner(puuid).get(0);
-
-        return new SummonerDto(summonerEntity);
+        return summonerController.getSummoner(puuid).get(0);
     }
 
     public String getSummonerPuuidBySummonerName(String name) {
-        return summonerController.getSummoner_Puuid_ByName(name);
+        return summonerController.getSummonerPuuidByName(name);
     }
 
     public SummonerDto getSummonerDtoBySummonerPuuid(String puuid) {
-        return new SummonerDto(summonerController.getSummoner(puuid).get(0));
+        return summonerController.getSummoner(puuid).get(0);
     }
 
-    private void sortParticipants(TeamDto team) {
+    private void sortParticipants(MatchTeamDto team) {
         List<MatchParticipantDto> participants = team.getParticipants();
 
         participants.sort((o1, o2) -> {
@@ -166,16 +163,16 @@ public class DBFacade {
 
 
             //2. Team 정보 생성
-            List<TeamDto> teamDtoList = teamController.getTeamsByMatchId(matchId);
+            List<MatchTeamDto> matchTeamDtoList = matchTeamController.getTeamsByMatchId(matchId);
 
-            for(TeamDto teamDto : teamDtoList) {
-                List<MatchBanDto> matchBanDtoList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, Integer.parseInt(teamDto.getTeamId()));
+            for(MatchTeamDto matchTeamDto : matchTeamDtoList) {
+                List<MatchBanDto> matchBanDtoList = matchBanController.getBansByMatchBanIdAndTeamId(matchId, Integer.parseInt(matchTeamDto.getTeamId()));
 
                 MatchObjectivesDto matchObjectivesDto = matchObjectivesController
-                        .getMatchObjectivesByMatchIdAndTeamId(matchId, Integer.parseInt(teamDto.getTeamId())).get(0);
+                        .getMatchObjectivesByMatchIdAndTeamId(matchId, Integer.parseInt(matchTeamDto.getTeamId())).get(0);
 
-                teamDto.setBans(matchBanDtoList);
-                teamDto.setObjectives(matchObjectivesDto);
+                matchTeamDto.setBans(matchBanDtoList);
+                matchTeamDto.setObjectives(matchObjectivesDto);
             }
 
             //5. Match Participants 정보 생성
@@ -209,10 +206,10 @@ public class DBFacade {
                 }
             }
 
-            setTeamsInformation(teamDtoList, blueMatchParticipantDtoList, redMatchParticipantDtoList, blueTeamKills, redTeamKills);
+            setTeamsInformation(matchTeamDtoList, blueMatchParticipantDtoList, redMatchParticipantDtoList, blueTeamKills, redTeamKills);
 
             MetadataDto metadataDto = new MetadataDto(matchMasterDto, participantsList);
-            InfoDto infoDto = new InfoDto(matchMasterDto, teamDtoList, summonerInfo);
+            InfoDto infoDto = new InfoDto(matchMasterDto, matchTeamDtoList, summonerInfo);
 
             MatchDto matchInfo = new MatchDto(metadataDto,infoDto);
 
@@ -222,8 +219,8 @@ public class DBFacade {
         return matchDtos;
     }
 
-    private void setTeamsInformation(List<TeamDto> teamDtoList, List<MatchParticipantDto> blueMatchParticipantDtoList, List<MatchParticipantDto> redMatchParticipantDtoList, int blueTeamKills, int redTeamKills) {
-        for(TeamDto team : teamDtoList) {
+    private void setTeamsInformation(List<MatchTeamDto> matchTeamDtoList, List<MatchParticipantDto> blueMatchParticipantDtoList, List<MatchParticipantDto> redMatchParticipantDtoList, int blueTeamKills, int redTeamKills) {
+        for(MatchTeamDto team : matchTeamDtoList) {
             if("100".equals(team.getTeamId())) {
                 team.setTeamKills(blueTeamKills);
                 team.setParticipants(blueMatchParticipantDtoList);
@@ -237,7 +234,7 @@ public class DBFacade {
         }
     }
 
-    private void getAndSetKillRatio(TeamDto team) {
+    private void getAndSetKillRatio(MatchTeamDto team) {
         for(MatchParticipantDto participant : team.getParticipants()) {
             BigDecimal killAndAssists = new BigDecimal(participant.getKills()).add(new BigDecimal(participant.getAssists()));
             BigDecimal killRatio;
@@ -284,7 +281,7 @@ public class DBFacade {
         for (Object teamsObj : jsonArrayForTeams) {
             JsonObject teamObj = (JsonObject)teamsObj;
 
-            teamController.insertTeamInfo(jsonObjectForMetadata.get("matchId").getAsString()
+            matchTeamController.insertTeamInfo(jsonObjectForMetadata.get("matchId").getAsString()
                     ,Integer.parseInt(teamObj.get("teamId").getAsString())
                     ,Boolean.parseBoolean(teamObj.get("win").getAsString())
                     ,timestamp);
@@ -490,7 +487,7 @@ public class DBFacade {
     }
 
     public long getLastRefreshTimeBySummonerName(String puuid) {
-        return getSummonerDtoBySummonerPuuid(puuid).getLastRefreshTime();
+        return getSummonerDtoBySummonerPuuid(puuid).getLastRefreshTimeForAPI();
     }
 
     public String getCurrentDdragonVersion() {

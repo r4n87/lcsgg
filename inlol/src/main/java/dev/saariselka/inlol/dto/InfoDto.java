@@ -1,6 +1,5 @@
 package dev.saariselka.inlol.dto;
 
-import dev.saariselka.inlol.entity.MatchMasterEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,10 +30,10 @@ public class InfoDto {
     private String gameAgoTime;
     private MatchParticipantDto summoner;
     private String queueId;
-    private List<TeamDto> teams;
+    private List<MatchTeamDto> teams;
     private String tournamentCode;
 
-    public InfoDto (MatchMasterDto matchMasterDto, List<TeamDto> teamDtoList, MatchParticipantDto summonerInfo) {
+    public InfoDto (MatchMasterDto matchMasterDto, List<MatchTeamDto> matchTeamDtoList, MatchParticipantDto summonerInfo) {
 
         //시간 차이 계산
         String gameDuration = String.valueOf(ChronoUnit.MINUTES.between(LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterDto.getGameStartTimeStamp()), TimeZone.getDefault().toZoneId()), LocalDateTime.ofInstant(Instant.ofEpochMilli(matchMasterDto.getGameEndTimeStamp()), TimeZone.getDefault().toZoneId())))
@@ -72,7 +71,7 @@ public class InfoDto {
         this.queueId = String.valueOf(matchMasterDto.getQueueId());
         this.tournamentCode = matchMasterDto.getTournamentCode();
         this.gameAgoTime = gameAgoTime;
-        this.teams = teamDtoList;
+        this.teams = matchTeamDtoList;
         this.summoner = summonerInfo;
     }
 }

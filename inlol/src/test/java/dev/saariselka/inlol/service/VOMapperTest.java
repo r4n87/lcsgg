@@ -394,4 +394,90 @@ public class VOMapperTest {
         assertThat(matchMasterVO.getMatchId()).isEqualTo(matchId);
         assertThat(matchMasterVO.getDataVersion()).isEqualTo(dataVersion);
     }
+
+    @Test
+    @DisplayName("Convert MatchObjectives Entity List To MatchObjectives VO List")
+    public void toMatchObjectivesVOList() {
+        // given
+        List<MatchObjectivesEntity> matchObjectivesEntityList = new ArrayList<>();
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        MatchObjectivesId matchObjectivesId = new MatchObjectivesId("Test1", 999);
+        MatchObjectivesEntity matchObjectivesEntity = new MatchObjectivesEntity(matchObjectivesId,
+                true, 1,
+                false, 2,
+                true, 3,
+                false, 4,
+                true, 5,
+                false, 6,
+                rrt
+                );
+        matchObjectivesEntityList.add(matchObjectivesEntity);
+
+        // when
+        MatchObjectivesVO matchObjectivesVO = voMapper.toMatchObjectivesVOList(matchObjectivesEntityList).get(0);
+
+        // then
+        assertThat(matchObjectivesVO.getBaron().isFirst()).isEqualTo(matchObjectivesEntity.isBaron_first());
+        assertThat(matchObjectivesVO.getBaron().getKills()).isEqualTo(matchObjectivesEntity.getBaron_kills());
+        assertThat(matchObjectivesVO.getChampion().isFirst()).isEqualTo(matchObjectivesEntity.isChampion_first());
+        assertThat(matchObjectivesVO.getChampion().getKills()).isEqualTo(matchObjectivesEntity.getChampion_kills());
+        assertThat(matchObjectivesVO.getDragon().isFirst()).isEqualTo(matchObjectivesEntity.isDragon_first());
+        assertThat(matchObjectivesVO.getDragon().getKills()).isEqualTo(matchObjectivesEntity.getDragon_kills());
+        assertThat(matchObjectivesVO.getInhibitor().isFirst()).isEqualTo(matchObjectivesEntity.isInhibitor_first());
+        assertThat(matchObjectivesVO.getInhibitor().getKills()).isEqualTo(matchObjectivesEntity.getInhibitor_kills());
+        assertThat(matchObjectivesVO.getRiftHeraId().isFirst()).isEqualTo(matchObjectivesEntity.isRiftherald_first());
+        assertThat(matchObjectivesVO.getRiftHeraId().getKills()).isEqualTo(matchObjectivesEntity.getRiftherald_kills());
+        assertThat(matchObjectivesVO.getTower().isFirst()).isEqualTo(matchObjectivesEntity.isTower_first());
+        assertThat(matchObjectivesVO.getTower().getKills()).isEqualTo(matchObjectivesEntity.getTower_kills());
+
+    }
+
+    @Test
+    @DisplayName("Convert MatchTeam Entity List To MathTeam VO List")
+    public void toMatchTeamVOList() {
+        // given
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        List<TeamEntity> teamEntityList = new ArrayList<>();
+        TeamEntity teamEntity = new TeamEntity(new TeamId("Test1", 999), false, rrt);
+        teamEntityList.add(teamEntity);
+
+        // when
+        MatchTeamVO matchTeamVO = voMapper.toMatchTeamVOList(teamEntityList).get(0);
+
+        // then
+        assertThat(matchTeamVO.getTeamId()).isEqualTo(String.valueOf(teamEntity.getTeamId().getTeamId()));
+        assertThat(matchTeamVO.getWin()).isEqualTo(String.valueOf(teamEntity.isWin()));
+
+    }
+
+    @Test
+    @DisplayName("Convert Summoner Entity List To Summoner VO List")
+    public void toSummonerVOList() {
+        // given
+        List<SummonerEntity> summonerEntityList = new ArrayList<>();
+        Timestamp rrt = new Timestamp(System.currentTimeMillis());
+        SummonerEntity summonerEntity = new SummonerEntity("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g",
+                "dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy",
+                "qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA",
+                "Test on bush",
+                6,
+                1655406735000L,
+                576L,
+                rrt);
+        summonerEntityList.add(summonerEntity);
+
+        // when
+        SummonerVO summonerVO = voMapper.toSummonerVOList(summonerEntityList).get(0);
+
+        // then
+        assertThat(summonerVO.getPuuid()).isEqualTo(summonerEntity.getPuuid());
+        assertThat(summonerVO.getAccountId()).isEqualTo(summonerEntity.getAccountid());
+        assertThat(summonerVO.getId()).isEqualTo(summonerEntity.getId());
+        assertThat(summonerVO.getName()).isEqualTo(summonerEntity.getName());
+        assertThat(summonerVO.getProfileIconId()).isEqualTo(String.valueOf(summonerEntity.getProfileiconid()));
+        assertThat(summonerVO.getRevisionDate()).isEqualTo(String.valueOf(summonerEntity.getRevisiondate()));
+        assertThat(summonerVO.getSummonerLevel()).isEqualTo(String.valueOf(summonerEntity.getSummonerlevel()));
+        assertThat(summonerVO.getLastRefreshTimeForUI()).isEqualTo("0분 전");
+        assertThat(summonerVO.getLastRefreshTimeForAPI()).isEqualTo(rrt.toInstant().getEpochSecond());
+    }
 }

@@ -1,5 +1,6 @@
-package dev.saariselka.inlol.dto;
+package dev.saariselka.inlol.vo;
 
+import dev.saariselka.inlol.dto.SummonerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -7,8 +8,9 @@ import org.junit.jupiter.api.Test;
 import java.sql.Timestamp;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class SummonerDtoTest {
+public class SummonerVOTest {
 
     Timestamp rrt;
 
@@ -25,7 +27,7 @@ public class SummonerDtoTest {
         //SummonerEntity entity = createSummonerEntity(rrt);
 
         //when
-        SummonerDto dto = new SummonerDto("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g",
+        SummonerVO summonerVO = new SummonerVO("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g",
                 "dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy",
                 "qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA",
                 "Hide on bush",
@@ -34,17 +36,17 @@ public class SummonerDtoTest {
                 "576",
                 "0분 전",
                 rrt.toInstant().getEpochSecond());
-        
-        //then 
-        assertThat(dto.getPuuid()).isEqualTo("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g");
-        assertThat(dto.getAccountId()).isEqualTo("dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy");
-        assertThat(dto.getId()).isEqualTo("qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA");
-        assertThat(dto.getName()).isEqualTo("Hide on bush");
-        assertThat(dto.getProfileIconId()).isEqualTo("6");
-        assertThat(dto.getRevisionDate()).isEqualTo("1655406735000");
-        assertThat(dto.getSummonerLevel()).isEqualTo("576");
-        assertThat(dto.getLastRefreshTimeForUI()).isEqualTo("0분 전");
-        assertThat(dto.getLastRefreshTimeForAPI()).isEqualTo(rrt.toInstant().getEpochSecond());
+
+        //then
+        assertThat(summonerVO.getPuuid()).isEqualTo("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g");
+        assertThat(summonerVO.getAccountId()).isEqualTo("dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy");
+        assertThat(summonerVO.getId()).isEqualTo("qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA");
+        assertThat(summonerVO.getName()).isEqualTo("Hide on bush");
+        assertThat(summonerVO.getProfileIconId()).isEqualTo("6");
+        assertThat(summonerVO.getRevisionDate()).isEqualTo("1655406735000");
+        assertThat(summonerVO.getSummonerLevel()).isEqualTo("576");
+        assertThat(summonerVO.getLastRefreshTimeForUI()).isEqualTo("0분 전");
+        assertThat(summonerVO.getLastRefreshTimeForAPI()).isEqualTo(rrt.toInstant().getEpochSecond());
     }
 
     @Test
@@ -55,7 +57,7 @@ public class SummonerDtoTest {
         //SummonerEntity faker = createSummonerEntity(rrt);
 
         //when
-        SummonerDto keria = new SummonerDto("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g",
+        SummonerVO keria = new SummonerVO("yNr_v4gSrhBU8EhJ5edZpXGRjG_892njE-EGMaRLdSXyMY2RJHGDMoFsbv4eD--2aQvdruC0YqNY4g",
                 "dAU3oF9-T5Rok7LzAwqhHDDTGiNNuvakeANcZcDWexPy",
                 "qdDRYfl_uN6Pt7V-9kSwLGoc-jNfw0hjQj0n7XT1yVrLiA",
                 "Hide on bush",
