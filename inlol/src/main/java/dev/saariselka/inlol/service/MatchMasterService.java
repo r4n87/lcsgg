@@ -3,6 +3,7 @@ package dev.saariselka.inlol.service;
 import dev.saariselka.inlol.entity.MatchMasterEntity;
 import dev.saariselka.inlol.entity.MatchMasterId;
 import dev.saariselka.inlol.repository.MatchMasterRepository;
+import dev.saariselka.inlol.vo.MatchMasterVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,15 @@ import java.util.List;
 public class MatchMasterService {
     @Autowired
     private final MatchMasterRepository matchMasterRepository;
+    @Autowired
+    private VOMapper voMapper;
 
-    public List<MatchMasterEntity> findByMatchId(String matchId) {
-        return matchMasterRepository.findByMatchMasterId_MatchId(matchId);
+    public List<MatchMasterVO> findByMatchId(String matchId) {
+        return voMapper.toMatchMasterVOList(matchMasterRepository.findByMatchMasterId_MatchId(matchId));
     }
 
-    public List<MatchMasterEntity> findByMatchMasterId(MatchMasterId matchMasterId) {
-        return matchMasterRepository.findByMatchMasterId(matchMasterId);
+    public List<MatchMasterVO> findByMatchMasterId(MatchMasterId matchMasterId) {
+        return voMapper.toMatchMasterVOList(matchMasterRepository.findByMatchMasterId(matchMasterId));
     }
 
     public void insert(String dataVersion, String matchId, long gameCreation, long gameDuration, long gameEndTimeStamp, long gameId,

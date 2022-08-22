@@ -1,5 +1,6 @@
 package dev.saariselka.inlol.service;
 
+import dev.saariselka.inlol.dto.MatchMasterDto;
 import dev.saariselka.inlol.dto.MatchPerksDto;
 import dev.saariselka.inlol.entity.*;
 import dev.saariselka.inlol.service.VOMapper;
@@ -354,5 +355,43 @@ public class VOMapperTest {
         assertThat(matchPerksVOList.get(0).getStatPerkFlex()).isEqualTo(matchPerksEntity.getStatPerkFlex());
         assertThat(matchPerksVOList.get(0).getStatPerkOffense()).isEqualTo(matchPerksEntity.getStatPerkOffense());
         assertThat(matchPerksVOList.get(0).getRrt()).isEqualTo(matchPerksEntity.getRrt());
+    }
+
+    @Test
+    @DisplayName("Convert MatchMaster Entity List To MatchMaster VO List")
+    public void toMatchMasterVOList() {
+        //given
+        String dataVersion = "2";
+        String matchId = "KR_5804413147";
+        long gameCreation = 1646753771000L;
+        long gameDuration = 694L;
+        long gameEndTimeStamp = 1646754647544L;
+        long gameId = 5803564866L;
+        String gameMode = "ARAM";
+        String gameName = "hondoner 님의 게임";
+        long gameStartTimeStamp = 1646753953169L;
+        String gameType = "CUSTOM_GAME";
+        String gameVersion = "12.5.425.9171";
+        int mapId = 12;
+        String platformId = "KR";
+        int queueId = 0;
+        String queueType = "일반";
+        int teamId1 = 100;
+        int teamId2 = 200;
+        String tournamentCode = null;
+
+        MatchMasterEntity matchMasterEntity = new MatchMasterEntity(new MatchMasterId(dataVersion,matchId),gameCreation,gameDuration,gameEndTimeStamp,gameId,gameMode,gameName,
+                gameStartTimeStamp,gameType,gameVersion,mapId,platformId,queueId,queueType,teamId1,teamId2,tournamentCode,null);
+
+        List<MatchMasterEntity> matchMasterEntityList = new ArrayList<>();
+
+        matchMasterEntityList.add(matchMasterEntity);
+
+        //when
+        MatchMasterVO matchMasterVO = voMapper.toMatchMasterVOList(matchMasterEntityList).get(0);
+
+        //then
+        assertThat(matchMasterVO.getMatchId()).isEqualTo(matchId);
+        assertThat(matchMasterVO.getDataVersion()).isEqualTo(dataVersion);
     }
 }

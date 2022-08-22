@@ -159,10 +159,10 @@ public class DBFacade {
         long gameDuration;
 
         for(MatchParticipantDto match : matchList) {
-            MatchMasterEntity matchMasterEntity = matchMasterController.getMatchMasterByMatchId(match.getMatchId()).get(0);
-            matchId = matchMasterEntity.getMatchMasterId().getMatchId();
-            dataVersion = matchMasterEntity.getMatchMasterId().getDataVersion();
-            gameDuration = matchMasterEntity.getGameDuration();
+            MatchMasterDto matchMasterDto = matchMasterController.getMatchMasterByMatchId(match.getMatchId()).get(0);
+            matchId = matchMasterDto.getMatchId();
+            dataVersion = matchMasterDto.getDataVersion();
+            gameDuration = matchMasterDto.getGameDuration();
 
 
             //2. Team 정보 생성
@@ -211,8 +211,8 @@ public class DBFacade {
 
             setTeamsInformation(teamDtoList, blueMatchParticipantDtoList, redMatchParticipantDtoList, blueTeamKills, redTeamKills);
 
-            MetadataDto metadataDto = new MetadataDto(matchMasterEntity, participantsList);
-            InfoDto infoDto = new InfoDto(matchMasterEntity, teamDtoList, summonerInfo);
+            MetadataDto metadataDto = new MetadataDto(matchMasterDto, participantsList);
+            InfoDto infoDto = new InfoDto(matchMasterDto, teamDtoList, summonerInfo);
 
             MatchDto matchInfo = new MatchDto(metadataDto,infoDto);
 

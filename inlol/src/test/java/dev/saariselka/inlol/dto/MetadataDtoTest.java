@@ -14,14 +14,14 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MetadataDtoTest {
-    MatchMasterEntity matchMasterEntity;
+    MatchMasterDto matchMasterDto;
     List<MatchParticipantDto> participantsList;
     DtoMapper dtoMapper;
     VOMapper voMapper;
 
     @BeforeEach
     void init() {
-        matchMasterEntity = createMatchMasterEntity();
+        matchMasterDto = createMatchMasterDto();
         participantsList = createParticipantsList();
     }
 
@@ -59,7 +59,7 @@ public class MetadataDtoTest {
 //        assertThat(metadataDto.getParticipants()).isEqualTo(participantsListForTest);
 //    }
 
-    private MatchMasterEntity createMatchMasterEntity() {
+    private MatchMasterDto createMatchMasterDto() {
         String dataVersion = "2";
         String matchId = "KR_5804413147";
         long gameCreation = 1646757704000L;
@@ -79,8 +79,8 @@ public class MetadataDtoTest {
         int teamId2 = 200;
         String tournamentCode = "";
 
-        return new MatchMasterEntity(
-                new MatchMasterId(dataVersion, matchId),
+        return new MatchMasterDto(
+                dataVersion, matchId,
                 gameCreation,
                 gameDuration,
                 gameEndTimeStamp,
@@ -96,8 +96,7 @@ public class MetadataDtoTest {
                 queueType,
                 teamId1,
                 teamId2,
-                tournamentCode,
-                null);
+                tournamentCode);
     }
 
     private List<MatchParticipantDto> createParticipantsList() {
