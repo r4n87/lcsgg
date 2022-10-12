@@ -19,7 +19,7 @@ public class LeagueEntry extends BaseInfo{
     private String summonerName;
     private String queueType;
     private String tier;
-    private String rank;
+    private String ranks;
     private int leaguePoints;
     private int wins;
     private int losses;
@@ -29,7 +29,7 @@ public class LeagueEntry extends BaseInfo{
     private boolean inactive;
 
     // 연관관계 매핑
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="mini_series_id")
     private MiniSeries miniSeries;
 
