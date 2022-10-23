@@ -1,4 +1,7 @@
 spring:
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://database-1.caybrpuf0ihh.ap-northeast-2.rds.amazonaws.com:3306/sys?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul

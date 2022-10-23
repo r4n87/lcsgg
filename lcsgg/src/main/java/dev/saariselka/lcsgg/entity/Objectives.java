@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -45,4 +46,15 @@ public class Objectives extends BaseInfo{
     public void setInhibitor(Objective inhibitor) { this.inhibitor = inhibitor; }
     public void setRiftHerald(Objective riftHerald) { this.riftHerald = riftHerald; }
     public void setTower(Objective tower) { this.tower = tower; }
+
+    @Builder
+    public Objectives(Objective baron, Objective champion, Objective dragon,
+                      Objective inhibitor, Objective riftHerald, Objective tower) {
+        this.baron = baron;
+        this.champion = champion;
+        this.dragon = dragon;
+        this.inhibitor = inhibitor;
+        this.riftHerald = riftHerald;
+        this.tower = tower;
+    }
 }
