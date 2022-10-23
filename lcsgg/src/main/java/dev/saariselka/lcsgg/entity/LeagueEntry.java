@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -37,4 +38,26 @@ public class LeagueEntry extends BaseInfo{
     public void setMiniSeries(MiniSeries miniSeries) {
         this.miniSeries = miniSeries;
     }
+
+    @Builder
+    public LeagueEntry(String leagueId, String summonerId, String summonerName, String queueType,
+                       String tier, String ranks, int leaguePoints, int wins, int losses,
+                       boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive,
+                       MiniSeries miniSeries) {
+        this.leagueId = leagueId;
+        this.summonerId = summonerId;
+        this.summonerName = summonerName;
+        this.queueType = queueType;
+        this.tier = tier;
+        this.ranks = ranks;
+        this.leaguePoints = leaguePoints;
+        this.wins = wins;
+        this.losses = losses;
+        this.hotStreak = hotStreak;
+        this.veteran = veteran;
+        this.freshBlood = freshBlood;
+        this.inactive = inactive;
+        this.miniSeries = miniSeries;
+    }
+
 }
