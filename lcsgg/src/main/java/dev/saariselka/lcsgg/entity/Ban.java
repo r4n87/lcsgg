@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,17 @@ public class Ban extends BaseInfo{
 
     // 연관관계 설정
     public void setTeam(Team team) { this.team = team; }
+
+    @Builder
+    public Ban(int championId, int pickTurn, Team team) {
+        this.championId = championId;
+        this.pickTurn = pickTurn;
+
+        if(this.team != null) {
+            this.team.getBanList().remove(this);
+        }
+
+        this.team = team;
+        team.getBanList().add(this);
+    }
 }

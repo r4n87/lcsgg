@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,4 +17,10 @@ public class Objective extends BaseInfo{
 
     private boolean first;
     private int kills;
+
+    @Builder
+    public Objective(boolean first, int kills) {
+        this.first = first;
+        this.kills = kills;
+    }
 }

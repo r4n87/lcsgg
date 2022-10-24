@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,7 +28,7 @@ public class Team extends BaseInfo{
     @OneToMany(mappedBy = "team")
     private List<Ban> banList = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "objectives_id")
     private Objectives objectives;
 
@@ -37,4 +38,11 @@ public class Team extends BaseInfo{
     public void setObjectives(Objectives objectives) { this.objectives = objectives; }
 
     public void setBanList(List<Ban> banList) { this.banList = banList; }
+
+    @Builder
+    public Team(boolean win, int matchTeamId, Objectives objectives) {
+        this.win = win;
+        this.matchTeamId = matchTeamId;
+        this.objectives = objectives;
+    }
 }
