@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,11 +21,15 @@ public class Perks extends BaseInfo{
     @JoinColumn(name = "perk_stats_id")
     private PerkStats statPerks;
 
-    @OneToMany
-    @JoinColumn(name = "perk_style_id")
+    @OneToMany(mappedBy = "perks")
     private List<PerkStyle> styles;
 
     // 연관관계 설정
     public void setStatPerks(PerkStats statPerks) { this.statPerks = statPerks; }
     public void setStyles(List<PerkStyle> styles) { this.styles = styles; }
+
+    @Builder
+    public Perks(PerkStats statPerks) {
+        setStatPerks(statPerks);
+    }
 }

@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,4 +42,32 @@ public class Info extends BaseInfo{
     public void setParticipants(List<Participant> participants) { this.participants = participants; }
     public void setTeams(List<Team> teams) { this.teams = teams; }
 
+    @Builder
+    public Info(long gameCreation
+            , long gameDuration
+            , long gameEndTimestamp
+            , long gameId
+            , String gameMode
+            , String gameName
+            , long gameStartTimeStamp
+            , String gameType
+            , String gameVersion
+            , int mapId
+            , String platformId
+            , int queueId
+            , String tournamentCode) {
+        this.gameCreation = gameCreation;
+        this.gameDuration = gameDuration;
+        this.gameEndTimestamp = gameEndTimestamp;
+        this.gameId = gameId;
+        this.gameMode = gameMode;
+        this.gameName = gameName;
+        this.gameStartTimeStamp = gameStartTimeStamp;
+        this.gameType = gameType;
+        this.gameVersion = gameVersion;
+        this.mapId = mapId;
+        this.platformId = platformId;
+        this.queueId = queueId;
+        this.tournamentCode = tournamentCode;
+    }
 }
