@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +22,14 @@ public class Metadata extends BaseInfo {
 
     // 연관관계 매핑
     @OneToMany(mappedBy = "metadata")
-    private List<Participant> participantList = new ArrayList<>();
+    private List<Participant> participants = new ArrayList<>();
 
     // 연관관계 설정
-    public void setParticipantList(List<Participant> participantList) { this.participantList = participantList; }
+    public void setParticipants(List<Participant> participants) { this.participants = participants; }
+
+    @Builder
+    public Metadata(String dataVersion, String matchId) {
+        this.dataVersion = dataVersion;
+        this.matchId = matchId;
+    }
 }

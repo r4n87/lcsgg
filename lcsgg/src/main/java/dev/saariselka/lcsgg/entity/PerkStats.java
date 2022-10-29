@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,4 +18,11 @@ public class PerkStats extends BaseInfo{
     private int defense;
     private int flex;
     private int offense;
+
+    @Builder
+    public PerkStats(int defense, int flex, int offense) {
+        this.defense = defense;
+        this.flex = flex;
+        this.offense = offense;
+    }
 }
