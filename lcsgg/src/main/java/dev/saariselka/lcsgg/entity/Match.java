@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.entity;
 
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -25,4 +26,10 @@ public class Match extends BaseInfo{
     // 연관관계 설정
     public void setMetadata(Metadata metadata) { this.metadata = metadata; }
     public void setInfo(Info info) { this.info = info; }
+
+    @Builder
+    public Match(Metadata metadata, Info info) {
+        setMetadata(metadata);
+        setInfo(info);
+    }
 }
