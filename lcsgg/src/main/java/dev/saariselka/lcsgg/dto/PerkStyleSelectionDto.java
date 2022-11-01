@@ -12,6 +12,4 @@ public class PerkStyleSelectionDto {
     private int var1;
     private int var2;
     private int var3;
-
-    private PerkStyleDto perkStyle;
 }

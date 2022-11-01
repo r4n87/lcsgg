@@ -14,5 +14,4 @@ public class PerkStyleDto {
     private int style;
 
     private List<PerkStyleSelectionDto> selections;
-    private PerksDto perks;
 }

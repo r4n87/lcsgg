@@ -16,7 +16,7 @@ public class InfoDto {
     private long gameId;
     private String gameMode;
     private String gameName;
-    private long gameStartTimeStamp;
+    private long gameStartTimestamp;
     private String gameType;
     private String gameVersion;
     private int mapId;

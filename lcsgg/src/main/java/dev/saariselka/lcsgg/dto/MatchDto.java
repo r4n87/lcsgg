@@ -1,7 +1,5 @@
 package dev.saariselka.lcsgg.dto;
 
-import dev.saariselka.lcsgg.entity.Info;
-import dev.saariselka.lcsgg.entity.Metadata;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

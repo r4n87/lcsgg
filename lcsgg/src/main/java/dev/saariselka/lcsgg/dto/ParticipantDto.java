@@ -111,8 +111,6 @@ public class ParticipantDto {
     private boolean win;
 
     private PerksDto perks;
-    private MetadataDto metadata;
-    private InfoDto infoDto;
 
     private String kda;
     private String minionsKilledPerMin;
