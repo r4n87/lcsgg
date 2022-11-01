@@ -23,7 +23,7 @@ public class Info extends BaseInfo{
     private long gameId;
     private String gameMode;
     private String gameName;
-    private long gameStartTimeStamp;
+    private long gameStartTimestamp;
     private String gameType;
     private String gameVersion;
     private int mapId;
@@ -49,7 +49,7 @@ public class Info extends BaseInfo{
             , long gameId
             , String gameMode
             , String gameName
-            , long gameStartTimeStamp
+            , long gameStartTimestamp
             , String gameType
             , String gameVersion
             , int mapId
@@ -62,7 +62,7 @@ public class Info extends BaseInfo{
         this.gameId = gameId;
         this.gameMode = gameMode;
         this.gameName = gameName;
-        this.gameStartTimeStamp = gameStartTimeStamp;
+        this.gameStartTimestamp = gameStartTimestamp;
         this.gameType = gameType;
         this.gameVersion = gameVersion;
         this.mapId = mapId;

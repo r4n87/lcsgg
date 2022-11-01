@@ -78,4 +78,222 @@ public class DtoMapper {
                 miniSeriesObject.get("progress").toString()
         );
     }
+
+    public List<PerkStyleSelectionDto> toPerkStyleSelectionDtoList(JsonArray perkStyleSelectionObjectList) {
+        List<PerkStyleSelectionDto> perkStyleSelectionDtoList = new ArrayList<>();
+
+        for (Object perkStyleSelectionObject : perkStyleSelectionObjectList) {
+            JsonObject perkStyleSelectionJsonObject = (JsonObject)perkStyleSelectionObject;
+            PerkStyleSelectionDto perkStyleSelectionDto
+                    = new PerkStyleSelectionDto(
+                            perkStyleSelectionJsonObject.get("perk").getAsInt(),
+                            perkStyleSelectionJsonObject.get("var1").getAsInt(),
+                            perkStyleSelectionJsonObject.get("var2").getAsInt(),
+                            perkStyleSelectionJsonObject.get("var3").getAsInt()
+            );
+            perkStyleSelectionDtoList.add(perkStyleSelectionDto);
+        }
+
+        return perkStyleSelectionDtoList;
+    }
+
+    public List<PerkStyleDto> toPerkStyleDtoList(JsonArray perkStyleObjectList) {
+        List<PerkStyleDto> perkStyleDtoList = new ArrayList<>();
+
+        for(Object perkStyleObject : perkStyleObjectList) {
+            JsonObject perkStyleJsonObject = (JsonObject) perkStyleObject;
+            PerkStyleDto perkStyleDto
+                    = new PerkStyleDto(
+                        perkStyleJsonObject.get("description").getAsString(),
+                        perkStyleJsonObject.get("style").getAsInt(),
+                        toPerkStyleSelectionDtoList((JsonArray)perkStyleJsonObject.get("selections"))
+            );
+
+            perkStyleDtoList.add(perkStyleDto);
+        }
+
+        return perkStyleDtoList;
+    }
+
+    public PerkStatsDto toPerkStatsDto(JsonObject perkStatsObject) {
+        return new PerkStatsDto(
+            perkStatsObject.get("defense").getAsInt(),
+            perkStatsObject.get("flex").getAsInt(),
+            perkStatsObject.get("offense").getAsInt()
+        );
+    }
+
+    public PerksDto toPerksDto(JsonObject perksObject) {
+        return new PerksDto(
+            toPerkStatsDto(perksObject.getAsJsonObject("statPerks")),
+            toPerkStyleDtoList(perksObject.getAsJsonArray("styles"))
+        );
+    }
+
+    public List<ParticipantDto> toParticipantDtoList(JsonArray participantObjectList) {
+        List<ParticipantDto> participantDtoList = new ArrayList<>();
+
+        for(Object participantObject : participantObjectList) {
+            JsonObject participantJsonObject = (JsonObject) participantObject;
+            ParticipantDto participantDto
+                = new ParticipantDto(
+                    participantJsonObject.get("assists").getAsInt(),
+                    participantJsonObject.get("baronKills").getAsInt(),
+                    participantJsonObject.get("bountyLevel").getAsInt(),
+                    participantJsonObject.get("champExperience").getAsInt(),
+                    participantJsonObject.get("champLevel").getAsInt(),
+                    participantJsonObject.get("championId").getAsInt(),
+                    participantJsonObject.get("championName").getAsString(),
+                    participantJsonObject.get("championTransform").getAsInt(),
+                    participantJsonObject.get("consumablePurchased").getAsInt(),
+                    participantJsonObject.get("damageDealtToBuildings").getAsInt(),
+                    participantJsonObject.get("damageDealtToObjectives").getAsInt(),
+                    participantJsonObject.get("damageDealtToTurrets").getAsInt(),
+                    participantJsonObject.get("damageSelfMitigated").getAsInt(),
+                    participantJsonObject.get("deaths").getAsInt(),
+                    participantJsonObject.get("detectorWardsPlaced").getAsInt(),
+                    participantJsonObject.get("doubleKills").getAsInt(),
+                    participantJsonObject.get("dragonKills").getAsInt(),
+                    participantJsonObject.get("firstBloodAssists").getAsBoolean(),
+                    participantJsonObject.get("firstBloodKills").getAsBoolean(),
+                    participantJsonObject.get("firstTowerAssists").getAsBoolean(),
+                    participantJsonObject.get("firstTowerKill").getAsBoolean(),
+                    participantJsonObject.get("gameEndedInEarlySurrender").getAsBoolean(),
+                    participantJsonObject.get("gameEndedInSurrender").getAsBoolean(),
+                    participantJsonObject.get("goldEarned").getAsInt(),
+                    participantJsonObject.get("goldSpent").getAsInt(),
+                    participantJsonObject.get("individualPosition").getAsString(),
+                    participantJsonObject.get("inhibitorKills").getAsInt(),
+                    participantJsonObject.get("inhibitorTakedowns").getAsInt(),
+                    participantJsonObject.get("inhibitorsLost").getAsInt(),
+                    participantJsonObject.get("item0").getAsInt(),
+                    participantJsonObject.get("item1").getAsInt(),
+                    participantJsonObject.get("item2").getAsInt(),
+                    participantJsonObject.get("item3").getAsInt(),
+                    participantJsonObject.get("item4").getAsInt(),
+                    participantJsonObject.get("item5").getAsInt(),
+                    participantJsonObject.get("item6").getAsInt(),
+                    participantJsonObject.get("itemsPurchased").getAsInt(),
+                    participantJsonObject.get("killingSprees").getAsInt(),
+                    participantJsonObject.get("kills").getAsInt(),
+                    participantJsonObject.get("lane").getAsString(),
+                    participantJsonObject.get("largestCriticalStrike").getAsInt(),
+                    participantJsonObject.get("largestKillingSpree").getAsInt(),
+                    participantJsonObject.get("largestMultiKill").getAsInt(),
+                    participantJsonObject.get("longestTimespentLiving").getAsInt(),
+                    participantJsonObject.get("magicDamageDealt").getAsInt(),
+                    participantJsonObject.get("magicDamageDealtToChampions").getAsInt(),
+                    participantJsonObject.get("magicDamageTaken").getAsInt(),
+                    participantJsonObject.get("neutralMinionsKilled").getAsInt(),
+                    participantJsonObject.get("nexusKills").getAsInt(),
+                    participantJsonObject.get("objectivesStolen").getAsInt(),
+                    participantJsonObject.get("objectivesStolenAssists").getAsInt(),
+                    participantJsonObject.get("pentaKills").getAsInt(),
+                    participantJsonObject.get("physicalDamageDealt").getAsInt(),
+                    participantJsonObject.get("physicalDamageDealtToChampions").getAsInt(),
+                    participantJsonObject.get("physicalDamageTaken").getAsInt(),
+                    participantJsonObject.get("profileIcon").getAsInt(),
+                    participantJsonObject.get("puuid").getAsString(),
+                    participantJsonObject.get("quadraKills").getAsInt(),
+                    participantJsonObject.get("riotIdName").getAsString(),
+                    participantJsonObject.get("riotIdTagLine").getAsString(),
+                    participantJsonObject.get("role").getAsString(),
+                    participantJsonObject.get("sightWardsBoughtInGame").getAsInt(),
+                    participantJsonObject.get("spell1Casts").getAsInt(),
+                    participantJsonObject.get("spell2Casts").getAsInt(),
+                    participantJsonObject.get("spell3Casts").getAsInt(),
+                    participantJsonObject.get("spell4Casts").getAsInt(),
+                    participantJsonObject.get("summoner1Casts").getAsInt(),
+                    participantJsonObject.get("summoner1Id").getAsInt(),
+                    participantJsonObject.get("summoner2Casts").getAsInt(),
+                    participantJsonObject.get("summoner2Id").getAsInt(),
+                    participantJsonObject.get("summonerId").getAsString(),
+                    participantJsonObject.get("summonerLevel").getAsInt(),
+                    participantJsonObject.get("summonerName").getAsString(),
+                    participantJsonObject.get("teamEarlySurrendered").getAsBoolean(),
+                    participantJsonObject.get("teamId").getAsInt(),
+                    participantJsonObject.get("teamPosition").getAsString(),
+                    participantJsonObject.get("timeCCingOthers").getAsInt(),
+                    participantJsonObject.get("timePlayed").getAsInt(),
+                    participantJsonObject.get("totalDamageDealt").getAsInt(),
+                    participantJsonObject.get("totalDamageDealtToChampions").getAsInt(),
+                    participantJsonObject.get("totalDamageShieldedOnTeammates").getAsInt(),
+                    participantJsonObject.get("totalDamageTaken").getAsInt(),
+                    participantJsonObject.get("totalHeal").getAsInt(),
+                    participantJsonObject.get("totalHealsOnTeammates").getAsInt(),
+                    participantJsonObject.get("totalMinionsKilled").getAsInt(),
+                    participantJsonObject.get("totalTimeCCDealt").getAsInt(),
+                    participantJsonObject.get("totalTimeSpentDead").getAsInt(),
+                    participantJsonObject.get("totalUnitsHealed").getAsInt(),
+                    participantJsonObject.get("tripleKills").getAsInt(),
+                    participantJsonObject.get("trueDamageDealt").getAsInt(),
+                    participantJsonObject.get("trueDamageDealtToChampions").getAsInt(),
+                    participantJsonObject.get("trueDamageTaken").getAsInt(),
+                    participantJsonObject.get("turretKills").getAsInt(),
+                    participantJsonObject.get("turretTakedowns").getAsInt(),
+                    participantJsonObject.get("turretsLost").getAsInt(),
+                    participantJsonObject.get("unrealKills").getAsInt(),
+                    participantJsonObject.get("visionScore").getAsInt(),
+                    participantJsonObject.get("visionWardsBoughtInGame").getAsInt(),
+                    participantJsonObject.get("wardsKilled").getAsInt(),
+                    participantJsonObject.get("wardsPlaced").getAsInt(),
+                    participantJsonObject.get("win").getAsBoolean(),
+                    toPerksDto(participantJsonObject.getAsJsonObject("perks")),
+                    participantJsonObject.get("kda").getAsString(),
+                    participantJsonObject.get("minionsKilledPerMin").getAsString(),
+                    participantJsonObject.get("killRation").getAsString(),
+                    participantJsonObject.get("multiKills").getAsString()
+            );
+
+            participantDtoList.add(participantDto);
+        }
+
+        return participantDtoList;
+    }
+
+    public MetadataDto toMetadataDto(JsonObject metadataObject) {
+        return new MetadataDto(
+            metadataObject.get("dataVersion").getAsString(),
+            metadataObject.get("matchId").getAsString(),
+            toParticipantDtoList(metadataObject.getAsJsonArray("participants"))
+        );
+    }
+
+    public List<TeamDto> toTeamDtoList(JsonArray teamObjectList) {
+        List<TeamDto> teamDtoList = new ArrayList<>();
+
+        for (Object teamObject : teamObjectList) {
+            JsonObject teamJsonObject = (JsonObject)teamObject;
+            teamDtoList.add(toTeamDto(teamJsonObject));
+        }
+
+        return teamDtoList;
+    }
+
+    public InfoDto toInfoDto(JsonObject infoObject) {
+        return new InfoDto(
+            infoObject.get("gameCreation").getAsLong(),
+            infoObject.get("gameDuration").getAsLong(),
+            infoObject.get("gameEndTimestamp").getAsLong(),
+            infoObject.get("gameId").getAsLong(),
+            infoObject.get("gameMode").getAsString(),
+            infoObject.get("gameName").getAsString(),
+            infoObject.get("gameStartTimestamp").getAsLong(),
+            infoObject.get("gameType").getAsString(),
+            infoObject.get("gameVersion").getAsString(),
+            infoObject.get("mapId").getAsInt(),
+            infoObject.get("platformId").getAsString(),
+            infoObject.get("queueId").getAsInt(),
+            infoObject.get("tournamentCode").getAsString(),
+            toParticipantDtoList(infoObject.getAsJsonArray("participants")),
+            toTeamDtoList(infoObject.getAsJsonArray("teams"))
+        );
+    }
+
+    public MatchDto toMatchDto(JsonObject matchObject) {
+        return new MatchDto(
+            toMetadataDto(matchObject.getAsJsonObject("metadata")),
+            toInfoDto(matchObject.getAsJsonObject("info"))
+        );
+    }
 }
