@@ -33,6 +33,7 @@ dependencies {
     testImplementation 'org.projectlombok:lombok'
     annotationProcessor     'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
 }
 
 tasks.named('test') {

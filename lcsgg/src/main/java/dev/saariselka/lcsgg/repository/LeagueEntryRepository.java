@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface LeagueEntryRepository extends JpaRepository<LeagueEntry, Long> {
-    Optional<LeagueEntry> findBySummonerId(String summonerId);
+    Optional<List<LeagueEntry>> findBySummonerId(String summonerId);
 }

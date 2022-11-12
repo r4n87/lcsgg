@@ -13,6 +13,7 @@ import java.util.List;
 
 @NoArgsConstructor
 @Component
+// TODO : new ObjectMapper() 중복코드임
 public class DtoMapper {
 
     public TeamDto toTeamDto(JsonObject teamObject) throws JsonProcessingException {
@@ -25,33 +26,45 @@ public class DtoMapper {
         return teamDto;
     }
 
-    public LeagueEntryDto toLeagueEntryDto(JsonObject leagueEntryObject) {
-        return new LeagueEntryDto(
-                leagueEntryObject.get("leagueId").toString(),
-                leagueEntryObject.get("summonerId").toString(),
-                leagueEntryObject.get("summonerName").toString(),
-                leagueEntryObject.get("queueType").toString(),
-                leagueEntryObject.get("tier").toString(),
-                leagueEntryObject.get("rank").toString(),
-                Integer.parseInt(String.valueOf(leagueEntryObject.get("leaguePoints"))),
-                Integer.parseInt(String.valueOf(leagueEntryObject.get("wins"))),
-                Integer.parseInt(String.valueOf(leagueEntryObject.get("losses"))),
-                Boolean.parseBoolean(leagueEntryObject.get("hotStreak").toString()),
-                Boolean.parseBoolean(leagueEntryObject.get("veteran").toString()),
-                Boolean.parseBoolean(leagueEntryObject.get("freshBlood").toString()),
-                Boolean.parseBoolean(leagueEntryObject.get("inactive").toString()),
-                toMiniSeriesDto((JsonObject)leagueEntryObject.get("miniSeries"))
-                );
+    public LeagueEntryDto toLeagueEntryDto(JsonObject leagueEntryObject) throws JsonProcessingException{
+        String jsonString = leagueEntryObject.toString();
+        ObjectMapper mapper = new ObjectMapper();
+        LeagueEntryDto leagueEntryDto = mapper.readValue(jsonString,LeagueEntryDto.class);
+        leagueEntryDto.setMiniSeries(toMiniSeriesDto((JsonObject)leagueEntryObject.get("miniSeries")));
+        return leagueEntryDto;
+
+//        return new LeagueEntryDto(
+//                leagueEntryObject.get("leagueId").toString(),
+//                leagueEntryObject.get("summonerId").toString(),
+//                leagueEntryObject.get("summonerName").toString(),
+//                leagueEntryObject.get("queueType").toString(),
+//                leagueEntryObject.get("tier").toString(),
+//                leagueEntryObject.get("rank").toString(),
+//                Integer.parseInt(String.valueOf(leagueEntryObject.get("leaguePoints"))),
+//                Integer.parseInt(String.valueOf(leagueEntryObject.get("wins"))),
+//                Integer.parseInt(String.valueOf(leagueEntryObject.get("losses"))),
+//                Boolean.parseBoolean(leagueEntryObject.get("hotStreak").toString()),
+//                Boolean.parseBoolean(leagueEntryObject.get("veteran").toString()),
+//                Boolean.parseBoolean(leagueEntryObject.get("freshBlood").toString()),
+//                Boolean.parseBoolean(leagueEntryObject.get("inactive").toString()),
+//                toMiniSeriesDto((JsonObject)leagueEntryObject.get("miniSeries"))
+//                );
 
     }
 
-    public MiniSeriesDto toMiniSeriesDto(JsonObject miniSeriesObject) {
-        return new MiniSeriesDto(
-                Integer.parseInt(String.valueOf(miniSeriesObject.get("wins"))),
-                Integer.parseInt(String.valueOf(miniSeriesObject.get("losses"))),
-                Integer.parseInt(String.valueOf(miniSeriesObject.get("target"))),
-                miniSeriesObject.get("progress").toString()
-        );
+    public MiniSeriesDto toMiniSeriesDto(JsonObject miniSeriesObject) throws JsonProcessingException {
+        String jsonString = miniSeriesObject.toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+        MiniSeriesDto miniSeriesDto = mapper.readValue(jsonString, MiniSeriesDto.class);
+        return miniSeriesDto;
+
+//        return new MiniSeriesDto(
+//                Integer.parseInt(String.valueOf(miniSeriesObject.get("wins"))),
+//                Integer.parseInt(String.valueOf(miniSeriesObject.get("losses"))),
+//                Integer.parseInt(String.valueOf(miniSeriesObject.get("target"))),
+//                miniSeriesObject.get("progress").toString()
+//        );
     }
 
     public List<PerkStyleSelectionDto> toPerkStyleSelectionDtoList(JsonArray perkStyleSelectionObjectList) {
