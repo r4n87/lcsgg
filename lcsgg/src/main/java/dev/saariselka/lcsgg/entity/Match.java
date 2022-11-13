@@ -1,11 +1,15 @@
 package dev.saariselka.lcsgg.entity;
 
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "match_master")
 public class Match extends BaseInfo{
