@@ -13,22 +13,29 @@ import java.util.List;
 
 @NoArgsConstructor
 @Component
-// TODO : new ObjectMapper() 중복코드임
 public class DtoMapper {
+    private final ObjectMapper mapper = new ObjectMapper();
 
     public TeamDto toTeamDto(JsonObject teamObject) throws JsonProcessingException {
 
         String jsonString = teamObject.toString();
 
-        ObjectMapper mapper = new ObjectMapper();
+        //ObjectMapper mapper = new ObjectMapper();
         TeamDto teamDto = mapper.readValue(jsonString,TeamDto.class);
 
         return teamDto;
     }
+    public SummonerDto toSummonerDto(JsonObject summonerObject) throws JsonProcessingException {
+        String jsonString = summonerObject.toString();
+
+        SummonerDto summonerDto = mapper.readValue(jsonString, SummonerDto.class);
+
+        return summonerDto;
+    }
 
     public LeagueEntryDto toLeagueEntryDto(JsonObject leagueEntryObject) throws JsonProcessingException{
         String jsonString = leagueEntryObject.toString();
-        ObjectMapper mapper = new ObjectMapper();
+        //ObjectMapper mapper = new ObjectMapper();
         LeagueEntryDto leagueEntryDto = mapper.readValue(jsonString,LeagueEntryDto.class);
         leagueEntryDto.setMiniSeries(toMiniSeriesDto((JsonObject)leagueEntryObject.get("miniSeries")));
         return leagueEntryDto;

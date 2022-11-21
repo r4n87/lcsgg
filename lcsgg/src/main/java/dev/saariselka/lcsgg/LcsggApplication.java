@@ -10,6 +10,7 @@ public class LcsggApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LcsggApplication.class, args);
+
     }
 
 }

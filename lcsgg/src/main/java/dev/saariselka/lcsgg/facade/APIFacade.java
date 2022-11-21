@@ -1,7 +1,12 @@
 package dev.saariselka.lcsgg.facade;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dev.saariselka.lcsgg.controller.APIController;
 import dev.saariselka.lcsgg.controller.APIKeyController;
+import dev.saariselka.lcsgg.controller.DtoMapper;
+import dev.saariselka.lcsgg.dto.SummonerDto;
 import dev.saariselka.lcsgg.utils.API;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +24,8 @@ public class APIFacade {
     private static String apiKey;
 
     @Autowired
+    private DtoMapper dtoMapper;
+    @Autowired
     private APIController apiController;
     @Autowired
     private APIKeyController apiKeyController;
@@ -27,8 +34,8 @@ public class APIFacade {
         api = new API();
     }
 
-    public HashMap<String, Object> getSummonerBySummonerName(String name) {
-
+    //public HashMap<String, Object> getSummonerBySummonerName(String name) {
+    public SummonerDto getSummonerBySummonerName(String name) throws JsonProcessingException {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
@@ -57,7 +64,12 @@ public class APIFacade {
             result.put("body"  , "summoner info get exception");
             System.out.println(e);
         }
-        return result;
+
+        // TODO : 더 좋은 변환방법이 있을듯 (공통코드로)
+        Gson gson = new Gson();
+        String json = gson.toJson(result);
+        JsonObject summoner = new JsonObject().getAsJsonObject(json);
+        return dtoMapper.toSummonerDto(summoner);
     }
 
     public HashMap<String, Object> getLeagueBySummonerId(String encryptedSummonerId) {

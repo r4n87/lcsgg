@@ -11,7 +11,7 @@ public class QueueTypeController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    QueueTypeService queueTypeService;
+    private QueueTypeService queueTypeService;
 
     public String getQueueTypeByQueueId(int queueId) {
         return queueTypeService.findByQueueId(queueId).get(0).getDescription();
