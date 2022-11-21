@@ -74,35 +74,26 @@ public class DtoMapper {
 //        );
     }
 
-    public List<PerkStyleSelectionDto> toPerkStyleSelectionDtoList(JsonArray perkStyleSelectionObjectList) {
+    public List<PerkStyleSelectionDto> toPerkStyleSelectionDtoList(JsonArray perkStyleSelectionObjectList) throws JsonProcessingException {
         List<PerkStyleSelectionDto> perkStyleSelectionDtoList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
 
         for (Object perkStyleSelectionObject : perkStyleSelectionObjectList) {
-            JsonObject perkStyleSelectionJsonObject = (JsonObject)perkStyleSelectionObject;
-            PerkStyleSelectionDto perkStyleSelectionDto
-                    = new PerkStyleSelectionDto(
-                            perkStyleSelectionJsonObject.get("perk").getAsInt(),
-                            perkStyleSelectionJsonObject.get("var1").getAsInt(),
-                            perkStyleSelectionJsonObject.get("var2").getAsInt(),
-                            perkStyleSelectionJsonObject.get("var3").getAsInt()
-            );
+            String jsonString = perkStyleSelectionObject.toString();
+            PerkStyleSelectionDto perkStyleSelectionDto = mapper.readValue(jsonString, PerkStyleSelectionDto.class);
             perkStyleSelectionDtoList.add(perkStyleSelectionDto);
         }
 
         return perkStyleSelectionDtoList;
     }
 
-    public List<PerkStyleDto> toPerkStyleDtoList(JsonArray perkStyleObjectList) {
+    public List<PerkStyleDto> toPerkStyleDtoList(JsonArray perkStyleObjectList) throws JsonProcessingException {
         List<PerkStyleDto> perkStyleDtoList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
 
         for(Object perkStyleObject : perkStyleObjectList) {
-            JsonObject perkStyleJsonObject = (JsonObject) perkStyleObject;
-            PerkStyleDto perkStyleDto
-                    = new PerkStyleDto(
-                        perkStyleJsonObject.get("description").getAsString(),
-                        perkStyleJsonObject.get("style").getAsInt(),
-                        toPerkStyleSelectionDtoList((JsonArray)perkStyleJsonObject.get("selections"))
-            );
+            String jsonString = perkStyleObject.toString();
+            PerkStyleDto perkStyleDto = mapper.readValue(jsonString, PerkStyleDto.class);
 
             perkStyleDtoList.add(perkStyleDto);
         }
@@ -110,185 +101,64 @@ public class DtoMapper {
         return perkStyleDtoList;
     }
 
-    public PerkStatsDto toPerkStatsDto(JsonObject perkStatsObject) {
-        return new PerkStatsDto(
-            perkStatsObject.get("defense").getAsInt(),
-            perkStatsObject.get("flex").getAsInt(),
-            perkStatsObject.get("offense").getAsInt()
-        );
+    public PerkStatsDto toPerkStatsDto(JsonObject perkStatsObject) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = perkStatsObject.toString();
+
+        return mapper.readValue(jsonString, PerkStatsDto.class);
     }
 
-    public PerksDto toPerksDto(JsonObject perksObject) {
-        return new PerksDto(
-            toPerkStatsDto(perksObject.getAsJsonObject("statPerks")),
-            toPerkStyleDtoList(perksObject.getAsJsonArray("styles"))
-        );
+    public PerksDto toPerksDto(JsonObject perksObject) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = perksObject.toString();
+
+        return mapper.readValue(jsonString, PerksDto.class);
     }
 
-    public List<ParticipantDto> toParticipantDtoList(JsonArray participantObjectList) {
+    public List<ParticipantDto> toParticipantDtoList(JsonArray participantObjectList) throws JsonProcessingException {
         List<ParticipantDto> participantDtoList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
 
         for(Object participantObject : participantObjectList) {
-            JsonObject participantJsonObject = (JsonObject) participantObject;
-            ParticipantDto participantDto
-                = new ParticipantDto(
-                    participantJsonObject.get("assists").getAsInt(),
-                    participantJsonObject.get("baronKills").getAsInt(),
-                    participantJsonObject.get("bountyLevel").getAsInt(),
-                    participantJsonObject.get("champExperience").getAsInt(),
-                    participantJsonObject.get("champLevel").getAsInt(),
-                    participantJsonObject.get("championId").getAsInt(),
-                    participantJsonObject.get("championName").getAsString(),
-                    participantJsonObject.get("championTransform").getAsInt(),
-                    participantJsonObject.get("consumablePurchased").getAsInt(),
-                    participantJsonObject.get("damageDealtToBuildings").getAsInt(),
-                    participantJsonObject.get("damageDealtToObjectives").getAsInt(),
-                    participantJsonObject.get("damageDealtToTurrets").getAsInt(),
-                    participantJsonObject.get("damageSelfMitigated").getAsInt(),
-                    participantJsonObject.get("deaths").getAsInt(),
-                    participantJsonObject.get("detectorWardsPlaced").getAsInt(),
-                    participantJsonObject.get("doubleKills").getAsInt(),
-                    participantJsonObject.get("dragonKills").getAsInt(),
-                    participantJsonObject.get("firstBloodAssists").getAsBoolean(),
-                    participantJsonObject.get("firstBloodKills").getAsBoolean(),
-                    participantJsonObject.get("firstTowerAssists").getAsBoolean(),
-                    participantJsonObject.get("firstTowerKill").getAsBoolean(),
-                    participantJsonObject.get("gameEndedInEarlySurrender").getAsBoolean(),
-                    participantJsonObject.get("gameEndedInSurrender").getAsBoolean(),
-                    participantJsonObject.get("goldEarned").getAsInt(),
-                    participantJsonObject.get("goldSpent").getAsInt(),
-                    participantJsonObject.get("individualPosition").getAsString(),
-                    participantJsonObject.get("inhibitorKills").getAsInt(),
-                    participantJsonObject.get("inhibitorTakedowns").getAsInt(),
-                    participantJsonObject.get("inhibitorsLost").getAsInt(),
-                    participantJsonObject.get("item0").getAsInt(),
-                    participantJsonObject.get("item1").getAsInt(),
-                    participantJsonObject.get("item2").getAsInt(),
-                    participantJsonObject.get("item3").getAsInt(),
-                    participantJsonObject.get("item4").getAsInt(),
-                    participantJsonObject.get("item5").getAsInt(),
-                    participantJsonObject.get("item6").getAsInt(),
-                    participantJsonObject.get("itemsPurchased").getAsInt(),
-                    participantJsonObject.get("killingSprees").getAsInt(),
-                    participantJsonObject.get("kills").getAsInt(),
-                    participantJsonObject.get("lane").getAsString(),
-                    participantJsonObject.get("largestCriticalStrike").getAsInt(),
-                    participantJsonObject.get("largestKillingSpree").getAsInt(),
-                    participantJsonObject.get("largestMultiKill").getAsInt(),
-                    participantJsonObject.get("longestTimespentLiving").getAsInt(),
-                    participantJsonObject.get("magicDamageDealt").getAsInt(),
-                    participantJsonObject.get("magicDamageDealtToChampions").getAsInt(),
-                    participantJsonObject.get("magicDamageTaken").getAsInt(),
-                    participantJsonObject.get("neutralMinionsKilled").getAsInt(),
-                    participantJsonObject.get("nexusKills").getAsInt(),
-                    participantJsonObject.get("objectivesStolen").getAsInt(),
-                    participantJsonObject.get("objectivesStolenAssists").getAsInt(),
-                    participantJsonObject.get("pentaKills").getAsInt(),
-                    participantJsonObject.get("physicalDamageDealt").getAsInt(),
-                    participantJsonObject.get("physicalDamageDealtToChampions").getAsInt(),
-                    participantJsonObject.get("physicalDamageTaken").getAsInt(),
-                    participantJsonObject.get("profileIcon").getAsInt(),
-                    participantJsonObject.get("puuid").getAsString(),
-                    participantJsonObject.get("quadraKills").getAsInt(),
-                    participantJsonObject.get("riotIdName").getAsString(),
-                    participantJsonObject.get("riotIdTagLine").getAsString(),
-                    participantJsonObject.get("role").getAsString(),
-                    participantJsonObject.get("sightWardsBoughtInGame").getAsInt(),
-                    participantJsonObject.get("spell1Casts").getAsInt(),
-                    participantJsonObject.get("spell2Casts").getAsInt(),
-                    participantJsonObject.get("spell3Casts").getAsInt(),
-                    participantJsonObject.get("spell4Casts").getAsInt(),
-                    participantJsonObject.get("summoner1Casts").getAsInt(),
-                    participantJsonObject.get("summoner1Id").getAsInt(),
-                    participantJsonObject.get("summoner2Casts").getAsInt(),
-                    participantJsonObject.get("summoner2Id").getAsInt(),
-                    participantJsonObject.get("summonerId").getAsString(),
-                    participantJsonObject.get("summonerLevel").getAsInt(),
-                    participantJsonObject.get("summonerName").getAsString(),
-                    participantJsonObject.get("teamEarlySurrendered").getAsBoolean(),
-                    participantJsonObject.get("teamId").getAsInt(),
-                    participantJsonObject.get("teamPosition").getAsString(),
-                    participantJsonObject.get("timeCCingOthers").getAsInt(),
-                    participantJsonObject.get("timePlayed").getAsInt(),
-                    participantJsonObject.get("totalDamageDealt").getAsInt(),
-                    participantJsonObject.get("totalDamageDealtToChampions").getAsInt(),
-                    participantJsonObject.get("totalDamageShieldedOnTeammates").getAsInt(),
-                    participantJsonObject.get("totalDamageTaken").getAsInt(),
-                    participantJsonObject.get("totalHeal").getAsInt(),
-                    participantJsonObject.get("totalHealsOnTeammates").getAsInt(),
-                    participantJsonObject.get("totalMinionsKilled").getAsInt(),
-                    participantJsonObject.get("totalTimeCCDealt").getAsInt(),
-                    participantJsonObject.get("totalTimeSpentDead").getAsInt(),
-                    participantJsonObject.get("totalUnitsHealed").getAsInt(),
-                    participantJsonObject.get("tripleKills").getAsInt(),
-                    participantJsonObject.get("trueDamageDealt").getAsInt(),
-                    participantJsonObject.get("trueDamageDealtToChampions").getAsInt(),
-                    participantJsonObject.get("trueDamageTaken").getAsInt(),
-                    participantJsonObject.get("turretKills").getAsInt(),
-                    participantJsonObject.get("turretTakedowns").getAsInt(),
-                    participantJsonObject.get("turretsLost").getAsInt(),
-                    participantJsonObject.get("unrealKills").getAsInt(),
-                    participantJsonObject.get("visionScore").getAsInt(),
-                    participantJsonObject.get("visionWardsBoughtInGame").getAsInt(),
-                    participantJsonObject.get("wardsKilled").getAsInt(),
-                    participantJsonObject.get("wardsPlaced").getAsInt(),
-                    participantJsonObject.get("win").getAsBoolean(),
-                    toPerksDto(participantJsonObject.getAsJsonObject("perks")),
-                    participantJsonObject.get("kda").getAsString(),
-                    participantJsonObject.get("minionsKilledPerMin").getAsString(),
-                    participantJsonObject.get("killRation").getAsString(),
-                    participantJsonObject.get("multiKills").getAsString()
-            );
-
+            String jsonString = participantObject.toString();
+            ParticipantDto participantDto = mapper.readValue(jsonString, ParticipantDto.class);
             participantDtoList.add(participantDto);
         }
 
         return participantDtoList;
     }
 
-    public MetadataDto toMetadataDto(JsonObject metadataObject) {
-        return new MetadataDto(
-            metadataObject.get("dataVersion").getAsString(),
-            metadataObject.get("matchId").getAsString(),
-            toParticipantDtoList(metadataObject.getAsJsonArray("participants"))
-        );
+    public MetadataDto toMetadataDto(JsonObject metadataObject) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = metadataObject.toString();
+
+        return mapper.readValue(jsonString, MetadataDto.class);
     }
 
     public List<TeamDto> toTeamDtoList(JsonArray teamObjectList) throws JsonProcessingException {
         List<TeamDto> teamDtoList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
 
         for (Object teamObject : teamObjectList) {
-            JsonObject teamJsonObject = (JsonObject)teamObject;
-            teamDtoList.add(toTeamDto(teamJsonObject));
+            String jsonString = teamObject.toString();
+            TeamDto teamDto = mapper.readValue(jsonString, TeamDto.class);
+            teamDtoList.add(teamDto);
         }
 
         return teamDtoList;
     }
 
     public InfoDto toInfoDto(JsonObject infoObject) throws JsonProcessingException {
-        return new InfoDto(
-            infoObject.get("gameCreation").getAsLong(),
-            infoObject.get("gameDuration").getAsLong(),
-            infoObject.get("gameEndTimestamp").getAsLong(),
-            infoObject.get("gameId").getAsLong(),
-            infoObject.get("gameMode").getAsString(),
-            infoObject.get("gameName").getAsString(),
-            infoObject.get("gameStartTimestamp").getAsLong(),
-            infoObject.get("gameType").getAsString(),
-            infoObject.get("gameVersion").getAsString(),
-            infoObject.get("mapId").getAsInt(),
-            infoObject.get("platformId").getAsString(),
-            infoObject.get("queueId").getAsInt(),
-            infoObject.get("tournamentCode").getAsString(),
-            toParticipantDtoList(infoObject.getAsJsonArray("participants")),
-            toTeamDtoList(infoObject.getAsJsonArray("teams"))
-        );
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = infoObject.toString();
+
+        return mapper.readValue(jsonString, InfoDto.class);
     }
 
     public MatchDto toMatchDto(JsonObject matchObject) throws JsonProcessingException {
-        return new MatchDto(
-            toMetadataDto(matchObject.getAsJsonObject("metadata")),
-            toInfoDto(matchObject.getAsJsonObject("info"))
-        );
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = matchObject.toString();
+
+        return mapper.readValue(jsonString, MatchDto.class);
     }
 }
