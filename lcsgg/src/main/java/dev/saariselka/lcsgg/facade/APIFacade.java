@@ -3,9 +3,11 @@ package dev.saariselka.lcsgg.facade;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import dev.saariselka.lcsgg.controller.APIController;
 import dev.saariselka.lcsgg.controller.APIKeyController;
 import dev.saariselka.lcsgg.controller.DtoMapper;
+import dev.saariselka.lcsgg.dto.LeagueEntryDto;
 import dev.saariselka.lcsgg.dto.SummonerDto;
 import dev.saariselka.lcsgg.utils.API;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,12 +69,14 @@ public class APIFacade {
 
         // TODO : 더 좋은 변환방법이 있을듯 (공통코드로)
         Gson gson = new Gson();
-        String json = gson.toJson(result);
-        JsonObject summoner = new JsonObject().getAsJsonObject(json);
+        String json = gson.toJson(result.get("body"));
+        JsonParser parser = new JsonParser();
+        JsonObject summoner = (JsonObject) parser.parse(json);
         return dtoMapper.toSummonerDto(summoner);
     }
 
-    public HashMap<String, Object> getLeagueBySummonerId(String encryptedSummonerId) {
+    //public HashMap<String, Object> getLeagueBySummonerId(String encryptedSummonerId) {
+    public LeagueEntryDto getLeagueBySummonerId(String encryptedSummonerId) throws JsonProcessingException {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
@@ -97,7 +101,14 @@ public class APIFacade {
             result.put("body", "league info get exception");
             System.out.println(e);
         }
-        return result;
+
+        // TODO : 더 좋은 변환방법이 있을듯 (공통코드로) 일단 임시로 값만 보기
+        Gson gson = new Gson();
+        String json = gson.toJson(result.get("body"));
+        JsonParser parser = new JsonParser();
+        JsonObject league = (JsonObject) parser.parse(json);
+        LeagueEntryDto leagueEntryDto = dtoMapper.toLeagueEntryDto(league);
+        return leagueEntryDto;
     }
 
     public ArrayList<String> getMatchIdListBySummonerPuuidAndMatchStartTime(String puuid, long startTime) {

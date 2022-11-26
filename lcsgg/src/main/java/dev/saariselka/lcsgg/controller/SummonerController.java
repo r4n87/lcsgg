@@ -25,7 +25,6 @@ public class SummonerController extends BaseConfig {
     }
 
     public void insertSummoner(SummonerDto summonerDto) {
-        //summonerService.insert(puuid, accountId, profileIconId, revisionDate, name, id, summonerLevel);
         summonerService.insert(modelMapper.map(summonerDto, Summoner.class));
     }
 

@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name="RIOT_QUEUE_TYPE")
 public class QueueType extends BaseInfo{
     @Id
     int queueId;

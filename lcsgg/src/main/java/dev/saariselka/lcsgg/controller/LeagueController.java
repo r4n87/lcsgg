@@ -30,4 +30,8 @@ public class LeagueController extends BaseConfig {
 
         return leagueEntryDtos;
     }
+
+    public void insertLeagueEntry(LeagueEntryDto leagueEntryDto) {
+        leagueService.insert(modelMapper.map(leagueEntryDto, LeagueEntry.class));
+    }
 }

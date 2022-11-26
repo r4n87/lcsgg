@@ -5,6 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BaseConfig {
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-    protected ModelMapper modelMapper = new ModelMapper();
+    final Logger logger = LoggerFactory.getLogger(this.getClass());
+    static final ModelMapper modelMapper = new ModelMapper();
 }

@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name="RIOT_CHAMPIONS")
 public class Champion extends BaseInfo{
     @Id
     private int id;
