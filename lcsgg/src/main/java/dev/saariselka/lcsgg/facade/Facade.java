@@ -1,7 +1,6 @@
 package dev.saariselka.lcsgg.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import dev.saariselka.lcsgg.dto.LeagueEntryDto;
 import dev.saariselka.lcsgg.dto.SummonerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 public class Facade {
@@ -55,15 +55,15 @@ public class Facade {
 //            dbFacade.setLeagueInfo(leagueEntryDto);
 
         //Step 3. Get Match Info List by Name via API
-//        ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), startTime);
-//        HashSet<String> dbMatchList = dbFacade.getMatchIdListBySummonerPuuid(summonerDto.getPuuid());
+        ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), startTime);
+//        HashSet<String> dbMatchList = dbFacade.getMatchIdListBySummonerPuuid(summonerDto.getPuuid()); // TODO : match를 puuid별로 가져올 방법 필요
 //
 //        matchList.removeIf(dbMatchList::contains);
 //
-//        for (int i = 0; i < matchList.size(); i++) {
-//            dbFacade.setMatch(((HashMap<String, Object>) apiFacade.getMatchByMatchId(matchList, i).get("body")));
-//        }
-//
+        for (int i = 0; i < matchList.size(); i++) {
+            dbFacade.setMatch(apiFacade.getMatchByMatchId(matchList, i));
+        }
+
         //TODO : 임시 리턴
         return "puuid"; //summonerDto.getPuuid();
     }

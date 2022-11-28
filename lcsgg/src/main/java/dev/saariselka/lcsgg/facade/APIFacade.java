@@ -8,6 +8,7 @@ import dev.saariselka.lcsgg.controller.APIController;
 import dev.saariselka.lcsgg.controller.APIKeyController;
 import dev.saariselka.lcsgg.controller.DtoMapper;
 import dev.saariselka.lcsgg.dto.LeagueEntryDto;
+import dev.saariselka.lcsgg.dto.MatchDto;
 import dev.saariselka.lcsgg.dto.SummonerDto;
 import dev.saariselka.lcsgg.utils.API;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,7 +143,7 @@ public class APIFacade {
         return matchList;
     }
 
-    public HashMap<String, Object> getMatchByMatchId(ArrayList<String> matchList, int i) {
+    public MatchDto getMatchByMatchId(ArrayList<String> matchList, int i) throws JsonProcessingException {
 
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
@@ -170,6 +171,13 @@ public class APIFacade {
             result.put("body"  , "excpetion~");
             System.out.println(e);
         }
-        return result;
+
+        Gson gson = new Gson();
+        String json = gson.toJson(result.get("body"));
+        JsonParser parser = new JsonParser();
+        JsonObject match = (JsonObject) parser.parse(json);
+        MatchDto matchDto = dtoMapper.toMatchDto(match);
+
+        return matchDto;
     }
 }

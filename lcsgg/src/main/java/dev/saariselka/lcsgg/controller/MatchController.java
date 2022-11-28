@@ -1,10 +1,12 @@
 package dev.saariselka.lcsgg.controller;
 
 import dev.saariselka.lcsgg.dto.*;
-import dev.saariselka.lcsgg.entity.*;
+import dev.saariselka.lcsgg.entity.Ban;
+import dev.saariselka.lcsgg.entity.Match;
+import dev.saariselka.lcsgg.entity.Objectives;
+import dev.saariselka.lcsgg.entity.Team;
 import dev.saariselka.lcsgg.service.MatchService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +20,23 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/match")
-public class MatchController {
+public class MatchController extends BaseConfig {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private MatchService matchService;
 
-    public ObjectivesDto getObjectivesDtoByObjectivesEntity(Objectives objectives) {
-        ModelMapper modelMapper = new ModelMapper();
+    public void insertMatch(MatchDto matchDto) {
+        matchService.insert(modelMapper.map(matchDto, Match.class));
+    }
 
+    public ObjectivesDto getObjectivesDtoByObjectivesEntity(Objectives objectives) {
         ObjectivesDto objectivesDto = modelMapper.map(objectives,ObjectivesDto.class);
 
         return objectivesDto;
     }
 
     public List<BanDto> getBanDtoListByBanEntityList(List<Ban> banList) {
-        ModelMapper modelMapper = new ModelMapper();
-
         List<BanDto> banDtoList = banList
                 .stream()
                 .map(banEntity -> modelMapper.map(banEntity, BanDto.class))
@@ -44,7 +46,6 @@ public class MatchController {
     }
 
     public TeamDto getTeamDtoByTeamEntity(Team team) {
-        ModelMapper modelMapper = new ModelMapper();
         TeamDto teamDto = modelMapper.map(team,TeamDto.class);
         teamDto.setObjectives(getObjectivesDtoByObjectivesEntity(team.getObjectives()));
         teamDto.setBans(getBanDtoListByBanEntityList(team.getBanList()));
@@ -53,7 +54,6 @@ public class MatchController {
     }
 
     public MatchDto getMatchDtoByMatchId(String matchId) {
-        ModelMapper modelMapper = new ModelMapper();
         Match match = matchService.getMatchByMatchId(matchId);
 
         MatchDto matchDto = modelMapper.map(match, MatchDto.class);
