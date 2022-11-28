@@ -15,4 +15,8 @@ public class LeagueService {
     public List<LeagueEntry> getLeagueEntriesBySummonerId(String summonerId) {
         return leagueEntryRepository.findBySummonerId(summonerId).get();
     }
+
+    public void insert(LeagueEntry leagueEntry) {
+        leagueEntryRepository.save(leagueEntry);
+    }
 }

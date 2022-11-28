@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class Summoner extends BaseInfo{
