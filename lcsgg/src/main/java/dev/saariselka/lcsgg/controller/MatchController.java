@@ -122,7 +122,7 @@ public class MatchController extends BaseConfig {
         }
 
         infoDto.setTeams(teamDtos);
-        infoDto.setParitcipants(participantDtos);
+        infoDto.setParticipants(participantDtos);
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

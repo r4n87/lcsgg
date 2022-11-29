@@ -26,6 +26,6 @@ public class InfoDto {
     private int queueId;
     private String tournamentCode;
 
-    private List<ParticipantDto> paritcipants;
+    private List<ParticipantDto> participants;
     private List<TeamDto> teams;
 }
