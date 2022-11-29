@@ -22,16 +22,13 @@ public class Metadata extends BaseInfo {
     private String dataVersion;
     private String matchId;
 
-    // 연관관계 매핑
-    @OneToMany(mappedBy = "metadata")
-    private List<Participant> participants = new ArrayList<>();
-
-    // 연관관계 설정
-    public void setParticipants(List<Participant> participants) { this.participants = participants; }
+    @Transient
+    private List<String> participants = new ArrayList<>();
 
     @Builder
-    public Metadata(String dataVersion, String matchId) {
+    public Metadata(String dataVersion, String matchId, List<String> participants) {
         this.dataVersion = dataVersion;
         this.matchId = matchId;
+        this.participants = participants;
     }
 }

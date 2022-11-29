@@ -123,16 +123,11 @@ public class Participant extends BaseInfo{
     private Perks perks;
 
     @ManyToOne
-    @JoinColumn(name = "metadata_id")
-    private Metadata metadata;
-
-    @ManyToOne
     @JoinColumn(name = "info_id")
     private Info info;
 
     // 연관관계 설정
     public void setPerks(Perks perks) { this.perks = perks; }
-    public void setMetadata(Metadata metadata) { this.metadata = metadata; }
     public void setInfo(Info info) { this.info = info; }
 
     @Builder
@@ -238,7 +233,6 @@ public class Participant extends BaseInfo{
             , int wardsPlaced
             , boolean win
             , Perks perks
-            , Metadata metadata
             , Info info) {
         this.assists = assists;
         this.baronKills = baronKills;
@@ -343,12 +337,6 @@ public class Participant extends BaseInfo{
         this.win = win;
 
         setPerks(perks);
-
-        if(this.metadata != null) {
-            this.metadata.getParticipants().remove(this);
-        }
-        setMetadata(metadata);
-        metadata.getParticipants().add(this);
 
         if(this.info != null) {
             this.info.getParticipants().remove(this);
