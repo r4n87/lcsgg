@@ -15,5 +15,5 @@ public class MetadataDto {
     private String dataVersion;
     private String matchId;
 
-    List<ParticipantDto> participants;
+    List<String> participants;
 }
