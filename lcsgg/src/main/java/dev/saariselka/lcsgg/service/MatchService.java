@@ -13,4 +13,8 @@ public class MatchService {
     public Match getMatchByMatchId(String matchId) {
         return matchRepository.findById(Long.parseLong(matchId)).get();
     }
+
+    public void insert(Match match) {
+        matchRepository.save(match);
+    }
 }
