@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.*;
 
 // TODO : db insert 실패했을 때 처리 필요해보임
 @Service
@@ -31,11 +32,13 @@ public class DBFacade {
         summonerController.insertSummoner(summonerDto);
     }
 
-    public void setLeagueInfo(LeagueEntryDto leagueEntryDto) {
+    public void setLeagueInfo(List<LeagueEntryDto> leagueEntryDtos) {
         // parsing
-        String queueType = leagueEntryDto.getQueueType();
-        if(queueType.equals("RANKED_FLEX_SR") || queueType.equals("RANKED_SOLO_5x5"))
-            leagueController.insertLeagueEntry(leagueEntryDto);
+        for(LeagueEntryDto leagueEntryDto : leagueEntryDtos) {
+            String queueType = leagueEntryDto.getQueueType();
+            if(queueType.equals("RANKED_FLEX_SR") || queueType.equals("RANKED_SOLO_5x5"))
+                leagueController.insertLeagueEntry(leagueEntryDto);
+        }
     }
 
     public void setMatch(MatchDto matchDto) { matchController.insertMatch(matchDto); }

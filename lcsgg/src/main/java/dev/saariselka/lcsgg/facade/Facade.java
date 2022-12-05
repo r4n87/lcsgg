@@ -1,6 +1,7 @@
 package dev.saariselka.lcsgg.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import dev.saariselka.lcsgg.dto.LeagueEntryDto;
 import dev.saariselka.lcsgg.dto.SummonerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 @RestController
 public class Facade {
@@ -50,9 +51,9 @@ public class Facade {
         dbFacade.setSummonerInfo(summonerDto);
 
         //Step 2. Get League info by encryptedSummonerId via API
-//        LeagueEntryDto leagueEntryDto = apiFacade.getLeagueBySummonerId(summonerDto.getId());
-//        if(leagueEntryDto != null)  // TODO : null 말고 다른걸로 체크해야 될 것 같음
-//            dbFacade.setLeagueInfo(leagueEntryDto);
+        List<LeagueEntryDto> leagueEntryDtos = apiFacade.getLeagueBySummonerId(summonerDto.getId());
+        if(leagueEntryDtos != null)
+            dbFacade.setLeagueInfo(leagueEntryDtos);
 
         //Step 3. Get Match Info List by Name via API
         ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), startTime);
