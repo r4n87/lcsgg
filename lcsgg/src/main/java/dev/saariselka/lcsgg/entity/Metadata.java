@@ -15,12 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 public class Metadata extends BaseInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "metadata_id")
-    private Long id;
-
-    private String dataVersion;
     private String matchId;
+    private String dataVersion;
 
     @Transient
     private List<String> participants = new ArrayList<>();
