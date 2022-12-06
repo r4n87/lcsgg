@@ -1,7 +1,9 @@
 package dev.saariselka.lcsgg.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import dev.saariselka.lcsgg.dto.*;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @NoArgsConstructor
 @Component
@@ -25,54 +28,32 @@ public class DtoMapper {
 
         return teamDto;
     }
-    public SummonerDto toSummonerDto(JsonObject summonerObject) throws JsonProcessingException {
-        String jsonString = summonerObject.toString();
-
-        SummonerDto summonerDto = mapper.readValue(jsonString, SummonerDto.class);
-
-        return summonerDto;
+    public SummonerDto toSummonerDto(Map<String, Object> summonerObject) throws JsonProcessingException {
+        // TODO : dto 변환클래스가 꼭 필요한지..?
+        //SummonerDto summonerDto = mapper.readValue(jsonString, SummonerDto.class);
+        return mapper.convertValue(summonerObject.get("body"), SummonerDto.class);
     }
 
-    public LeagueEntryDto toLeagueEntryDto(JsonObject leagueEntryObject) throws JsonProcessingException{
-        String jsonString = leagueEntryObject.toString();
-        //ObjectMapper mapper = new ObjectMapper();
-        LeagueEntryDto leagueEntryDto = mapper.readValue(jsonString,LeagueEntryDto.class);
-        leagueEntryDto.setMiniSeries(toMiniSeriesDto((JsonObject)leagueEntryObject.get("miniSeries")));
-        return leagueEntryDto;
-
-//        return new LeagueEntryDto(
-//                leagueEntryObject.get("leagueId").toString(),
-//                leagueEntryObject.get("summonerId").toString(),
-//                leagueEntryObject.get("summonerName").toString(),
-//                leagueEntryObject.get("queueType").toString(),
-//                leagueEntryObject.get("tier").toString(),
-//                leagueEntryObject.get("rank").toString(),
-//                Integer.parseInt(String.valueOf(leagueEntryObject.get("leaguePoints"))),
-//                Integer.parseInt(String.valueOf(leagueEntryObject.get("wins"))),
-//                Integer.parseInt(String.valueOf(leagueEntryObject.get("losses"))),
-//                Boolean.parseBoolean(leagueEntryObject.get("hotStreak").toString()),
-//                Boolean.parseBoolean(leagueEntryObject.get("veteran").toString()),
-//                Boolean.parseBoolean(leagueEntryObject.get("freshBlood").toString()),
-//                Boolean.parseBoolean(leagueEntryObject.get("inactive").toString()),
-//                toMiniSeriesDto((JsonObject)leagueEntryObject.get("miniSeries"))
-//                );
-
-    }
-
-    public MiniSeriesDto toMiniSeriesDto(JsonObject miniSeriesObject) throws JsonProcessingException {
-        String jsonString = miniSeriesObject.toString();
-
+    //public LeagueEntryDto toLeagueEntryDto(JsonObject leagueEntryObject) throws JsonProcessingException{
+    public List<LeagueEntryDto> toLeagueEntryDto(Map<String, Object> leagueEntryObject) {
         ObjectMapper mapper = new ObjectMapper();
-        MiniSeriesDto miniSeriesDto = mapper.readValue(jsonString, MiniSeriesDto.class);
-        return miniSeriesDto;
+        //파라미터에서 DTO에 들어있지 않는 변수가 있어도 무시함.
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-//        return new MiniSeriesDto(
-//                Integer.parseInt(String.valueOf(miniSeriesObject.get("wins"))),
-//                Integer.parseInt(String.valueOf(miniSeriesObject.get("losses"))),
-//                Integer.parseInt(String.valueOf(miniSeriesObject.get("target"))),
-//                miniSeriesObject.get("progress").toString()
-//        );
+        List<LeagueEntryDto> leagueEntryDtos =
+                mapper.convertValue(leagueEntryObject.get("body"), TypeFactory.defaultInstance().constructCollectionType(List.class, LeagueEntryDto.class));
+
+        return leagueEntryDtos;
     }
+
+    // 사용하지 않아서 주석처리
+//    public MiniSeriesDto toMiniSeriesDto(JsonObject miniSeriesObject) throws JsonProcessingException {
+//        String jsonString = miniSeriesObject.toString();
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        MiniSeriesDto miniSeriesDto = mapper.readValue(jsonString, MiniSeriesDto.class);
+//        return miniSeriesDto;
+//    }
 
     public List<PerkStyleSelectionDto> toPerkStyleSelectionDtoList(JsonArray perkStyleSelectionObjectList) throws JsonProcessingException {
         List<PerkStyleSelectionDto> perkStyleSelectionDtoList = new ArrayList<>();
@@ -158,7 +139,7 @@ public class DtoMapper {
     public MatchDto toMatchDto(JsonObject matchObject) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = matchObject.toString();
-
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper.readValue(jsonString, MatchDto.class);
     }
 }

@@ -37,7 +37,6 @@ public class APIFacade {
         api = new API();
     }
 
-    //public HashMap<String, Object> getSummonerBySummonerName(String name) {
     public SummonerDto getSummonerBySummonerName(String name) throws JsonProcessingException {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
@@ -68,16 +67,10 @@ public class APIFacade {
             System.out.println(e);
         }
 
-        // TODO : 더 좋은 변환방법이 있을듯 (공통코드로)
-        Gson gson = new Gson();
-        String json = gson.toJson(result.get("body"));
-        JsonParser parser = new JsonParser();
-        JsonObject summoner = (JsonObject) parser.parse(json);
-        return dtoMapper.toSummonerDto(summoner);
+        return dtoMapper.toSummonerDto(result);
     }
 
-    //public HashMap<String, Object> getLeagueBySummonerId(String encryptedSummonerId) {
-    public LeagueEntryDto getLeagueBySummonerId(String encryptedSummonerId) throws JsonProcessingException {
+    public List<LeagueEntryDto> getLeagueBySummonerId(String encryptedSummonerId) throws JsonProcessingException {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();
@@ -103,13 +96,7 @@ public class APIFacade {
             System.out.println(e);
         }
 
-        // TODO : 더 좋은 변환방법이 있을듯 (공통코드로) 일단 임시로 값만 보기
-        Gson gson = new Gson();
-        String json = gson.toJson(result.get("body"));
-        JsonParser parser = new JsonParser();
-        JsonObject league = (JsonObject) parser.parse(json);
-        LeagueEntryDto leagueEntryDto = dtoMapper.toLeagueEntryDto(league);
-        return leagueEntryDto;
+        return dtoMapper.toLeagueEntryDto(result);
     }
 
     public ArrayList<String> getMatchIdListBySummonerPuuidAndMatchStartTime(String puuid, long startTime) {

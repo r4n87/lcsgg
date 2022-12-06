@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MiniSeriesDto {
+    private Long id;
     private int wins;
     private int losses;
     private int target;

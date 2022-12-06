@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LeagueEntryDto {
+    private Long id;
     private String leagueId;
     private String summonerId;
     private String summonerName;
