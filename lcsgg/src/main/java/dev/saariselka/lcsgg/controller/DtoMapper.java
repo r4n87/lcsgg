@@ -139,7 +139,7 @@ public class DtoMapper {
     public MatchDto toMatchDto(JsonObject matchObject) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = matchObject.toString();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper.readValue(jsonString, MatchDto.class);
     }
 }
