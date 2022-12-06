@@ -10,14 +10,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipantDto {
+    private int allInPings;
+    private int assistMePings;
     private int assists;
+    private int baitPings;
     private int baronKills;
+    private int basicPings;
     private int bountyLevel;
     private int champExperience;
     private int champLevel;
     private int championId;
     private String championName;
     private int championTransform;
+    private int commandPings;
     private int consumablesPurchased;
     private int damageDealtToBuildings;
     private int damageDealtToObjectives;
@@ -27,14 +32,19 @@ public class ParticipantDto {
     private int detectorWardsPlaced;
     private int doubleKills;
     private int dragonKills;
+    private boolean eligibleForProgression;
+    private int enemyMissingPings;
+    private int enemyVisionPings;
     private boolean firstBloodAssists;
     private boolean firstBloodKill;
     private boolean firstTowerAssist;
     private boolean firstTowerKill;
     private boolean gameEndedInEarlySurrender;
     private boolean gameEndedInSurrender;
+    private int getBackPings;
     private int goldEarned;
     private int goldSpent;
+    private int holdPings;
     private String individualPosition;
     private int inhibitorKills;
     private int inhibitorTakedowns;
@@ -57,15 +67,20 @@ public class ParticipantDto {
     private int magicDamageDealt;
     private int magicDamageDealtToChampions;
     private int magicDamageTaken;
+    private int needVisionPings;
     private int neutralMinionsKilled;
     private int nexusKills;
+    private int nexusLost;
+    private int nexusTakedowns;
     private int objectivesStolen;
     private int objectivesStolenAssists;
+    private int onMyWayPings;
     private int pentaKills;
     private int physicalDamageDealt;
     private int physicalDamageDealtToChampions;
     private int physicalDamageTaken;
     private int profileIcon;
+    private int pushPings;
     private String puuid;
     private int quadraKills;
     private String riotIdName;
@@ -106,6 +121,7 @@ public class ParticipantDto {
     private int turretTakedowns;
     private int turretsLost;
     private int unrealKills;
+    private int visionClearedPings;
     private int visionScore;
     private int visionWardsBoughtInGame;
     private int wardsKilled;
@@ -113,6 +129,7 @@ public class ParticipantDto {
     private boolean win;
 
     private PerksDto perks;
+    private ChallengesDto challenges;
 
     private String kda;
     private String minionsKilledPerMin;

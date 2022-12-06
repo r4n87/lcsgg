@@ -9,20 +9,25 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Participant extends BaseInfo{
+public class Participant extends BaseInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "participant_id")
     private Long id;
 
+    private int allInPings;
+    private int assistMePings;
     private int assists;
+    private int baitPings;
     private int baronKills;
+    private int basicPings;
     private int bountyLevel;
     private int champExperience;
     private int champLevel;
     private int championId;
     private String championName;
     private int championTransform;
+    private int commandPings;
     private int consumablesPurchased;
     private int damageDealtToBuildings;
     private int damageDealtToObjectives;
@@ -32,14 +37,19 @@ public class Participant extends BaseInfo{
     private int detectorWardsPlaced;
     private int doubleKills;
     private int dragonKills;
+    private boolean eligibleForProgression;
+    private int enemyMissingPings;
+    private int enemyVisionPings;
     private boolean firstBloodAssists;
     private boolean firstBloodKill;
     private boolean firstTowerAssist;
     private boolean firstTowerKill;
     private boolean gameEndedInEarlySurrender;
     private boolean gameEndedInSurrender;
+    private int getBackPings;
     private int goldEarned;
     private int goldSpent;
+    private int holdPings;
     private String individualPosition;
     private int inhibitorKills;
     private int inhibitorTakedowns;
@@ -62,15 +72,20 @@ public class Participant extends BaseInfo{
     private int magicDamageDealt;
     private int magicDamageDealtToChampions;
     private int magicDamageTaken;
+    private int needVisionPings;
     private int neutralMinionsKilled;
     private int nexusKills;
+    private int nexusLost;
+    private int nexusTakedowns;
     private int objectivesStolen;
     private int objectivesStolenAssists;
+    private int onMyWayPings;
     private int pentaKills;
     private int physicalDamageDealt;
     private int physicalDamageDealtToChampions;
     private int physicalDamageTaken;
     private int profileIcon;
+    private int pushPings;
     private String puuid;
     private int quadraKills;
     private String riotIdName;
@@ -111,6 +126,7 @@ public class Participant extends BaseInfo{
     private int turretTakedowns;
     private int turretsLost;
     private int unrealKills;
+    private int visionClearedPings;
     private int visionScore;
     private int visionWardsBoughtInGame;
     private int wardsKilled;
@@ -126,19 +142,31 @@ public class Participant extends BaseInfo{
     @JoinColumn(name = "info_id")
     private Info info;
 
+    @OneToOne
+    @JoinColumn(name = "challenges_id")
+    private Challenges challenges;
+
     // 연관관계 설정
     public void setPerks(Perks perks) { this.perks = perks; }
     public void setInfo(Info info) { this.info = info; }
+    public void setChallenges(Challenges challenges) { this.challenges = challenges; }
+
+
 
     @Builder
-    public Participant(int assists
+    public Participant(int allInPings
+            , int assistMePings
+            , int assists
+            , int baitPings
             , int baronKills
+            , int basicPings
             , int bountyLevel
             , int champExperience
             , int champLevel
             , int championId
             , String championName
             , int championTransform
+            , int commandPings
             , int consumablesPurchased
             , int damageDealtToBuildings
             , int damageDealtToObjectives
@@ -148,14 +176,19 @@ public class Participant extends BaseInfo{
             , int detectorWardsPlaced
             , int doubleKills
             , int dragonKills
+            , boolean eligibleForProgression
+            , int enemyMissingPings
+            , int enemyVisionPings
             , boolean firstBloodAssists
             , boolean firstBloodKill
             , boolean firstTowerAssist
             , boolean firstTowerKill
             , boolean gameEndedInEarlySurrender
             , boolean gameEndedInSurrender
+            , int getBackPings
             , int goldEarned
             , int goldSpent
+            , int holdPings
             , String individualPosition
             , int inhibitorKills
             , int inhibitorTakedowns
@@ -178,15 +211,20 @@ public class Participant extends BaseInfo{
             , int magicDamageDealt
             , int magicDamageDealtToChampions
             , int magicDamageTaken
+            , int needVisionPings
             , int neutralMinionsKilled
             , int nexusKills
+            , int nexusLost
+            , int nexusTakedowns
             , int objectivesStolen
             , int objectivesStolenAssists
+            , int onMyWayPings
             , int pentaKills
             , int physicalDamageDealt
             , int physicalDamageDealtToChampions
             , int physicalDamageTaken
             , int profileIcon
+            , int pushPings
             , String puuid
             , int quadraKills
             , String riotIdName
@@ -227,15 +265,21 @@ public class Participant extends BaseInfo{
             , int turretTakedowns
             , int turretsLost
             , int unrealKills
+            , int visionClearedPings
             , int visionScore
             , int visionWardsBoughtInGame
             , int wardsKilled
             , int wardsPlaced
             , boolean win
             , Perks perks
-            , Info info) {
+            , Info info
+            , Challenges challenges) {
+        this.allInPings = allInPings;
+        this.assistMePings = assistMePings;
         this.assists = assists;
+        this.baitPings = baitPings;
         this.baronKills = baronKills;
+        this.basicPings = basicPings;
         this.bountyLevel = bountyLevel;
         this.champExperience = champExperience;
         this.champLevel = champLevel;
@@ -243,6 +287,7 @@ public class Participant extends BaseInfo{
         this.championName = championName;
         this.championTransform = championTransform;
         this.consumablesPurchased = consumablesPurchased;
+        this.commandPings = commandPings;
         this.damageDealtToBuildings = damageDealtToBuildings;
         this.damageDealtToObjectives = damageDealtToObjectives;
         this.damageDealtToTurrets = damageDealtToTurrets;
@@ -251,14 +296,19 @@ public class Participant extends BaseInfo{
         this.detectorWardsPlaced = detectorWardsPlaced;
         this.doubleKills = doubleKills;
         this.dragonKills = dragonKills;
+        this.eligibleForProgression = eligibleForProgression;
+        this.enemyMissingPings = enemyMissingPings;
+        this.enemyVisionPings = enemyVisionPings;
         this.firstBloodAssists = firstBloodAssists;
         this.firstBloodKill = firstBloodKill;
         this.firstTowerAssist = firstTowerAssist;
         this.firstTowerKill = firstTowerKill;
         this.gameEndedInEarlySurrender = gameEndedInEarlySurrender;
         this.gameEndedInSurrender = gameEndedInSurrender;
+        this.getBackPings = getBackPings;
         this.goldEarned = goldEarned;
         this.goldSpent = goldSpent;
+        this.holdPings = holdPings;
         this.individualPosition = individualPosition;
         this.inhibitorKills = inhibitorKills;
         this.inhibitorTakedowns = inhibitorTakedowns;
@@ -281,15 +331,20 @@ public class Participant extends BaseInfo{
         this.magicDamageDealt = magicDamageDealt;
         this.magicDamageDealtToChampions = magicDamageDealtToChampions;
         this.magicDamageTaken = magicDamageTaken;
+        this.needVisionPings = needVisionPings;
         this.neutralMinionsKilled = neutralMinionsKilled;
         this.nexusKills = nexusKills;
+        this.nexusLost = nexusLost;
+        this.nexusTakedowns = nexusTakedowns;
         this.objectivesStolen = objectivesStolen;
         this.objectivesStolenAssists = objectivesStolenAssists;
+        this.onMyWayPings = onMyWayPings;
         this.pentaKills = pentaKills;
         this.physicalDamageDealt = physicalDamageDealt;
         this.physicalDamageDealtToChampions = physicalDamageDealtToChampions;
         this.physicalDamageTaken = physicalDamageTaken;
         this.profileIcon = profileIcon;
+        this.pushPings = pushPings;
         this.puuid = puuid;
         this.quadraKills = quadraKills;
         this.riotIdName = riotIdName;
@@ -330,6 +385,7 @@ public class Participant extends BaseInfo{
         this.turretTakedowns = turretTakedowns;
         this.turretsLost = turretsLost;
         this.unrealKills = unrealKills;
+        this.visionClearedPings = visionClearedPings;
         this.visionScore = visionScore;
         this.visionWardsBoughtInGame = visionWardsBoughtInGame;
         this.wardsKilled = wardsKilled;
@@ -343,5 +399,7 @@ public class Participant extends BaseInfo{
         }
         setInfo(info);
         info.getParticipants().add(this);
+
+        setChallenges(challenges);
     }
 }

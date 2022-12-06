@@ -4,6 +4,7 @@ import dev.saariselka.lcsgg.dto.*;
 import dev.saariselka.lcsgg.entity.*;
 import dev.saariselka.lcsgg.service.MatchService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,9 +85,14 @@ public class MatchController extends BaseConfig {
         return perksDto;
     }
 
+    public ChallengesDto getChallengesDtoByChallengesEntity(Challenges challenges) {
+        return modelMapper.map(challenges, ChallengesDto.class);
+    }
+
     public ParticipantDto getParticipantDtoByParticipantEntity(Participant participant) {
         ParticipantDto participantDto = modelMapper.map(participant, ParticipantDto.class);
         participantDto.setPerks(getPerksDtoByPerksEntity(participant.getPerks()));
+        participantDto.setChallenges(getChallengesDtoByChallengesEntity(participant.getChallenges()));
 
         return participantDto;
     }

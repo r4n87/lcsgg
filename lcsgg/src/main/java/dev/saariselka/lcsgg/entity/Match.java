@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Match extends BaseInfo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "match_id")
+    @Column(name="match_id")
     private Long id;
 
     // 연관관계 매핑
