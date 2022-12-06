@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChallengesDto {
+    @JsonProperty("12AssistStreakCount")
     private int assistStreakCount;
     private int abilityUses;
     private int acesBefore15Minutes;
     private int alliedJungleMonsterKills;
-    private int baronTakedown;
+    private int baronTakedowns;
     private int blastConeOppositeOpponentCount;
     private int bountyGold;
     private int buffsStolen;
