@@ -1,11 +1,7 @@
 package dev.saariselka.lcsgg.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -16,7 +12,7 @@ public class LeagueEntryDto {
     private String summonerName;
     private String queueType;
     private String tier;
-    private String rank;
+    private String ranks;
     private int leaguePoints;
     private int wins;
     private int losses;
@@ -26,4 +22,22 @@ public class LeagueEntryDto {
     private boolean inactive;
     private MiniSeriesDto miniSeries;
 
+    @Builder
+    public LeagueEntryDto(Long id, String leagueId, String summonerId, String summonerName, String queueType, String tier, String ranks, int leaguePoints, int wins, int losses, boolean hotStreak, boolean veteran, boolean freshBlood, boolean inactive, MiniSeriesDto miniSeries) {
+        this.id = id;
+        this.leagueId = leagueId;
+        this.summonerId = summonerId;
+        this.summonerName = summonerName;
+        this.queueType = queueType;
+        this.tier = tier;
+        this.ranks = ranks;
+        this.leaguePoints = leaguePoints;
+        this.wins = wins;
+        this.losses = losses;
+        this.hotStreak = hotStreak;
+        this.veteran = veteran;
+        this.freshBlood = freshBlood;
+        this.inactive = inactive;
+        this.miniSeries = miniSeries;
+    }
 }

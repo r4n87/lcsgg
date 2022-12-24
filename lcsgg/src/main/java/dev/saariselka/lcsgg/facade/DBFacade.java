@@ -47,4 +47,9 @@ public class DBFacade {
         // TODO : match를 puuid 가준으로 찾아오는 방법?
         return null;
     }
+
+    // TODO : SummonerName -> LastRefreshTime 바로 가지고 오는 METHOD 만들지
+    public long getLastRefreshTimeBySummonerName(String puuid) {
+        return summonerController.getSummonerDtoByPuuid(puuid).getLastRefreshTimeForAPI();
+    }
 }

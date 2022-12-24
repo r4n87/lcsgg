@@ -13,8 +13,8 @@ public class ChampionService {
     @Autowired
     ChampionRepository championRepository;
 
-    public void insertAll(List<ChampionDto> entities) {
-        //championRepository.saveAll(entities);
+    public void insertAll(List<Champion> entities) {
+        championRepository.saveAll(entities);
     }
 
     public String findImagePathByNameEng(String nameEng) {
