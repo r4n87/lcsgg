@@ -1,11 +1,7 @@
 package dev.saariselka.lcsgg.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -15,4 +11,13 @@ public class MiniSeriesDto {
     private int losses;
     private int target;
     private String progress;
+
+    @Builder
+    public MiniSeriesDto(Long id, int wins, int losses, int target, String progress) {
+        this.id = id;
+        this.wins = wins;
+        this.losses = losses;
+        this.target = target;
+        this.progress = progress;
+    }
 }

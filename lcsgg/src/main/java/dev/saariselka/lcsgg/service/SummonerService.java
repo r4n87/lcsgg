@@ -31,17 +31,6 @@ public class SummonerService {
 
     //public void insert(String puuid, String accountId, int profileIconId, long revisionDate, String name, String id, long summonerLevel) {
     public void insert(Summoner summoner) {
-
-//        Summoner summoner = Summoner.builder()
-//                .puuid(puuid)
-//                .accountId(accountId)
-//                .profileIconId(profileIconId)
-//                .revisionDate(revisionDate)
-//                .name(name)
-//                .id(id)
-//                .summonerLevel(summonerLevel)
-//                .build();
-
         summonerRepository.save(summoner);
     }
 }

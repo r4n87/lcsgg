@@ -1,13 +1,9 @@
 package dev.saariselka.lcsgg.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class SummonerDto {
 
@@ -21,4 +17,16 @@ public class SummonerDto {
     private String lastRefreshTimeForUI;
     private long lastRefreshTimeForAPI;
 
+    @Builder
+    public SummonerDto(String puuid, String accountId, String id, String name, String profileIconId, String revisionDate, String summonerLevel, String lastRefreshTimeForUI, long lastRefreshTimeForAPI) {
+        this.puuid = puuid;
+        this.accountId = accountId;
+        this.id = id;
+        this.name = name;
+        this.profileIconId = profileIconId;
+        this.revisionDate = revisionDate;
+        this.summonerLevel = summonerLevel;
+        this.lastRefreshTimeForUI = lastRefreshTimeForUI;
+        this.lastRefreshTimeForAPI = lastRefreshTimeForAPI;
+    }
 }

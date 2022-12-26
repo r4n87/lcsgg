@@ -42,9 +42,8 @@ public class Facade {
     public String setSummonerByAPI(String name, String puuid) throws JsonProcessingException {
         long startTime = 0L;
 
-        // TODO : getLastRefreshTimeBySummonerName() 없어서 주석처리
-//        if(puuid != null)
-//            startTime = dbFacade.getLastRefreshTimeBySummonerName(puuid);
+        if(puuid != null)
+            startTime = dbFacade.getLastRefreshTimeBySummonerName(puuid); // TODO : 껍데기만 있어서 정상동작 안함
 
         //Step 1. Get Summoner Info By Name via API
         SummonerDto summonerDto = apiFacade.getSummonerBySummonerName(name);
@@ -65,7 +64,6 @@ public class Facade {
             dbFacade.setMatch(apiFacade.getMatchByMatchId(matchList, i));
         }
 
-        //TODO : 임시 리턴
-        return "puuid"; //summonerDto.getPuuid();
+        return summonerDto.getPuuid();
     }
 }

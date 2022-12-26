@@ -29,7 +29,6 @@ public class DtoMapper {
         return teamDto;
     }
     public SummonerDto toSummonerDto(Map<String, Object> summonerObject) throws JsonProcessingException {
-        // TODO : dto 변환클래스가 꼭 필요한지..?
         //SummonerDto summonerDto = mapper.readValue(jsonString, SummonerDto.class);
         return mapper.convertValue(summonerObject.get("body"), SummonerDto.class);
     }
