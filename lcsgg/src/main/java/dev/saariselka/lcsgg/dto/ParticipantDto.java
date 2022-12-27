@@ -10,6 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipantDto {
+    private Long id;
+
     private int allInPings;
     private int assistMePings;
     private int assists;

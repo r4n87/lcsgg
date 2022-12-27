@@ -23,14 +23,14 @@ public class Team extends BaseInfo{
     private int teamId;
 
     // 연관관계 매핑
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "info_id")
     private Info info_team;
 
-    @OneToMany(mappedBy = "team")
-    private List<Ban> bans = new ArrayList<>();
+    @OneToMany(mappedBy = "team_bans", cascade = CascadeType.ALL)
+    private List<Ban> bans = new ArrayList<Ban>();
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "objectives_id")
     private Objectives objectives;
 
