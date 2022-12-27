@@ -25,7 +25,7 @@ public class Team extends BaseInfo{
     // 연관관계 매핑
     @ManyToOne
     @JoinColumn(name = "info_id")
-    private Info info;
+    private Info info_team;
 
     @OneToMany(mappedBy = "team")
     private List<Ban> bans = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Team extends BaseInfo{
     private Objectives objectives;
 
     // 연관관계 설정
-    public void setInfo(Info info) { this.info = info; }
+    public void setInfo(Info info) { this.info_team = info; }
 
     public void setObjectives(Objectives objectives) { this.objectives = objectives; }
 
