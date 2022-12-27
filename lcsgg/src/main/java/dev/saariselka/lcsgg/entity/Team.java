@@ -27,10 +27,10 @@ public class Team extends BaseInfo{
     @JoinColumn(name = "info_id")
     private Info info_team;
 
-    @OneToMany(mappedBy = "team_bans", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "team_bans", cascade = CascadeType.PERSIST)
     private List<Ban> bans = new ArrayList<Ban>();
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "objectives_id")
     private Objectives objectives;
 
@@ -39,14 +39,15 @@ public class Team extends BaseInfo{
 
     public void setObjectives(Objectives objectives) { this.objectives = objectives; }
 
-    public void setBanList(List<Ban> banList) { this.bans = banList; }
+    public void setBans(List<Ban> bans) { this.bans = bans; }
 
     @Builder
-    public Team(boolean win, int teamId, Objectives objectives, Info info) {
+    public Team(boolean win, int teamId, Objectives objectives, Info info, List<Ban> bans) {
         this.win = win;
         this.teamId = teamId;
-        this.objectives = objectives;
 
         setInfo(info);
+        setObjectives(objectives);
+        setBans(bans);
     }
 }

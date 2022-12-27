@@ -19,11 +19,11 @@ public class Match extends BaseInfo{
     private Long id;
 
     // 연관관계 매핑
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "metadata_id")
     private Metadata metadata;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "info_id")
     private Info info;
 

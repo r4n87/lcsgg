@@ -33,11 +33,11 @@ public class Ban extends BaseInfo{
         this.championId = championId;
         this.pickTurn = pickTurn;
 
-//        if(this.team != null) {
-//            this.team.getBans().remove(this);
-//        }
-//
-//        this.team = team;
-//        team.getBans().add(this);
+        if(this.team_bans != null) {
+            this.team_bans.getBans().remove(this);
+        }
+
+        this.team_bans = team;
+        team.getBans().add(this);
     }
 }
