@@ -17,6 +17,9 @@ public class Objectives extends BaseInfo{
     @Column(name = "objectives_id")
     private Long id;
 
+    @OneToOne(mappedBy = "objectives")
+    private Team team;
+
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "baron_id")
     private Objective baron;

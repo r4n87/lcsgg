@@ -16,11 +16,11 @@ import java.util.List;
 public class Team extends BaseInfo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "team_id")
+    @Column(name = "matchteam_id")
     private Long id;
 
     private boolean win;
-    private int matchTeamId;
+    private int teamId;
 
     // 연관관계 매핑
     @ManyToOne
@@ -28,9 +28,9 @@ public class Team extends BaseInfo{
     private Info info;
 
     @OneToMany(mappedBy = "team")
-    private List<Ban> banList = new ArrayList<>();
+    private List<Ban> bans = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "objectives_id")
     private Objectives objectives;
 
@@ -39,12 +39,14 @@ public class Team extends BaseInfo{
 
     public void setObjectives(Objectives objectives) { this.objectives = objectives; }
 
-    public void setBanList(List<Ban> banList) { this.banList = banList; }
+    public void setBanList(List<Ban> banList) { this.bans = banList; }
 
     @Builder
-    public Team(boolean win, int matchTeamId, Objectives objectives) {
+    public Team(boolean win, int teamId, Objectives objectives, Info info) {
         this.win = win;
-        this.matchTeamId = matchTeamId;
+        this.teamId = teamId;
         this.objectives = objectives;
+
+        setInfo(info);
     }
 }

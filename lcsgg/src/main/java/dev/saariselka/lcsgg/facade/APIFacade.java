@@ -1,9 +1,6 @@
 package dev.saariselka.lcsgg.facade;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import dev.saariselka.lcsgg.controller.APIController;
 import dev.saariselka.lcsgg.controller.APIKeyController;
 import dev.saariselka.lcsgg.controller.DtoMapper;
@@ -159,12 +156,6 @@ public class APIFacade {
             System.out.println(e);
         }
 
-        Gson gson = new Gson();
-        String json = gson.toJson(result.get("body"));
-        JsonParser parser = new JsonParser();
-        JsonObject match = (JsonObject) parser.parse(json);
-        MatchDto matchDto = dtoMapper.toMatchDto(match);
-
-        return matchDto;
+        return dtoMapper.toMatchDto(result);
     }
 }

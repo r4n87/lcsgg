@@ -4,7 +4,6 @@ import dev.saariselka.lcsgg.dto.*;
 import dev.saariselka.lcsgg.entity.*;
 import dev.saariselka.lcsgg.service.MatchService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class MatchController extends BaseConfig {
     public TeamDto getTeamDtoByTeamEntity(Team team) {
         TeamDto teamDto = modelMapper.map(team,TeamDto.class);
         teamDto.setObjectives(getObjectivesDtoByObjectivesEntity(team.getObjectives()));
-        teamDto.setBans(getBanDtoListByBanEntityList(team.getBanList()));
+        teamDto.setBans(getBanDtoListByBanEntityList(team.getBans()));
 
         return teamDto;
     }

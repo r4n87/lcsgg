@@ -135,10 +135,11 @@ public class DtoMapper {
         return mapper.readValue(jsonString, InfoDto.class);
     }
 
-    public MatchDto toMatchDto(JsonObject matchObject) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = matchObject.toString();
-//        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapper.readValue(jsonString, MatchDto.class);
+    public MatchDto toMatchDto(Map<String, Object> matchObject) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        //파라미터에서 DTO에 들어있지 않는 변수가 있어도 무시함.
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        return mapper.convertValue(matchObject.get("body"), MatchDto.class);
     }
 }

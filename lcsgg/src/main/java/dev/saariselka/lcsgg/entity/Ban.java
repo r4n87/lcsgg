@@ -22,7 +22,7 @@ public class Ban extends BaseInfo{
 
     // 연관관계 매핑
     @ManyToOne
-    @JoinColumn(name="team_id")
+    @JoinColumn(name="matchteam_id")
     private Team team;
 
     // 연관관계 설정
@@ -34,10 +34,10 @@ public class Ban extends BaseInfo{
         this.pickTurn = pickTurn;
 
         if(this.team != null) {
-            this.team.getBanList().remove(this);
+            this.team.getBans().remove(this);
         }
 
         this.team = team;
-        team.getBanList().add(this);
+        team.getBans().add(this);
     }
 }

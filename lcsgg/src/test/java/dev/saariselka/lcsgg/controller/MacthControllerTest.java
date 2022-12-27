@@ -30,9 +30,9 @@ public class MacthControllerTest {
         TeamDto teamDto = matchController.getTeamDtoByTeamEntity(match.getInfo().getTeams().get(0));
 
         //then
-        assertThat(teamDto.getTeamId()).isEqualTo(match.getInfo().getTeams().get(0).getMatchTeamId());
+        assertThat(teamDto.getTeamId()).isEqualTo(match.getInfo().getTeams().get(0).getTeamId());
         assertThat(teamDto.getObjectives().getBaron().getKills()).isEqualTo(match.getInfo().getTeams().get(0).getObjectives().getBaron().getKills());
-        assertThat(teamDto.getBans().get(0).getPickTurn()).isEqualTo(match.getInfo().getTeams().get(0).getBanList().get(0).getPickTurn());
+        assertThat(teamDto.getBans().get(0).getPickTurn()).isEqualTo(match.getInfo().getTeams().get(0).getBans().get(0).getPickTurn());
     }
 
     @Test
@@ -55,10 +55,10 @@ public class MacthControllerTest {
         Match match = createMatchEntity();
 
         //when
-        List<BanDto> banDtoList = matchController.getBanDtoListByBanEntityList(match.getInfo().getTeams().get(0).getBanList());
+        List<BanDto> banDtoList = matchController.getBanDtoListByBanEntityList(match.getInfo().getTeams().get(0).getBans());
 
         //then
-        assertThat(banDtoList.get(0).getChampionId()).isEqualTo(match.getInfo().getTeams().get(0).getBanList().get(0).getChampionId());
+        assertThat(banDtoList.get(0).getChampionId()).isEqualTo(match.getInfo().getTeams().get(0).getBans().get(0).getChampionId());
 
     }
 
@@ -98,7 +98,7 @@ public class MacthControllerTest {
     Team createTeamEntity() {
         Team team = new Team();
 
-        team.setMatchTeamId(100);
+        team.setTeamId(100);
         team.setWin(true);
         team.setBanList(createBanEntityList());
         team.setObjectives(createObjectivesEntity());
