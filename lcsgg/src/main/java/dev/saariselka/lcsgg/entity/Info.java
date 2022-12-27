@@ -34,11 +34,11 @@ public class Info extends BaseInfo{
     private String tournamentCode;
     
     // 연관관계 매핑
-    @OneToMany(mappedBy = "info", cascade = CascadeType.PERSIST)
-    private List<Participant> participants = new ArrayList<>();
+    @OneToMany(mappedBy = "info_team", cascade = CascadeType.PERSIST)
+    private List<Team> teams = new ArrayList<Team>();
 
-    @OneToMany(mappedBy = "info")
-    private List<Team> teams = new ArrayList<>();
+    @OneToMany(mappedBy = "info_participants", cascade = CascadeType.PERSIST)
+    private List<Participant> participants = new ArrayList<Participant>();
 
     // 연관관계 설정
     public void setParticipants(List<Participant> participants) { this.participants = participants; }

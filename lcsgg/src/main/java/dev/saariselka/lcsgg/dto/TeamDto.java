@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TeamDto {
+    private Long id;
 
     private int teamId;
     private boolean win;

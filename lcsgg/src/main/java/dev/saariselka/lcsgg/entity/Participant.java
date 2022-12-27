@@ -3,11 +3,13 @@ package dev.saariselka.lcsgg.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class Participant extends BaseInfo {
     @Id
@@ -140,7 +142,7 @@ public class Participant extends BaseInfo {
 
     @ManyToOne
     @JoinColumn(name = "info_id")
-    private Info info;
+    private Info info_participants;
 
     @OneToOne
     @JoinColumn(name = "challenges_id")
@@ -148,7 +150,7 @@ public class Participant extends BaseInfo {
 
     // 연관관계 설정
     public void setPerks(Perks perks) { this.perks = perks; }
-    public void setInfo(Info info) { this.info = info; }
+    public void setInfo(Info info) { this.info_participants = info; }
     public void setChallenges(Challenges challenges) { this.challenges = challenges; }
 
 
@@ -394,8 +396,8 @@ public class Participant extends BaseInfo {
 
         setPerks(perks);
 
-        if(this.info != null) {
-            this.info.getParticipants().remove(this);
+        if(this.info_participants != null) {
+            this.info_participants.getParticipants().remove(this);
         }
         setInfo(info);
         info.getParticipants().add(this);

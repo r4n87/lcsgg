@@ -16,35 +16,38 @@ import java.util.List;
 public class Team extends BaseInfo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "team_id")
+    @Column(name = "matchteam_id")
     private Long id;
 
     private boolean win;
-    private int matchTeamId;
+    private int teamId;
 
     // 연관관계 매핑
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "info_id")
-    private Info info;
+    private Info info_team;
 
-    @OneToMany(mappedBy = "team")
-    private List<Ban> banList = new ArrayList<>();
+    @OneToMany(mappedBy = "team_bans", cascade = CascadeType.PERSIST)
+    private List<Ban> bans = new ArrayList<Ban>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "objectives_id")
     private Objectives objectives;
 
     // 연관관계 설정
-    public void setInfo(Info info) { this.info = info; }
+    public void setInfo(Info info) { this.info_team = info; }
 
     public void setObjectives(Objectives objectives) { this.objectives = objectives; }
 
-    public void setBanList(List<Ban> banList) { this.banList = banList; }
+    public void setBans(List<Ban> bans) { this.bans = bans; }
 
     @Builder
-    public Team(boolean win, int matchTeamId, Objectives objectives) {
+    public Team(boolean win, int teamId, Objectives objectives, Info info, List<Ban> bans) {
         this.win = win;
-        this.matchTeamId = matchTeamId;
-        this.objectives = objectives;
+        this.teamId = teamId;
+
+        setInfo(info);
+        setObjectives(objectives);
+        setBans(bans);
     }
 }
