@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 @Service
@@ -64,7 +65,9 @@ public class APIFacade {
             System.out.println(e);
         }
 
-        return dtoMapper.toSummonerDto(result);
+        SummonerDto summonerDto = dtoMapper.toSummonerDto(result);
+        summonerDto.setLastRefreshTimeForAPI(new Timestamp(System.currentTimeMillis()));
+        return summonerDto;
     }
 
     public List<LeagueEntryDto> getLeagueBySummonerId(String encryptedSummonerId) throws JsonProcessingException {
@@ -96,7 +99,7 @@ public class APIFacade {
         return dtoMapper.toLeagueEntryDto(result);
     }
 
-    public ArrayList<String> getMatchIdListBySummonerPuuidAndMatchStartTime(String puuid, long startTime) {
+    public ArrayList<String> getMatchIdListBySummonerPuuidAndMatchStartTime(String puuid) {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();

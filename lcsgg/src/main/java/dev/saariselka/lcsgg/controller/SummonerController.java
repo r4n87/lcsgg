@@ -6,6 +6,8 @@ import dev.saariselka.lcsgg.service.SummonerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.sql.Timestamp;
+
 @Controller
 public class SummonerController extends BaseConfig {
 
