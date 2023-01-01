@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +29,7 @@ public class SummonerControllerTest {
     String revisionDate = "1655406735000";
     String summonerLevel = "576";
     String lastRefreshTimeForUI = getLastRefreshTimeForUI(new Timestamp(System.currentTimeMillis()));
-    long lastRefreshTimeForAPI = 123456789L;
+    Timestamp lastRefreshTimeForAPI = new Timestamp(System.currentTimeMillis());
 
     @Test
     @DisplayName("Get Puuid By Name")

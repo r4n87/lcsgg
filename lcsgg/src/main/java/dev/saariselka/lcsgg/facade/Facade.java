@@ -40,10 +40,11 @@ public class Facade {
     }
 
     public String setSummonerByAPI(String name, String puuid) throws JsonProcessingException {
-        long startTime = 0L;
-
-        if(puuid != null)
-            startTime = dbFacade.getLastRefreshTimeBySummonerName(puuid); // TODO : 껍데기만 있어서 정상동작 안함
+        // TODO : 기존 플젝에서도 startTime 변수 안쓰였음
+//        long startTime = 0L;
+//
+//        if(puuid != null)
+//            startTime = dbFacade.getLastRefreshTimeBySummonerName(puuid); // TODO : 껍데기만 있어서 정상동작 안함
 
         //Step 1. Get Summoner Info By Name via API
         SummonerDto summonerDto = apiFacade.getSummonerBySummonerName(name);
@@ -55,7 +56,7 @@ public class Facade {
             dbFacade.setLeagueInfo(leagueEntryDtos);
 
         //Step 3. Get Match Info List by Name via API
-        ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid(), startTime);
+        ArrayList<String> matchList = apiFacade.getMatchIdListBySummonerPuuidAndMatchStartTime(summonerDto.getPuuid());
 //        HashSet<String> dbMatchList = dbFacade.getMatchIdListBySummonerPuuid(summonerDto.getPuuid()); // TODO : match를 puuid별로 가져올 방법 필요
 //
 //        matchList.removeIf(dbMatchList::contains);

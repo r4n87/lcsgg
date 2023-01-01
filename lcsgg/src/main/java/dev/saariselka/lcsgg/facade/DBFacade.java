@@ -48,8 +48,8 @@ public class DBFacade {
         return null;
     }
 
-    // TODO : SummonerName -> LastRefreshTime 바로 가지고 오는 METHOD 만들지
-    public long getLastRefreshTimeBySummonerName(String puuid) {
-        return summonerController.getSummonerDtoByPuuid(puuid).getLastRefreshTimeForAPI();
-    }
+    // TODO : SummonerName -> LastRefreshTime 바로 가지고 오는 METHOD 만들지 -> 필요한지 먼저 체크
+//    public long getLastRefreshTimeBySummonerName(String puuid) {
+//        return summonerController.getSummonerDtoByPuuid(puuid).getLastRefreshTimeForAPI();
+//    }
 }

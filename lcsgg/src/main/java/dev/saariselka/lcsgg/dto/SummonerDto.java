@@ -2,6 +2,8 @@ package dev.saariselka.lcsgg.dto;
 
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,10 +17,10 @@ public class SummonerDto {
     private String revisionDate;
     private String summonerLevel;
     private String lastRefreshTimeForUI;
-    private long lastRefreshTimeForAPI;
+    private Timestamp lastRefreshTimeForAPI;
 
     @Builder
-    public SummonerDto(String puuid, String accountId, String id, String name, String profileIconId, String revisionDate, String summonerLevel, String lastRefreshTimeForUI, long lastRefreshTimeForAPI) {
+    public SummonerDto(String puuid, String accountId, String id, String name, String profileIconId, String revisionDate, String summonerLevel, String lastRefreshTimeForUI, Timestamp lastRefreshTimeForAPI) {
         this.puuid = puuid;
         this.accountId = accountId;
         this.id = id;
