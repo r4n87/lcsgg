@@ -50,11 +50,19 @@ public class MatchController extends BaseConfig {
         return modelMapper.map(perkStats, PerkStatsDto.class);
     }
 
+    public PerkStyleSelectionDto getPerkStyleSelectionDtoByPerkStyleSelectionEntity(PerkStyleSelection perkStyleSelection) {
+        return modelMapper.map(perkStyleSelection, PerkStyleSelectionDto.class);
+    }
+
     public List<PerkStyleSelectionDto> getPerkStyleSelectionDtoListByPerkStyleSelectionEntityList(List<PerkStyleSelection> perkStyleSelectionList) {
-        return  perkStyleSelectionList
-                .stream()
-                .map(perkStyleSelectionEntity -> modelMapper.map(perkStyleSelectionEntity, PerkStyleSelectionDto.class))
-                .collect(Collectors.toList());
+        List<PerkStyleSelectionDto> perkStyleSelectionDtoList = new ArrayList<>();
+
+        for (PerkStyleSelection perkStyleSelection : perkStyleSelectionList) {
+            PerkStyleSelectionDto perkStyleSelectionDto = getPerkStyleSelectionDtoByPerkStyleSelectionEntity(perkStyleSelection);
+            perkStyleSelectionDtoList.add(perkStyleSelectionDto);
+        }
+
+        return perkStyleSelectionDtoList;
     }
 
     public PerkStyleDto getPerkStyleDtoByPerkStyleEntity(PerkStyle perkStyle) {

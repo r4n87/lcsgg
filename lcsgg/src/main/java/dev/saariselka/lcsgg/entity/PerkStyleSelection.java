@@ -3,12 +3,14 @@ package dev.saariselka.lcsgg.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class PerkStyleSelection extends BaseInfo{
     @Id
@@ -21,7 +23,7 @@ public class PerkStyleSelection extends BaseInfo{
     private int var2;
     private int var3;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "perk_style_id")
     private PerkStyle perkStyle;
 
