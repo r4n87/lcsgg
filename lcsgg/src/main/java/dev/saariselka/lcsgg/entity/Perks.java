@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,12 +20,12 @@ public class Perks extends BaseInfo{
     private Long id;
 
     // 연관관계 매핑
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "perk_stats_id")
     private PerkStats statPerks;
 
-    @OneToMany(mappedBy = "perks")
-    private List<PerkStyle> styles;
+    @OneToMany(mappedBy = "perks", cascade = CascadeType.PERSIST)
+    private List<PerkStyle> styles = new ArrayList<>();
 
     // 연관관계 설정
     public void setStatPerks(PerkStats statPerks) { this.statPerks = statPerks; }

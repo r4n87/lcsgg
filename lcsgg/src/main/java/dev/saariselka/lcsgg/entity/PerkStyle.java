@@ -3,6 +3,7 @@ package dev.saariselka.lcsgg.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class PerkStyle extends BaseInfo{
     @Id
@@ -22,10 +24,10 @@ public class PerkStyle extends BaseInfo{
     private int style;
 
     // 연관관계 매핑
-    @OneToMany(mappedBy = "perkStyle")
+    @OneToMany(mappedBy = "perkStyle", cascade = CascadeType.PERSIST)
     private List<PerkStyleSelection> selections = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "perks_id")
     private Perks perks;
 
