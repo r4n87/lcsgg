@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InfoDto {
-    private Long id;
+
     private long gameCreation;
     private long gameDuration;
     private long gameEndTimestamp;

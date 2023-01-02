@@ -4,6 +4,7 @@ import dev.saariselka.lcsgg.dto.*;
 import dev.saariselka.lcsgg.entity.*;
 import dev.saariselka.lcsgg.service.MatchService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.convention.MatchingStrategies;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class MatchController extends BaseConfig {
     private MatchService matchService;
 
     public void insertMatch(MatchDto matchDto) {
+        modelMapper.getConfiguration()
+                .setMatchingStrategy(MatchingStrategies.STRICT);
         matchService.insert(modelMapper.map(matchDto, Match.class));
     }
 
@@ -144,4 +147,36 @@ public class MatchController extends BaseConfig {
 
         return matchDto;
     }
+
+//    PropertyMap<MatchDto, Match> matchMap = new PropertyMap<MatchDto, Match>() {
+//        protected void configure() {
+//            map().setInfo(modelMapper.map(source.getInfo(), Info.class));
+//            map().setMetadata(modelMapper.map(source.getMetadata(), Metadata.class));
+//        }
+//    };
+//
+//    PropertyMap<InfoDto, Info> infoMap = new PropertyMap<InfoDto, Info>() {
+//        protected void configure() {
+//
+//            map().setGameCreation(source.getGameCreation());
+//            map().setGameDuration(source.getGameDuration());
+//            map().setGameEndTimestamp(source.getGameEndTimestamp());
+//            map().setGameId(source.getGameId());
+//            map().setGameMode(source.getGameMode());
+//            map().setGameName(source.getGameName());
+//            map().setGameStartTimestamp(source.getGameStartTimestamp());
+//            map().setGameType(source.getGameType());
+//            map().setGameVersion(source.getGameVersion());
+//            map().setMapId(source.getMapId());
+//            map().setPlatformId(source.getPlatformId());
+//            map().setQueueId(source.getQueueId());
+//            map().setTournamentCode(source.getTournamentCode());
+//
+//            ArrayList<Team> teams = new ArrayList<>();
+//
+//            for (TeamDto team : source.getTeams()) {
+//                teams.add(modelMapper.map(team, Team.class));
+//            }
+//        }
+//    };
 }
