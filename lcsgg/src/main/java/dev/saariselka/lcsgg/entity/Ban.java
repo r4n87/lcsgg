@@ -21,7 +21,7 @@ public class Ban extends BaseInfo{
     private int pickTurn;
 
     // 연관관계 매핑
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="matchteam_id")
     private Team team_bans;
 
@@ -37,7 +37,7 @@ public class Ban extends BaseInfo{
             this.team_bans.getBans().remove(this);
         }
 
-        this.team_bans = team;
+        setTeam(team);
         team.getBans().add(this);
     }
 }
