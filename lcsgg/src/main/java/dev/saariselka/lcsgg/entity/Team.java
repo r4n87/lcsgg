@@ -23,31 +23,35 @@ public class Team extends BaseInfo{
     private int teamId;
 
     // 연관관계 매핑
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "info_id")
-    private Info info_team;
+    private Info info;
 
-    @OneToMany(mappedBy = "team_bans", cascade = CascadeType.PERSIST)
-    private List<Ban> bans = new ArrayList<Ban>();
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team", cascade = CascadeType.PERSIST)
+    private List<Ban> bans = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "objectives_id")
     private Objectives objectives;
 
     // 연관관계 설정
-    public void setInfo(Info info) { this.info_team = info; }
+    public void setInfo(Info info) { this.info = info; }
 
     public void setObjectives(Objectives objectives) { this.objectives = objectives; }
 
-    public void setBans(List<Ban> bans) { this.bans = bans; }
-
     @Builder
-    public Team(boolean win, int teamId, Objectives objectives, Info info, List<Ban> bans) {
+    public Team(boolean win, int teamId, Objectives objectives, Info info) {
         this.win = win;
         this.teamId = teamId;
 
-        setInfo(info);
         setObjectives(objectives);
-        setBans(bans);
+
+        if(this.info != null) {
+            this.info.getTeams().remove(this);
+        }
+
+        setInfo(info);
+        info.getTeams().add(this);
+
     }
 }
