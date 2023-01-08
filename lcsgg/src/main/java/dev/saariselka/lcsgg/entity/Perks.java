@@ -24,7 +24,7 @@ public class Perks extends BaseInfo{
     @JoinColumn(name = "perk_stats_id")
     private PerkStats statPerks;
 
-    @OneToMany(mappedBy = "perks", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "perks", cascade = CascadeType.PERSIST)
     private List<PerkStyle> styles = new ArrayList<>();
 
     // 연관관계 설정
