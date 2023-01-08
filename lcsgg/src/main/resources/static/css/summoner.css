@@ -1,0 +1,1460 @@
+:root {
+    --HSDSGlobalFontFamily: "Aktiv Grotesk","Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    --HSDSGlobalFontFamilySystem: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    --HSDSGlobalFontFamilyMono: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    --HSDSGlobalFontSize: 13px;
+}
+#__next {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+small, div, p, span, button {
+    font-family: Helvetica, "Malgun Gothic", "Apple SD Gothic Neo", AppleGothic, Dotum, Arial, Tahoma;
+}
+.css-16nzi5j {
+    min-width: 1080px;
+}
+footer, header {
+    display: block;
+}
+.css-7dq222 {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    height: 48px;
+    background-color: #B5D692;
+    /*border-bottom: 1px solid #98D692;*/
+    box-sizing: border-box;
+}
+.css-7dq222 .route-nav {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 1300px;
+}
+nav {
+    display: block;
+}
+.css-7dq222 .route-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.css-110azl1 {
+    padding: 10px 0 4px 0;
+    color: #FFF;
+    border-bottom: 3px solid #FFF;
+    font-weight: 500;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    box-sizing: border-box;
+    letter-spacing: -0.5px;
+}
+.css-7dq222 .route-item +.route-item {
+    margin-left: 24px;
+}
+.css-4b4yo9 {
+    padding: 10px 0 4px 0;
+    color: #e5ffc9;
+    border-bottom: 3px solid transparent;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 48px;
+    font-size: 15px;
+    box-sizing: border-box;
+    letter-spacing: -0.5px;
+}
+html {
+    font-family: sans-serif;
+    text-size-adjust: 100%;
+    background-color: rgb(234, 234, 234) !important;
+}
+.css-1hxhw8h {
+    /*color: #fff;*/
+    width: 1080px;
+    padding: 40px 0;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: auto;
+}
+.css-1hxhw8h .links {
+    line-height: 15px;
+    font-size: 12px;
+}
+.css-1hxhw8h .links__item:first-of-type {
+    margin-left: 0;
+}
+.css-1hxhw8h .links__item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.css-1hxhw8h .links__item a {
+    display: block;
+    color: inherit;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+.css-1hxhw8h .info {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 10px;
+}
+.css-1hxhw8h .copyright {
+    width: 1000px;
+    line-height: 1.5;
+    font-size: 11px;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.css-1qmhykx {
+    padding: 56px 0 48px;
+}
+.css-1qmhykx img {
+    display: block;
+    max-height: 200px;
+    margin: 0 auto;
+}
+.css-16kp18i {
+    display: block;
+    width: 1080px;
+    margin: 0 auto;
+}
+.css-1lshm8i {
+    padding: 32px 0 24px;
+}
+.css-16kp18i .search-contaienr {
+    width: 624px;
+    margin: 0 auto;
+}
+.css-yxjuhi {
+    position: relative;
+    border-radius: 2px;
+    background-color: #fff;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+caption, .hidden {
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+.hidden {
+    position: absolute;
+}
+label {
+    cursor: pointer;
+}
+.css-1k7wk8z {
+    width: 100%;
+    padding: 15px 150px 18px 17px;
+    border: 0;
+    height: 50px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 19%);
+    border-radius: 4px;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+input, textarea {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+input, select {
+    background: #fff;
+    border: none;
+    vertical-align: middle;
+}
+input {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+input[type="text" i] {
+    padding: 1px 2px;
+}
+input {
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    margin: 0em;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+.css-yxjuhi button[type="submit"] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;
+    height: 30px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    background: #01a9ff;
+    border-radius: 2px;
+}
+button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background: none;
+}
+body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
+    margin: 0;
+    padding: 0;
+}
+img {
+    border: 0px;
+    vertical-align: middle;
+    max-width: 100%;
+}
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+input, textarea, keygen, select, button {
+    font-family: "Apple SD Gothic Neo",AppleGothic,"Helvetica Neue",Helvetica,"Malgun Gothic",Dotum,Arial,Tahoma;
+}
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
+.css-97qxj7 {
+    /*position: relative;*/
+    width: 1080px;
+    margin: 0 auto;
+    margin-top: 20px;
+    min-height: 400px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+.css-nvyacf {
+    position: relative;
+    width: 1000px;
+    margin: 0px auto;
+    padding: 20px 0px 0px;
+}
+.css-nvyacf ul {
+    margin-top: -5px;
+    margin-left: 5px;
+    padding-left: 30px;
+    padding-bottom: 15px;
+}
+.css-nvyacf .face {
+    display: inline-block;
+    width: 100px;
+    padding-left: 30px;
+    vertical-align: top;
+}
+.css-nvyacf .face .profile-icon {
+    position: relative;
+}
+.css-nvyacf .face .profile-icon .border-image {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    width: 120px;
+    height: 120px;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+.css-nvyacf .face .profile-icon .level {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: -14px;
+    margin-left: -22px;
+    width: 44px;
+    height: 24px;
+    padding-top: 3px;
+    box-sizing: border-box;
+    line-height: 17px;
+    font-family: Helvetica, AppleSDGothic, "Apple SD Gothic Neo", AppleGothic, Arial, Tahoma;
+    font-size: 14px;
+    text-align: center;
+    color: rgb(234, 189, 86);
+    background: url(https://s-lol-web.op.gg/static/images/site/summoner/bg-levelbox.png) 0% 0% / 100%;
+}
+.css-nvyacf .last-update {
+    position: absolute;
+    left: 160px;
+    bottom: -18px;
+    height: 12px;
+    color: rgb(153, 162, 162);
+    font-size: 11px;
+}
+
+.css-nvyacf .profile {
+    position: relative;
+    display: inline-block;
+    height: 100px;
+    margin: 0px 25px 0px 29px;
+    vertical-align: top;
+    line-height: 1.1;
+}
+
+.css-nvyacf .profile .buttons {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    font-size: 0px;
+    margin: 15px 0px -6px;
+    white-space: nowrap;
+}
+
+.css-nvyacf .profile .buttons button {
+    padding: 11px 14px 10px;
+    border-radius: 2px;
+    font-size: 14px;
+    margin: 0px 6px 6px 0px;
+}
+
+.css-nvyacf .profile .buttons .tier-graph {
+    border: 1px solid rgb(204, 209, 209);
+    background: rgb(242, 242, 242);
+    color: rgb(36, 41, 41);
+}
+
+.css-nvyacf .profile .info > .name {
+    color: rgb(36, 41, 41);
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+
+.css-nvyacf .profile .rank {
+    font-size: 11px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+.css-nvyacf .face .profile-icon img {
+    display: block;
+    width: 100px;
+    height: 100px;
+}
+
+.css-19ozhet {
+    display:flex;
+    width: 1000px;
+    margin: 0 auto;
+}
+.css-19ozhet > div:nth-of-type(1) {
+    display: inline-block;
+    width: 300px;
+    font-size: 0px;
+    vertical-align: top;
+    min-height: 870px;
+}
+.css-13uv2u8 {
+    margin-top: 10px;
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+}
+.css-13uv2u8 .wrapper {
+    display: table;
+    width: 100%;
+    color: #879292;
+    position: relative;
+    background-color: #f2f2f2;
+    padding: 8px 0;
+}
+.css-13uv2u8 .wrapper .medal {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+    height: 124px;
+    text-align: center;
+}
+.css-13uv2u8 .wrapper .medal img {
+    width: 104px;
+    height: 104px;
+    margin: -5px 0 -10px 0;
+}
+.css-13uv2u8 .wrapper .info {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 0px;
+    line-height: 1.5;
+    text-align: left;
+}
+.css-13uv2u8 .wrapper .info .type {
+    font-size: 11px;
+    color: #879292;
+}
+.css-13uv2u8 .wrapper .info .tier-rank {
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgb(79, 99, 57);
+}
+.css-13uv2u8 .wrapper .info .tier-info .lp {
+    color: rgb(85, 94, 94);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.css-13uv2u8 .wrapper .info .tier-info .win-lose {
+    color: #555e5e;
+    font-size: 12px;
+}
+
+.css-rxctzc {
+    margin-top: 10px;
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+}
+.css-rxctzc .wrapper {
+    display: table;
+    width: 100%;
+    color: #879292;
+    position: relative;
+    background-color: #f2f2f2;
+    padding: 8px 0;
+}
+.css-rxctzc .wrapper .medal {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+    height: 82px;
+    text-align: center;
+}
+.css-rxctzc .wrapper .medal img {
+    width: 64px;
+    height: 64px;
+    margin: -15px 0 -10px 0;
+}
+.css-rxctzc .wrapper .info {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 0px;
+    line-height: 1.3;
+    text-align: left;
+}
+.css-rxctzc .wrapper .info .type {
+    font-size: 11px;
+    color: #879292;
+}
+.css-rxctzc .wrapper .info .tier-rank {
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: rgb(79, 99, 57);
+}
+
+.css-rxctzc .wrapper .info .tier-info .lp{
+    color: rgb(85, 94, 94);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.css-rxctzc .wrapper .info .tier-info .win-lose{
+    color: #555e5e;
+    font-size: 12px;
+}
+
+.css-1u0uowu {
+    border-bottom: 1px solid rgb(198, 203, 203);
+    margin-top: 25px;
+}
+.css-1u0uowu dl {
+    width: 1000px;
+    height: 40px;
+    margin: 0px auto;
+    padding: 0px;
+    font-size: 0px;
+}
+.css-1u0uowu dl dd {
+    display: inline-block;
+    margin: 0px -1px 0px 0px;
+    padding: 0px;
+}
+.css-1a8o8sd {
+    display: block;
+    min-width: 70px;
+    height: 39px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(198, 203, 203) rgb(198, 203, 203) rgb(232, 234, 234);
+    border-image: initial;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(232, 234, 234);
+    color: rgb(20, 23, 23);
+    font-size: 13px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+}
+.css-1hxj3ri {
+    display: block;
+    min-width: 70px;
+    height: 39px;
+    border: 1px solid rgb(198, 203, 203);
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(242, 242, 242);
+    color: rgb(85, 94, 94);
+    font-size: 13px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+}
+.css-jyq6x6 {
+    border: 1px solid rgb(198, 203, 203);
+    background-color: rgb(242, 242, 242);
+    color: rgb(79, 150, 57);
+    position: relative;
+    display: block;
+    margin-left: 15px;
+    min-width: 70px;
+    height: 39px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 13px;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+}
+.css-jyq6x6 span {
+    margin-left: 4px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.css-1sq1kbv {
+    display: inline-block;
+    width: 690px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 0px;
+    vertical-align: top;
+}
+.css-j57b8z {
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+    position: relative;
+    border-bottom: 1px solid #cdd2d2;
+    margin-bottom: -1px;
+    height: 34px;
+}
+.css-j57b8z>ul {
+    float: left;
+    padding-left: 10px;
+}
+.css-19vcwbs {
+    display: inline-block;
+    height: 32px;
+    margin: 0 10px;
+    vertical-align: top;
+    border-bottom: 2px solid #1f8ecd;
+}
+.css-19vcwbs button {
+    display: inline-block;
+    color: #1f8ecd;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 36px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+button {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+.css-itomut {
+    display: inline-block;
+    height: 32px;
+    margin: 0 10px;
+    vertical-align: top;
+}
+.css-itomut button {
+    display: inline-block;
+    color: #555e5e;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 36px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+.css-1mznf9n {
+    margin-top: -1px;
+    box-sizing: border-box;
+    text-align: left;
+    border: 1px solid rgb(205, 210, 210);
+    box-shadow: rgb(220 223 223) 0px 1px;
+    background: rgb(242, 242, 242);
+    border-radius: 2px;
+}
+.css-1mznf9n table {
+    display: table;
+    width: 100%;
+    table-layout: auto;
+    background-color: rgb(237, 237, 237);
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.css-1mznf9n table td.title:nth-of-type(1) {
+    border-left: none;
+    padding-left: 24px;
+}
+.css-1mznf9n table td.most-champion {
+    width: 229px;
+    border-left: 1px solid rgb(205, 210, 210);
+}
+.css-1mznf9n table td.title {
+     padding: 16px 0px 14px 20px;
+     line-height: 14px;
+     font-size: 12px;
+     color: rgb(102, 102, 102);
+     height: 14px;
+     border-left: 1px solid rgb(205, 210, 210);
+}
+th, td {
+    padding: 0;
+    margin: 0;
+}
+.css-1mznf9n table td.most-champion ul {
+    font-size: 0px;
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+dl, dt, dd, ol, ul, li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+body, h1, h2, h3, h4, p, ol, ul, dl, dd, button {
+    margin: 0;
+    padding: 0;
+}
+.css-1mznf9n table td.most-champion ul li:nth-of-type(1) {
+    margin-top: 0px;
+}
+.css-1mznf9n table td.most-champion ul li {
+     position: relative;
+     display: block;
+     white-space: nowrap;
+     margin-top: 12px;
+     padding-left: 42px;
+     padding-top: 1px;
+}
+.css-1mznf9n table td.most-champion ul li .icon {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.css-1mznf9n table td.most-champion ul li .icon img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+img {
+    border: 0;
+    vertical-align: middle;
+    max-width: 100%;
+}
+.css-1mznf9n table td.most-champion ul li .win-lose {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 12px;
+    color: rgb(51, 51, 51);
+}
+.css-164l9sf {
+    display: inline-block;
+    line-height: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    color: rgb(31, 142, 205);
+}
+.css-1mznf9n table td.title {
+    padding: 16px 0px 14px 20px;
+    line-height: 14px;
+    font-size: 12px;
+    color: rgb(102, 102, 102);
+    height: 14px;
+    border-left: 1px solid rgb(205, 210, 210);
+}
+.css-164r41r {
+    margin-top: 8px;
+}
+.css-ja2wlz {
+    position: relative;
+    border-radius: 3px;
+    margin-bottom: 8px;
+}
+.css-utzuox {
+    display: table;
+    table-layout: fixed;
+    width: 689px;
+    border-collapse: collapse;
+    border: 1px solid #cea7a7;
+    background-color: #e2b6b3;
+}
+.css-utzuox > div.info {
+    width: 70px;
+    text-align: center;
+    font-size: 11px;
+    color: #555;
+    line-height: 16px;
+}
+.css-utzuox > div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox > div.info .type {
+    font-weight: bold;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.css-utzuox > div.info .bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: #cea7a7;
+}
+.css-utzuox > div.info .game-result {
+    font-weight: bold;
+    color: #c6443e;
+}
+.css-utzuox > div.champion {
+    width: 100px;
+    font-size: 0;
+}
+.css-utzuox > div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox > div.champion .icon {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.css-utzuox > div.champion .icon a {
+    text-decoration: none;
+    color: inherit;
+}
+.css-utzuox > div.champion .icon a img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+.css-utzuox > div.champion .spells {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.css-utzuox > div.champion .spells .spell:nth-of-type(1) {
+    margin-top: 0;
+}
+.css-utzuox > div.champion .spells .spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.css-utzuox > div.champion .spells .spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.css-utzuox > div.champion .runes {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.css-utzuox > div.champion .runes .rune:nth-of-type(1) {
+    margin-top: 0;
+}
+.css-utzuox > div.champion .runes .rune {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+.css-utzuox > div.champion .runes .rune:nth-of-type(1) img {
+    background: #000;
+}
+.css-utzuox > div.champion .runes .rune img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.css-utzuox>div.champion .name {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.css-utzuox > div.kda {
+    font-size: 11px;
+    text-align: center;
+}
+.css-utzuox > div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-utzuox > div.kda .k-d-a {
+    color: #879292;
+    font-size: 15px;
+    white-space: nowrap;
+}
+.css-utzuox > div.kda .k-d-a span {
+    color: #555e5e;
+    font-weight: bold;
+}
+.css-utzuox > div.kda .k-d-a span.d {
+    color: #c6443e;
+}
+
+.css-utzuox > div.kda .multi-kill {
+    display: inline-block;
+    margin: 8px 4px 0px;
+    font-size: 10px;
+    color: rgb(242, 242, 242);
+}
+.css-utzuox > div.kda .multi-kill span {
+    display: inline-block;
+    background: rgb(238, 90, 82);
+    border: 1px solid rgb(198, 68, 62);
+    border-radius: 15px;
+    padding: 2px 5px;
+    line-height: 1;
+}
+
+.css-utzuox > div.kda .ratio {
+    color: #555e5e;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.css-utzuox > div.kda .ratio span {
+    color: #353a3a;
+}
+.css-utzuox > div.stats {
+    width: 90px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: #555e5e;
+}
+.css-utzuox > div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+
+.css-utzuox > div.items {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+
+.css-utzuox > div.items .item {
+    font-size: 0px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.css-utzuox > div.items .item ul {
+    width: 72px;
+}
+
+.css-utzuox > div.items .item ul li {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    background-color: #cea7a7;
+}
+.css-utzuox > div.items .item > div {
+    width: 22px;
+}
+.css-utzuox > div.items .item > div .ward {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    background-color: rgb(206, 167, 167);
+}
+.css-utzuox > div.items .item > div .build {
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+.css-utzuox > div.items .control {
+    margin-top: 7px;
+    color: rgb(53, 58, 58);
+    line-height: 13px;
+    font-size: 11px;
+    text-align: center;
+}
+
+.css-utzuox > div.stats .cs div {
+    display: inline;
+    margin-right: 4px;
+}
+.css-utzuox > div.stats .kill-participantion {
+    color: #c6443e;
+}
+.css-utzuox > div.stats .mmr b {
+    color: #353a3a;
+    text-transform: capitalize;
+}
+b, strong {
+    font-weight: bold;
+}
+.css-utzuox > div.participants {
+    width: 85px;
+    font-size: 0;
+}
+.css-utzuox > div.participants ul {
+    float: left;
+    width: 100%;
+}
+.css-tegtkt {
+    display: block;
+    width: 80px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+.css-tegtkt .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.css-tegtkt .icon img {
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+}
+.css-tegtkt .name {
+    display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #555;
+}
+.css-tegtkt .name a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.css-utzuox>div.action {
+    position: relative;
+    width: 30px;
+    border: 1px solid #d67b77;
+    background-color: #e89d99;
+}
+.css-utzuox>div.action .detail {
+    width: 30px;
+    height: 100%;
+}
+.css-utzuox>div.action .detail img {
+    position: absolute;
+    bottom: 10px;
+    left: 9px;
+    -webkit-transform: rotate( 0deg );
+    -moz-transform: rotate( 0deg );
+    -ms-transform: rotate( 0deg );
+    transform: rotate( 0deg );
+}
+.css-1sq1kbv .more {
+    border: 1px solid #cdd2d2;
+    box-shadow: 0 1px #dcdfdf;
+    background: #f2f2f2;
+    border-radius: 2px;
+    display: block;
+    width: 100%;
+    height: 50px;
+    color: #555e5e;
+    font-size: 13px;
+    line-height: 50px;
+    text-align: center;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+
+.css-7uadie {
+    display: table;
+    table-layout: fixed;
+    width: 689px;
+    border-collapse: collapse;
+    border: 1px solid rgb(153, 185, 207);
+    background-color: rgb(163, 207, 236);
+}
+.css-7uadie > div.info {
+    width: 70px;
+    text-align: center;
+    font-size: 11px;
+    color: rgb(85, 85, 85);
+    line-height: 16px;
+}
+.css-7uadie > div {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-7uadie > div.info .type {
+    font-weight: bold;
+    width: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.css-7uadie > div.info .bar {
+    display: block;
+    width: 27px;
+    margin: 5px auto;
+    height: 2px;
+    background: rgb(153, 185, 207);
+}
+.css-7uadie > div.info .game-result {
+    font-weight: bold;
+    color: rgb(26, 120, 174);
+}
+.css-7uadie > div.champion {
+    width: 100px;
+    font-size: 0px;
+}
+.css-7uadie > div.champion .icon {
+    display: inline-block;
+    width: 46px;
+    height: 46px;
+    vertical-align: middle;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.css-7uadie > div.champion .icon a {
+    text-decoration: none;
+    color: inherit;
+}
+.css-7uadie > div.champion .icon a img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+}
+.css-7uadie > div.champion .spells {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.css-7uadie > div.champion .spells .spell:nth-of-type(1) {
+    margin-top: 0px;
+}
+.css-7uadie > div.champion .spells .spell {
+    display: block;
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.css-7uadie > div.champion .runes {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+.css-7uadie > div.champion .runes .rune:nth-of-type(1) {
+    margin-top: 0px;
+}
+.css-7uadie > div.champion .runes .rune {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+}
+.css-7uadie > div.champion .runes .rune:nth-of-type(1) img {
+    background: rgb(0, 0, 0);
+}
+.css-7uadie > div.champion .runes .rune img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.css-7uadie > div.kda {
+    font-size: 11px;
+    text-align: center;
+}
+.css-7uadie > div.kda .k-d-a {
+    color: rgb(135, 146, 146);
+    font-size: 15px;
+    white-space: nowrap;
+}
+.css-7uadie > div.kda .k-d-a span {
+    color: rgb(85, 94, 94);
+    font-weight: bold;
+}
+.css-7uadie > div.kda .k-d-a span.d {
+    color: rgb(198, 68, 62);
+}
+
+.css-7uadie > div.kda .multi-kill {
+    display: inline-block;
+    margin: 8px 4px 0px;
+    font-size: 10px;
+    color: rgb(242, 242, 242);
+}
+.css-7uadie > div.kda .multi-kill span {
+    display: inline-block;
+    background: rgb(238, 90, 82);
+    border: 1px solid rgb(198, 68, 62);
+    border-radius: 15px;
+    padding: 2px 5px;
+    line-height: 1;
+}
+
+.css-7uadie > div.kda .ratio {
+    color: rgb(85, 94, 94);
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.css-7uadie > div.kda .ratio span {
+    color: rgb(53, 58, 58);
+}
+
+.css-7uadie > div.stats {
+    width: 90px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    color: rgb(85, 94, 94);
+}
+.css-7uadie > div.stats .cs div {
+    display: inline;
+    margin-right: 4px;
+}
+.css-7uadie > div.stats .kill-participantion {
+    color: rgb(198, 68, 62);
+}
+.css-7uadie > div.stats .mmr b {
+    color: rgb(53, 58, 58);
+    text-transform: capitalize;
+}
+
+.css-7uadie > div.items {
+    display: table-cell;
+    height: 96px;
+    vertical-align: middle;
+}
+.css-7uadie > div.items .item {
+    font-size: 0px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.css-7uadie > div.items .item ul {
+    width: 72px;
+}
+.css-7uadie > div.items .item ul li {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    background-color: rgb(153, 185, 207);
+}
+.css-7uadie > div.items .item > div .ward {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+    background-color: rgb(153, 185, 207);
+}
+
+.css-7uadie > div.items .item > div .build {
+    width: 22px;
+    height: 22px;
+    border-radius: 3px;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+.css-7uadie > div.items .item > div .build button {
+    width: 22px;
+    height: 22px;
+}
+.css-7uadie > div.items .control {
+    margin-top: 7px;
+    color: rgb(53, 58, 58);
+    line-height: 13px;
+    font-size: 11px;
+    text-align: center;
+}
+.css-7uadie > div.items .control img {
+    vertical-align: middle;
+}
+.css-7uadie > div.participants {
+    width: 85px;
+    font-size: 0px;
+}
+.css-7uadie > div.participants ul {
+    float: left;
+    width: 100%;
+}
+.css-1wh3ggh {
+    display: block;
+    width: 80px;
+    height: 18px;
+    margin-left: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+.css-1wh3ggh .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.css-1wh3ggh .icon img {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+.css-1wh3ggh .name {
+    display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: rgb(34, 34, 34);
+}
+.css-1wh3ggh .name a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.css-7uadie > div.action {
+    position: relative;
+    width: 30px;
+    border: 1px solid rgb(74, 161, 210);
+    background-color: rgb(100, 177, 228);
+}
+.css-7uadie > div.action .detail {
+    width: 30px;
+    height: 100%;
+}
+.css-7uadie > div.action .detail img {
+    position: absolute;
+    bottom: 10px;
+    left: 9px;
+    transform: rotate(0deg);
+}
+.css-7uadie > div.champion .name {
+    margin-top: 8px;
+    font-size: 11px;
+    color: rgb(85, 85, 85);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.css-1wyd9qh {
+    position: relative;
+    border: 1px solid #75b53c;
+    background: #81c147;
+    color: rgb(242, 242, 242);
+}
+.css-13uv2u8 .wrapper .info .series .title {
+    margin-bottom: 5px;
+    color: rgb(135, 146, 146);
+    font-size: 11px;
+    font-weight: normal;
+}
+.css-13uv2u8 .wrapper .info .series .content {
+    width: 120px;
+    height: 17px;
+    background-image: url(https://s-lol-web.op.gg/static/images/site/spectate/pro/icon-promoBattle-slot.png);
+    background-size: 120px 17px;
+}
+.css-13uv2u8 .wrapper .info .series .content img:nth-of-type(1) {
+    margin-left: 0px;
+}
+.css-13uv2u8 .wrapper .info .series .content img {
+    margin-left: 9px;
+}
+img {
+     border: 0px;
+     vertical-align: middle;
+     max-width: 100%;
+}
