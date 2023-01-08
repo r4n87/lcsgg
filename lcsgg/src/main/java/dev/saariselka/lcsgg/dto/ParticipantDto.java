@@ -130,7 +130,6 @@ public class ParticipantDto {
     private boolean win;
 
     private PerksDto perks;
-    private ChallengesDto challenges;
 
     private String kda;
     private String minionsKilledPerMin;
