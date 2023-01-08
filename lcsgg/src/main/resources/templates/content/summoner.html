@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout}">
+
+<th:block layout:fragment="head">
+    <title>Inlol Project</title>
+    <!--/* css */-->
+    <link th:href="@{/css/summoner.css}" rel="stylesheet" />
+</th:block>
+
+<body>
+<th:block layout:fragment="header" th:include="/fragments/header"> </th:block>
+<div class="css-nvyacf e1y28yym3">
+    <ul> </ul>
+    <div class="face">
+        <div class="profile-icon">
+            <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/profileicon/${summoner.getProfileIconId()}.png?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="profile image">
+            <span class="level" th:text="${summoner.getSummonerLevel()}"> </span>
+        </div>
+    </div>
+    <div class="profile">
+        <div class="info">
+            <span class="name" th:text="${summoner.getName()}"></span>
+            <div class="rank">래더 랭킹  <span class="ranking">1</span>
+                위 (상위 0.0%)
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="css-1wyd9qh ejbh9aw1" th:onclick="|location.href='@{refresh(name=${summoner.getName()})}'|">전적 갱신</button>
+            <button class="tier-graph">티어 그래프</button>
+        </div>
+    </div>
+    <div class="last-update" th:text="|최근 업데이트: ${summoner.getLastRefreshTimeForUI()}|">
+
+    </div>
+
+</div>
+<div class="css-1u0uowu e1ijocqp2">
+    <dl>
+        <dd>
+            <a th:onclick="|location.href='@{search(name=${summoner.getName()})}'|" class="css-1a8o8sd e1ijocqp1">
+                종합
+            </a>
+        </dd>
+        <dd>
+            <a href="/summoners/kr/${name}/champions" class="css-1hxj3ri e1ijocqp1">챔피언</a>
+        </dd>
+        <dd>
+            <div class="" style="position: relative;">
+                <a href="/summoners/kr/${name}/ingame" class="css-jyq6x6 e1ijocqp0">
+                    <span>인게임 정보</span>
+                </a>
+            </div>
+        </dd>
+    </dl>
+</div>
+<div class="css-19ozhet e1sjz9pt1">
+    <div>
+        <div class="css-13uv2u8 e135kpg1">
+            <div class="wrapper">
+                <div class="medal">
+                    <div style="position: relative" class>
+                        <img th:if="${soloRankInfo} != null" th:src="${soloRankImg}">
+                        <img th:if="${soloRankInfo} == null" th:src="|/images/ranked-emblems/UNRANKED.svg|">
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="type">솔로랭크</div>
+                    <div th:if="${soloRankInfo} != null">
+                        <div class="tier-rank" th:text="${soloRankInfo.getTier()} + ${soloRankInfo.getRank()}"></div>
+                        <div class="tier-info">
+                            <span class="lp" th:text="${soloRankInfo.getLeaguePoints()} + LP"></span>
+                            <span class="win-lose" th:text="|&nbsp;&#47; ${soloRankInfo.getWins()}승 ${soloRankInfo.getLosses()}패|"><br>승률 53%</span>
+                        </div>
+                        <div th:if="${soloRankIsIncrement} == 'true'">
+                            <div class="series">
+                                <div class="title"> 승급전 진행중 </div>
+                                <div class="content">
+                                    <tr th:each="seriesResult : ${soloRankIncrementProgress}">
+                                        <td th:if="${seriesResult} != 'N'">
+                                            <img th:src="|/images/ranked-miniseries/icon-promoBattle-${seriesResult}.png|">
+                                        </td>
+                                    </tr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:if="${soloRankInfo} == null">
+                        <div class="tier-rank" th:text="Unranked"/>
+                    </div>
+                    <!--                            <div class="league-name">빅토르의 그림자들</div>-->
+                </div>
+            </div>
+        </div>
+        <div class="css-rxctzc e135kpg1">
+            <div class="wrapper">
+                <div class="medal">
+                    <div style="position: relative" class>
+                        <img th:if="${flexRankInfo} != null" th:src="${flexRankImg}">
+                        <img th:if="${flexRankInfo} == null" th:src="|/images/ranked-emblems/UNRANKED.svg|">
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="type">자유랭크</div>
+                    <div th:if="${flexRankInfo} != null">
+                        <div class="tier-rank" th:text="${flexRankInfo.getTier()} + ${flexRankInfo.getRank()}"></div>
+                        <div class="tier-info">
+                            <span class="lp" th:text="${flexRankInfo.getLeaguePoints()} + LP"></span>
+                            <span class="win-lose" th:text="|&nbsp;&#47; ${flexRankInfo.getWins()}승 ${flexRankInfo.getLosses()}패|"><br>승률 48%</span>
+                        </div>
+                    </div>
+                    <div th:if="${flexRankInfo} == null">
+                        <div class="tier-rank" th:text="Unranked"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="css-1s4j24f exxtup3"> </div>
+        <div class="css-19xo3qz etgm35o1"> </div>
+        <div class="css-b9il6f etgm35o1"> </div>
+    </div>
+    <div class="css-1sq1kbv e3mqlfu0">
+        <div class="css-j57b8z e1yoemer2"></div>
+        <div class="css-1mznf9n e1je0q1a3"></div>
+        <ul class="css-164r41r exlvoq30">
+            <tr th:each="matchInfo : ${matchInfoList}">
+                <li class="css-ja2wlz e19epo2o3">
+                    <td th:if="${matchInfo.info.summoner.getWin()} == 'true'">
+                        <div result="WIN" class="css-7uadie e19epo2o2">
+                            <div class="info">
+                                <div class="type" th:text = "${matchInfo.info.getQueueType()}"></div>
+                                <div style="position: relative" class>
+                                    <div class="time-stamp"
+                                         th:text="${matchInfo.info.getGameAgoTime()}">
+                                    </div>
+                                </div>
+                                <div class="bar"></div>
+                                <div class="game-result">승리</div>
+                                <div class="game-length"
+                                     th:text="${matchInfo.info.getGameDuration()}">
+                                </div>
+                            </div>
+                            <div class="champion">
+                                <div class="icon">
+                                    <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${matchInfo.info.summoner.getChampionImg()}?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
+                                </div>
+                                <div class="spells">
+                                    <div class="spell">
+                                        <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner1Id()} != 'bot'">
+                                            <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
+                                        </div>
+                                    </div>
+                                    <div class="spell">
+                                        <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner2Id()} != 'bot'">
+                                            <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="runes">
+                                    <div class="rune">
+                                        <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getPrimaryIconPath()} != '0'">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/img/${matchInfo.info.summoner.getPerks()?.getPrimaryIconPath()}|">
+                                        </div>
+                                    </div>
+                                    <div class="rune">
+                                        <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getSubIconPath()} != '0'">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/img/${matchInfo.info.summoner.getPerks()?.getSubIconPath()}|">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
+                            </div>
+                            <div class="kda">
+                                <div class="k-d-a">
+                                    <span th:text="${matchInfo?.info.summoner.getKills()}"/> /
+                                    <span class="d" th:text="${matchInfo?.info.summoner.getDeaths()}"/> /
+                                    <span th:text="${matchInfo?.info.summoner.getAssists()}"/>
+                                </div>
+                                <div class="ratio">
+                                    <span th:text="${matchInfo?.info.summoner.getKda()}"/> 평점
+                                </div>
+                                <div class="multi-kill" th:if="${matchInfo.info.summoner.getMultiKills()} != null">
+                                    <span th:text="${matchInfo.info.summoner.getMultiKills()}"/>
+                                </div>
+                            </div>
+                            <div class="stats">
+                                <div class="level">
+                                    레벨 <span th:text="${matchInfo?.info.summoner.getChampLevel()}"/>
+                                </div>
+                                <div class="cs">
+                                    <div class="" style="position: relative;">
+                                        <span th:text="${matchInfo?.info.summoner.getTotalMinionsKilled()}"/>
+                                        (<span th:text="${matchInfo?.info.summoner.getMinionsKilledPerMin()}"/>)
+                                        CS
+                                    </div>
+                                </div>
+                                <div class="kill-participation">
+                                    <div class="" style="position: relative;">
+                                        킬관여
+                                        <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div>
+                                    <div class="item">
+                                        <ul>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem0()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem0()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem1()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem1()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem2()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem2()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem3()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem3()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem4()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem4()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem5()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem5()}.png|">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <div class="ward">
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem6()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem6()}.png|">
+                                                </div>
+                                            </div>
+                                            <div class="build">
+                                                <div class="" style="position: relative;">
+                                                    <button>
+                                                        <img src="/images/match-build/build_blue.png" alt="build">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control">
+                                    <img src="images/match-ward/ward_blue.png" alt="control ward" th:text="|제어 와드 ${matchInfo.info.summoner.getVisionWardsBoughtInGame()}|">
+                                </div>
+                            </div>
+                            <div class="participants">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(0).getParticipants()}">
+                                    <li class="css-tegtkt e19epo2o1">
+                                        <div class="icon">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionImg()}?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                        </div>
+                                        <div class="name">
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="participants">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(1).getParticipants()}">
+                                    <li class="css-tegtkt e19epo2o1">
+                                        <div class="icon">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionImg()}?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                        </div>
+                                        <div class="name">
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="action"></div>
+                        </div>
+                    </td>
+                    <td th:if="${matchInfo.info.summoner.getWin()} == 'false'">
+                        <div result="LOSE" class="css-utzuox e19epo2o2">
+                            <div class="info">
+                                <div class="type" th:text = "${matchInfo.info.getQueueType()}"></div>
+                                <div style="position: relative" class>
+                                    <div class="time-stamp"
+                                         th:text="${matchInfo.info.getGameAgoTime()}">
+                                    </div>
+                                </div>
+                                <div class="bar"></div>
+                                <div class="game-result">패배</div>
+                                <div class="game-length"
+                                     th:text="${matchInfo.info.getGameDuration()}">
+                                </div>
+                            </div>
+                            <div class="champion">
+                                <div class="icon">
+                                    <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${matchInfo.info.summoner.getChampionImg()}?image=q_auto&amp;image=q_auto,f_webp,w_auto&amp;v=1650634188774|" alt="${matchInfo.info.summoner.getChampionNameKR()}">
+                                </div>
+                                <div class="spells">
+                                    <div class="spell">
+                                        <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner1Id()} != 'bot'">
+                                            <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner1Id()}|">
+                                        </div>
+                                    </div>
+                                    <div class="spell">
+                                        <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getSummoner2Id()} != 'bot'">
+                                            <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/spell/${matchInfo.info.summoner.getSummoner2Id()}|">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="runes">
+                                    <div class="rune">
+                                        <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getPrimaryIconPath()} != '0'">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/img/${matchInfo.info.summoner.getPerks()?.getPrimaryIconPath()}|">
+                                        </div>
+                                    </div>
+                                    <div class="rune">
+                                        <div style="position: relative;" th:if="${matchInfo.info.summoner.getPerks().getSubIconPath()} != '0'">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/img/${matchInfo.info.summoner.getPerks()?.getSubIconPath()}|">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="name" th:text="${matchInfo.info.summoner.getChampionNameKR()}"></div>
+                            </div>
+                            <div class="kda">
+                                <div class="k-d-a">
+                                    <span th:text="${matchInfo?.info.summoner.getKills()}"/> /
+                                    <span class="d" th:text="${matchInfo?.info.summoner.getDeaths()}"/> /
+                                    <span th:text="${matchInfo?.info.summoner.getAssists()}"/>
+                                </div>
+                                <div class="ratio">
+                                    <span th:text="${matchInfo?.info.summoner.getKda()}"/> 평점
+                                </div>
+                                <div class="multi-kill" th:if="${matchInfo.info.summoner.getMultiKills()} != null">
+                                    <span th:text="${matchInfo.info.summoner.getMultiKills()}"/>
+                                </div>
+                            </div>
+                            <div class="stats">
+                                <div class="level">
+                                    레벨 <span th:text="${matchInfo?.info.summoner.getChampLevel()}"/>
+                                </div>
+                                <div class="cs">
+                                    <div class="" style="position: relative;">
+                                        <span th:text="${matchInfo?.info.summoner.getTotalMinionsKilled()}"/>
+                                        (<span th:text="${matchInfo?.info.summoner.getMinionsKilledPerMin()}"/>)
+                                        CS
+                                    </div>
+                                </div>
+                                <div class="kill-participation">
+                                    <div class="" style="position: relative;">
+                                        킬관여
+                                        <span th:text="${matchInfo?.info.summoner.getKillRatio()}"/>%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="items">
+                                <div>
+                                    <div class="item">
+                                        <ul>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem0()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem0()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem1()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem1()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem2()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem2()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem3()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem3()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem4()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem4()}.png|">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem5()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem5()}.png|">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <div class="ward">
+                                                <div class="" style="position: relative;" th:if="${matchInfo.info.summoner.getItem6()} != '0'">
+                                                    <img th:src="|http://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/item/${matchInfo.info.summoner.getItem6()}.png|">
+                                                </div>
+                                            </div>
+                                            <div class="build">
+                                                <div class="" style="position: relative;">
+                                                    <button>
+                                                        <img src="/images/match-build/build_red.png" alt="build">
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control">
+                                    <img src="images/match-ward/ward_red.png" alt="control ward" th:text="|제어 와드 ${matchInfo.info.summoner.getVisionWardsBoughtInGame()}|">
+                                </div>
+                            </div>
+                            <div class="participants">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(0).getParticipants()}">
+                                    <li class="css-tegtkt e19epo2o1">
+                                        <div class="icon">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionImg()}?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                        </div>
+                                        <div class="name">
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="participants">
+                                <ul th:each="participant : ${matchInfo.info.getTeams().get(1).getParticipants}">
+                                    <li class="css-tegtkt e19epo2o1">
+                                        <div class="icon">
+                                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/${DdragonVersion}/img/champion/${participant.getChampionImg()}?image=q_auto,f_webp,w_auto&amp;v=1651226741046|" alt="${participantsInfo.getChampionNameKR()}">
+                                        </div>
+                                        <div class="name">
+                                            <a th:href="|/search?name=${participant.getSummonerName()}|" target="_blank" rel="noreferrer" th:text="${participant.getSummonerName()}"></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="action"></div>
+                        </div>
+                    </td>
+                </li>
+            </tr>
+        </ul>
+        <button class="more">더 보기</button>
+    </div>
+</div>
+<th:block layout:fragment="footer" th:include="/fragments/footer"> </th:block>
+</body>
+</html>

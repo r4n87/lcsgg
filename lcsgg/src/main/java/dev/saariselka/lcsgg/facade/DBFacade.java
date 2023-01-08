@@ -1,5 +1,6 @@
 package dev.saariselka.lcsgg.facade;
 
+import dev.saariselka.lcsgg.controller.DdragonVersionController;
 import dev.saariselka.lcsgg.controller.LeagueController;
 import dev.saariselka.lcsgg.controller.MatchController;
 import dev.saariselka.lcsgg.controller.SummonerController;
@@ -23,6 +24,9 @@ public class DBFacade {
 
     @Autowired
     private MatchController matchController;
+
+    @Autowired
+    private DdragonVersionController ddragonVersionController;
 
     public String getSummonerPuuidBySummonerName(String name) {
         return summonerController.getPuuidByName(name);
@@ -52,4 +56,25 @@ public class DBFacade {
 //    public long getLastRefreshTimeBySummonerName(String puuid) {
 //        return summonerController.getSummonerDtoByPuuid(puuid).getLastRefreshTimeForAPI();
 //    }
+
+    public SummonerDto getSummonerDtoBySummonerPuuid(String puuid) {
+        return summonerController.getSummonerDtoByPuuid(puuid);
+    }
+
+    public List<LeagueEntryDto> getLeagueEntryDtoListBySummonerId(String summonerId) {
+        return leagueController.getLeagueEntryDtosBySummonerId(summonerId);
+    }
+
+    // TODO : 구현해야 함
+    public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) {
+        ArrayList<MatchDto> matchDtos = new ArrayList<>();
+
+        return matchDtos;
+    }
+
+    public String getCurrentDdragonVersion() {
+        // TODO : 구현해야 함
+        //return ddragonVersionController.getCurrentDdragonVersion();
+        return "";
+    }
 }
