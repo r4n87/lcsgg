@@ -23,8 +23,8 @@ public class LeagueController extends BaseConfig {
 
         for(LeagueEntry leagueEntry : leagueEntries) {
             LeagueEntryDto leagueEntryDto = modelMapper.map(leagueEntry, LeagueEntryDto.class);
-            MiniSeriesDto miniSeriesDto = modelMapper.map(leagueEntry.getMiniSeries(), MiniSeriesDto.class);
-            leagueEntryDto.setMiniSeries(miniSeriesDto);
+            //MiniSeriesDto miniSeriesDto = modelMapper.map(leagueEntry.getMiniSeries(), MiniSeriesDto.class);
+            //leagueEntryDto.setMiniSeries(miniSeriesDto);
             leagueEntryDtos.add(leagueEntryDto);
         }
 
