@@ -144,9 +144,15 @@ public class Participant extends BaseInfo {
     @JoinColumn(name = "info_id")
     private Info info_participants;
 
+    @OneToOne
+    @JoinColumn(name = "challenges_id")
+    private Challenges challenges;
+
     // 연관관계 설정
     public void setPerks(Perks perks) { this.perks = perks; }
     public void setInfo(Info info) { this.info_participants = info; }
+    public void setChallenges(Challenges challenges) { this.challenges = challenges; }
+
 
 
     @Builder
@@ -268,6 +274,7 @@ public class Participant extends BaseInfo {
             , int wardsPlaced
             , boolean win
             , Perks perks
+//            , Challenges challenges
             , Info info) {
         this.allInPings = allInPings;
         this.assistMePings = assistMePings;
@@ -388,6 +395,8 @@ public class Participant extends BaseInfo {
         this.win = win;
 
         setPerks(perks);
+
+//        setChallenges(challenges);
 
         if(this.info_participants != null) {
             this.info_participants.getParticipants().remove(this);
