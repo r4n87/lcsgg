@@ -95,14 +95,14 @@ public class MatchController extends BaseConfig {
         return perksDto;
     }
 
-    public ChallengesDto getChallengesDtoByChallengesEntity(Challenges challenges) {
+/*    public ChallengesDto getChallengesDtoByChallengesEntity(Challenges challenges) {
         return modelMapper.map(challenges, ChallengesDto.class);
-    }
+    }*/
 
     public ParticipantDto getParticipantDtoByParticipantEntity(Participant participant) {
         ParticipantDto participantDto = modelMapper.map(participant, ParticipantDto.class);
         participantDto.setPerks(getPerksDtoByPerksEntity(participant.getPerks()));
-        participantDto.setChallenges(getChallengesDtoByChallengesEntity(participant.getChallenges()));
+/*        participantDto.setChallenges(getChallengesDtoByChallengesEntity(participant.getChallenges()));*/
 
         return participantDto;
     }
