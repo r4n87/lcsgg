@@ -274,8 +274,8 @@ public class Participant extends BaseInfo {
             , int wardsPlaced
             , boolean win
             , Perks perks
-            , Info info
-            , Challenges challenges) {
+//            , Challenges challenges
+            , Info info) {
         this.allInPings = allInPings;
         this.assistMePings = assistMePings;
         this.assists = assists;
@@ -396,12 +396,12 @@ public class Participant extends BaseInfo {
 
         setPerks(perks);
 
+//        setChallenges(challenges);
+
         if(this.info_participants != null) {
             this.info_participants.getParticipants().remove(this);
         }
         setInfo(info);
         info.getParticipants().add(this);
-
-        setChallenges(challenges);
     }
 }
