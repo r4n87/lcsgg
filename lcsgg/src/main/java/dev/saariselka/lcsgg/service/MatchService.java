@@ -335,6 +335,148 @@ public class MatchService {
 
         newInfo.setTeams(newTeams);
 
+        List<Participant> newParticipants = new ArrayList<>();
+        for(Participant participant : new ArrayList<>(match.getInfo().getParticipants())) {
+            Participant newParticipant = new Participant(
+                    participant.getAllInPings(),
+                    participant.getAssistMePings(),
+                    participant.getAssists(),
+                    participant.getBaitPings(),
+                    participant.getBaronKills(),
+                    participant.getBasicPings(),
+                    participant.getBountyLevel(),
+                    participant.getChampExperience(),
+                    participant.getChampLevel(),
+                    participant.getChampionId(),
+                    participant.getChampionName(),
+                    participant.getChampionTransform(),
+                    participant.getCommandPings(),
+                    participant.getConsumablesPurchased(),
+                    participant.getDamageDealtToBuildings(),
+                    participant.getDamageDealtToObjectives(),
+                    participant.getDamageDealtToTurrets(),
+                    participant.getDamageSelfMitigated(),
+                    participant.getDeaths(),
+                    participant.getDetectorWardsPlaced(),
+                    participant.getDoubleKills(),
+                    participant.getDragonKills(),
+                    participant.isEligibleForProgression(),
+                    participant.getEnemyMissingPings(),
+                    participant.getEnemyVisionPings(),
+                    participant.isFirstBloodAssists(),
+                    participant.isFirstBloodKill(),
+                    participant.isFirstTowerAssist(),
+                    participant.isFirstTowerKill(),
+                    participant.isGameEndedInEarlySurrender(),
+                    participant.isGameEndedInSurrender(),
+                    participant.getGetBackPings(),
+                    participant.getGoldEarned(),
+                    participant.getGoldSpent(),
+                    participant.getHoldPings(),
+                    participant.getIndividualPosition(),
+                    participant.getInhibitorKills(),
+                    participant.getInhibitorTakedowns(),
+                    participant.getInhibitorsLost(),
+                    participant.getItem0(),
+                    participant.getItem1(),
+                    participant.getItem2(),
+                    participant.getItem3(),
+                    participant.getItem4(),
+                    participant.getItem5(),
+                    participant.getItem6(),
+                    participant.getItemsPurchased(),
+                    participant.getKillingSprees(),
+                    participant.getKills(),
+                    participant.getLane(),
+                    participant.getLargestCriticalStrike(),
+                    participant.getLargestKillingSpree(),
+                    participant.getLargestMultiKill(),
+                    participant.getLongestTimeSpentLiving(),
+                    participant.getMagicDamageDealt(),
+                    participant.getMagicDamageDealtToChampions(),
+                    participant.getMagicDamageTaken(),
+                    participant.getNeedVisionPings(),
+                    participant.getNeutralMinionsKilled(),
+                    participant.getNexusKills(),
+                    participant.getNexusLost(),
+                    participant.getNexusTakedowns(),
+                    participant.getObjectivesStolen(),
+                    participant.getObjectivesStolenAssists(),
+                    participant.getOnMyWayPings(),
+                    participant.getPentaKills(),
+                    participant.getPhysicalDamageDealt(),
+                    participant.getPhysicalDamageDealtToChampions(),
+                    participant.getPhysicalDamageTaken(),
+                    participant.getProfileIcon(),
+                    participant.getPushPings(),
+                    participant.getPuuid(),
+                    participant.getQuadraKills(),
+                    participant.getRiotIdName(),
+                    participant.getRiotIdTagline(),
+                    participant.getRole(),
+                    participant.getSightWardsBoughtInGame(),
+                    participant.getSpell1Casts(),
+                    participant.getSpell2Casts(),
+                    participant.getSpell3Casts(),
+                    participant.getSpell4Casts(),
+                    participant.getSummoner1Casts(),
+                    participant.getSummoner1Id(),
+                    participant.getSummoner2Casts(),
+                    participant.getSummoner2Id(),
+                    participant.getSummonerId(),
+                    participant.getSummonerLevel(),
+                    participant.getSummonerName(),
+                    participant.isTeamEarlySurrendered(),
+                    participant.getTeamId(),
+                    participant.getTeamPosition(),
+                    participant.getTimeCCingOthers(),
+                    participant.getTimePlayed(),
+                    participant.getTotalDamageDealt(),
+                    participant.getTotalDamageDealtToChampions(),
+                    participant.getTotalDamageShieldedOnTeammates(),
+                    participant.getTotalDamageTaken(),
+                    participant.getTotalHeal(),
+                    participant.getTotalHealsOnTeammates(),
+                    participant.getTotalMinionsKilled(),
+                    participant.getTotalTimeCCDealt(),
+                    participant.getTotalTimeSpentDead(),
+                    participant.getTotalUnitsHealed(),
+                    participant.getTripleKills(),
+                    participant.getTrueDamageDealt(),
+                    participant.getTrueDamageDealtToChampions(),
+                    participant.getTrueDamageTaken(),
+                    participant.getTurretKills(),
+                    participant.getTurretTakedowns(),
+                    participant.getTurretsLost(),
+                    participant.getUnrealKills(),
+                    participant.getVisionClearedPings(),
+                    participant.getVisionScore(),
+                    participant.getVisionWardsBoughtInGame(),
+                    participant.getWardsKilled(),
+                    participant.getWardsPlaced(),
+                    participant.isWin(),
+                    participant.getPerks(),
+                    newInfo
+            );
+
+            Perks newPerks = new Perks(participant.getPerks().getStatPerks());
+            List<PerkStyle> newPerkStyles = new ArrayList<>();
+            for(PerkStyle perkStyle : new ArrayList<>(newParticipant.getPerks().getStyles())) {
+                PerkStyle newPerkStyle = new PerkStyle(
+                        perkStyle.getDescription(),
+                        perkStyle.getStyle(),
+                        newPerks
+                );
+
+                newPerkStyles.add(newPerkStyle);
+            }
+
+            newPerks.setStyles(newPerkStyles);
+            newParticipant.setPerks(newPerks);
+            newParticipants.add(newParticipant);
+        }
+
+        newInfo.setParticipants(newParticipants);
         match.setInfo(newInfo);
 
         matchRepository.save(match);
