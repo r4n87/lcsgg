@@ -86,7 +86,7 @@ public class Facade {
         //setMatchListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(puuid));
 
         //TODO : Step 5. Get Ddragon Version And Set Ddragon Version At ModelAndView
-        //setDdragonVersionAtModelAndView(modelAndView, dbFacade.getCurrentDdragonVersion());
+        setDdragonVersionAtModelAndView(modelAndView, dbFacade.getCurrentDdragonVersion());
 
         return modelAndView;
     }
