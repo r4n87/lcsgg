@@ -99,7 +99,7 @@ public class APIFacade {
         return dtoMapper.toLeagueEntryDto(result);
     }
 
-    public ArrayList<String> getMatchIdListBySummonerPuuidAndMatchStartTime(String puuid) {
+    public ArrayList<String> getMatchIdListBySummonerPuuid(String puuid) {
         apiKey = apiKeyController.getAPIKeyByCategory("Product");
 
         HashMap<String, Object> result = new HashMap<>();

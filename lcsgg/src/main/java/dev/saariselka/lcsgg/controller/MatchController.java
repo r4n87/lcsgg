@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -164,6 +165,16 @@ public class MatchController extends BaseConfig {
         }
 
         return matchDtoList;
+    }
+
+    public HashSet<String> getMatchIdListByPuuid(String puuid) {
+        List<Match> matchList = matchService.getMatchListByPuuid(puuid);
+        HashSet<String> matchIdList = new HashSet<>();
+        for(Match match : matchList) {
+            matchIdList.add(match.getMetadata().getMatchId());
+        }
+
+        return matchIdList;
     }
 
 //    PropertyMap<MatchDto, Match> matchMap = new PropertyMap<MatchDto, Match>() {
