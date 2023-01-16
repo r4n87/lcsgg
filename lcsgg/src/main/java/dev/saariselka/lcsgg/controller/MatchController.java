@@ -107,9 +107,7 @@ public class MatchController extends BaseConfig {
         return participantDto;
     }
 
-
-    public MatchDto getMatchDtoByMatchId(String matchId) {
-        Match match = matchService.getMatchByMatchId(matchId);
+    public MatchDto getMatchDtoByMatchEntity(Match match) {
 
         MatchDto matchDto = modelMapper.map(match, MatchDto.class);
 
@@ -146,6 +144,26 @@ public class MatchController extends BaseConfig {
         matchDto.setInfo(infoDto);
 
         return matchDto;
+
+    }
+
+
+    public MatchDto getMatchDtoByMatchId(String matchId) {
+        Match match = matchService.getMatchByMatchId(matchId);
+
+        return getMatchDtoByMatchEntity(match);
+    }
+
+    public List<MatchDto> getMatchDtoListByPuuid(String puuid) {
+
+        List<Match> matchList = matchService.getMatchListByPuuid(puuid);
+        List<MatchDto> matchDtoList = new ArrayList<>();
+
+        for(Match match : matchList) {
+            matchDtoList.add(getMatchDtoByMatchEntity(match));
+        }
+
+        return matchDtoList;
     }
 
 //    PropertyMap<MatchDto, Match> matchMap = new PropertyMap<MatchDto, Match>() {

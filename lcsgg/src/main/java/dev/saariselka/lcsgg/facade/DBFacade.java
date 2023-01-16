@@ -65,9 +65,10 @@ public class DBFacade {
         return leagueController.getLeagueEntryDtosBySummonerId(summonerId);
     }
 
-    // TODO : 구현해야 함
-    public ArrayList<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) {
-        ArrayList<MatchDto> matchDtos = new ArrayList<>();
+    public List<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) {
+        List<MatchDto> matchDtos = new ArrayList<>();
+
+        matchDtos = matchController.getMatchDtoListByPuuid(puuid);
 
         return matchDtos;
     }
