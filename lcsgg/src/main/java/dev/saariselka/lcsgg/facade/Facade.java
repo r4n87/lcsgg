@@ -83,7 +83,7 @@ public class Facade {
         setLeagueAtModelAndView(modelAndView, dbFacade.getLeagueEntryDtoListBySummonerId(summonerDto.getId()));
 
         //TODO : Step 4. Get Match Info List
-        //setMatchListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(puuid));
+        setMatchListAtModelAndView(modelAndView, dbFacade.getMatchDtoListBySummonerPuuid(puuid));
 
         //TODO : Step 5. Get Ddragon Version And Set Ddragon Version At ModelAndView
         setDdragonVersionAtModelAndView(modelAndView, dbFacade.getCurrentDdragonVersion());
@@ -138,7 +138,7 @@ public class Facade {
         }
     }
 
-    private void setMatchListAtModelAndView(ModelAndView modelAndView, ArrayList<MatchDto> matchInfoList) {
+    private void setMatchListAtModelAndView(ModelAndView modelAndView, List<MatchDto> matchInfoList) {
         modelAndView.addObject("matchInfoList", matchInfoList);
     }
 

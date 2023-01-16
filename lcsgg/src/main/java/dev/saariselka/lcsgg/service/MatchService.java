@@ -19,6 +19,10 @@ public class MatchService {
         return matchRepository.findByMetadata_MatchId(matchId).get();
     }
 
+    public List<Match> getMatchListByPuuid(String puuid) {
+        return matchRepository.findMatchListByPuuid(puuid);
+    }
+
     public void insert(Match match) {
 
         Info newInfo = new Info(match.getInfo().getGameCreation(),
