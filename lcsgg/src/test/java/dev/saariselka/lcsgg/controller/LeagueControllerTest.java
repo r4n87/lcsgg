@@ -44,7 +44,7 @@ public class LeagueControllerTest {
                 .leagueId(leagueId)
                 .summonerName(summonerName)
                 .tier(tier)
-                .ranks(ranks)
+                .rank(ranks)
                 .leaguePoints(leaguePoints)
                 .wins(wins)
                 .losses(losses)
@@ -70,7 +70,7 @@ public class LeagueControllerTest {
         assertThat(findDto.getLeagueId()).isEqualTo(leagueId);
         assertThat(findDto.getSummonerName()).isEqualTo(summonerName);
         assertThat(findDto.getTier()).isEqualTo(tier);
-        assertThat(findDto.getRanks()).isEqualTo(ranks);
+        assertThat(findDto.getRank()).isEqualTo(ranks);
         assertThat(findDto.getLeaguePoints()).isEqualTo(leaguePoints);
         assertThat(findDto.getWins()).isEqualTo(wins);
         assertThat(findDto.getLosses()).isEqualTo(losses);

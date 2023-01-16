@@ -73,8 +73,6 @@ public class DBFacade {
     }
 
     public String getCurrentDdragonVersion() {
-        // TODO : 구현해야 함
-        //return ddragonVersionController.getCurrentDdragonVersion();
-        return "";
+        return ddragonVersionController.getDdragonVersionByCurrent("Y");
     }
 }
