@@ -48,8 +48,7 @@ public class DBFacade {
     public void setMatch(MatchDto matchDto) { matchController.insertMatch(matchDto); }
 
     public HashSet<String> getMatchIdListBySummonerPuuid(String puuid) {
-        // TODO : match를 puuid 가준으로 찾아오는 방법?
-        return null;
+        return matchController.getMatchIdListByPuuid(puuid);
     }
 
     // TODO : SummonerName -> LastRefreshTime 바로 가지고 오는 METHOD 만들지 -> 필요한지 먼저 체크
@@ -66,11 +65,7 @@ public class DBFacade {
     }
 
     public List<MatchDto> getMatchDtoListBySummonerPuuid(String puuid) {
-        List<MatchDto> matchDtos = new ArrayList<>();
-
-        matchDtos = matchController.getMatchDtoListByPuuid(puuid);
-
-        return matchDtos;
+        return matchController.getMatchDtoListByPuuid(puuid);
     }
 
     public String getCurrentDdragonVersion() {
